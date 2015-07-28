@@ -1,0 +1,8 @@
+*.iml
+*.log
+*.out
+.idea/
+__*
+dist/
+node_modules/
+webpack-stats.json

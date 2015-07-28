@@ -9,7 +9,6 @@ import httpProxy from 'http-proxy';
 import path from 'path';
 import serialize from 'serialize-javascript';
 import createStore from './redux/create';
-import api from './api/api';
 import ApiClient from './ApiClient';
 import universalRouter from './universalRouter';
 const app = new Express();
@@ -29,7 +28,7 @@ if (!__DEVELOPMENT__) {
 app.use(require('serve-static')(path.join(__dirname, '..', 'static')));
 
 // Proxy to API server
-app.use('/api', (req, res) => {
+app.use('/cp/v1', (req, res) => {
   proxy.web(req, res);
 });
 
@@ -86,10 +85,8 @@ if (config.port) {
     if (err) {
       console.error(err);
     } else {
-      api().then(() => {
-        console.info('==> Server is listening');
-        console.info('==>   %s running on port %s, API on port %s', config.app.name, config.port, config.apiPort);
-      });
+      console.info('==> Server is listening');
+      console.info('==>   %s running on port %s, API on port %s', config.app.name, config.port, config.apiPort);
     }
   });
 } else {
