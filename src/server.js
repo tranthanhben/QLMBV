@@ -13,7 +13,7 @@ import ApiClient from './ApiClient';
 import universalRouter from './universalRouter';
 const app = new Express();
 const proxy = httpProxy.createProxyServer({
-  target: 'http://localhost:' + config.apiPort
+  target: 'http://localhost:' + config.apiPort + '/cp/v1'
 });
 
 app.use(compression());
