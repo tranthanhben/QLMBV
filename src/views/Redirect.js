@@ -1,12 +1,32 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
+import {loadMe} from '../actions/userActions';
+import {isLoaded} from '../reducers/user';
+import {connect} from 'react-redux';
 
+@connect (state =>({
+  user: state.user.user
+}))
 export default class Redirect extends Component {
-  static onEnter(nextState, transition) {
-    transition.to('/', null, {nextPathname: nextState.location.pathname});
+  static propTypes = {
+    user: PropTypes.object
+  }
+  static fetchData(store){
+    if(!isLoaded(store.getState())){
+      return store.dispatch(loadMe());
+    }
+  }
+  componentDidMount(){
+    if(this.props.user){
+      console.log("job redirect");
+    }else{
+      window.location = "/job";
+      console.log("login redirect");
+    }
   }
   render() {
     return (
-      <div>This shouldn't render in the browser</div>
+      <div>
+      </div>
     );
   }
 }

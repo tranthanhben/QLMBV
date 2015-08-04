@@ -1,4 +1,3 @@
-export info from './info';
-export widgets from './widgets';
-export auth from './auth';
-export counter from './counter';
+export layout from './layout';
+export job from './job';
+export user from './user';
