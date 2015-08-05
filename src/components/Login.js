@@ -2,10 +2,24 @@ import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as userActions from '../actions/userActions';
+import {setValue, validateEmail, parseError} from '../meta';
 
+
+function checkRequire(user){
+  user = user || {};
+  if(!user.email){
+    return "Vui lòng nhập email!"
+  }else if(validateEmail(user.email)){
+    return validateEmail(user.email);
+  }
+  if(!user.password){
+    return "Vui lòng nhập password!"
+  }
+  return '';
+}
 class LoginPage extends Component {
   static propTypes = {
-    user: PropTypes.object,
+    error: PropTypes.object,
     login: PropTypes.func.isRequired
   }
 
@@ -17,34 +31,69 @@ class LoginPage extends Component {
     message:""
   }
 
-  onSubmit(user){
-    this.props.login(user);
+  onSubmit(){
+    event.preventDefault();
+    let user = {};
+    let refs = this.refs
+    user.email = refs.email.getDOMNode().value.trim();
+    user.password = refs.password.getDOMNode().value.trim();
+    if(checkRequire(user)){
+      this.setState({message: checkRequire(user)});
+    }else{
+      this.props.login(user);
+    }
+  }
+
+  handleRequireEmail(){
+    let mes = '';
+    let user = this.state.user;
+    if(!user.email){
+      mes = "Vui lòng nhập email!"
+    }else {
+      mes = validateEmail(user.email);
+    }
+    this.setState({message: mes});
+  }
+
+  handleRequirePassword(){
+    let mes = '';
+    let user = this.state.user;
+    if(!user.password){
+      mes = "Vui lòng nhập password!"
+    }
+    this.setState({message: mes});
   }
 
   handleChange(event) {
-    this.setState({ user: setValueUser(event, this.state.user) });
+    this.setState({ user: setValue(event, this.state.user) });
   }
 
   render(){
+    const {user, message}= this.state;
+    let error = '';
+    if(this.props.error){
+      error = parseError(this.props.error.code);
+    }
+    let flag = checkRequire(user);
     return (
       <div className='page login'>
         <div className='space'></div>
         <div className='box'>
-          <form onSubmit={()=>this.onSubmit(this.state.user)}>
+          <form onSubmit={::this.onSubmit}>
             <p className='message'>
-              {this.state.message}
+              {message || error}
               &nbsp;
             </p>
             <div className='form-group'>
-              <input className='form-control' data-addr='username' placeholder='Username'
-                onChange={::this.handleChange}/>
+              <input className='form-control' data-addr='email' ref="email" placeholder='Email'
+                onChange={::this.handleChange} onBlur={::this.handleRequireEmail} />
             </div>
             <div className='form-group'>
-              <input className='form-control' data-addr='password' placeholder='Password'
+              <input className='form-control' data-addr='password' ref="password" placeholder='Password'
                 type='password'
-                onChange={::this.handleChange}/>
+                onChange={::this.handleChange} onBlur={::this.handleRequirePassword}/>
             </div>
-            <input className='btn btn-success form-control' type='submit' value='Login'/>
+            <input className='btn btn-success form-control' type='submit' value='Login' disabled={flag ? 'disabled' : ''}/>
             <p className='help-block'>
             </p>
           </form>
@@ -55,16 +104,16 @@ class LoginPage extends Component {
   }
 }
 @connect (state =>({
-  user: state.user.user
+  error: state.user.errorLogin
 }))
 export default class LoginPageContainer {
   static propTypes = {
-    user: PropTypes.object,
+    error: PropTypes.object,
     dispatch: PropTypes.func.isRequired
   }
 
   render(){
-    const {user, dispatch} = this.props;
-    return <LoginPage user={user} {...bindActionCreators(userActions, dispatch)}></LoginPage>
+    const {error, dispatch} = this.props;
+    return <LoginPage error={error} {...bindActionCreators(userActions, dispatch)}></LoginPage>
   }
 }

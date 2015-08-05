@@ -9,9 +9,10 @@ import Login from '../components/Login';
 export default (
   <Route component={App} >
     <Route path="/" component={Redirect} onEnter={Redirect.onEnter} >
+      <Route path="/job" name="job" component={Job}/>
+      <Route path="/job/editor/:id" name="job editor" component={NotFound}/>
     </Route>
-    <Route path="/job" name="job" component={Job}/>
-    <Route path="/job/editor/:id" name="job editor" component={NotFound}/>
+
     <Route path="/login" name="login" component={Login}/>
     <Route path="*" component={NotFound}/>
   </Route>

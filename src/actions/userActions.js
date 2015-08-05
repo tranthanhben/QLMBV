@@ -5,6 +5,9 @@ import {
   LOGIN_LOAD,
   LOGIN_LOAD_SUCCESS,
   LOGIN_LOAD_FAIL,
+  LOGOUT_LOAD,
+  LOGOUT_LOAD_SUCCESS,
+  LOGOUT_LOAD_FAIL,
 } from './actionTypes';
 
 export function loadMe(){
@@ -14,10 +17,18 @@ export function loadMe(){
   };
 }
 
-export function login(){
+export function login(account){
   return {
     types: [LOGIN_LOAD, LOGIN_LOAD_SUCCESS, LOGIN_LOAD_FAIL],
-    promise: (client) => client.get('/login')
+    promise: (client) => client.post('/login',{
+      data: JSON.stringify(account)
+    })
   };
 }
 
+export function logout(){
+  return {
+    types: [LOGOUT_LOAD, LOGOUT_LOAD_SUCCESS, LOGOUT_LOAD_FAIL],
+    promise: (client) => client.post('/logout')
+  };
+}

@@ -16,17 +16,16 @@ export default class Redirect extends Component {
     }
   }
   componentDidMount(){
-    if(this.props.user){
-      console.log("job redirect");
+    if(!this.props.user){
+      window.location = "/login";
     }else{
-      window.location = "/job";
+      if(window.location.pathname !== "/job"){
+        window.location= "/job";
+      }
       console.log("login redirect");
     }
   }
   render() {
-    return (
-      <div>
-      </div>
-    );
+    return (this.props.children || <div></div>);
   }
 }

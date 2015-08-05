@@ -5,7 +5,7 @@ var notifyStats = require('./utils/notifyStats');
 var assetsPath = path.resolve(__dirname, '../static/dist');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var host = 'localhost';
-var port = parseInt(process.env.PORT) + 1 || 3001;
+var port = parseInt(process.env.PORT) + 3 || 3003;
 
 module.exports = {
   devtool: 'eval-source-map',

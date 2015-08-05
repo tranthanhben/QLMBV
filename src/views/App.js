@@ -1,13 +1,13 @@
 import React, {Component, PropTypes} from 'react';
 import {Link} from 'react-router';
-import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {createTransitionHook} from '../universalRouter';
 import LeftNavigator from '../components/layout/LeftNavigator';
 
 class App extends Component {
   static propTypes = {
-    params: PropTypes.object
+    params: PropTypes.object,
+    user: PropTypes.object
   }
   static contextTypes = {
     router: PropTypes.object.isRequired,
@@ -19,7 +19,7 @@ class App extends Component {
     router.addTransitionHook(createTransitionHook(store));
   }
   render() {
-    if(!!this.props.user){
+    if(!this.props.user){
       return (
         <div className="wrapper">
         {this.props.children}
@@ -42,10 +42,12 @@ class App extends Component {
     );
   }
 }
-
+@connect(state =>({
+  user: state.user.user
+}))
 export default class AppContainer {
   render() {
-    return <App params={this.props.params}>
+    return <App params={this.props.params} user={this.props.user}>
       {this.props.children}
     </App>;
   }

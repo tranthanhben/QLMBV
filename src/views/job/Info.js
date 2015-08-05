@@ -1,5 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {Link} from 'react-router';
+import {formatDate} from '../../meta';
+
 export default class ListView extends Component {
   static propTypes = {
     delItem: PropTypes.func.isRequired
@@ -24,22 +26,23 @@ export default class ListView extends Component {
             </div>
             <div className='row'>
               <div className='col-md-12'>
-                <b>
-                  <span>Job Name: </span>
-                </b>
-                {item && item.id}
+                <h4>
+                  <b>
+                    <span>Job Name: </span>
+                  </b>
+                  {item && item.id}
+                </h4>
               </div>
             </div>
             <div className='row'>
               <div className='col-md-6'>
-                <b>
-                  <span>Created At:</span>
-                </b>
+                <span>Created At: </span>
+                {formatDate(item.created_time)}
               </div>
               <div className='col-md-6'>
-                <b>
-                  <span>Update At:</span>
-                </b>
+
+                <span>Update At: </span>
+                {formatDate(item.updated_time)}
               </div>
             </div>
             <br/>
@@ -56,6 +59,7 @@ export default class ListView extends Component {
               </div>
             </div>
             <hr/>
+            {item.description}
           </div>
         )}
       </div>

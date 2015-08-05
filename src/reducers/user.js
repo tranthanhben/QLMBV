@@ -2,6 +2,12 @@ import {
   ME_LOAD,
   ME_LOAD_SUCCESS,
   ME_LOAD_FAIL,
+  LOGIN_LOAD,
+  LOGIN_LOAD_SUCCESS,
+  LOGIN_LOAD_FAIL,
+  LOGOUT_LOAD,
+  LOGOUT_LOAD_SUCCESS,
+  LOGOUT_LOAD_FAIL,
 } from '../actions/actionTypes';
 
 const initialState = {
@@ -28,6 +34,35 @@ export default function user(state = initialState, action = {}) {
           loaded: true,
           user: null,
           errorUser: action.error
+        }
+      case LOGIN_LOAD:
+        return {
+          ...state
+        };
+      case LOGIN_LOAD_SUCCESS:
+        location.assign('/');
+        return {
+          ...state
+        };
+      case LOGIN_LOAD_FAIL:
+        return {
+          ...state,
+          errorLogin: action.error
+        }
+      case LOGOUT_LOAD:
+        return {
+          ...state
+        };
+      case LOGOUT_LOAD_SUCCESS:
+        location.assign('/');
+        return {
+          ...state,
+          user: null
+        };
+      case LOGOUT_LOAD_FAIL:
+        return {
+          ...state,
+          errorLogout: action.error
         }
       default:
         return state;

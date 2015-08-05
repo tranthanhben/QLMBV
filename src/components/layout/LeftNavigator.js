@@ -1,11 +1,21 @@
 import React, {Component, PropTypes} from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
+import * as userActions from '../../actions/userActions';
+import {bindActionCreators} from 'redux';
+
 class LeftNav extends Component {
   static propTypes = {
     menu: PropTypes.array,
-    params: PropTypes.object
+    params: PropTypes.object,
+    logout: PropTypes.func.isRequired
   }
+
+  logout(){
+    console.log("logout");
+    this.props.logout();
+  }
+
   render (){
     const {menu, params} = this.props;
     return (
@@ -16,6 +26,15 @@ class LeftNav extends Component {
             index > 0 ? <div className='space'/> : null,
             <ul className='items'>
                 {items.map((item) => {
+                  if(item.href === "/logout"){
+                    return <li
+                      key={item.label} >
+                      <Link to={item.href} activeClassName="active" onClick={::this.logout}>
+                        <span className={'glyphicon glyphicon-' + item.icon}/>
+                        {item.label}
+                      </Link>
+                    </li>
+                  }
                   return (
                     <li
                       key={item.label}>
@@ -41,10 +60,11 @@ class LeftNav extends Component {
 export default class LeftNavContainer {
   static propTypes = {
     menu : PropTypes.array,
-    params: PropTypes.object
+    params: PropTypes.object,
+    dispatch: PropTypes.func.isRequired
   }
   render(){
-    const {menu, params} = this.props;
-    return (<LeftNav menu={menu} params={params}></LeftNav>);
+    const {menu, params, dispatch} = this.props;
+    return (<LeftNav menu={menu} params={params} {...bindActionCreators(userActions, dispatch)}></LeftNav>);
   }
 }
