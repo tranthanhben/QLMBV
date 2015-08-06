@@ -19,13 +19,13 @@ export default class Redirect extends Component {
     if(!this.props.user){
       window.location = "/login";
     }else{
-      if(window.location.pathname !== "/job"){
-        window.location= "/job";
+      if(location.pathname === "/"){
+       location.assign("/job");
       }
-      console.log("login redirect");
     }
   }
   render() {
+
     return (this.props.children || <div></div>);
   }
 }

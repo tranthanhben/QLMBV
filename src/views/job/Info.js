@@ -48,7 +48,7 @@ export default class ListView extends Component {
             <br/>
             <div className='row'>
               <div className='col-md-8'>
-                <Link to={`/job_editor/${item.id}`}>
+                <Link to={`/job/${item.id}`}>
                   <button className='btn btn-default'>Edit Bank</button>
                 </Link>
                 &nbsp;&nbsp;&nbsp;

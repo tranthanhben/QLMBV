@@ -8,8 +8,12 @@ function swap(time) {
   parse json data =>send for server
 **/
 export function changeITD(time) {
-  var r = time.split("-");
-  return JSON.stringify(new Date(r[2], r[1] - 1, r[0]));
+  if(/-/.test(time)){
+    var r = time.split("-");
+    return JSON.stringify(new Date(r[2], r[1] - 1, r[0]));
+  }
+  return time;
+
 }
 export function parseDate(time) {
   if (!time)
@@ -33,9 +37,13 @@ function addZero(r) {
   "3/19/2015" => "2015-03-19"
 **/
 export function changeDTI(time) {
-  var r = time.split("/");
-  r = addZero(r);
-  return r[2] + "-" + r[0] + "-" + r[1];
+  if(/\//.test(time)){
+    var r = time.split("/");
+    r = addZero(r);
+    return r[2] + "-" + r[0] + "-" + r[1];
+  }
+  return time;
+
 }
 
 export function formatDate(n) {

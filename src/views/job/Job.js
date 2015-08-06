@@ -13,15 +13,12 @@ let cmdsRight = [{
     active: false,
     icon: 'pencel',
     label: 'New Job',
-    href: '/job/editor/'
+    href: '/job/new'
 }];
 
 let tabsLeft = [{
   label : 'Job List',
   name: 'job_list'
-},{
-  label : 'Job Select',
-  name: 'job_select'
 }];
 
 let tabsRight = [{
@@ -42,9 +39,6 @@ class JobPage extends Component {
       <PanelTabs tabs={tabsLeft}>
         <PanelTabLeft tab={tabsLeft[0]}>
           <ListView list={list} paging={paging} {...bindActionCreators(jobActions, dispatch)}></ListView>
-        </PanelTabLeft>
-        <PanelTabLeft tab={tabsLeft[1]}>
-          "select"
         </PanelTabLeft>
       </PanelTabs>
       <PanelTabs cmds={cmdsRight} tabs={tabsRight}>

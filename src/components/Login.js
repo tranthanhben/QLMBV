@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as userActions from '../actions/userActions';
-import {setValue, validateEmail, parseError} from '../meta';
+import {setValueLogin, validateEmail, parseError} from '../meta';
 
 
 function checkRequire(user){
@@ -65,7 +65,7 @@ class LoginPage extends Component {
   }
 
   handleChange(event) {
-    this.setState({ user: setValue(event, this.state.user) });
+    this.setState({ user: setValueLogin(event, this.state.user) });
   }
 
   render(){

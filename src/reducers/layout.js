@@ -4,18 +4,6 @@ const initialState = {
             label: 'Job',
             href: '/job',
             icon: 'book'
-        }, {
-            label: 'Credit Cards',
-            href: '/credit_cards',
-            icon: 'book'
-        }, {
-            label: 'Debit Cards',
-            href: '/debit_cards',
-            icon: 'book'
-        }, {
-            label: 'Term Deposits',
-            href: '/term_deposits',
-            icon: 'book'
         }],
         [{
             label: 'Profile',

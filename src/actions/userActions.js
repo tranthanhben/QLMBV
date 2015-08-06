@@ -7,7 +7,7 @@ import {
   LOGIN_LOAD_FAIL,
   LOGOUT_LOAD,
   LOGOUT_LOAD_SUCCESS,
-  LOGOUT_LOAD_FAIL,
+  LOGOUT_LOAD_FAIL
 } from './actionTypes';
 
 export function loadMe(){
