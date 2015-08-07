@@ -31,7 +31,7 @@ export default class ListView extends Component {
                       {paging.page * paging.page_size + index + 1}
                     </td>
                     <td className>
-                      {item.id}
+                      {item.title}
                     </td>
                   </tr>
                 );

@@ -30,7 +30,7 @@ export default class ListView extends Component {
                   <b>
                     <span>Job Name: </span>
                   </b>
-                  {item && item.id}
+                  {item && item.title}
                 </h4>
               </div>
             </div>
