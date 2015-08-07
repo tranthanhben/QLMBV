@@ -10,7 +10,8 @@ import {
   POST_ITEM_FAIL,
   GET_ITEM,
   GET_ITEM_SUCCESS,
-  GET_ITEM_FAIL
+  GET_ITEM_FAIL,
+  RESETDATA
 } from './actionTypes';
 
 
@@ -57,4 +58,10 @@ export function getItem(id){
     types: [GET_ITEM, GET_ITEM_SUCCESS, GET_ITEM_FAIL],
     promise: (client) => client.get('/jobs/'+id)
   };
+}
+
+export function resetData(){
+  return {
+    type: RESETDATA
+  }
 }

@@ -10,7 +10,8 @@ import {
   POST_ITEM_FAIL,
   GET_ITEM,
   GET_ITEM_SUCCESS,
-  GET_ITEM_FAIL
+  GET_ITEM_FAIL,
+  RESETDATA
 } from '../actions/actionTypes';
 const metaJob = {
     "title": {
@@ -140,6 +141,13 @@ export default function job(state = initialState, action = {}) {
           editItem: null,
           getLoading: false,
           errorGetItem: action.error
+        }
+      case RESETDATA:
+        return {
+          ...state,
+          editItem: null,
+          errorPostItem: null,
+          errorGetItem: null
         }
       default:
         return state;

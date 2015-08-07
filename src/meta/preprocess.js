@@ -102,7 +102,7 @@ inputs.md = function (field) {
     let html = md.toHTML(scope[field.name] || '');
     return (
       <div>
-        <textarea className='form-control' type='text'
+        <textarea className='form-control md' type='text'
           data-addr={address}
           onChange={::fn.handleChange}
           placeholder={field.label}

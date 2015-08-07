@@ -6,10 +6,21 @@ import PanelView from '../../components/layout/PanelView';
 import PanelTabs ,{PanelTabLeft, PanelTabRight}from '../../components/layout/PanelTabs';
 import {initObject, preprocess, renderField, setValue, checkRequire, preprocessPost} from '../../meta';
 
+let cmdsRight = [{
+    active: false,
+    icon: 'pencel',
+    label: 'New Job',
+    href: '/job/new'
+}];
+
 let tabsLeft = [{
     name: 'info_job',
     label: 'Info Job'
 }];
+let tabsRight = [{
+  label : 'Review',
+  name : 'review'
+}]
 
 class EditorJobPage extends Component {
   static propTypes = {
@@ -18,7 +29,8 @@ class EditorJobPage extends Component {
     metaJob: PropTypes.object,
     message: PropTypes.bool,
     postItem: PropTypes.func.isRequired,
-    getItem: PropTypes.func.isRequired
+    getItem: PropTypes.func.isRequired,
+    resetData: PropTypes.func.isRequired
   }
   state = {
     item: initObject(this.props.metaJob) || {},
@@ -27,6 +39,9 @@ class EditorJobPage extends Component {
   componentWillMount(){
     if(this.props.params && this.props.params.id !== "new"){
       this.props.getItem(this.props.params.id)
+    }else if(this.props.params.id === "new"){
+      console.log("in here new reset");
+      this.props.resetData();
     }
   }
   componentWillReceiveProps(nextProps) {
@@ -35,6 +50,11 @@ class EditorJobPage extends Component {
         item : nextProps.item,
         edited: false
       });
+    }else{
+      this.setState({
+        item: initObject(this.props.metaJob) || {},
+        edited: false
+      })
     }
   }
   handleChange(){
@@ -61,37 +81,38 @@ class EditorJobPage extends Component {
             <div className='card'>
 
               <div className='row'>
-                <div className='col-md-8'>
+                <div className='col-md-12'>
                   {fieldRender}
-                </div>
-                <div className='col-md-4'>
-                  <div className='form-group'>
-                  </div>
                 </div>
               </div>
               <h3></h3>
               <div className='row'>
                 <div className='col-md-6'>
+                  {(message && !edited)? (message === true?
+                      <p className='help-block success'>
+                      {"Submit Success!"}
+                      </p>:
+                      <p className='help-block required'>
+                      {"Submit Fail!"}
+                      </p>
+                      ):null}
                   <button className={'btn ' + (item && item.id ? 'btn-warning' : 'btn-success')} onClick={::this.onSubmit}>
-                    Update
+                    {item && item.id? "Update" : "Created"}
                   </button>
                   <p className='help-block required'>
                     {resultCheckRequire}
                   </p>
-                  {(message && !edited)? (message === true?
-                    <p className='help-block success'>
-                    {"Submit Success!"}
-                    </p>:
-                    <p className='help-block required'>
-                    {"Submit Fail!"}
-                    </p>
-                    ):null}
+
                 </div>
                 <div className='col-md-6 text-right'></div>
               </div>
             </div>
           </div>
         </PanelTabLeft>
+      </PanelTabs>
+      <PanelTabs cmds={cmdsRight} tabs={tabsRight}>
+        <PanelTabRight tab={tabsRight[0]} >
+        </PanelTabRight>
       </PanelTabs>
     </PanelView>;
   }
