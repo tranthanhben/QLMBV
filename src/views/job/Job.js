@@ -30,15 +30,16 @@ class JobPage extends Component {
     list: PropTypes.array,
     item: PropTypes.object,
     paging: PropTypes.object,
-    dispatch: PropTypes.func.isRequired
+    dispatch: PropTypes.func.isRequired,
+    reloadList: PropTypes.bool
   }
 
   render() {
-    const {list, item, dispatch, paging} = this.props;
+    const {list, item, dispatch, paging, reloadList} = this.props;
     return <PanelView>
       <PanelTabs tabs={tabsLeft}>
         <PanelTabLeft tab={tabsLeft[0]}>
-          <ListView list={list} paging={paging} {...bindActionCreators(jobActions, dispatch)}></ListView>
+          <ListView list={list} paging={paging} reloadList={reloadList} {...bindActionCreators(jobActions, dispatch)}></ListView>
         </PanelTabLeft>
       </PanelTabs>
       <PanelTabs cmds={cmdsRight} tabs={tabsRight}>
@@ -55,7 +56,8 @@ class JobPage extends Component {
   error: state.job.error,
   item: state.job.item,
   paging: state.job.paging,
-  user: state.user.user
+  user: state.user.user,
+  reloadList : state.job.reloadList
 }))
 export default class JobPageContainer{
   static propTypes = {
@@ -64,6 +66,7 @@ export default class JobPageContainer{
     paging: PropTypes.object,
     error: PropTypes.object,
     user: PropTypes.object,
+    reloadList: PropTypes.bool,
     dispatch: PropTypes.func.isRequired
   }
 
@@ -73,7 +76,8 @@ export default class JobPageContainer{
     }
   }
   render(){
-    const {list, item, dispatch, paging} = this.props;
-    return <JobPage list={list} item={item} dispatch={dispatch} paging={paging}></JobPage>
+    const {list, item, dispatch, paging, reloadList} = this.props;
+    console.log(this.props.reloadList);
+    return <JobPage list={list} item={item} dispatch={dispatch} paging={paging} reloadList={reloadList}></JobPage>
   }
 }

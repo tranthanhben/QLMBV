@@ -5,6 +5,9 @@ import {
   ONEJOB_LOAD,
   ONEJOB_LOAD_SUCCESS,
   ONEJOB_LOAD_FAIL,
+  DEL_ITEM,
+  DEL_ITEM_SUCCESS,
+  DEL_ITEM_FAIL,
   POST_ITEM,
   POST_ITEM_SUCCESS,
   POST_ITEM_FAIL,
@@ -73,6 +76,7 @@ export default function job(state = initialState, action = {}) {
         return {
           ...state,
           loadingList: false,
+          reloadList: false,
           loaded: true,
           list: action.result.items,
           paging: action.result.paging
@@ -104,6 +108,25 @@ export default function job(state = initialState, action = {}) {
           item:null,
           error: action.error
         };
+      case DEL_ITEM:
+        return {
+          ...state,
+          loadingOne: true
+        };
+      case DEL_ITEM_SUCCESS:
+        return {
+          ...state,
+          reloadList: true,
+          loadingOne: false,
+          item: null
+        };
+      case DEL_ITEM_FAIL:
+        return {
+          ...state,
+          loadingOne: false,
+          item: null,
+          errorDel: action.error
+        };
       case POST_ITEM:
         return {
           ...state,
@@ -113,6 +136,7 @@ export default function job(state = initialState, action = {}) {
         return {
           ...state,
           editItem: action.result,
+          reloadList: true,
           message: true,
           postLoading: false,
         };

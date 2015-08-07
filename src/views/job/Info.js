@@ -8,7 +8,10 @@ export default class ListView extends Component {
   }
 
   delItem(id){
-    this.props.delItem(id);
+    let conf = confirm("Sau khi xóa sẽ không phục hồi được!");
+    if(conf) {
+      this.props.delItem(id);
+    }
   }
 
   render() {
@@ -49,7 +52,7 @@ export default class ListView extends Component {
             <div className='row'>
               <div className='col-md-8'>
                 <Link to={`/job/${item.id}`}>
-                  <button className='btn btn-default'>Edit Bank</button>
+                  <button className='btn btn-default'>Edit Job</button>
                 </Link>
                 &nbsp;&nbsp;&nbsp;
               </div>

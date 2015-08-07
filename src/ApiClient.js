@@ -10,6 +10,7 @@ class ApiClient {
           return new Promise((resolve, reject) => {
             let request = superagent[method](this.formatUrl(path));
             if (options && options.params) {
+              console.log("options", options.params);
               request.query(options.params);
             }
             if (__SERVER__) {
