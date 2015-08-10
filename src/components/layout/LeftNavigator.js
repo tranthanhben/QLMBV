@@ -1,21 +1,27 @@
 import React, {Component, PropTypes} from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
-import * as userActions from '../../actions/userActions';
+import {logout} from '../../actions/userActions';
+import {resetData} from '../../actions/jobActions';
 import {bindActionCreators} from 'redux';
 
 class LeftNav extends Component {
   static propTypes = {
     menu: PropTypes.array,
     params: PropTypes.object,
-    logout: PropTypes.func.isRequired
+    logout: PropTypes.func.isRequired,
+    resetData: PropTypes.func.isRequired
   }
 
   logout(){
     console.log("logout");
     this.props.logout();
   }
-
+  handleReset(item){
+    if(item.href === "/job"){
+      this.props.resetData();
+    }
+  }
   render (){
     const {menu, params} = this.props;
     return (
@@ -38,7 +44,7 @@ class LeftNav extends Component {
                   return (
                     <li
                       key={item.label}>
-                      <Link to={item.href} activeClassName="active" >
+                      <Link to={item.href} activeClassName="active" onClick={()=>this.handleReset(item)}>
                         <span className={'glyphicon glyphicon-' + item.icon}/>
                         {item.label}
                       </Link>
@@ -65,6 +71,6 @@ export default class LeftNavContainer {
   }
   render(){
     const {menu, params, dispatch} = this.props;
-    return (<LeftNav menu={menu} params={params} {...bindActionCreators(userActions, dispatch)}></LeftNav>);
+    return (<LeftNav menu={menu} params={params} {...bindActionCreators({logout, resetData}, dispatch)}></LeftNav>);
   }
 }

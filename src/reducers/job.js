@@ -169,6 +169,7 @@ export default function job(state = initialState, action = {}) {
       case RESETDATA:
         return {
           ...state,
+          loaded: false,
           editItem: null,
           errorPostItem: null,
           errorGetItem: null

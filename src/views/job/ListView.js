@@ -17,6 +17,7 @@ export default class ListView extends Component {
   componentWillReceiveProps(nextProps) {
     console.log("next props", nextProps);
     if(nextProps.reloadList === true){
+      console.log("title", this.state.titleSearch);
       this.props.loadList({
         title: this.state.titleSearch
       })
@@ -52,7 +53,6 @@ export default class ListView extends Component {
   }
   render() {
     const {list, paging} = this.props;
-    console.log("paging", paging, endPage(paging));
     let isEndPage = endPage(paging);
     return (
       <div className='panel-categories flex-col flex'>

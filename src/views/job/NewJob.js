@@ -40,12 +40,13 @@ class EditorJobPage extends Component {
     if(this.props.params && this.props.params.id !== "new"){
       this.props.getItem(this.props.params.id)
     }else if(this.props.params.id === "new"){
-      console.log("in here new reset");
       this.props.resetData();
     }
   }
   componentWillReceiveProps(nextProps) {
-    if(nextProps.item){
+    if (nextProps.params.id === "new" && nextProps.item){
+      this.props.resetData();
+    }else if(nextProps.item){
       this.setState({
         item : nextProps.item,
         edited: false
@@ -73,6 +74,7 @@ class EditorJobPage extends Component {
     const {item, error, metaJob, message} = this.props;
     let edited = this.state.edited;
     let fieldRender = renderField(this.state.item, metaJob, this)|| [];
+    let itemState = this.state.item;
     let resultCheckRequire = checkRequire(metaJob, this.state.item);
     return <PanelView>
       <PanelTabs tabs={tabsLeft}>
@@ -96,12 +98,12 @@ class EditorJobPage extends Component {
                       {"Submit Fail!"}
                       </p>
                       ):null}
-                  <button className={'btn ' + (item && item.id ? 'btn-warning' : 'btn-success')} onClick={::this.onSubmit}>
-                    {item && item.id? "Update" : "Created"}
-                  </button>
                   <p className='help-block required'>
                     {resultCheckRequire}
                   </p>
+                  <button className={'btn ' + (item && item.id ? 'btn-warning' : 'btn-success')} onClick={::this.onSubmit}>
+                    {item && item.id? "Update" : "Created"}
+                  </button>
 
                 </div>
                 <div className='col-md-6 text-right'></div>
@@ -112,6 +114,30 @@ class EditorJobPage extends Component {
       </PanelTabs>
       <PanelTabs cmds={cmdsRight} tabs={tabsRight}>
         <PanelTabRight tab={tabsRight[0]} >
+          <div className="heading">
+            <button className="btn pull-right apply-btn">Ứng tuyển ngay</button>
+            <h1>{itemState && itemState.title? itemState.title:"Title sample"}</h1>
+            <div className="meta">
+              <div className="expired"><span className="glyphicon glyphicon-time"></span> Expires on {itemState && new Date(itemState.expired_time).toDateString()}</div>
+              <div className="salary"><span className="glyphicon glyphicon-usd"></span> Salary: from {itemState && itemState.salary_min} to {itemState && itemState.salary_max}</div>
+              <div className="location"><span className="glyphicon glyphicon-map-marker"></span> Work at: {itemState && itemState.location}</div>
+            </div>
+          </div>
+          <div className="content">
+            <h2>Mô tả công việc</h2>
+            {itemState && itemState.description}
+          </div>
+          <div className="content">
+            <h2>Yêu cầu công việc</h2>
+            {itemState && itemState.qualification}
+          </div>
+          <div className="content">
+            <h2>Giới thiệu công ty</h2>
+            <h4>{itemState && itemState.employer_profile && itemState.employer_profile.name}</h4>
+            <p>
+              {itemState && itemState.employer_profile && itemState.employer_profile.description}
+            </p>
+          </div>
         </PanelTabRight>
       </PanelTabs>
     </PanelView>;
@@ -134,7 +160,6 @@ export default class EditorJobContainer {
   }
 
   render(){
-    console.log(this.props.metaJob);
     const {item, error, dispatch, params, metaJob, message}= this.props;
     let metaPreprocess = preprocess(metaJob);
     return <EditorJobPage item={item} metaJob={metaPreprocess} params={params} message={message} error={error} {...bindActionCreators(jobActions, dispatch)}></EditorJobPage>
