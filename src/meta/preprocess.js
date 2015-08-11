@@ -99,17 +99,13 @@ inputs.multiline = function (field) {
 inputs.md = function (field) {
   return function (scope, fn, addr) {
     let address = addr ? addr + field.name : field.name;
-    let html = md.toHTML(scope[field.name] || '');
     return (
-      <div>
         <textarea className='form-control md' type='text'
           data-addr={address}
           onChange={::fn.handleChange}
           placeholder={field.label}
           value={scope[field.name] || ''}>
         </textarea>
-        <div className='content' dangerouslySetInnerHTML={{ __html: html }}></div>
-      </div>
     );
   };
 };

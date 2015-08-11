@@ -5,6 +5,8 @@ import * as jobActions from '../../actions/jobActions';
 import PanelView from '../../components/layout/PanelView';
 import PanelTabs ,{PanelTabLeft, PanelTabRight}from '../../components/layout/PanelTabs';
 import {initObject, preprocess, renderField, setValue, checkRequire, preprocessPost} from '../../meta';
+import markdown from 'markdown';
+let md = markdown.markdown;
 
 let cmdsRight = [{
     active: false,
@@ -76,6 +78,7 @@ class EditorJobPage extends Component {
     let fieldRender = renderField(this.state.item, metaJob, this)|| [];
     let itemState = this.state.item;
     let resultCheckRequire = checkRequire(metaJob, this.state.item);
+    let employer_des = (itemState && itemState.employer_profile)? md.toHTML(itemState.employer_profile.description):'';
     return <PanelView>
       <PanelTabs tabs={tabsLeft}>
         <PanelTabLeft tab={tabsLeft[0]}>
@@ -125,18 +128,16 @@ class EditorJobPage extends Component {
           </div>
           <div className="content">
             <h2>Mô tả công việc</h2>
-            {itemState && itemState.description}
+            {itemState &&  (<p dangerouslySetInnerHTML={{ __html: md.toHTML(itemState.description || '') }}></p>)}
           </div>
           <div className="content">
             <h2>Yêu cầu công việc</h2>
-            {itemState && itemState.qualification}
+            {itemState &&  (<p dangerouslySetInnerHTML={{ __html: md.toHTML(itemState.qualification || '') }}></p>)}
           </div>
-          <div className="content">
+          <div className="content" >
             <h2>Giới thiệu công ty</h2>
             <h4>{itemState && itemState.employer_profile && itemState.employer_profile.name}</h4>
-            <p>
-              {itemState && itemState.employer_profile && itemState.employer_profile.description}
-            </p>
+              <p dangerouslySetInnerHTML={{ __html: employer_des }}></p>
           </div>
         </PanelTabRight>
       </PanelTabs>
