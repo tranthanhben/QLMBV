@@ -4,13 +4,13 @@ import {formatDate} from '../../meta';
 
 export default class ListView extends Component {
   static propTypes = {
-    delJob: PropTypes.func.isRequired
+    delItem: PropTypes.func.isRequired
   }
 
-  delJob(id){
+  delItem(id){
     let conf = confirm("Sau khi xóa sẽ không phục hồi được!");
     if(conf) {
-      this.props.delJob(id);
+      this.props.delItem(id);
     }
   }
 
@@ -51,12 +51,12 @@ export default class ListView extends Component {
             <br/>
             <div className='row'>
               <div className='col-md-8'>
-                <Link to={`/job/${item.id}`}>
+                <Link to={`/event/${item.id}`}>
                   <button className='btn btn-default'>Edit Job</button>
                 </Link>
                 &nbsp;&nbsp;&nbsp;
               </div>
-              <div className='col-md-4 text-right' onClick={() => this.delJob(item.id)}>
+              <div className='col-md-4 text-right' onClick={() => this.delItem(item.id)}>
                 <button className='btn btn-danger'>Delete</button>
                 &nbsp;
               </div>

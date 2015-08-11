@@ -11,7 +11,7 @@ export default function makeQuery(query) {
       result[property] = value;
 
     } else if(typeof value === "string"){
-      result[property] = value.trim().split(" ").join(",");
+      result[property] = value.trim().split(' ').join(',');
     }else if (value) {
       result[property] = value;
     }

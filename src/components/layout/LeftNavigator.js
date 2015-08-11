@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import {logout} from '../../actions/userActions';
-import {resetData} from '../../actions/jobActions';
+import {resetJob} from '../../actions/jobActions';
 import {bindActionCreators} from 'redux';
 
 class LeftNav extends Component {
@@ -10,7 +10,7 @@ class LeftNav extends Component {
     menu: PropTypes.array,
     params: PropTypes.object,
     logout: PropTypes.func.isRequired,
-    resetData: PropTypes.func.isRequired
+    resetJob: PropTypes.func.isRequired
   }
 
   logout(){
@@ -19,7 +19,7 @@ class LeftNav extends Component {
   }
   handleReset(item){
     if(item.href === "/job"){
-      this.props.resetData();
+      this.props.resetJob();
     }
   }
   render (){
@@ -71,6 +71,6 @@ export default class LeftNavContainer {
   }
   render(){
     const {menu, params, dispatch} = this.props;
-    return (<LeftNav menu={menu} params={params} {...bindActionCreators({logout, resetData}, dispatch)}></LeftNav>);
+    return (<LeftNav menu={menu} params={params} {...bindActionCreators({logout, resetJob}, dispatch)}></LeftNav>);
   }
 }

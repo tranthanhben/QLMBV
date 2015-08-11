@@ -4,6 +4,10 @@ const initialState = {
             label: 'Job',
             href: '/job',
             icon: 'book'
+        },{
+            label: 'Event',
+            href: '/event',
+            icon: 'book'
         }],
         [{
             label: 'Profile',

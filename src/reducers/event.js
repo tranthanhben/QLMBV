@@ -1,48 +1,30 @@
 import {
-  LISTJOB_LOAD,
-  LISTJOB_LOAD_SUCCESS,
-  LISTJOB_LOAD_FAIL,
-  ONEJOB_LOAD,
-  ONEJOB_LOAD_SUCCESS,
-  ONEJOB_LOAD_FAIL,
-  DEL_JOB,
-  DEL_JOB_SUCCESS,
-  DEL_JOB_FAIL,
-  POST_JOB,
-  POST_JOB_SUCCESS,
-  POST_JOB_FAIL,
-  PUT_JOB,
-  PUT_JOB_SUCCESS,
-  PUT_JOB_FAIL,
-  GET_JOB,
-  GET_JOB_SUCCESS,
-  GET_JOB_FAIL,
-  RESETJOB
+  LISTEVENT_LOAD,
+  LISTEVENT_LOAD_SUCCESS,
+  LISTEVENT_LOAD_FAIL,
+  ONEEVENT_LOAD,
+  ONEEVENT_LOAD_SUCCESS,
+  ONEEVENT_LOAD_FAIL,
+  DEL_EVENT,
+  DEL_EVENT_SUCCESS,
+  DEL_EVENT_FAIL,
+  POST_EVENT,
+  POST_EVENT_SUCCESS,
+  POST_EVENT_FAIL,
+  PUT_EVENT,
+  PUT_EVENT_SUCCESS,
+  PUT_EVENT_FAIL,
+  GET_EVENT,
+  GET_EVENT_SUCCESS,
+  GET_EVENT_FAIL,
+  RESETEVENT
 } from '../actions/actionTypes';
-const metaJob = {
+const metaEvent = {
     "title": {
         "label": "Title",
         "name": "title",
         "required": true,
         "type": "single"
-    },
-    "salary_min": {
-        "label": "Salary Min",
-        "name": "salary_min",
-        "required": false,
-        "type": "number"
-    },
-    "salary_max": {
-        "label": "Salary Max",
-        "name": "salary_max",
-        "required": false,
-        "type": "number"
-    },
-    "description": {
-        "label": "Description",
-        "name": "description",
-        "required": false,
-        "type": "md"
     },
     "location": {
         "label": "Location",
@@ -50,15 +32,15 @@ const metaJob = {
         "required": false,
         "type": "single"
     },
-    "expired_time": {
-        "label": "Expired Time",
-        "name": "expired_time",
+    "time": {
+        "label": "Time",
+        "name": "time",
         "required": false,
         "type": "date"
     },
-    "qualification": {
-        "label": "Qualification",
-        "name": "qualification",
+    "content": {
+        "label": "Content",
+        "name": "content",
         "required": false,
         "type": "md"
     }
@@ -66,16 +48,16 @@ const metaJob = {
 
 const initialState = {
   loaded: false,
-  metaJob: metaJob
+  metaEvent: metaEvent
 };
-export default function job(state = initialState, action = {}) {
+export default function event(state = initialState, action = {}) {
     switch (action.type) {
-      case LISTJOB_LOAD:
+      case LISTEVENT_LOAD:
         return {
           ...state,
           loadingList: true
         };
-      case LISTJOB_LOAD_SUCCESS:
+      case LISTEVENT_LOAD_SUCCESS:
         return {
           ...state,
           loadingList: false,
@@ -84,7 +66,7 @@ export default function job(state = initialState, action = {}) {
           list: action.result.items,
           paging: action.result.paging
         };
-      case LISTJOB_LOAD_FAIL:
+      case LISTEVENT_LOAD_FAIL:
         return {
           ...state,
           loadingList: false,
@@ -93,51 +75,51 @@ export default function job(state = initialState, action = {}) {
           paging:null,
           error: action.error
         };
-      case ONEJOB_LOAD:
+      case ONEEVENT_LOAD:
         return {
           ...state,
           loadingOne: true
         };
-      case ONEJOB_LOAD_SUCCESS:
+      case ONEEVENT_LOAD_SUCCESS:
         return {
           ...state,
           loadingOne: false,
           item: action.result
         };
-      case ONEJOB_LOAD_FAIL:
+      case ONEEVENT_LOAD_FAIL:
         return {
           ...state,
           loadingOne: false,
           item:null,
           error: action.error
         };
-      case DEL_JOB:
+      case DEL_EVENT:
         return {
           ...state,
           loadingOne: true
         };
-      case DEL_JOB_SUCCESS:
+      case DEL_EVENT_SUCCESS:
         return {
           ...state,
           reloadList: true,
           loadingOne: false,
           item: null
         };
-      case DEL_JOB_FAIL:
+      case DEL_EVENT_FAIL:
         return {
           ...state,
           loadingOne: false,
           item: null,
           errorDel: action.error
         };
-      case POST_JOB:
+      case POST_EVENT:
         return {
           ...state,
           postLoading: true
         };
-      case POST_JOB_SUCCESS:
+      case POST_EVENT_SUCCESS:
         alert("Create Success!");
-        location.assign("/job/"+action.result.id);
+        location.assign("/event/"+action.result.id);
         return {
           ...state,
           editItem: action.result,
@@ -145,20 +127,20 @@ export default function job(state = initialState, action = {}) {
           message: true,
           postLoading: false,
         };
-      case POST_JOB_FAIL:
+      case POST_EVENT_FAIL:
         return {
           ...state,
           editItem: null,
           message: false,
           postLoading: false,
-          errorPostItem: action.error
+          errorPostEvent: action.error
         };
-      case PUT_JOB:
+      case PUT_EVENT:
         return {
           ...state,
           postLoading: true
         };
-      case PUT_JOB_SUCCESS:
+      case PUT_EVENT_SUCCESS:
         return {
           ...state,
           editItem: action.result,
@@ -166,40 +148,40 @@ export default function job(state = initialState, action = {}) {
           message: true,
           postLoading: false,
         };
-      case PUT_JOB_FAIL:
+      case PUT_EVENT_FAIL:
         return {
           ...state,
           editItem: null,
           message: false,
           postLoading: false,
-          errorPostItem: action.error
+          errorPostEvent: action.error
         };
-      case GET_JOB:
+      case GET_EVENT:
         return {
           ...state,
           getLoading: true
         };
-      case GET_JOB_SUCCESS:
+      case GET_EVENT_SUCCESS:
         return {
           ...state,
           editItem: action.result,
           getLoading: false,
         };
-      case GET_JOB_FAIL:
+      case GET_EVENT_FAIL:
         return {
           ...state,
           editItem: null,
           getLoading: false,
-          errorGetItem: action.error
+          errorGetEvent: action.error
         }
-      case RESETJOB:
+      case RESETEVENT:
         return {
           ...state,
           loaded: false,
           editItem: null,
           message: '',
-          errorPostItem: null,
-          errorGetItem: null
+          errorPostEvent: null,
+          errorGetEvent: null
         }
       default:
         return state;
@@ -207,5 +189,5 @@ export default function job(state = initialState, action = {}) {
 }
 
 export function isLoaded(globalState){
-  return globalState.job && globalState.job.loaded;
+  return globalState.event && globalState.event.loaded;
 }
