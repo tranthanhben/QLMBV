@@ -8,6 +8,10 @@ const initialState = {
             label: 'Event',
             href: '/event',
             icon: 'book'
+        },{
+            label: 'Blog',
+            href: '/blog',
+            icon: 'book'
         }],
         [{
             label: 'Profile',

@@ -56,7 +56,6 @@ class JobPage extends Component {
   error: state.job.error,
   item: state.job.item,
   paging: state.job.paging,
-  user: state.user.user,
   reloadList : state.job.reloadList
 }))
 export default class JobPageContainer{
@@ -65,7 +64,6 @@ export default class JobPageContainer{
     item: PropTypes.object,
     paging: PropTypes.object,
     error: PropTypes.object,
-    user: PropTypes.object,
     reloadList: PropTypes.bool,
     dispatch: PropTypes.func.isRequired
   }
