@@ -197,7 +197,7 @@ export default function job(state = initialState, action = {}) {
           ...state,
           loaded: false,
           editItem: null,
-          message: '',
+          message: false,
           errorPostItem: null,
           errorGetItem: null
         }

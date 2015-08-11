@@ -179,7 +179,7 @@ export default function event(state = initialState, action = {}) {
           ...state,
           loaded: false,
           editItem: null,
-          message: '',
+          message: false,
           errorPostEvent: null,
           errorGetEvent: null
         }

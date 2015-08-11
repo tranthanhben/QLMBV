@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {Link} from 'react-router';
 import {formatDate} from '../../meta';
+import {markdown} from 'markdown';
 
 export default class ListView extends Component {
   static propTypes = {
@@ -62,7 +63,8 @@ export default class ListView extends Component {
               </div>
             </div>
             <hr/>
-            {item.description}
+            <div dangerouslySetInnerHTML={{ __html: markdown.toHTML(item.description)}}>
+            </div>
           </div>
         )}
       </div>

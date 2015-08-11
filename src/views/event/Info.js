@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {Link} from 'react-router';
 import {formatDate} from '../../meta';
+import {markdown} from 'markdown';
 
 export default class ListView extends Component {
   static propTypes = {
@@ -31,7 +32,7 @@ export default class ListView extends Component {
               <div className='col-md-12'>
                 <h4>
                   <b>
-                    <span>Job Name: </span>
+                    <span>Event Name: </span>
                   </b>
                   {item && item.title}
                 </h4>
@@ -52,7 +53,7 @@ export default class ListView extends Component {
             <div className='row'>
               <div className='col-md-8'>
                 <Link to={`/event/${item.id}`}>
-                  <button className='btn btn-default'>Edit Job</button>
+                  <button className='btn btn-default'>Edit Event</button>
                 </Link>
                 &nbsp;&nbsp;&nbsp;
               </div>
@@ -62,7 +63,8 @@ export default class ListView extends Component {
               </div>
             </div>
             <hr/>
-            {item.description}
+            <div dangerouslySetInnerHTML={{ __html: markdown.toHTML(item.content)}}>
+            </div>
           </div>
         )}
       </div>
