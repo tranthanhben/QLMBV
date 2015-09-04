@@ -26,9 +26,21 @@ const metaApply = {
         "required": true,
         "type": "single"
     },
-    "content": {
-        "label": "Content",
-        "name": "content",
+    "cv": {
+        "label": "CV",
+        "name": "cv",
+        "required": true,
+        "type": "single"
+    },
+    "phone": {
+        "label": "Phone",
+        "name": "phone",
+        "required": true,
+        "type": "single"
+    },
+    "letter": {
+        "label": "Letter",
+        "name": "letter",
         "required": false,
         "type": "md"
     }

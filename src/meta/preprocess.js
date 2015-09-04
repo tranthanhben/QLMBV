@@ -198,7 +198,6 @@ inputs.select = function (field) {
         disabled={field.disabled}
         onChange={::fn.handleChange}
         value={scope[field.name] || ''}>
-        <option key='select'></option>
         {field.options.map(function (f) {
           return (
             <option key={f.name} value={f.value}>

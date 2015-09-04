@@ -61,6 +61,44 @@ const metaJob = {
         "name": "qualification",
         "required": false,
         "type": "md"
+    },
+    "category": {
+        "label": "Category",
+        "name": "category",
+        "required": false,
+        "type": "select",
+        "options": [{
+            "label": "Event",
+            "value": "event"
+        },{
+            "label": "Media",
+            "value": "media"
+        },{
+            "label": "Design / Film",
+            "value": "design_film"
+        },{
+            "label": "Sale / Account",
+            "value": "sale_account"
+        },{
+            "label": "Maketing",
+            "value": "maketing"
+        },{
+            "label": "Other",
+            "value": "other"
+        }]
+    },
+    "kind": {
+        "label": "Kind",
+        "name": "kind",
+        "required": false,
+        "type": "select",
+        "options": [{
+            "label": "Agency",
+            "value": "agency"
+        },{
+            "label": "Client",
+            "value": "client"
+        }]
     }
 }
 

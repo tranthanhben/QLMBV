@@ -26,6 +26,12 @@ const metaEvent = {
         "required": true,
         "type": "single"
     },
+    "avatar": {
+        "label": "Avatar",
+        "name": "avatar",
+        "required": true,
+        "type": "single"
+    },
     "location": {
         "label": "Location",
         "name": "location",

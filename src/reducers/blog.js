@@ -26,6 +26,12 @@ const metaBlog = {
         "required": true,
         "type": "single"
     },
+    "avatar": {
+        "label": "Avatar",
+        "name": "avatar",
+        "required": true,
+        "type": "single"
+    },
     "content": {
         "label": "Content",
         "name": "content",
