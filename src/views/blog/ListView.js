@@ -28,18 +28,23 @@ export default class ListView extends Component {
   }
 
   nextPage(){
-    this.props.loadList({
-      page: this.props.paging.page +1,
-      title: this.state.titleSearch
-    })
+    if(!endPage(this.props.paging)){
+      this.props.loadList({
+        page: this.props.paging.page +1,
+        title: this.state.titleSearch
+      })
+    }
   }
 
   prevPage(){
-    this.props.loadList({
-      page: this.props.paging.page - 1,
-      title: this.state.titleSearch
-    })
+    if(this.props.paging.page !==0){
+      this.props.loadList({
+        page: this.props.paging.page - 1,
+        title: this.state.titleSearch
+      })
+    }
   }
+
   searchList(){
     this.props.loadList({
       title: this.state.titleSearch
@@ -69,7 +74,7 @@ export default class ListView extends Component {
             <thead>
               <tr>
                 <th className='#'>#</th>
-                <th>Blogs</th>
+                <th>Articles</th>
               </tr>
             </thead>
             <tbody>
@@ -90,10 +95,10 @@ export default class ListView extends Component {
           <div>
             <ul className=' pagination'>
               <li className={paging && paging.page === 0 ? 'disabled' : ''} onClick={::this.prevPage}>
-                <span className=' glyphicon glyphicon-chevron-left '></span>
+                <span className='noselect glyphicon glyphicon-chevron-left '></span>
               </li>
-              <li className={isEndPage === true ? 'disabled' : ''} onClick={::this.nextPage} >
-                <span className=' glyphicon glyphicon-chevron-right'></span>
+              <li className={isEndPage === true ? 'disabled' : ''}  onClick={::this.nextPage} >
+                <span className='noselect glyphicon glyphicon-chevron-right'></span>
               </li>
             </ul>
           </div>

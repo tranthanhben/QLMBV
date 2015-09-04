@@ -75,10 +75,14 @@ class EditorJobPage extends Component {
   render(){
     const {item, error, metaJob, message} = this.props;
     let edited = this.state.edited;
+    console.log("truoc", item);
     let fieldRender = renderField(this.state.item, metaJob, this)|| [];
     let itemState = this.state.item;
+
     let resultCheckRequire = checkRequire(metaJob, this.state.item);
-    let employer_des = (itemState && itemState.employer_profile)? md.toHTML(itemState.employer_profile.description):'';
+    console.log("sau", item);
+
+    let employer_des = (itemState && itemState.employer_profile)? md.toHTML(itemState.employer_profile.introduction || ''):'';
     return <PanelView>
       <PanelTabs tabs={tabsLeft}>
         <PanelTabLeft tab={tabsLeft[0]}>

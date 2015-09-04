@@ -15,9 +15,7 @@ export default class ListView extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log("next props", nextProps);
     if(nextProps.reloadList === true){
-      console.log("title", this.state.titleSearch);
       this.props.loadList({
         title: this.state.titleSearch
       })
@@ -29,18 +27,23 @@ export default class ListView extends Component {
   }
 
   nextPage(){
-    this.props.loadList({
-      page: this.props.paging.page +1,
-      title: this.state.titleSearch
-    })
+    if(!endPage(this.props.paging)){
+      this.props.loadList({
+        page: this.props.paging.page +1,
+        title: this.state.titleSearch
+      })
+    }
   }
 
   prevPage(){
-    this.props.loadList({
-      page: this.props.paging.page - 1,
-      title: this.state.titleSearch
-    })
+    if(this.props.paging.page !==0){
+      this.props.loadList({
+        page: this.props.paging.page - 1,
+        title: this.state.titleSearch
+      })
+    }
   }
+
   searchJob(){
     this.props.loadList({
       title: this.state.titleSearch

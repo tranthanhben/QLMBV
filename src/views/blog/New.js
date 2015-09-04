@@ -9,13 +9,13 @@ import {initObject, preprocess, renderField, setValue, checkRequire, preprocessP
 let cmdsRight = [{
     active: false,
     icon: 'pencel',
-    label: 'New Blog',
+    label: 'New Article',
     href: '/blog/new'
 }];
 
 let tabsLeft = [{
     name: 'info_blog',
-    label: 'Info Blog'
+    label: 'Info Article'
 }];
 let tabsRight = [{
   label : 'Review',

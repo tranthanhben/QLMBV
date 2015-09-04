@@ -9,7 +9,7 @@ const initialState = {
             href: '/event',
             icon: 'book'
         },{
-            label: 'Blog',
+            label: 'Article',
             href: '/blog',
             icon: 'book'
         }],

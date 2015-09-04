@@ -32,7 +32,7 @@ export default class ListView extends Component {
               <div className='col-md-12'>
                 <h4>
                   <b>
-                    <span>Blog Name: </span>
+                    <span>Article Title: </span>
                   </b>
                   {item && item.title}
                 </h4>
@@ -53,7 +53,7 @@ export default class ListView extends Component {
             <div className='row'>
               <div className='col-md-8'>
                 <Link to={`/blog/${item.id}`}>
-                  <button className='btn btn-default'>Edit Blog</button>
+                  <button className='btn btn-default'>Edit Article</button>
                 </Link>
                 &nbsp;&nbsp;&nbsp;
               </div>

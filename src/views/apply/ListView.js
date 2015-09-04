@@ -28,18 +28,23 @@ export default class ListView extends Component {
   }
 
   nextPage(){
-    this.props.loadList({
-      page: this.props.paging.page +1,
-      title: this.state.titleSearch
-    })
+    if(!endPage(this.props.paging)){
+      this.props.loadList({
+        page: this.props.paging.page +1,
+        title: this.state.titleSearch
+      })
+    }
   }
 
   prevPage(){
-    this.props.loadList({
-      page: this.props.paging.page - 1,
-      title: this.state.titleSearch
-    })
+    if(this.props.paging.page !==0){
+      this.props.loadList({
+        page: this.props.paging.page - 1,
+        title: this.state.titleSearch
+      })
+    }
   }
+
   searchList(){
     this.props.loadList({
       title: this.state.titleSearch

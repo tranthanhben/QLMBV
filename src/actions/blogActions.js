@@ -41,7 +41,7 @@ export function loadList(options = {}){
     promise: (client) => client.get('/articles',{
       params: makeQuery({
         page: options.page || 0,
-        page_size : options.page || 10,
+        page_size : options.page_size || 10,
         title: options.title || ''
       })
     })

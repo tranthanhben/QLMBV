@@ -12,12 +12,12 @@ import Info from './Info';
 let cmdsRight = [{
     active: false,
     icon: 'pencel',
-    label: 'New Blog',
+    label: 'New Article',
     href: '/blog/new'
 }];
 
 let tabsLeft = [{
-  label : 'Blog List',
+  label : 'Article List',
   name: 'blog_list'
 }];
 
