@@ -12,6 +12,10 @@ const initialState = {
             label: 'Article',
             href: '/blog',
             icon: 'book'
+        },{
+            label: 'Apply',
+            href: '/apply',
+            icon: 'book'
         }],
         [{
             label: 'Profile',

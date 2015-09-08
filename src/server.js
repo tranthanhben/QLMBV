@@ -32,6 +32,13 @@ app.use('/cp/v1', (req, res) => {
   proxy.web(req, res);
 });
 
+app.use('/v1/upload', (req, res) => {
+  httpProxy.createProxyServer({
+    target: 'http://localhost:' + config.apiPort + '/v1/upload'
+  }).web(req, res);
+});
+
+
 app.use((req, res) => {
   if (__DEVELOPMENT__) {
     webpackStats = require('../webpack-stats.json');

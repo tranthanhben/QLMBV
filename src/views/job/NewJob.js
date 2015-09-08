@@ -18,7 +18,7 @@ let cmdsRight = [{
 let tabsLeft = [{
     name: 'info_job',
     label: 'Info Job'
-}];
+  }];
 let tabsRight = [{
   label : 'Review',
   name : 'review'
@@ -75,23 +75,210 @@ class EditorJobPage extends Component {
   render(){
     const {item, error, metaJob, message} = this.props;
     let edited = this.state.edited;
-    console.log("truoc", item);
     let fieldRender = renderField(this.state.item, metaJob, this)|| [];
     let itemState = this.state.item;
 
     let resultCheckRequire = checkRequire(metaJob, this.state.item);
-    console.log("sau", item);
-
     let employer_des = (itemState && itemState.employer_profile)? md.toHTML(itemState.employer_profile.introduction || ''):'';
     return <PanelView>
-      <PanelTabs tabs={tabsLeft}>
-        <PanelTabLeft tab={tabsLeft[0]}>
+      <PanelTabs tabs={tabsLeft} key="left tabs">
+        <PanelTabLeft tab={tabsLeft[0]} key='0'>
           <div className='panel-info'>
             <div className='card'>
-
               <div className='row'>
                 <div className='col-md-12'>
-                  {fieldRender}
+                  <div className='form-group' key="title">
+                    <label>
+                      <span>
+                        {metaJob["title"].label}
+                      </span>
+                      &nbsp;
+                      {metaJob["title"].required ? <span className='required'>*</span> : null}
+                      <br/>
+                      <span className='label-small'>
+                        {metaJob["title"].label_vi}
+                      </span>
+                      <span className='unit'>
+                        {metaJob["title"].unit}
+                      </span>
+                    </label>
+                    &nbsp;
+                    {metaJob["title"].$input(this.state.item, this)}
+                  </div>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-md-6">
+                  <div className='form-group' key="expired_time">
+                    <label>
+                      <span>
+                        {metaJob["expired_time"].label}
+                      </span>
+                      &nbsp;
+                      {metaJob["expired_time"].required ? <span className='required'>*</span> : null}
+                      <br/>
+                      <span className='label-small'>
+                        {metaJob["expired_time"].label_vi}
+                      </span>
+                      <span className='unit'>
+                        {metaJob["expired_time"].unit}
+                      </span>
+                    </label>
+                    &nbsp;
+                    {metaJob["expired_time"].$input(this.state.item, this)}
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <div className='form-group' key="location">
+                    <label>
+                      <span>
+                        {metaJob["location"].label}
+                      </span>
+                      &nbsp;
+                      {metaJob["location"].required ? <span className='required'>*</span> : null}
+                      <br/>
+                      <span className='label-small'>
+                        {metaJob["location"].label_vi}
+                      </span>
+                      <span className='unit'>
+                        {metaJob["location"].unit}
+                      </span>
+                    </label>
+                    &nbsp;
+                    {metaJob["location"].$input(this.state.item, this)}
+                  </div>
+                </div>
+              </div>
+              <div className="row">
+                  <div className="col-md-6">
+                    <div className='form-group' key="salary_min">
+                      <label>
+                        <span>
+                          {metaJob["salary_min"].label}
+                        </span>
+                        &nbsp;
+                        {metaJob["salary_min"].required ? <span className='required'>*</span> : null}
+                        <br/>
+                        <span className='label-small'>
+                          {metaJob["salary_min"].label_vi}
+                        </span>
+                        <span className='unit'>
+                          {metaJob["salary_min"].unit}
+                        </span>
+                      </label>
+                      &nbsp;
+                      <input className='form-control' step='1' type='number' min="0"
+                        data-addr="salary_min"
+                        onChange={this.handleChange}
+                        placeholder={metaJob["salary_min"].label}
+                        value={this.state.item["salary_min"] || ''}/>
+                    </div>
+                  </div>
+                  <div className="col-md-6">
+                    <div className='form-group' key="salary_max">
+                      <label>
+                        <span>
+                          {metaJob["salary_max"].label}
+                        </span>
+                        &nbsp;
+                        {metaJob["salary_max"].required ? <span className='required'>*</span> : null}
+                        <br/>
+                        <span className='label-small'>
+                          {metaJob["salary_max"].label_vi}
+                        </span>
+                        <span className='unit'>
+                          {metaJob["salary_max"].unit}
+                        </span>
+                      </label>
+                      &nbsp;
+                      <input className='form-control' step='1' type='number' min="0"
+                        data-addr="salary_max"
+                        onChange={this.handleChange}
+                        placeholder={metaJob["salary_max"].label}
+                        value={this.state.item["salary_max"] || ''}/>
+                    </div>
+                  </div>
+              </div>
+              <div className='row'>
+                <div className='col-md-12'>
+                  <div className='form-group' key="description">
+                    <label>
+                      <span>
+                        {metaJob["description"].label}
+                      </span>
+                      &nbsp;
+                      {metaJob["description"].required ? <span className='required'>*</span> : null}
+                      <br/>
+                      <span className='label-small'>
+                        {metaJob["description"].label_vi}
+                      </span>
+                      <span className='unit'>
+                        {metaJob["description"].unit}
+                      </span>
+                    </label>
+                    &nbsp;
+                    {metaJob["description"].$input(this.state.item, this)}
+                  </div>
+                  <div className='form-group' key="qualification">
+                    <label>
+                      <span>
+                        {metaJob["qualification"].label}
+                      </span>
+                      &nbsp;
+                      {metaJob["qualification"].required ? <span className='required'>*</span> : null}
+                      <br/>
+                      <span className='label-small'>
+                        {metaJob["qualification"].label_vi}
+                      </span>
+                      <span className='unit'>
+                        {metaJob["qualification"].unit}
+                      </span>
+                    </label>
+                    &nbsp;
+                    {metaJob["qualification"].$input(this.state.item, this)}
+                  </div>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-md-6">
+                  <div className='form-group' key="category">
+                    <label>
+                      <span>
+                        {metaJob["category"].label}
+                      </span>
+                      &nbsp;
+                      {metaJob["category"].required ? <span className='required'>*</span> : null}
+                      <br/>
+                      <span className='label-small'>
+                        {metaJob["category"].label_vi}
+                      </span>
+                      <span className='unit'>
+                        {metaJob["category"].unit}
+                      </span>
+                    </label>
+                    &nbsp;
+                    {metaJob["category"].$input(this.state.item, this)}
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <div className='form-group' key="kind">
+                    <label>
+                      <span>
+                        {metaJob["kind"].label}
+                      </span>
+                      &nbsp;
+                      {metaJob["kind"].required ? <span className='required'>*</span> : null}
+                      <br/>
+                      <span className='label-small'>
+                        {metaJob["kind"].label_vi}
+                      </span>
+                      <span className='unit'>
+                        {metaJob["kind"].unit}
+                      </span>
+                    </label>
+                    &nbsp;
+                    {metaJob["kind"].$input(this.state.item, this)}
+                  </div>
                 </div>
               </div>
               <h3></h3>
@@ -111,7 +298,6 @@ class EditorJobPage extends Component {
                   <button className={'btn ' + (item && item.id ? 'btn-warning' : 'btn-success')} onClick={::this.onSubmit}>
                     {item && item.id? "Update" : "Created"}
                   </button>
-
                 </div>
                 <div className='col-md-6 text-right'></div>
               </div>
@@ -119,7 +305,7 @@ class EditorJobPage extends Component {
           </div>
         </PanelTabLeft>
       </PanelTabs>
-      <PanelTabs cmds={cmdsRight} tabs={tabsRight}>
+      <PanelTabs cmds={cmdsRight} tabs={tabsRight} key="right tabs">
         <PanelTabRight tab={tabsRight[0]} >
           <div className="heading">
             <button className="btn pull-right apply-btn">Ứng tuyển ngay</button>

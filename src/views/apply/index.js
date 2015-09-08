@@ -42,7 +42,7 @@ class ApplyPage extends Component {
           <ListView list={list} paging={paging} reloadList={reloadList} {...bindActionCreators(applyActions, dispatch)}></ListView>
         </PanelTabLeft>
       </PanelTabs>
-      <PanelTabs cmds={cmdsRight} tabs={tabsRight}>
+      <PanelTabs tabs={tabsRight}>
         <PanelTabRight tab={tabsRight[0]} >
           <Info item={item} {...bindActionCreators(applyActions, dispatch)}></Info>
         </PanelTabRight>

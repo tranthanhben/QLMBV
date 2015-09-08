@@ -61,6 +61,7 @@ export default class PanelTabs extends Component{
 export class PanelTabLeft extends Component {
   render(){
     const {tab, active} = this.props;
+    const elemProps = {selectTab:this.props.selectTab};
     return (
         <div key={tab.label}
           className={cx({
@@ -69,7 +70,9 @@ export class PanelTabLeft extends Component {
           })}>
           <div className='panel-categories flex-col flex'>
             <div className='flex-panel'>
-              {this.props.children}
+              {React.Children.map(this.props.children, child => {
+                return React.cloneElement(child, elemProps);
+              })}
             </div>
           </div>
         </div>

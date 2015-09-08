@@ -9,3 +9,4 @@ export {default as renderField} from './renderField';
 export {preprocess, preprocessPost} from './preprocess';
 export {default as checkRequire} from './checkRequire';
 export {default as makeQuery} from './makeQuery';
+export let defaultimg = '../images/defautl.jpg';

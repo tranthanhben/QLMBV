@@ -50,20 +50,9 @@ export default class ListView extends Component {
               </div>
             </div>
             <br/>
-            <div className='row'>
-              <div className='col-md-8'>
-                <Link to={`/apply/${item.id}`}>
-                  <button className='btn btn-default'>Edit Apply</button>
-                </Link>
-                &nbsp;&nbsp;&nbsp;
-              </div>
-              <div className='col-md-4 text-right' onClick={() => this.delItem(item.id)}>
-                <button className='btn btn-danger'>Delete</button>
-                &nbsp;
-              </div>
-            </div>
+
             <hr/>
-            <div dangerouslySetInnerHTML={{ __html: markdown.toHTML(item.content)}}>
+            <div dangerouslySetInnerHTML={{ __html: markdown.toHTML(item.letter)}}>
             </div>
           </div>
         )}
@@ -71,3 +60,15 @@ export default class ListView extends Component {
     );
   }
 }
+// <div className='row'>
+//               <div className='col-md-8'>
+//                 <Link to={`/apply/${item.id}`}>
+//                   <button className='btn btn-default'>Edit Apply</button>
+//                 </Link>
+//                 &nbsp;&nbsp;&nbsp;
+//               </div>
+//               <div className='col-md-4 text-right' onClick={() => this.delItem(item.id)}>
+//                 <button className='btn btn-danger'>Delete</button>
+//                 &nbsp;
+//               </div>
+//             </div>
