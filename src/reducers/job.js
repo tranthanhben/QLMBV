@@ -99,6 +99,12 @@ const metaJob = {
             "label": "Client",
             "value": "client"
         }]
+    },
+    "marked":{
+      "label": "",
+      "name": "marked",
+      "required": false,
+      "type": "bool"
     }
 }
 

@@ -44,11 +44,23 @@ const metaEvent = {
         "required": false,
         "type": "date"
     },
+    "description": {
+        "label": "Description",
+        "name": "description",
+        "required": true,
+        "type": "md"
+    },
     "content": {
         "label": "Content",
         "name": "content",
         "required": false,
         "type": "md"
+    },
+    "tag":{
+      "label": "Tags",
+      "name": "tag",
+      "required": false,
+      "type": "multiselect"
     }
 }
 

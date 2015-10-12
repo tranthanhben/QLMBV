@@ -175,6 +175,24 @@ class EditorEventPage extends Component {
               </div>
               <div className='row'>
                 <div className='col-md-12'>
+                  <div className='form-group' key="description">
+                    <label>
+                      <span>
+                        {metaEvent["description"].label}
+                      </span>
+                      &nbsp;
+                      {metaEvent["description"].required ? <span className='required'>*</span> : null}
+                      <br/>
+                      <span className='label-small'>
+                        {metaEvent["description"].label_vi}
+                      </span>
+                      <span className='unit'>
+                        {metaEvent["description"].unit}
+                      </span>
+                    </label>
+                    &nbsp;
+                    {metaEvent["description"].$input(this.state.item, this)}
+                  </div>
                   <div className='form-group' key="content">
                     <label>
                       <span>
@@ -275,9 +293,7 @@ class EditorEventPage extends Component {
                     <div className="col-md-6 time-info"><i className="fa fa-clock-o time-location-icon"></i> {itemState && new Date(itemState.time).toDateString()|| new Date().toDateString()}</div>
                     <div className="col-md-6 location-info"><i className="fa fa-map-marker time-location-icon"></i>  {itemState && itemState.location ||'Location Example'}</div>
                   </div>
-                  <p className="short-content">
-                  Your brand is your business. The visual system that expresses your personality, communicates your values, and distinguishes you from your competitors. With your close involvement, we gather information and examine your business and industry in order to best visually interpret your company.
-                  </p>
+                  {itemState && itemState.description ? (<p className="short-content">{itemState.description}</p>) : <p className="short-content">Your brand is your business. The visual system that expresses your personality, communicates your values, and distinguishes you from your competitors. With your close involvement, we gather information and examine your business and industry in order to best visually interpret your company.</p>}
                 </div>
               </div>
             </div>

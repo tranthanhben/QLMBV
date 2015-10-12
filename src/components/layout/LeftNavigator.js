@@ -14,9 +14,9 @@ class LeftNav extends Component {
   }
 
   logout(){
-    console.log("logout");
     this.props.logout();
   }
+
   handleReset(item){
     if(item.href === "/job"){
       this.props.resetJob();

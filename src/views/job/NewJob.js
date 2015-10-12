@@ -55,7 +55,7 @@ class EditorJobPage extends Component {
       });
     }else{
       this.setState({
-        item: initObject(this.props.metaJob) || {},
+        item: initObject(this.props.metaJob),
         edited: false
       })
     }
@@ -78,8 +78,9 @@ class EditorJobPage extends Component {
     let fieldRender = renderField(this.state.item, metaJob, this)|| [];
     let itemState = this.state.item;
 
-    let resultCheckRequire = checkRequire(metaJob, this.state.item);
+    let resultCheckRequire = checkRequire(metaJob, itemState);
     let employer_des = (itemState && itemState.employer_profile)? md.toHTML(itemState.employer_profile.introduction || ''):'';
+    console.log("item", itemState, this.state.item);
     return <PanelView>
       <PanelTabs tabs={tabsLeft} key="left tabs">
         <PanelTabLeft tab={tabsLeft[0]} key='0'>
@@ -167,11 +168,11 @@ class EditorJobPage extends Component {
                         </span>
                       </label>
                       &nbsp;
-                      <input className='form-control' step='1' type='number' min="0"
+                      <input className='form-control' step='100' type='number' min="0"
                         data-addr="salary_min"
                         onChange={this.handleChange}
                         placeholder={metaJob["salary_min"].label}
-                        value={this.state.item["salary_min"] || ''}/>
+                        value={this.state.item["salary_min"] || 0}/>
                     </div>
                   </div>
                   <div className="col-md-6">
@@ -191,11 +192,11 @@ class EditorJobPage extends Component {
                         </span>
                       </label>
                       &nbsp;
-                      <input className='form-control' step='1' type='number' min="0"
+                      <input className='form-control' step='100' type='number' min="0"
                         data-addr="salary_max"
                         onChange={this.handleChange}
                         placeholder={metaJob["salary_max"].label}
-                        value={this.state.item["salary_max"] || ''}/>
+                        value={this.state.item["salary_max"] || 0}/>
                     </div>
                   </div>
               </div>
@@ -281,7 +282,6 @@ class EditorJobPage extends Component {
                   </div>
                 </div>
               </div>
-              <h3></h3>
               <div className='row'>
                 <div className='col-md-6'>
                   {(message && !edited)? (message === true?
