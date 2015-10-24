@@ -1,18 +1,18 @@
 module.exports = {
   development: {
     isProduction: false,
-    port: process.env.PORT,
-    apiPort: process.env.APIPORT,
+    port: 3001,
+    apiPort: 3030,
     app: {
-      name: 'React Redux Example Development'
+      name: 'Adjobs Back (development)'
     }
   },
   production: {
     isProduction: true,
     port: process.env.PORT,
-    apiPort: process.env.APIPORT,
+    apiPort: process.env.API_PORT,
     app: {
-      name: 'React Redux Example Production'
+      name: 'Adjobs Back (production)'
     }
   }
 }[process.env.NODE_ENV || 'development'];

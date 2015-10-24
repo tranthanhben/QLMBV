@@ -1,130 +1,96 @@
+/*global __DEVELOPMENT__*/
 import Express from 'express';
 import React from 'react';
-import ReactDOM from 'react-dom/server';
+import Location from 'react-router/lib/Location';
 import config from './config';
 import favicon from 'serve-favicon';
 import compression from 'compression';
 import httpProxy from 'http-proxy';
 import path from 'path';
+import serialize from 'serialize-javascript';
 import createStore from './redux/create';
-import ApiClient from './helpers/ApiClient';
-import Html from './helpers/Html';
-import PrettyError from 'pretty-error';
-import http from 'http';
-import SocketIo from 'socket.io';
-
-import {ReduxRouter} from 'redux-router';
-import createHistory from 'history/lib/createMemoryHistory';
-import {reduxReactRouter, match} from 'redux-router/server';
-import {Provider} from 'react-redux';
-import qs from 'query-string';
-import getRoutes from './routes';
-import getStatusFromRoutes from './helpers/getStatusFromRoutes';
-
-const pretty = new PrettyError();
+import ApiClient from './ApiClient';
+import universalRouter from './universalRouter';
 const app = new Express();
-const server = new http.Server(app);
 const proxy = httpProxy.createProxyServer({
-  target: 'http://localhost:' + config.apiPort,
-  ws: true
+  target: 'http://localhost:' + config.apiPort + '/cp/v1'
 });
 
 app.use(compression());
-app.use(favicon(path.join(__dirname, '..', 'static', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, '..', 'favicon.ico')));
+
+let webpackStats;
+
+if (!__DEVELOPMENT__) {
+  webpackStats = require('../webpack-stats.json');
+}
 
 app.use(require('serve-static')(path.join(__dirname, '..', 'static')));
 
 // Proxy to API server
-app.use('/api', (req, res) => {
+app.use('/cp/v1', (req, res) => {
   proxy.web(req, res);
 });
 
-// added the error handling to avoid https://github.com/nodejitsu/node-http-proxy/issues/527
-proxy.on('error', (error, req, res) => {
-  let json;
-  if (error.code !== 'ECONNRESET') {
-    console.error('proxy error', error);
-  }
-  if (!res.headersSent) {
-    res.writeHead(500, {'content-type': 'application/json'});
-  }
-
-  json = {error: 'proxy_error', reason: error.message};
-  res.end(JSON.stringify(json));
+app.use('/v1/upload', (req, res) => {
+  httpProxy.createProxyServer({
+    target: 'http://localhost:' + config.apiPort + '/v1/upload'
+  }).web(req, res);
 });
+
 
 app.use((req, res) => {
   if (__DEVELOPMENT__) {
+    webpackStats = require('../webpack-stats.json');
     // Do not cache webpack stats: the script file would change since
     // hot module replacement is enabled in the development env
-    webpackIsomorphicTools.refresh();
+    delete require.cache[require.resolve('../webpack-stats.json')];
   }
   const client = new ApiClient(req);
-
-  const store = createStore(reduxReactRouter, getRoutes, createHistory, client);
-
-  function hydrateOnClient() {
-    res.send('<!doctype html>\n' +
-      ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} store={store}/>));
-  }
-
-  if (__DISABLE_SSR__) {
-    hydrateOnClient();
-    return;
-  }
-
-  store.dispatch(match(req.originalUrl, (error, redirectLocation, routerState) => {
-    if (redirectLocation) {
-      res.redirect(redirectLocation.pathname + redirectLocation.search);
-    } else if (error) {
-      console.error('ROUTER ERROR:', pretty.render(error));
-      res.status(500);
-      hydrateOnClient();
-    } else if (!routerState) {
-      res.status(500);
-      hydrateOnClient();
-    } else {
-      // Workaround redux-router query string issue:
-      // https://github.com/rackt/redux-router/issues/106
-      if (routerState.location.search && !routerState.location.query) {
-        routerState.location.query = qs.parse(routerState.location.search);
-      }
-
-      store.getState().router.then(() => {
-        const component = (
-          <Provider store={store} key="provider">
-            <ReduxRouter/>
-          </Provider>
-        );
-
-        const status = getStatusFromRoutes(routerState.routes);
-        if (status) {
-          res.status(status);
+  const store = createStore(client);
+  const location = new Location(req.path, req.query);
+  universalRouter(location, undefined, store)
+    .then(({component, transition, isRedirect}) => {
+      try {
+        // console.log("server", transition);
+        if (isRedirect) {
+          res.redirect(transition.redirectInfo.pathname);
+          return;
         }
-        res.send('<!doctype html>\n' +
-          ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={component} store={store}/>));
-      }).catch((err) => {
-        console.error('DATA FETCHING ERROR:', pretty.render(err));
-        res.status(500);
-        hydrateOnClient();
-      });
-    }
-  }));
+
+        res.send('<!doctype html>\n' + React.renderToString(
+            <html lang="en-us">
+            <head>
+              <meta charSet="utf-8"/>
+              <title>Adjobs Back </title>
+              <link rel="shortcut icon" href="/favicon.ico"/>
+              {webpackStats.css.map((css, i) => <link href={css} ref={i} media="screen, projection" rel="stylesheet" type="text/css"/>)}
+            </head>
+            <body>
+            <div id="content" dangerouslySetInnerHTML={{__html: React.renderToString(component)}}/>
+            <script dangerouslySetInnerHTML={{__html: `window.__data=${serialize(store.getState())};`}}/>
+            <script src={webpackStats.script[0]}/>
+            </body>
+            </html>));
+      } catch (error) {
+        console.error('ERROR', error.stack);
+        res.status(500).send({error: error});
+      }
+    }, (error) => {
+      console.error('ERROR', error.stack);
+      res.status(500).send({error: error});
+    });
 });
 
 if (config.port) {
-  if (config.isProduction) {
-    const io = new SocketIo(server);
-    io.path('/api/ws');
-  }
-
-  server.listen(config.port, (err) => {
+  app.listen(config.port, (err) => {
     if (err) {
       console.error(err);
+    } else {
+      console.info('==> Server is listening');
+      console.info('==>   %s running on port %s, API on port %s', config.app.name, config.port, config.apiPort);
     }
-    console.info('----\n==> ✅  %s is running, talking to API server on %s.', config.app.name, config.apiPort);
-    console.info('==> 💻  Open http://localhost:%s in a browser to view the app.', config.port);
   });
 } else {
-  console.error('==>     ERROR: No PORT environment variable has been specified');
+  console.error('==> ERROR: No PORT environment variable has been specified');
 }
