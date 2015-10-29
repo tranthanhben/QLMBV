@@ -77,28 +77,18 @@ class LoginPage extends Component {
     let flag = checkRequire(user);
     return (
       <div className='page login'>
-        <div className='space'></div>
-        <div className='box'>
-          <form onSubmit={::this.onSubmit}>
-            <p className='message'>
-              {message || error}
-              &nbsp;
-            </p>
-            <div className='form-group'>
-              <input className='form-control' data-addr='email' ref="email" placeholder='Email'
-                onChange={::this.handleChange} onBlur={::this.handleRequireEmail} />
-            </div>
-            <div className='form-group'>
-              <input className='form-control' data-addr='password' ref="password" placeholder='Password'
-                type='password'
-                onChange={::this.handleChange} onBlur={::this.handleRequirePassword}/>
-            </div>
-            <input className='btn btn-success form-control' type='submit' value='Login' disabled={flag ? 'disabled' : ''}/>
-            <p className='help-block'>
-            </p>
-          </form>
+        <form onSubmit={::this.onSubmit}>
+        <div className="logo"></div>
+        <div className="login-block">
+            <h1>Login</h1>
+            <input id="username" type="email" data-addr='email' ref="email" placeholder='Email'
+                  onChange={::this.handleChange} onBlur={::this.handleRequireEmail} />
+            <input id="password" data-addr='password' ref="password" placeholder='Password'
+                  type='password'
+                  onChange={::this.handleChange} onBlur={::this.handleRequirePassword} />
+            <button className='btn btn-success form-control' type='submit'  value='Login' disabled={flag ? 'disabled' : ''}>Submit</button>
         </div>
-        <div className='space-2'></div>
+        </form>
       </div>
     )
   }

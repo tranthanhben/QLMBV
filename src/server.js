@@ -62,7 +62,7 @@ app.use((req, res) => {
             <html lang="en-us">
             <head>
               <meta charSet="utf-8"/>
-              <title>Adjobs Back </title>
+              <title>Quan Ly MBV </title>
               <link rel="shortcut icon" href="/favicon.ico"/>
               {webpackStats.css.map((css, i) => <link href={css} ref={i} media="screen, projection" rel="stylesheet" type="text/css"/>)}
             </head>
