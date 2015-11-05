@@ -16,13 +16,13 @@ export default class Redirect extends Component {
     }
   }
   componentDidMount(){
-    if(!this.props.user){
-      window.location = "/login";
-    }else{
-      if(location.pathname === "/"){
-       location.assign("/job");
-      }
-    }
+    // if(!this.props.user){
+    //   window.location = "/khachhang";
+    // }else{
+    //   if(location.pathname === "/" ){
+    //    location.assign("/khachhang");
+    //   }
+    // }
   }
   render() {
 

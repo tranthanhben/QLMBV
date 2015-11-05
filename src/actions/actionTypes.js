@@ -8,86 +8,6 @@ export const LOGOUT_LOAD = "LOGOUT_LOAD";
 export const LOGOUT_LOAD_SUCCESS = "LOGOUT_LOAD_SUCCESS";
 export const LOGOUT_LOAD_FAIL = "LOGOUT_LOAD_FAIL";
 
-export const LISTJOB_LOAD = "LISTJOB_LOAD";
-export const LISTJOB_LOAD_SUCCESS = "LISTJOB_LOAD_SUCCESS";
-export const LISTJOB_LOAD_FAIL = "LISTJOB_LOAD_FAIL";
-export const ONEJOB_LOAD = "ONEJOB_LOAD";
-export const ONEJOB_LOAD_SUCCESS = "ONEJOB_LOAD_SUCCESS";
-export const ONEJOB_LOAD_FAIL = "ONEJOB_LOAD_FAIL";
-export const DEL_JOB = "DEL_JOB";
-export const DEL_JOB_SUCCESS = "DEL_JOB_SUCCESS";
-export const DEL_JOB_FAIL = "DEL_JOB_FAIL";
-export const POST_JOB = "POST_JOB";
-export const POST_JOB_SUCCESS = "POST_JOB_SUCCESS";
-export const POST_JOB_FAIL = "POST_JOB_FAIL";
-export const PUT_JOB = "PUT_JOB";
-export const PUT_JOB_SUCCESS = "PUT_JOB_SUCCESS";
-export const PUT_JOB_FAIL = "PUT_JOB_FAIL";
-export const GET_JOB = "GET_JOB";
-export const GET_JOB_SUCCESS = "GET_JOB_SUCCESS";
-export const GET_JOB_FAIL = "GET_JOB_FAIL";
-export const RESETJOB = "RESETJOB";
-
-export const LISTEVENT_LOAD = "LISTEVENT_LOAD";
-export const LISTEVENT_LOAD_SUCCESS = "LISTEVENT_LOAD_SUCCESS";
-export const LISTEVENT_LOAD_FAIL = "LISTEVENT_LOAD_FAIL";
-export const ONEEVENT_LOAD = "ONEEVENT_LOAD";
-export const ONEEVENT_LOAD_SUCCESS = "ONEEVENT_LOAD_SUCCESS";
-export const ONEEVENT_LOAD_FAIL = "ONEEVENT_LOAD_FAIL";
-export const DEL_EVENT = "DEL_EVENT";
-export const DEL_EVENT_SUCCESS = "DEL_EVENT_SUCCESS";
-export const DEL_EVENT_FAIL = "DEL_EVENT_FAIL";
-export const POST_EVENT = "POST_EVENT";
-export const POST_EVENT_SUCCESS = "POST_EVENT_SUCCESS";
-export const POST_EVENT_FAIL = "POST_EVENT_FAIL";
-export const PUT_EVENT = "PUT_EVENT";
-export const PUT_EVENT_SUCCESS = "PUT_EVENT_SUCCESS";
-export const PUT_EVENT_FAIL = "PUT_EVENT_FAIL";
-export const GET_EVENT = "GET_EVENT";
-export const GET_EVENT_SUCCESS = "GET_EVENT_SUCCESS";
-export const GET_EVENT_FAIL = "GET_EVENT_FAIL";
-export const RESETEVENT = "RESETEVENT";
-
-export const LISTBLOG_LOAD = "LISTBLOG_LOAD";
-export const LISTBLOG_LOAD_SUCCESS = "LISTBLOG_LOAD_SUCCESS";
-export const LISTBLOG_LOAD_FAIL = "LISTBLOG_LOAD_FAIL";
-export const ONEBLOG_LOAD = "ONEBLOG_LOAD";
-export const ONEBLOG_LOAD_SUCCESS = "ONEBLOG_LOAD_SUCCESS";
-export const ONEBLOG_LOAD_FAIL = "ONEBLOG_LOAD_FAIL";
-export const DEL_BLOG = "DEL_BLOG";
-export const DEL_BLOG_SUCCESS = "DEL_BLOG_SUCCESS";
-export const DEL_BLOG_FAIL = "DEL_BLOG_FAIL";
-export const POST_BLOG = "POST_BLOG";
-export const POST_BLOG_SUCCESS = "POST_BLOG_SUCCESS";
-export const POST_BLOG_FAIL = "POST_BLOG_FAIL";
-export const PUT_BLOG = "PUT_BLOG";
-export const PUT_BLOG_SUCCESS = "PUT_BLOG_SUCCESS";
-export const PUT_BLOG_FAIL = "PUT_BLOG_FAIL";
-export const GET_BLOG = "GET_BLOG";
-export const GET_BLOG_SUCCESS = "GET_BLOG_SUCCESS";
-export const GET_BLOG_FAIL = "GET_BLOG_FAIL";
-export const RESETBLOG = "RESETBLOG";
-
-export const LIST_APPLY_LOAD = "LIST_APPLY_LOAD";
-export const LIST_APPLY_LOAD_SUCCESS = "LIST_APPLY_LOAD_SUCCESS";
-export const LIST_APPLY_LOAD_FAIL = "LIST_APPLY_LOAD_FAIL";
-export const ONE_APPLY_LOAD = "ONE_APPLY_LOAD";
-export const ONE_APPLY_LOAD_SUCCESS = "ONE_APPLY_LOAD_SUCCESS";
-export const ONE_APPLY_LOAD_FAIL = "ONE_APPLY_LOAD_FAIL";
-export const DEL_APPLY = "DEL_APPLY";
-export const DEL_APPLY_SUCCESS = "DEL_APPLY_SUCCESS";
-export const DEL_APPLY_FAIL = "DEL_APPLY_FAIL";
-export const POST_APPLY = "POST_APPLY";
-export const POST_APPLY_SUCCESS = "POST_APPLY_SUCCESS";
-export const POST_APPLY_FAIL = "POST_APPLY_FAIL";
-export const PUT_APPLY = "PUT_APPLY";
-export const PUT_APPLY_SUCCESS = "PUT_APPLY_SUCCESS";
-export const PUT_APPLY_FAIL = "PUT_APPLY_FAIL";
-export const GET_APPLY = "GET_APPLY";
-export const GET_APPLY_SUCCESS = "GET_APPLY_SUCCESS";
-export const GET_APPLY_FAIL = "GET_APPLY_FAIL";
-export const RESET_APPLY = "RESET_APPLY";
-
 export const UPLOAD_IMAGE = "UPLOAD_IMAGE";
 export const UPLOAD_IMAGE_SUCCESS = "UPLOAD_IMAGE_SUCCESS";
 export const UPLOAD_IMAGE_FAIL = "UPLOAD_IMAGE_FAIL";
@@ -97,3 +17,370 @@ export const LIST_IMAGE_FAIL = "LIST_IMAGE_FAIL";
 export const SELECT_IMAGE = "SELECT_IMAGE";
 export const SELECT_IMAGE_SUCCESS = "SELECT_IMAGE_SUCCESS";
 export const SELECT_IMAGE_FAIL = "SELECT_IMAGE_FAIL";
+
+// KHACH HANG
+export const KH_LIST_LOAD = "KH_LIST_LOAD";
+export const KH_LIST_LOAD_SUCCESS = "KH_LIST_LOAD_SUCCESS";
+export const KH_LIST_LOAD_FAIL = "KH_LIST_LOAD_FAIL";
+
+export const KH_ONE_LOAD = "KH_ONE_LOAD";
+export const KH_ONE_LOAD_SUCCESS = "KH_ONE_LOAD_SUCCESS";
+export const KH_ONE_LOAD_FAIL = "KH_ONE_LOAD_FAIL";
+
+export const KH_POST = "KH_POST";
+export const KH_POST_SUCCESS = "KH_POST_SUCCESS";
+export const KH_POST_FAIL = "KH_POST_FAIL";
+
+export const KH_PUT = "KH_PUT";
+export const KH_PUT_SUCCESS = "KH_PUT_SUCCESS";
+export const KH_PUT_FAIL = "KH_PUT_FAIL";
+
+export const KH_DELETE = "KH_DELETE";
+export const KH_DELETE_SUCCESS = "KH_DELETE_SUCCESS";
+export const KH_DELETE_FAIL = "KH_DELETE_FAIL";
+
+export const KH_RESET = "KH_RESET";
+
+// NHA CUNG CAP
+export const NCC_LIST_LOAD = "NCC_LIST_LOAD";
+export const NCC_LIST_LOAD_SUCCESS = "NCC_LIST_LOAD_SUCCESS";
+export const NCC_LIST_LOAD_FAIL = "NCC_LIST_LOAD_FAIL";
+
+export const NCC_ONE_LOAD = "NCC_ONE_LOAD";
+export const NCC_ONE_LOAD_SUCCESS = "NCC_ONE_LOAD_SUCCESS";
+export const NCC_ONE_LOAD_FAIL = "NCC_ONE_LOAD_FAIL";
+
+export const NCC_POST = "NCC_POST";
+export const NCC_POST_SUCCESS = "NCC_POST_SUCCESS";
+export const NCC_POST_FAIL = "NCC_POST_FAIL";
+
+export const NCC_PUT = "NCC_PUT";
+export const NCC_PUT_SUCCESS = "NCC_PUT_SUCCESS";
+export const NCC_PUT_FAIL = "NCC_PUT_FAIL";
+
+export const NCC_DELETE = "NCC_DELETE";
+export const NCC_DELETE_SUCCESS = "NCC_DELETE_SUCCESS";
+export const NCC_DELETE_FAIL = "NCC_DELETE_FAIL";
+
+export const NCC_RESET = "NCC_RESET";
+
+// NHAN VIEN
+export const NV_LIST_LOAD = "NV_LIST_LOAD";
+export const NV_LIST_LOAD_SUCCESS = "NV_LIST_LOAD_SUCCESS";
+export const NV_LIST_LOAD_FAIL = "NV_LIST_LOAD_FAIL";
+
+export const NV_ONE_LOAD = "NV_ONE_LOAD";
+export const NV_ONE_LOAD_SUCCESS = "NV_ONE_LOAD_SUCCESS";
+export const NV_ONE_LOAD_FAIL = "NV_ONE_LOAD_FAIL";
+
+export const NV_POST = "NV_POST";
+export const NV_POST_SUCCESS = "NV_POST_SUCCESS";
+export const NV_POST_FAIL = "NV_POST_FAIL";
+
+export const NV_PUT = "NV_PUT";
+export const NV_PUT_SUCCESS = "NV_PUT_SUCCESS";
+export const NV_PUT_FAIL = "NV_PUT_FAIL";
+
+export const NV_DELETE = "NV_DELETE";
+export const NV_DELETE_SUCCESS = "NV_DELETE_SUCCESS";
+export const NV_DELETE_FAIL = "NV_DELETE_FAIL";
+
+export const NV_RESET = "NV_RESET";
+
+// KHO
+export const KHO_LIST_LOAD = "KHO_LIST_LOAD";
+export const KHO_LIST_LOAD_SUCCESS = "KHO_LIST_LOAD_SUCCESS";
+export const KHO_LIST_LOAD_FAIL = "KHO_LIST_LOAD_FAIL";
+
+export const KHO_ONE_LOAD = "KHO_ONE_LOAD";
+export const KHO_ONE_LOAD_SUCCESS = "KHO_ONE_LOAD_SUCCESS";
+export const KHO_ONE_LOAD_FAIL = "KHO_ONE_LOAD_FAIL";
+
+export const KHO_POST = "KHO_POST";
+export const KHO_POST_SUCCESS = "KHO_POST_SUCCESS";
+export const KHO_POST_FAIL = "KHO_POST_FAIL";
+
+export const KHO_PUT = "KHO_PUT";
+export const KHO_PUT_SUCCESS = "KHO_PUT_SUCCESS";
+export const KHO_PUT_FAIL = "KHO_PUT_FAIL";
+
+export const KHO_DELETE = "KHO_DELETE";
+export const KHO_DELETE_SUCCESS = "KHO_DELETE_SUCCESS";
+export const KHO_DELETE_FAIL = "KHO_DELETE_FAIL";
+
+export const KHO_RESET = "KHO_RESET";
+
+// LOAI VAI
+export const LV_LIST_LOAD = "LV_LIST_LOAD";
+export const LV_LIST_LOAD_SUCCESS = "LV_LIST_LOAD_SUCCESS";
+export const LV_LIST_LOAD_FAIL = "LV_LIST_LOAD_FAIL";
+
+export const LV_ONE_LOAD = "LV_ONE_LOAD";
+export const LV_ONE_LOAD_SUCCESS = "LV_ONE_LOAD_SUCCESS";
+export const LV_ONE_LOAD_FAIL = "LV_ONE_LOAD_FAIL";
+
+export const LV_POST = "LV_POST";
+export const LV_POST_SUCCESS = "LV_POST_SUCCESS";
+export const LV_POST_FAIL = "LV_POST_FAIL";
+
+export const LV_PUT = "LV_PUT";
+export const LV_PUT_SUCCESS = "LV_PUT_SUCCESS";
+export const LV_PUT_FAIL = "LV_PUT_FAIL";
+
+export const LV_DELETE = "LV_DELETE";
+export const LV_DELETE_SUCCESS = "LV_DELETE_SUCCESS";
+export const LV_DELETE_FAIL = "LV_DELETE_FAIL";
+
+export const LV_RESET = "LV_RESET";
+
+// LO HANG
+export const LH_LIST_LOAD = "LH_LIST_LOAD";
+export const LH_LIST_LOAD_SUCCESS = "LH_LIST_LOAD_SUCCESS";
+export const LH_LIST_LOAD_FAIL = "LH_LIST_LOAD_FAIL";
+
+export const LH_ONE_LOAD = "LH_ONE_LOAD";
+export const LH_ONE_LOAD_SUCCESS = "LH_ONE_LOAD_SUCCESS";
+export const LH_ONE_LOAD_FAIL = "LH_ONE_LOAD_FAIL";
+
+export const LH_POST = "LH_POST";
+export const LH_POST_SUCCESS = "LH_POST_SUCCESS";
+export const LH_POST_FAIL = "LH_POST_FAIL";
+
+export const LH_PUT = "LH_PUT";
+export const LH_PUT_SUCCESS = "LH_PUT_SUCCESS";
+export const LH_PUT_FAIL = "LH_PUT_FAIL";
+
+export const LH_DELETE = "LH_DELETE";
+export const LH_DELETE_SUCCESS = "LH_DELETE_SUCCESS";
+export const LH_DELETE_FAIL = "LH_DELETE_FAIL";
+
+export const LH_RESET = "LH_RESET";
+
+// PHIEU MUA HANG CHO KHACH HANG
+export const PMH_LIST_LOAD = "PMH_LIST_LOAD";
+export const PMH_LIST_LOAD_SUCCESS = "PMH_LIST_LOAD_SUCCESS";
+export const PMH_LIST_LOAD_FAIL = "PMH_LIST_LOAD_FAIL";
+
+export const PMH_ONE_LOAD = "PMH_ONE_LOAD";
+export const PMH_ONE_LOAD_SUCCESS = "PMH_ONE_LOAD_SUCCESS";
+export const PMH_ONE_LOAD_FAIL = "PMH_ONE_LOAD_FAIL";
+
+export const PMH_POST = "PMH_POST";
+export const PMH_POST_SUCCESS = "PMH_POST_SUCCESS";
+export const PMH_POST_FAIL = "PMH_POST_FAIL";
+
+export const PMH_PUT = "PMH_PUT";
+export const PMH_PUT_SUCCESS = "PMH_PUT_SUCCESS";
+export const PMH_PUT_FAIL = "PMH_PUT_FAIL";
+
+export const PMH_DELETE = "PMH_DELETE";
+export const PMH_DELETE_SUCCESS = "PMH_DELETE_SUCCESS";
+export const PMH_DELETE_FAIL = "PMH_DELETE_FAIL";
+
+export const PMH_RESET = "PMH_RESET";
+
+// PHIEU XUAT HANG CHO KHACH HANG
+export const PXH_LIST_LOAD = "PXH_LIST_LOAD";
+export const PXH_LIST_LOAD_SUCCESS = "PXH_LIST_LOAD_SUCCESS";
+export const PXH_LIST_LOAD_FAIL = "PXH_LIST_LOAD_FAIL";
+
+export const PXH_ONE_LOAD = "PXH_ONE_LOAD";
+export const PXH_ONE_LOAD_SUCCESS = "PXH_ONE_LOAD_SUCCESS";
+export const PXH_ONE_LOAD_FAIL = "PXH_ONE_LOAD_FAIL";
+
+export const PXH_POST = "PXH_POST";
+export const PXH_POST_SUCCESS = "PXH_POST_SUCCESS";
+export const PXH_POST_FAIL = "PXH_POST_FAIL";
+
+export const PXH_PUT = "PXH_PUT";
+export const PXH_PUT_SUCCESS = "PXH_PUT_SUCCESS";
+export const PXH_PUT_FAIL = "PXH_PUT_FAIL";
+
+export const PXH_DELETE = "PXH_DELETE";
+export const PXH_DELETE_SUCCESS = "PXH_DELETE_SUCCESS";
+export const PXH_DELETE_FAIL = "PXH_DELETE_FAIL";
+
+export const PXH_RESET = "PXH_RESET";
+
+// PHIEU DAT HANG CHO NHA CUNG CAP
+export const PDH_LIST_LOAD = "PDH_LIST_LOAD";
+export const PDH_LIST_LOAD_SUCCESS = "PDH_LIST_LOAD_SUCCESS";
+export const PDH_LIST_LOAD_FAIL = "PDH_LIST_LOAD_FAIL";
+
+export const PDH_ONE_LOAD = "PDH_ONE_LOAD";
+export const PDH_ONE_LOAD_SUCCESS = "PDH_ONE_LOAD_SUCCESS";
+export const PDH_ONE_LOAD_FAIL = "PDH_ONE_LOAD_FAIL";
+
+export const PDH_POST = "PDH_POST";
+export const PDH_POST_SUCCESS = "PDH_POST_SUCCESS";
+export const PDH_POST_FAIL = "PDH_POST_FAIL";
+
+export const PDH_PUT = "PDH_PUT";
+export const PDH_PUT_SUCCESS = "PDH_PUT_SUCCESS";
+export const PDH_PUT_FAIL = "PDH_PUT_FAIL";
+
+export const PDH_DELETE = "PDH_DELETE";
+export const PDH_DELETE_SUCCESS = "PDH_DELETE_SUCCESS";
+export const PDH_DELETE_FAIL = "PDH_DELETE_FAIL";
+
+export const PDH_RESET = "PDH_RESET";
+
+// PHIEU NHAP HANG TU NHA CUNG CAP
+export const PNH_LIST_LOAD = "PNH_LIST_LOAD";
+export const PNH_LIST_LOAD_SUCCESS = "PNH_LIST_LOAD_SUCCESS";
+export const PNH_LIST_LOAD_FAIL = "PNH_LIST_LOAD_FAIL";
+
+export const PNH_ONE_LOAD = "PNH_ONE_LOAD";
+export const PNH_ONE_LOAD_SUCCESS = "PNH_ONE_LOAD_SUCCESS";
+export const PNH_ONE_LOAD_FAIL = "PNH_ONE_LOAD_FAIL";
+
+export const PNH_POST = "PNH_POST";
+export const PNH_POST_SUCCESS = "PNH_POST_SUCCESS";
+export const PNH_POST_FAIL = "PNH_POST_FAIL";
+
+export const PNH_PUT = "PNH_PUT";
+export const PNH_PUT_SUCCESS = "PNH_PUT_SUCCESS";
+export const PNH_PUT_FAIL = "PNH_PUT_FAIL";
+
+export const PNH_DELETE = "PNH_DELETE";
+export const PNH_DELETE_SUCCESS = "PNH_DELETE_SUCCESS";
+export const PNH_DELETE_FAIL = "PNH_DELETE_FAIL";
+
+export const PNH_RESET = "PNH_RESET";
+
+// HOA DON KHACH HANG
+export const HDKH_LIST_LOAD = "HDKH_LIST_LOAD";
+export const HDKH_LIST_LOAD_SUCCESS = "HDKH_LIST_LOAD_SUCCESS";
+export const HDKH_LIST_LOAD_FAIL = "HDKH_LIST_LOAD_FAIL";
+
+export const HDKH_ONE_LOAD = "HDKH_ONE_LOAD";
+export const HDKH_ONE_LOAD_SUCCESS = "HDKH_ONE_LOAD_SUCCESS";
+export const HDKH_ONE_LOAD_FAIL = "HDKH_ONE_LOAD_FAIL";
+
+export const HDKH_POST = "HDKH_POST";
+export const HDKH_POST_SUCCESS = "HDKH_POST_SUCCESS";
+export const HDKH_POST_FAIL = "HDKH_POST_FAIL";
+
+export const HDKH_PUT = "HDKH_PUT";
+export const HDKH_PUT_SUCCESS = "HDKH_PUT_SUCCESS";
+export const HDKH_PUT_FAIL = "HDKH_PUT_FAIL";
+
+export const HDKH_DELETE = "HDKH_DELETE";
+export const HDKH_DELETE_SUCCESS = "HDKH_DELETE_SUCCESS";
+export const HDKH_DELETE_FAIL = "HDKH_DELETE_FAIL";
+
+export const HDKH_RESET = "HDKH_RESET";
+
+// HOA DON NHA CUNG CAP
+export const HDNCC_LIST_LOAD = "HDNCC_LIST_LOAD";
+export const HDNCC_LIST_LOAD_SUCCESS = "HDNCC_LIST_LOAD_SUCCESS";
+export const HDNCC_LIST_LOAD_FAIL = "HDNCC_LIST_LOAD_FAIL";
+
+export const HDNCC_ONE_LOAD = "HDNCC_ONE_LOAD";
+export const HDNCC_ONE_LOAD_SUCCESS = "HDNCC_ONE_LOAD_SUCCESS";
+export const HDNCC_ONE_LOAD_FAIL = "HDNCC_ONE_LOAD_FAIL";
+
+export const HDNCC_POST = "HDNCC_POST";
+export const HDNCC_POST_SUCCESS = "HDNCC_POST_SUCCESS";
+export const HDNCC_POST_FAIL = "HDNCC_POST_FAIL";
+
+export const HDNCC_PUT = "HDNCC_PUT";
+export const HDNCC_PUT_SUCCESS = "HDNCC_PUT_SUCCESS";
+export const HDNCC_PUT_FAIL = "HDNCC_PUT_FAIL";
+
+export const HDNCC_DELETE = "HDNCC_DELETE";
+export const HDNCC_DELETE_SUCCESS = "HDNCC_DELETE_SUCCESS";
+export const HDNCC_DELETE_FAIL = "HDNCC_DELETE_FAIL";
+
+export const HDNCC_RESET = "HDNCC_RESET";
+
+// THANH TOAN KHACH HANG
+export const TTKH_LIST_LOAD = "TTKH_LIST_LOAD";
+export const TTKH_LIST_LOAD_SUCCESS = "TTKH_LIST_LOAD_SUCCESS";
+export const TTKH_LIST_LOAD_FAIL = "TTKH_LIST_LOAD_FAIL";
+
+export const TTKH_ONE_LOAD = "TTKH_ONE_LOAD";
+export const TTKH_ONE_LOAD_SUCCESS = "TTKH_ONE_LOAD_SUCCESS";
+export const TTKH_ONE_LOAD_FAIL = "TTKH_ONE_LOAD_FAIL";
+
+export const TTKH_POST = "TTKH_POST";
+export const TTKH_POST_SUCCESS = "TTKH_POST_SUCCESS";
+export const TTKH_POST_FAIL = "TTKH_POST_FAIL";
+
+export const TTKH_PUT = "TTKH_PUT";
+export const TTKH_PUT_SUCCESS = "TTKH_PUT_SUCCESS";
+export const TTKH_PUT_FAIL = "TTKH_PUT_FAIL";
+
+export const TTKH_DELETE = "TTKH_DELETE";
+export const TTKH_DELETE_SUCCESS = "TTKH_DELETE_SUCCESS";
+export const TTKH_DELETE_FAIL = "TTKH_DELETE_FAIL";
+
+export const TTKH_RESET = "TTKH_RESET";
+
+// THANH TOAN NHA CUNG CAP
+export const TTNCC_LIST_LOAD = "TTNCC_LIST_LOAD";
+export const TTNCC_LIST_LOAD_SUCCESS = "TTNCC_LIST_LOAD_SUCCESS";
+export const TTNCC_LIST_LOAD_FAIL = "TTNCC_LIST_LOAD_FAIL";
+
+export const TTNCC_ONE_LOAD = "TTNCC_ONE_LOAD";
+export const TTNCC_ONE_LOAD_SUCCESS = "TTNCC_ONE_LOAD_SUCCESS";
+export const TTNCC_ONE_LOAD_FAIL = "TTNCC_ONE_LOAD_FAIL";
+
+export const TTNCC_POST = "TTNCC_POST";
+export const TTNCC_POST_SUCCESS = "TTNCC_POST_SUCCESS";
+export const TTNCC_POST_FAIL = "TTNCC_POST_FAIL";
+
+export const TTNCC_PUT = "TTNCC_PUT";
+export const TTNCC_PUT_SUCCESS = "TTNCC_PUT_SUCCESS";
+export const TTNCC_PUT_FAIL = "TTNCC_PUT_FAIL";
+
+export const TTNCC_DELETE = "TTNCC_DELETE";
+export const TTNCC_DELETE_SUCCESS = "TTNCC_DELETE_SUCCESS";
+export const TTNCC_DELETE_FAIL = "TTNCC_DELETE_FAIL";
+
+export const TTNCC_RESET = "TTNCC_RESET";
+// CONG NO KHACH HANG
+export const CNKH_LIST_LOAD = "CNKH_LIST_LOAD";
+export const CNKH_LIST_LOAD_SUCCESS = "CNKH_LIST_LOAD_SUCCESS";
+export const CNKH_LIST_LOAD_FAIL = "CNKH_LIST_LOAD_FAIL";
+
+export const CNKH_ONE_LOAD = "CNKH_ONE_LOAD";
+export const CNKH_ONE_LOAD_SUCCESS = "CNKH_ONE_LOAD_SUCCESS";
+export const CNKH_ONE_LOAD_FAIL = "CNKH_ONE_LOAD_FAIL";
+
+export const CNKH_POST = "CNKH_POST";
+export const CNKH_POST_SUCCESS = "CNKH_POST_SUCCESS";
+export const CNKH_POST_FAIL = "CNKH_POST_FAIL";
+
+export const CNKH_PUT = "CNKH_PUT";
+export const CNKH_PUT_SUCCESS = "CNKH_PUT_SUCCESS";
+export const CNKH_PUT_FAIL = "CNKH_PUT_FAIL";
+
+export const CNKH_DELETE = "CNKH_DELETE";
+export const CNKH_DELETE_SUCCESS = "CNKH_DELETE_SUCCESS";
+export const CNKH_DELETE_FAIL = "CNKH_DELETE_FAIL";
+
+export const CNKH_RESET = "CNKH_RESET";
+
+// CONG NO NHA CUNG CAP
+export const CNNCC_LIST_LOAD = "CNNCC_LIST_LOAD";
+export const CNNCC_LIST_LOAD_SUCCESS = "CNNCC_LIST_LOAD_SUCCESS";
+export const CNNCC_LIST_LOAD_FAIL = "CNNCC_LIST_LOAD_FAIL";
+
+export const CNNCC_ONE_LOAD = "CNNCC_ONE_LOAD";
+export const CNNCC_ONE_LOAD_SUCCESS = "CNNCC_ONE_LOAD_SUCCESS";
+export const CNNCC_ONE_LOAD_FAIL = "CNNCC_ONE_LOAD_FAIL";
+
+export const CNNCC_POST = "CNNCC_POST";
+export const CNNCC_POST_SUCCESS = "CNNCC_POST_SUCCESS";
+export const CNNCC_POST_FAIL = "CNNCC_POST_FAIL";
+
+export const CNNCC_PUT = "CNNCC_PUT";
+export const CNNCC_PUT_SUCCESS = "CNNCC_PUT_SUCCESS";
+export const CNNCC_PUT_FAIL = "CNNCC_PUT_FAIL";
+
+export const CNNCC_DELETE = "CNNCC_DELETE";
+export const CNNCC_DELETE_SUCCESS = "CNNCC_DELETE_SUCCESS";
+export const CNNCC_DELETE_FAIL = "CNNCC_DELETE_FAIL";
+
+export const CNNCC_RESET = "CNNCC_RESET";

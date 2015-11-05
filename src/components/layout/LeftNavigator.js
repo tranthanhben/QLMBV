@@ -26,7 +26,17 @@ class LeftNav extends Component {
     const {menu, params} = this.props;
     return (
       <div className='tabs'>
-        <div className='brand'/>
+      <div id="avatar" >
+        <div className="mbv-grid container-fluid" style={{"zIndex":"9999998" }}>
+          <div className="row fg-white" >
+            <div className="col-xs-4 col-xs-collapse-right" ><img src="/images/avatar0.png" width="40" height="40" /></div>
+            <div id="avatar-col" className="col-xs-8 col-xs-collapse-left" >
+              <div style={{"top":"15px","font-size":"16px","line-height":"1","position":"relative"}} >Anna Sanchez</div>
+              <div style={{"top":"31px", "font-size":"12px","line-height":"1","position":"relative"}} >Nhan Vien</div>
+            </div>
+          </div>
+        </div>
+      </div>
         {menu.map((items, index) => {
           return [
             index > 0 ? <div className='space'/> : null,

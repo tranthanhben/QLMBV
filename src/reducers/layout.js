@@ -1,20 +1,20 @@
 const initialState = {
     menu: [
         [{
-            label: 'Quan Ly Mua Ban Vai',
-            href: '/job',
+            label: 'Quan Ly San Pham',
+            href: '/sanpham',
             icon: 'book'
         },{
             label: 'Quan Ly Khach Hang',
-            href: '/event',
+            href: '/khachhang',
             icon: 'book'
         },{
             label: 'Quan Ly Nha Cung Cap',
-            href: '/blog',
+            href: '/nhacungcap',
             icon: 'book'
         },{
             label: 'Quan Ly Cong No',
-            href: '/apply',
+            href: '/congno',
             icon: 'book'
         }],
         [{
