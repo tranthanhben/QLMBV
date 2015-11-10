@@ -31,8 +31,8 @@ class LeftNav extends Component {
           <div className="row fg-white" >
             <div className="col-xs-4 col-xs-collapse-right" ><img src="/images/avatar0.png" width="40" height="40" /></div>
             <div id="avatar-col" className="col-xs-8 col-xs-collapse-left" >
-              <div style={{"top":"15px","font-size":"16px","line-height":"1","position":"relative"}} >Anna Sanchez</div>
-              <div style={{"top":"31px", "font-size":"12px","line-height":"1","position":"relative"}} >Nhan Vien</div>
+              <div style={{"textAlign":"center","fontSize":"16px","position":"relative"}} >Anna Sanchez</div>
+              <div style={{"textAlign":"center","fontSize":"12px","position":"relative"}} >Nhan Vien</div>
             </div>
           </div>
         </div>

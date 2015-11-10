@@ -1,3 +1,4 @@
+import {makeQuery} from 'meta';
 import {
   HDKH_LIST_LOAD,
   HDKH_LIST_LOAD_SUCCESS,
@@ -20,7 +21,7 @@ import {
   HDKH_DELETE_FAIL,
 
   HDKH_RESET
-} from './actionTypes';
+} from '../actionTypes';
 
 export function loadItem(id){
   return {

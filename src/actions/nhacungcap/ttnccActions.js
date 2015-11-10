@@ -1,3 +1,4 @@
+import {makeQuery} from 'meta';
 import {
   TTNCC_LIST_LOAD,
   TTNCC_LIST_LOAD_SUCCESS,
@@ -20,7 +21,7 @@ import {
   TTNCC_DELETE_FAIL,
 
   TTNCC_RESET
-} from './actionTypes';
+} from '../actionTypes';
 
 export function loadItem(id){
   return {

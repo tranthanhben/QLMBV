@@ -1,3 +1,4 @@
+import {makeQuery} from 'meta';
 import {
   KH_LIST_LOAD,
   KH_LIST_LOAD_SUCCESS,
@@ -20,7 +21,7 @@ import {
   KH_DELETE_FAIL,
 
   KH_RESET
-} from './actionTypes';
+} from '../actionTypes';
 
 export function loadItem(id){
   return {

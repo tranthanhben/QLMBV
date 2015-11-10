@@ -1,3 +1,4 @@
+import {makeQuery} from 'meta';
 import {
   ME_LOAD,
   ME_LOAD_SUCCESS,

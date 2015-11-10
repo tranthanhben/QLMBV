@@ -1,3 +1,4 @@
+import {makeQuery} from 'meta';
 import {
   UPLOAD_IMAGE,
   UPLOAD_IMAGE_SUCCESS,
@@ -9,7 +10,7 @@ import {
   SELECT_IMAGE_SUCCESS,
   SELECT_IMAGE_FAIL
 } from './actionTypes';
-import {makeQuery} from '../meta'
+import {makeQuery} from 'meta';/n import {makeQuery} from '../meta'
 
 export function postFile(file){
   let data = new FormData();

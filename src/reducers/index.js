@@ -1,10 +1,6 @@
 export layout from './layout';
-export job from './job';
 export user from './user';
-export event from './event';
-export blog from './blog';
 export image from './image';
-export apply from './apply';
 export {congnoKH, hoadonKH, khachhang, phieumuahang, phieuxuathang, thanhtoanKH} from './khachhang';
 export {congnoNCC, hoadonNCC, nhacungcap, phieunhaphang, phieudathang, thanhtoanNCC} from './nhacungcap';
 export kho from './kho';

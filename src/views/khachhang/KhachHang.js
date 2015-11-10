@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import * as khachhangActions from 'actions/khachhangActions';
 import {isLoaded, loadList as loadKH} from 'actions/khachhangActions';
+import PanelView from 'components/layout';
 
 @connect(
   state =>({
@@ -24,5 +25,10 @@ class KhachHang extends Component{
       return dispatch(loadKH());
     }
   }
-
+  render(){
+    return (
+      <PanelView>
+      </PanelView>
+    );
+  }
 }

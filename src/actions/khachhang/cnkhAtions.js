@@ -1,3 +1,4 @@
+import {makeQuery} from 'meta';
 import {
   CNKH_LIST_LOAD,
   CNKH_LIST_LOAD_SUCCESS,
@@ -20,7 +21,7 @@ import {
   CNKH_DELETE_FAIL,
 
   CNKH_RESET
-} from './actionTypes';
+} from '../actionTypes';
 
 export function loadItem(id){
   return {

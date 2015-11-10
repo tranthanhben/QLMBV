@@ -46,25 +46,25 @@ export default class PanelView {
                               <input type="search" className="form-control " placeholder="" aria-controls="example" />
                             </label>
                           </div>
-                          <table id="example" className="table display nowrap dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="example_info" style={{"width": "100%"}}>
+                          <table id="example" className="table display nowrap dataTable" cellSpacing="0" width="100%" role="grid" aria-describedby="example_info" style={{"width": "100%"}}>
                             <thead>
                               <tr role="row">
-                                <th className="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending" style={{"width": "158px"}}>Name</th>
-                                <th className="sorting_desc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style={{"width": "240px"}} aria-sort="descending">Position</th>
-                                <th className="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style={{"width": "108px"}}>Office</th>
-                                <th className="dt-body-right sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style={{"width": "46px"}}>Age</th>
-                                <th className="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style={{"width": "100px"}}>Start date</th>
-                                <th className="dt-body-right sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style={{"width": "90px"}}>Salary</th>
+                                <th className="sorting" tabIndex="0" aria-controls="example" rowSpan="1" colSpan="1" aria-label="Name: activate to sort column ascending" style={{"width": "158px"}}>Name</th>
+                                <th className="sorting_desc" tabIndex="0" aria-controls="example" rowSpan="1" colSpan="1" aria-label="Position: activate to sort column ascending" style={{"width": "240px"}} aria-sort="descending">Position</th>
+                                <th className="sorting" tabIndex="0" aria-controls="example" rowSpan="1" colSpan="1" aria-label="Office: activate to sort column ascending" style={{"width": "108px"}}>Office</th>
+                                <th className="dt-body-right sorting" tabIndex="0" aria-controls="example" rowSpan="1" colSpan="1" aria-label="Age: activate to sort column ascending" style={{"width": "46px"}}>Age</th>
+                                <th className="sorting" tabIndex="0" aria-controls="example" rowSpan="1" colSpan="1" aria-label="Start date: activate to sort column ascending" style={{"width": "100px"}}>Start date</th>
+                                <th className="dt-body-right sorting" tabIndex="0" aria-controls="example" rowSpan="1" colSpan="1" aria-label="Salary: activate to sort column ascending" style={{"width": "90px"}}>Salary</th>
                               </tr>
                             </thead>
                             <tfoot>
                               <tr>
-                                <th rowspan="1" colspan="1">Name</th>
-                                <th rowspan="1" colspan="1">Position</th>
-                                <th rowspan="1" colspan="1">Office</th>
-                                <th className="dt-body-right" rowspan="1" colspan="1">Age</th>
-                                <th rowspan="1" colspan="1">Start date</th>
-                                <th className="dt-body-right" rowspan="1" colspan="1">Salary</th>
+                                <th rowSpan="1" colSpan="1">Name</th>
+                                <th rowSpan="1" colSpan="1">Position</th>
+                                <th rowSpan="1" colSpan="1">Office</th>
+                                <th className="dt-body-right" rowSpan="1" colSpan="1">Age</th>
+                                <th rowSpan="1" colSpan="1">Start date</th>
+                                <th className="dt-body-right" rowSpan="1" colSpan="1">Salary</th>
                               </tr>
                             </tfoot>
                             <tbody>
@@ -152,16 +152,16 @@ export default class PanelView {
                           </table>
                           <div className="dataTables_info" id="example_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>
                           <div className="dataTables_paginate paging_simple_numbers" id="example_paginate">
-                            <a className="paginate_button btn btn-outlined btn-success previous disabled" aria-controls="example" data-dt-idx="0" tabindex="0" id="example_previous">Previous</a>
+                            <a className="paginate_button btn btn-outlined btn-success previous disabled" aria-controls="example" data-dt-idx="0" tabIndex="0" id="example_previous">Previous</a>
                             <span>
-                          <a className="paginate_button btn btn-outlined btn-success active" aria-controls="example" data-dt-idx="1" tabindex="0">1</a>
-                          <a className="paginate_button btn btn-outlined btn-success " aria-controls="example" data-dt-idx="2" tabindex="0">2</a>
-                          <a className="paginate_button btn btn-outlined btn-success " aria-controls="example" data-dt-idx="3" tabindex="0">3</a>
-                          <a className="paginate_button btn btn-outlined btn-success " aria-controls="example" data-dt-idx="4" tabindex="0">4</a>
-                          <a className="paginate_button btn btn-outlined btn-success " aria-controls="example" data-dt-idx="5" tabindex="0">5</a>
-                          <a className="paginate_button btn btn-outlined btn-success " aria-controls="example" data-dt-idx="6" tabindex="0">6</a>
+                          <a className="paginate_button btn btn-outlined btn-success active" aria-controls="example" data-dt-idx="1" tabIndex="0">1</a>
+                          <a className="paginate_button btn btn-outlined btn-success " aria-controls="example" data-dt-idx="2" tabIndex="0">2</a>
+                          <a className="paginate_button btn btn-outlined btn-success " aria-controls="example" data-dt-idx="3" tabIndex="0">3</a>
+                          <a className="paginate_button btn btn-outlined btn-success " aria-controls="example" data-dt-idx="4" tabIndex="0">4</a>
+                          <a className="paginate_button btn btn-outlined btn-success " aria-controls="example" data-dt-idx="5" tabIndex="0">5</a>
+                          <a className="paginate_button btn btn-outlined btn-success " aria-controls="example" data-dt-idx="6" tabIndex="0">6</a>
                           </span>
-                            <a className="paginate_button btn btn-outlined btn-success next" aria-controls="example" data-dt-idx="7" tabindex="0" id="example_next">Next</a>
+                            <a className="paginate_button btn btn-outlined btn-success next" aria-controls="example" data-dt-idx="7" tabIndex="0" id="example_next">Next</a>
                         </div>
                         </div>
                       </div>

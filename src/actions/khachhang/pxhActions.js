@@ -1,3 +1,4 @@
+import {makeQuery} from 'meta';
 import {
   PXH_LIST_LOAD,
   PXH_LIST_LOAD_SUCCESS,
@@ -20,7 +21,7 @@ import {
   PXH_DELETE_FAIL,
 
   PXH_RESET
-} from './actionTypes';
+} from '../actionTypes';
 
 export function loadItem(id){
   return {

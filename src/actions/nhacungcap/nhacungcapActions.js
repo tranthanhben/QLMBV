@@ -1,3 +1,4 @@
+import {makeQuery} from 'meta';
 import {
   NCC_LIST_LOAD,
   NCC_LIST_LOAD_SUCCESS,
@@ -20,7 +21,7 @@ import {
   NCC_DELETE_FAIL,
 
   NCC_RESET
-} from './actionTypes';
+} from '../actionTypes';
 
 export function loadItem(id){
   return {

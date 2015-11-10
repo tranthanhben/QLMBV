@@ -1,3 +1,4 @@
+import {makeQuery} from 'meta';
 import {
   TTKH_LIST_LOAD,
   TTKH_LIST_LOAD_SUCCESS,
@@ -20,7 +21,7 @@ import {
   TTKH_DELETE_FAIL,
 
   TTKH_RESET
-} from './actionTypes';
+} from '../actionTypes';
 
 export function loadItem(id){
   return {

@@ -1,3 +1,4 @@
+import {makeQuery} from 'meta';
 import {
   HDNCC_LIST_LOAD,
   HDNCC_LIST_LOAD_SUCCESS,
@@ -20,7 +21,7 @@ import {
   HDNCC_DELETE_FAIL,
 
   HDNCC_RESET
-} from './actionTypes';
+} from '../actionTypes';
 
 export function loadItem(id){
   return {

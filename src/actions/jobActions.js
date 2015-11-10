@@ -1,3 +1,4 @@
+import {makeQuery} from 'meta';
 import {
   LISTJOB_LOAD,
   LISTJOB_LOAD_SUCCESS,
@@ -19,7 +20,6 @@ import {
   GET_JOB_FAIL,
   RESETJOB
 } from './actionTypes';
-import {makeQuery} from '../meta'
 
 export function loadOne(id){
   return {

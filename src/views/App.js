@@ -33,9 +33,7 @@ class App extends Component {
           <div className='outer'>
           <LeftNavigator params={this.props.params} user={this.props.user}>
           </LeftNavigator>
-          <PanelView>
             {this.props.children}
-          </PanelView>
         </div>
           <footer>
             <div className='container'>Build with React and &lt;3</div>

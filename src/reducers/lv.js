@@ -143,5 +143,7 @@ export default function loaivai(state = initialState, action = {}){
         massage: false,
         errorPost:null
       };
+    default:
+      return state;
   }
 }

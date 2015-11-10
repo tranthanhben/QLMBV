@@ -1,3 +1,4 @@
+import {makeQuery} from 'meta';
 import {
   CNNCC_LIST_LOAD,
   CNNCC_LIST_LOAD_SUCCESS,
@@ -20,7 +21,7 @@ import {
   CNNCC_DELETE_FAIL,
 
   CNNCC_RESET
-} from './actionTypes';
+} from '../actionTypes';
 
 export function loadItem(id){
   return {

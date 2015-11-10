@@ -1,3 +1,4 @@
+import {makeQuery} from 'meta';
 import {
   PMH_LIST_LOAD,
   PMH_LIST_LOAD_SUCCESS,
@@ -20,7 +21,7 @@ import {
   PMH_DELETE_FAIL,
 
   PMH_RESET
-} from './actionTypes';
+} from '../actionTypes';
 
 export function loadItem(id){
   return {
