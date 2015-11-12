@@ -38,8 +38,8 @@ export default function congnoKH(state = initialState, action = {}){
         ...state,
         loadding: false,
         loaded: true,
-        list: actions.result.items,
-        paging: action.result.pagding
+        list: action.result.items,
+        paging: action.result.paging
       };
     case CNKH_LIST_LOAD_FAIL:
       return {

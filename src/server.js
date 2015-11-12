@@ -13,7 +13,7 @@ import ApiClient from './ApiClient';
 import universalRouter from './universalRouter';
 const app = new Express();
 const proxy = httpProxy.createProxyServer({
-  target: 'http://localhost:' + config.apiPort + '/cp/v1'
+  target: 'http://localhost:' + config.apiPort + '/v1'
 });
 
 app.use(compression());
@@ -28,7 +28,7 @@ if (!__DEVELOPMENT__) {
 app.use(require('serve-static')(path.join(__dirname, '..', 'static')));
 
 // Proxy to API server
-app.use('/cp/v1', (req, res) => {
+app.use('/v1', (req, res) => {
   proxy.web(req, res);
 });
 
