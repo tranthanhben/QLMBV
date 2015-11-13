@@ -52,12 +52,16 @@ export class TBody extends Component {
           classField = "sorting_1";
         }
       }
+      console.log(field.up);
+      if(field.up){
+        classField = classField + " uppercase";
+      }
       trList.push(
-        <td className={classField} key={field.name} >{item[field.name]}</td>
+        <td className={classField} key={field.name} >{item[key]}</td>
         );
     }
     return (
-      <tr role="row" className={index%2===1 ? "odd":"even"}>
+      <tr role="row" className={index%2===1 ? "even":"odd"}>
         {trList}
       </tr>
     )

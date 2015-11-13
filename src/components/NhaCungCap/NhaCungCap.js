@@ -4,6 +4,7 @@ import * as nhacungcapActions from '../../actions/nhacungcap/nhacungcapActions';
 import {isLoaded, loadList as loadNCC} from '../../actions/nhacungcap/nhacungcapActions';
 import {PanelView} from 'components/layout';
 import {THead, TBody, TFoot} from '../table/row';
+import {Pagination} from '../table/pagination';
 
 @connect(
   state =>({
@@ -36,9 +37,10 @@ class NhaCungCap extends Component{
     },
     meta:{
       "nccid":{
-        name: "nccid",
+        name: "id",
         label: "NCCID",
-        sort: true
+        sort: true,
+        up: true
       },
       "tenncc":{
         name: "tenncc",
@@ -94,6 +96,14 @@ class NhaCungCap extends Component{
       this.setState({options: opt});
     }
   }
+  paginationLoad(page){
+    return () =>{
+      let opt = this.state.options;
+      opt.page = page;
+      this.props.loadList(opt);
+      this.setState({options: opt});
+    }
+  }
   render(){
     const {listNCC, paging} = this.props;
     const {options, meta} = this.state;
@@ -134,18 +144,7 @@ class NhaCungCap extends Component{
                   </tbody>
                 </table>
                 <div className="dataTables_info" id="example_info" role="status" aria-live="polite">Showing {paging && paging.page * paging.page_size+ 1} to {paging && paging.page * paging.page_size+ listNCC.length} of {paging && paging.total} entries</div>
-                <div className="dataTables_paginate paging_simple_numbers" id="example_paginate">
-                  <a className="paginate_button btn btn-outlined btn-success previous disabled" aria-controls="example" data-dt-idx="0" tabIndex="0" id="example_previous">Previous</a>
-                  <span>
-                <a className="paginate_button btn btn-outlined btn-success active" aria-controls="example" data-dt-idx="1" tabIndex="0">1</a>
-                <a className="paginate_button btn btn-outlined btn-success " aria-controls="example" data-dt-idx="2" tabIndex="0">2</a>
-                <a className="paginate_button btn btn-outlined btn-success " aria-controls="example" data-dt-idx="3" tabIndex="0">3</a>
-                <a className="paginate_button btn btn-outlined btn-success " aria-controls="example" data-dt-idx="4" tabIndex="0">4</a>
-                <a className="paginate_button btn btn-outlined btn-success " aria-controls="example" data-dt-idx="5" tabIndex="0">5</a>
-                <a className="paginate_button btn btn-outlined btn-success " aria-controls="example" data-dt-idx="6" tabIndex="0">6</a>
-                </span>
-                  <a className="paginate_button btn btn-outlined btn-success next" aria-controls="example" data-dt-idx="7" tabIndex="0" id="example_next">Next</a>
-              </div>
+                <Pagination load={::this.paginationLoad} paging={paging}></Pagination>
               </div>
             </div>
           </div>
