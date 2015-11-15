@@ -140,7 +140,7 @@ class KhachHang extends Component{
                   <tbody>
                     {listKH && listKH.map((item, index) =>{
                       return(
-                        <TBody item={item} index={index} sort={options.sort} meta={meta} key={index}></TBody>
+                        <TBody item={item} index={index} sort={options.sort} meta={meta} paging={paging} key={index}></TBody>
                       )
                     })}
 

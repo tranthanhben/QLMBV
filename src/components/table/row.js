@@ -8,7 +8,6 @@ export class THead extends Component {
   }
   render(){
     const {meta, sort, sortFunc} = this.props;
-    console.log(sortFunc("khid"));
     let thList = [];
     for(let key in meta){
       let classField = '';
@@ -28,6 +27,7 @@ export class THead extends Component {
     }
     return (
       <tr role="row">
+        <th key="stt" tabIndex="0" aria-controls="example" >#</th>
         {thList}
       </tr>
     )
@@ -40,7 +40,7 @@ export class TBody extends Component {
     item: PropTypes.object
   }
   render(){
-    const {meta, sort, item, index} = this.props;
+    const {meta, sort, item, index, paging} = this.props;
     let trList = [];
     for(let key in meta){
       let classField = '';
@@ -62,6 +62,7 @@ export class TBody extends Component {
     }
     return (
       <tr role="row" className={index%2===1 ? "even":"odd"}>
+        <td>{paging.page*paging.page_size+1+index}</td>
         {trList}
       </tr>
     )
@@ -83,6 +84,7 @@ export class TFoot extends Component {
     }
     return (
       <tr role="row">
+        <th key="stt" tabIndex="0" aria-controls="example" >#</th>
         {thList}
       </tr>
     )
