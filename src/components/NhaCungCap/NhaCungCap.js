@@ -44,7 +44,7 @@ class NhaCungCap extends Component{
       },
       "tenncc":{
         name: "tenncc",
-        label: "Tên Nhà Cung Cấp",
+        label: "Nhà Cung Cấp",
         sort: true
       },
       "sdt":{

@@ -44,7 +44,7 @@ class KhachHang extends Component{
       },
       "tenkh":{
         name: "tenkh",
-        label: "Tên Khách Hàng",
+        label: "Khách Hàng",
         sort: true
       },
       "sdt":{
@@ -109,7 +109,6 @@ class KhachHang extends Component{
   render(){
     const {listKH, paging} = this.props;
     const {options, meta} = this.state;
-     console.log("list", paging);
     return (
       <PanelView>
         <div className="mbv-grid container-fluid" style={{"zIndex": "9999983"}}>

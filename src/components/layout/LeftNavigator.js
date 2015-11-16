@@ -8,21 +8,29 @@ class LeftNav extends Component {
   static propTypes = {
     menu: PropTypes.array,
     params: PropTypes.object,
-    logout: PropTypes.func.isRequired,
-    resetJob: PropTypes.func.isRequired
+    logout: PropTypes.func.isRequired
   }
-
+  state = {
+    openTabs:{}
+  }
   logout(){
     this.props.logout();
   }
-
-  handleReset(item){
-    if(item.href === "/job"){
-      this.props.resetJob();
+  openTab(name){
+    return ()=>{
+      event.preventDefault();
+      let obj = this.state.openTabs;
+      if(!obj[name]){
+        obj[name]= true;
+      }else{
+        obj[name]= !obj[name];
+      }
+      this.setState({openTabs: obj});
     }
   }
   render (){
     const {menu, params} = this.props;
+    let openTabs = this.state.openTabs;
     return (
       <div className='tabs sidebar-nav-container'>
       <div id="avatar" >
@@ -36,91 +44,65 @@ class LeftNav extends Component {
           </div>
         </div>
       </div>
-
-        <ul style={{"margin-bottom":"0"}} className="items sidebar-nav">
-          <li name="Dashboard" tabIndex="-1" href="/app/dashboard">
-            <a tabIndex="-1" href="/app/dashboard">
-              <span className="mbv-icon icon-fontello-gauge">
-              </span>
-              <span className="name">Dashboard</span>
-            </a>
-          </li>
-          <li name="" className="open" tabIndex="-1">
-            <a tabIndex="-1"  href="">
-              <span className="mbv-icon fa fa-folder-open-o"></span>
-              <span className="name">
-                <span >
-                  <span >Mailbox </span>
-                  <span className="label label-default bg-darkgreen45 fg-white">3</span>
-                </span>
-              </span>
-              <span className="mbv-icon fontello toggle-button fa fa-chevron-left open"></span>
-            </a>
-            <ul className="sidebar-nav">
-              <li name="Inbox" className="active" tabIndex="-1" href="/app/mailbox/inbox">
-                <a tabIndex="-1" href="/app/mailbox/inbox">
-                  <span className="mbv-icon fa fa-file-o">
-              </span>
-                  <span className="name">Inbox</span>
-                </a>
-              </li>
-              <li name="Mail" tabIndex="-1" href="/app/mailbox/mail">
-                <a tabIndex="-1" href="/app/mailbox/mail">
-                  <span className="mbv-icon fa fa-file-o"></span>
-                  <span className="name">Mail</span>
-                </a>
-              </li>
-              <li name="Compose" tabIndex="-1" href="/app/mailbox/compose">
-                <a tabIndex="-1" href="/app/mailbox/compose">
-                  <span className="mbv-icon fa fa-file-o">
-              </span>
-                  <span className="name">Compose</span>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li name="Gallery" tabIndex="-1" href="/app/gallery">
-            <a tabIndex="-1" href="/app/gallery">
-              <span className="mbv-icon fa fa-folder-o"></span>
-              <span className="name">Gallery</span>
-            </a>
-          </li>
-        </ul>
-        <div className='space'/>
-        <ul style={{"margin-bottom":"0"}} className="items sidebar-nav">
-          <li name="Social" tabIndex="-1" href="/app/social">
-            <a tabIndex="-1" href="/app/social">
-              <span className="mbv-icon fa fa-folder-o"></span>
-              <span className="name">Social</span>
-            </a>
-          </li>
-          <li name="" tabIndex="-1">
-            <a tabIndex="-1" href="">
-              <span className="mbv-icon fa fa-folder-o"></span>
-              <span className="name">
-                <span >
-                  <span >Blog </span>
-                  <span className="label label-default bg-darkcyan fg-white">2</span>
-                </span>
-              </span>
-              <span className="mbv-icon fontello toggle-button fa fa-chevron-left"></span>
-            </a>
-            <ul className="sidebar-nav">
-              <li name="Posts" tabIndex="-1" href="/app/blog/posts">
-                <a tabIndex="-1" href="/app/blog/posts">
-                  <span className="mbv-icon icon-feather-layout"></span>
-                  <span className="name">Posts</span>
-                </a>
-              </li>
-              <li name="Single Post" tabIndex="-1" href="/app/blog/post">
-                <a tabIndex="-1" href="/app/blog/post">
-                  <span className="mbv-icon icon-feather-paper"></span>
-                  <span className="name">Single Post</span>
-                </a>
-              </li>
-            </ul>
-          </li>
-        </ul>
+      {menu.map((items, index) => {
+          return [
+            index > 0 ? <div className='space'/> : null,
+            <ul style={{"marginBottom":"0"}} key={index} className="items sidebar-nav">
+                {items.map((item) => {
+                  if(item.sub){
+                    let liClass = openTabs && openTabs[item.name]? "open":"";
+                    let regex = new RegExp(item.href);
+                    liClass = regex.test(params.pathname)? "open":liClass;
+                    return (
+                      <li name="" className={liClass} tabIndex="-1" key={item.label} >
+                      <a tabIndex="-1" onClick={::this.openTab(item.name)}>
+                        <span className={"mbv-icon fa fa-folder-"+(liClass? "open-o":"o")}></span>
+                        <span className="name">
+                          <span >
+                            <span >{item.label}</span>
+                            <span className="label label-default bg-darkgreen45 fg-white">{item.children.length}</span>
+                          </span>
+                        </span>
+                        <span className={"mbv-icon fontello toggle-button fa fa-chevron-left "+liClass}></span>
+                      </a>
+                      <ul className="sidebar-nav">
+                        {item.children.map((sub,index)=>{
+                          return (
+                            <li name={sub.label} key={sub.label} className={sub.href === params.pathname? "active":""} tabIndex="-1" >
+                              <Link tabIndex="-1" to={sub.href}>
+                                <span className={"mbv-icon fa fa-"+ sub.icon}>
+                            </span>
+                                <span className="name">{sub.label}</span>
+                              </Link>
+                            </li>
+                          )
+                        })}
+                      </ul>
+                    </li>
+                    )
+                  }
+                  if(item.href === "/logout"){
+                    return <li name={item.label} key={item.label} className={item.href === params.pathname? "active":""} tabIndex="-1" >
+                      <Link tabIndex="-1" to={item.href}onClick={::this.logout} >
+                        <span className={"mbv-icon glyphicon glyphicon-"+item.icon}>
+                        </span>
+                        <span className="name">{item.label}</span>
+                      </Link>
+                    </li>
+                  }
+                  return (
+                    <li name={item.label} key={item.label} className={item.href === params.pathname? "active":""} tabIndex="-1" >
+                      <Link tabIndex="-1" to={item.href}>
+                        <span className={"mbv-icon fa fa-"+item.icon}>
+                        </span>
+                        <span className="name">{item.label}</span>
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+          ];
+        })}
       </div>
     )
   }

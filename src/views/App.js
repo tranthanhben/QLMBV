@@ -27,11 +27,12 @@ class App extends Component {
     //     </div>
     //   );
     // }
+
     return (
       <div className="wrapper">
         <div className='page'>
           <div className='outer'>
-          <LeftNavigator params={this.props.params} user={this.props.user}>
+          <LeftNavigator  params={this.props.params} user={this.props.user}>
           </LeftNavigator>
             {this.props.children}
         </div>
@@ -48,7 +49,7 @@ class App extends Component {
 }))
 export default class AppContainer {
   render() {
-    return <App params={this.props.params} user={this.props.user}>
+    return <App params={this.props.location} user={this.props.user}>
       {this.props.children}
     </App>;
   }

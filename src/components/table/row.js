@@ -52,7 +52,6 @@ export class TBody extends Component {
           classField = "sorting_1";
         }
       }
-      console.log(field.up);
       if(field.up){
         classField = classField + " uppercase";
       }
