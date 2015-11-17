@@ -3,7 +3,7 @@ const initialState = {
     [{
       label: 'Sản Phẩm',
       href: '/sanpham',
-      icon: 'file-o'
+      icon: 'cubes'
     }, {
       label: 'Khách Hàng',
       href: '/khachhang',
@@ -17,15 +17,15 @@ const initialState = {
       },{
         label: 'Phiếu Mua Hàng',
         href: '/khachhang/pmh',
-        icon: 'file-o'
+        icon: 'shopping-cart'
       },{
         label: 'Phiếu Xuất Hàng',
         href: '/khachhang/pxh',
-        icon: 'file-o'
+        icon: 'truck'
       },{
         label: 'Hóa đơn',
         href: '/khachhang/hdkh',
-        icon: 'file-o'
+        icon: 'money'
       }]
     }, {
       label: 'Nhà Cung Cấp',
@@ -40,20 +40,20 @@ const initialState = {
       },{
         label: 'Phiếu Đặt Hàng',
         href: '/nhacungcap/pdh',
-        icon: 'file-o'
+        icon: 'shopping-cart'
       },{
         label: 'Phiếu Nhập Hàng',
         href: '/nhacungcap/pnh',
-        icon: 'file-o'
+        icon: 'truck'
       },{
         label: 'Hóa đơn',
         href: '/nhacungcap/hdncc',
-        icon: 'file-o'
+        icon: 'money'
       }]
     },{
       label: 'Công Nợ',
       href: '/congno',
-      icon: 'file-o'
+      icon: 'dollar'
     },{
       label: 'Thống Kê',
       href: '/thongke',
