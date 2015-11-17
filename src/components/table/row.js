@@ -56,6 +56,9 @@ export class TBody extends Component {
       if(field.type === "number"){
         classField += " dt-body-right";
       }
+      if(field.type === "content"){
+        classField += " dt-content";
+      }
       if(field.up){
         classField = classField + " uppercase";
       }

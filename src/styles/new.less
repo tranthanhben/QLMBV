@@ -123,6 +123,9 @@ table.dataTable {
 label.line-height{
   line-height: 34px;
 }
+table.dataTable{
+  max-width: 74vw;
+}
 table.dataTable.display tbody tr.odd, table.dataTable.stripe tbody tr.odd {
     background-color: #f9f9f9;
 }
@@ -130,12 +133,12 @@ table.dataTable.display tbody tr.even:hover, table.dataTable.display tbody tr.od
     background-color: #f5f5f5;
 }
 table.dataTable thead td, table.dataTable thead th {
-    padding: 10px 18px;
+    padding: 10px 10px 10px 5px;
     border-bottom: 1px solid #111;
     outline: none;
 }
 table.dataTable tfoot td, table.dataTable tfoot th {
-    padding: 10px 18px 6px;
+    padding: 10px 5px 6px;
     border-top: 1px solid #111;
     outline: none;
 }
@@ -352,4 +355,13 @@ table.dataTable.display tbody tr.even>.sorting_1, table.dataTable.order-column.s
 }
 td.dt-body-right,th.dt-body-right {
   text-align: right;
+}
+table.dataTable.nowrap td, table.dataTable.nowrap th {
+    white-space: nowrap;
+}
+table.dataTable.preline td, table.dataTable.preline th {
+    white-space: pre-line;
+}
+.dt-content{
+  max-width: 300px;
 }

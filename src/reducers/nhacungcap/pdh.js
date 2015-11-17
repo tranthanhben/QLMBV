@@ -47,7 +47,7 @@ export default function phieudathang(state = initialState, action = {}){
         loading: false,
         loaded: false,
         list: [],
-        paging: null,
+        paging: {},
         error: action.error
       };
 
@@ -66,7 +66,7 @@ export default function phieudathang(state = initialState, action = {}){
       return {
         ...state,
         loadingOne: false,
-        item: null,
+        item: {},
         error: action.error
       };
 

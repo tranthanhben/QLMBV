@@ -1,23 +1,23 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import * as pmhActions from '../../actions/khachhang/pmhActions';
+import * as pdhAtions from '../../actions/nhacungcap/pdhAtions';
 import {THead, TBody, TFoot} from '../table/row';
 import {Pagination} from '../table/pagination';
-import {isLoaded, loadList as loadPMH} from '../../actions/khachhang/pmhActions';
+import {isLoaded, loadList as loadPDH} from '../../actions/nhacungcap/pdhAtions';
 
 @connect(
   state =>({
-    listPMH: state.phieumuahang.list,
-    paging: state.phieumuahang.paging,
-    error: state.phieumuahang.error,
-    loading: state.phieumuahang.loading
+    listPDH: state.phieudathang.list,
+    paging: state.phieudathang.paging,
+    error: state.phieudathang.error,
+    loading: state.phieudathang.loading
   }),
-  {...pmhActions})
+  {...pdhAtions})
 
 export default
-class PMH extends Component{
+class PDH extends Component{
   static propTypes = {
-    listPMH: PropTypes.array,
+    listPDH: PropTypes.array,
     error: PropTypes.object,
     paging: PropTypes.object,
     loading: PropTypes.bool,
@@ -26,7 +26,7 @@ class PMH extends Component{
 
   static fetchData(store){
     if(!isLoaded(store.getState)){
-      return store.dispatch(loadPMH());
+      return store.dispatch(loadPDH());
     }
   }
 
@@ -125,7 +125,7 @@ class PMH extends Component{
     }
   }
   render(){
-    const {listPMH, paging} = this.props;
+    const {listPDH, paging} = this.props;
     const {options, meta} = this.state;
     return (
         <div className="mbv-grid container-fluid" style={{"zIndex": "9999983"}}>
@@ -154,7 +154,7 @@ class PMH extends Component{
                     <TFoot meta={meta} ></TFoot>
                   </tfoot>
                   <tbody>
-                    {listPMH && listPMH.map((item, index) =>{
+                    {listPDH && listPDH.map((item, index) =>{
                       return(
                         <TBody item={item} index={index} sort={options.sort} meta={meta} paging={paging} key={index}></TBody>
                       )
@@ -162,7 +162,7 @@ class PMH extends Component{
 
                   </tbody>
                 </table>
-                <div className="dataTables_info" id="example_info" role="status" aria-live="polite">Showing {paging && paging.page * paging.page_size+ 1} to {paging && paging.page * paging.page_size+ listPMH.length} of {paging && paging.total} entries</div>
+                <div className="dataTables_info" id="example_info" role="status" aria-live="polite">Showing {paging && paging.page * paging.page_size+ 1} to {paging && paging.page * paging.page_size+ listPDH.length} of {paging && paging.total} entries</div>
                 <Pagination load={::this.paginationLoad} paging={paging}></Pagination>
               </div>
             </div>
