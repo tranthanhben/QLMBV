@@ -23,7 +23,7 @@ const initialState = {
         href: '/khachhang/pxh',
         icon: 'truck'
       },{
-        label: 'Hóa đơn',
+        label: 'Hóa Đơn',
         href: '/khachhang/hdkh',
         icon: 'money'
       }]
@@ -46,7 +46,7 @@ const initialState = {
         href: '/nhacungcap/pnh',
         icon: 'truck'
       },{
-        label: 'Hóa đơn',
+        label: 'Hóa Đơn',
         href: '/nhacungcap/hdncc',
         icon: 'money'
       }]
@@ -58,6 +58,10 @@ const initialState = {
       label: 'Thống Kê',
       href: '/thongke',
       icon: 'line-chart'
+    },{
+      label: 'Kho',
+      href: '/kho',
+      icon: 'database'
     }],
     [{
       label: 'Profile',
@@ -68,7 +72,24 @@ const initialState = {
       href: '/logout',
       icon: 'log-out'
     }]
-  ]
+  ],
+  menuparse:{
+    '/sanpham':'Sản Phẩm',
+    '/khachhang/list':'Danh Sách Khách Hàng',
+    '/khachhang/pmh':'Phiếu Mua Hàng',
+    '/khachhang/pxh':'Phiếu Xuất Hàng',
+    '/khachhang/hdkh':'Hóa Đơn Khách Hàng',
+    '/nhacungcap/list':'Danh Sách Nhà Cung Cấp',
+    '/nhacungcap/pdh':'Phiếu Đặt Hàng',
+    '/nhacungcap/pnh':'Phiếu Nhập Hàng',
+    '/nhacungcap/hdncc':'Hóa Đơn Nhà Cung Cấp',
+    '/thongke':'Thống Kê',
+    '/congno':'Công Nợ',
+    '/profile':'Profile',
+    '/nhanvien':'Nhân Viên',
+    '/kho':'Kho'
+
+  }
 };
 export default function layout(state = initialState, action = {}) {
   switch (action.type) {
