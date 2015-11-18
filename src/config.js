@@ -4,7 +4,7 @@ module.exports = {
     port: 3001,
     apiPort: 3030,
     app: {
-      name: 'Adjobs Back (development)'
+      name: 'QLMBV (development)'
     }
   },
   production: {
@@ -12,7 +12,7 @@ module.exports = {
     port: process.env.PORT,
     apiPort: process.env.API_PORT,
     app: {
-      name: 'Adjobs Back (production)'
+      name: 'QLMBV (production)'
     }
   }
 }[process.env.NODE_ENV || 'development'];

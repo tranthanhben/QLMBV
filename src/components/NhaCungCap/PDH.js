@@ -40,7 +40,8 @@ class PDH extends Component{
       "pmhid":{
         name: "pmhid",
         label: "PMHID",
-        sort: true
+        sort: true,
+        up: true
       },
       "lhid":{
         name: "lhid",
@@ -67,13 +68,15 @@ class PDH extends Component{
         name: "soluong",
         label: "Số Lượng",
         sort: false,
-        type: "number"
+        type: "number",
+        unit: ' Cây'
       },
       "tongtien":{
         name: "tongtien",
         label: "Tổng Tiền",
         sort: true,
-        type: "number"
+        type: "number",
+        unit: ' VND'
       },
       "tinhtrang":{
         name: "tinhtrang",

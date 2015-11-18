@@ -62,13 +62,15 @@ class PXH extends Component{
         name: "soluong",
         label: "Số Lượng",
         sort: false,
-        type: "number"
+        type: "number",
+        unit: ' Cây'
       },
       "tongtien":{
         name: "tongtien",
         label: "Tổng Tiền",
         sort: true,
-        type: "number"
+        type: "number",
+        unit: ' VND'
       },
       "tinhtrang":{
         name: "tinhtrang",

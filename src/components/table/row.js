@@ -1,5 +1,25 @@
 import React, {Component, PropTypes} from 'react';
 import {formatDate} from '../../meta';
+import numeral from 'numeral';
+numeral.language('vi', {
+    delimiters: {
+        thousands: '.',
+        decimal: ','
+    },
+    abbreviations: {
+        thousand: 'k',
+        million: 'm',
+        billion: 'b',
+        trillion: 't'
+    },
+    ordinal : function (number) {
+        return number === 1 ? 'er' : 'ème';
+    },
+    currency: {
+        symbol: 'VND'
+    }
+});
+numeral.language('vi');
 export class THead extends Component {
   static propTypes = {
     meta: PropTypes.object,
@@ -53,9 +73,7 @@ export class TBody extends Component {
           classField = "sorting_1";
         }
       }
-      if(field.type === "number"){
-        classField += " dt-body-right";
-      }
+
       if(field.type === "content"){
         classField += " dt-content";
       }
@@ -65,6 +83,11 @@ export class TBody extends Component {
       if(field.type === "date"){
         trList.push(
           <td className={classField} key={field.name} >{formatDate(item[key])}</td>
+        );
+      }else if(field.type ==="number"){
+        classField += " dt-body-right";
+        trList.push(
+        <td className={classField} key={field.name} >{numeral(item[key]).format('0,0')+(field.unit|| '')}</td>
         );
       }else{
         trList.push(
