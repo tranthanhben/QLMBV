@@ -9,7 +9,8 @@ import Login from '../components/Login';
 import {
   KhachHang,
   NhaCungCap,
-  ThongKe
+  ThongKe,
+  SanPham
 } from 'components';
 import {
   ListKH,
@@ -35,6 +36,8 @@ export default (
         <Route path="/pdh" name="pdh nha cung cap" component={PDH}/>
         <Route path="/pnh" name="pnh nha cung cap" component={PNH}/>
         <Route path="/hdncc" name="hdncc nha cung cap" component={NotFound}/>
+      </Route>
+      <Route path="/sanpham" name="sanpham" component={SanPham}>
       </Route>
 
       <Route path="/thongke" name="thongke" component={ThongKe}/>

@@ -87,8 +87,9 @@ const initialState = {
     '/congno':'Công Nợ',
     '/profile':'Profile',
     '/nhanvien':'Nhân Viên',
-    '/kho':'Kho'
-
+    '/kho':'Kho',
+    'lohang': 'Lô Hàng',
+    'loaivai': 'Loại Vải'
   }
 };
 export default function layout(state = initialState, action = {}) {

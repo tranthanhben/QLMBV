@@ -1,23 +1,23 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import * as pmhActions from '../../actions/khachhang/pmhActions';
+import * as lohangActions from '../../actions/lohangActions';
 import {THead, TBody, TFoot} from '../table/row';
 import {Pagination} from '../table/pagination';
-import {isLoaded, loadList as loadPMH} from '../../actions/khachhang/pmhActions';
+import {isLoaded, loadList as loadLH} from '../../actions/lohangActions';
 
 @connect(
   state =>({
-    listPMH: state.phieumuahang.list,
-    paging: state.phieumuahang.paging,
-    error: state.phieumuahang.error,
-    loading: state.phieumuahang.loading
+    listLH: state.lohang.list,
+    paging: state.lohang.paging,
+    error: state.lohang.error,
+    loading: state.lohang.loading
   }),
-  {...pmhActions})
+  {...lohangActions})
 
 export default
-class PMH extends Component{
+class ListLH extends Component{
   static propTypes = {
-    listPMH: PropTypes.array,
+    listLH: PropTypes.array,
     error: PropTypes.object,
     paging: PropTypes.object,
     loading: PropTypes.bool,
@@ -26,9 +26,12 @@ class PMH extends Component{
 
   static fetchData(store){
     if(!isLoaded(store.getState)){
-      return store.dispatch(loadPMH());
+      return store.dispatch(loadLH());
     }
   }
+  // componentWillMount(){
+  //   this.props.loadList();
+  // }
 
   state = {
     options :{
@@ -37,50 +40,59 @@ class PMH extends Component{
       sort: ''
     },
     meta:{
-      "pmhid":{
-        name: "id",
-        label: "PMHID",
-        sort: true
-      },
       "lhid":{
-        name: "lhid",
+        name: "id",
         label: "LHID",
-        sort: false
+        sort: true,
+        up: true
       },
-      "nvid":{
-        name: "nvid",
-        label: "NVID",
-        sort: false
+      "lvid":{
+        name: "lvid",
+        label: "LVID",
+        sort: true,
+        up: true
       },
-      "khid":{
-        name: "khid",
-        label: "KHID",
-        sort: false
+      "nccid":{
+        name: "nccid",
+        label: "NCCID",
+        sort: true,
+        up: true
+      },
+      "tenlohang":{
+        name: "tenlohang",
+        label: "Lô Hàng",
+        sort: true
       },
       "ngaytao":{
         name: "ngaytao",
         label: "Ngày Tạo",
-        type: "date",
+        type: 'date',
+        sort: true
+      },
+      "ngaynhapkho":{
+        name: "ngaynhapkho",
+        label: "Ngày Nhập",
+        type: 'date',
         sort: true
       },
       "soluong":{
         name: "soluong",
         label: "Số Lượng",
-        sort: false,
-        type: "number",
+        type: 'number',
+        sort: true,
         unit: ' Cây'
       },
-      "tongtien":{
-        name: "tongtien",
-        label: "Tổng Tiền",
+      "conlai":{
+        name: "conlai",
+        label: "Còn Lại",
         sort: true,
-        type: "number",
-        unit: ' VND'
+        type: 'number',
+        unit: ' Cây'
       },
       "tinhtrang":{
         name: "tinhtrang",
         label: "Tình Trạng",
-        sort: true
+        sort: false
       }
     }
   }
@@ -127,7 +139,7 @@ class PMH extends Component{
     }
   }
   render(){
-    const {listPMH, paging} = this.props;
+    const {listLH, paging} = this.props;
     const {options, meta} = this.state;
     return (
         <div className="mbv-grid container-fluid" style={{"zIndex": "9999983"}}>
@@ -156,7 +168,7 @@ class PMH extends Component{
                     <TFoot meta={meta} ></TFoot>
                   </tfoot>
                   <tbody>
-                    {listPMH && listPMH.map((item, index) =>{
+                    {listLH && listLH.map((item, index) =>{
                       return(
                         <TBody item={item} index={index} sort={options.sort} meta={meta} paging={paging} key={index}></TBody>
                       )
@@ -164,7 +176,7 @@ class PMH extends Component{
 
                   </tbody>
                 </table>
-                <div className="dataTables_info" id="example_info" role="status" aria-live="polite">Showing {paging && paging.page * paging.page_size+ 1} to {paging && paging.page * paging.page_size+ listPMH.length} of {paging && paging.total} entries</div>
+                <div className="dataTables_info" id="example_info" role="status" aria-live="polite">Showing {paging && paging.page * paging.page_size+ 1} to {paging && paging.page * paging.page_size+ listLH.length} of {paging && paging.total} entries</div>
                 <Pagination load={::this.paginationLoad} paging={paging}></Pagination>
               </div>
             </div>

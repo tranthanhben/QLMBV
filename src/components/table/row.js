@@ -41,7 +41,9 @@ export class THead extends Component {
           classField = "sorting";
         }
       }
-
+      // if(field.type ==="number"){
+      //   classField += " dt-body-right";
+      // }
       thList.push(
         <th className={classField} onClick={sortFunc(field.name)} key={field.name} tabIndex="0" aria-controls="example" rowSpan="1" colSpan="1" >{field.label}</th>
         );
@@ -78,7 +80,7 @@ export class TBody extends Component {
         classField += " dt-content";
       }
       if(field.up){
-        classField = classField + " uppercase";
+        classField += " uppercase";
       }
       if(field.type === "date"){
         trList.push(
@@ -114,6 +116,10 @@ export class TFoot extends Component {
     let thList = [];
     for(let key in meta){
       let field = meta[key];
+      let classField = '';
+      // if(field.type ==="number"){
+      //   classField += " dt-body-right";
+      // }
       thList.push(
         <th  key={field.name} tabIndex="0" aria-controls="example" rowSpan="1" colSpan="1" >{field.label}</th>
         );
