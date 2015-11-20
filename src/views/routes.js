@@ -10,18 +10,24 @@ import {
   KhachHang,
   NhaCungCap,
   ThongKe,
-  SanPham
+  SanPham,
+  NhanVien
 } from 'components';
 import {
   ListKH,
   PMH,
-  PXH
+  PXH,
+  HDKH
 } from '../components/KhachHang';
 import {
   ListNCC,
   PDH,
-  PNH
+  PNH,
+  HDNCC
 } from '../components/NhaCungCap';
+// import {
+//   ListNV
+// } from '../components/NhanVien';
 export default (
   <Route component={App} >
     <Route path="/" component={Redirect} onEnter={Redirect.onEnter} >
@@ -29,13 +35,15 @@ export default (
         <Route path="/list" name="list khach hang" component={ListKH}/>
         <Route path="/pmh" name="pmh khach hang" component={PMH}/>
         <Route path="/pxh" name="pxh khach hang" component={PXH}/>
-        <Route path="/hdkh" name="hdkh khach hang" component={NotFound}/>
+        <Route path="/hdkh" name="hdkh khach hang" component={HDKH}/>
       </Route>
       <Route path="/nhacungcap/" name="nhacungcap" component={NhaCungCap}>
         <Route path="/list" name="list nha cung cap" component={ListNCC}/>
         <Route path="/pdh" name="pdh nha cung cap" component={PDH}/>
         <Route path="/pnh" name="pnh nha cung cap" component={PNH}/>
-        <Route path="/hdncc" name="hdncc nha cung cap" component={NotFound}/>
+        <Route path="/hdncc" name="hdncc nha cung cap" component={HDNCC}/>
+      </Route>
+      <Route path="/nhanvien" name="nhanvien" component={NhanVien}>
       </Route>
       <Route path="/sanpham" name="sanpham" component={SanPham}>
       </Route>

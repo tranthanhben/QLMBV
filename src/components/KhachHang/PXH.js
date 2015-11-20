@@ -38,7 +38,7 @@ class PXH extends Component{
     },
     meta:{
       "pxhid":{
-        name: "pxhid",
+        name: "id",
         label: "PXHID",
         sort: true
       },

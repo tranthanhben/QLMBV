@@ -29,9 +29,9 @@ class ListLH extends Component{
       return store.dispatch(loadLH());
     }
   }
-  // componentWillMount(){
-  //   this.props.loadList();
-  // }
+  componentWillMount(){
+    this.props.loadList();
+  }
 
   state = {
     options :{

@@ -1,23 +1,23 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import * as pdhAtions from '../../actions/nhacungcap/pdhAtions';
+import * as hdkhAtions from '../../actions/khachhang/hdkhAtions';
 import {THead, TBody, TFoot} from '../table/row';
 import {Pagination} from '../table/pagination';
-import {isLoaded, loadList as loadPDH} from '../../actions/nhacungcap/pdhAtions';
+import {isLoaded, loadList as loadHDKH} from '../../actions/khachhang/hdkhAtions';
 
 @connect(
   state =>({
-    listPDH: state.phieudathang.list,
-    paging: state.phieudathang.paging,
-    error: state.phieudathang.error,
-    loading: state.phieudathang.loading
+    listHDKH: state.hoadonKH.list,
+    paging: state.hoadonKH.paging,
+    error: state.hoadonKH.error,
+    loading: state.hoadonKH.loading
   }),
-  {...pdhAtions})
+  {...hdkhAtions})
 
 export default
-class PDH extends Component{
+class HDKH extends Component{
   static propTypes = {
-    listPDH: PropTypes.array,
+    listHDKH: PropTypes.array,
     error: PropTypes.object,
     paging: PropTypes.object,
     loading: PropTypes.bool,
@@ -26,7 +26,7 @@ class PDH extends Component{
 
   static fetchData(store){
     if(!isLoaded(store.getState)){
-      return store.dispatch(loadPDH());
+      return store.dispatch(loadHDKH());
     }
   }
 
@@ -37,11 +37,15 @@ class PDH extends Component{
       sort: ''
     },
     meta:{
-      "pdhid":{
+      "hdid":{
         name: "id",
-        label: "PDHID",
-        sort: true,
-        up: true
+        label: "HDID",
+        sort: true
+      },
+      "pxhid":{
+        name: "pxhid",
+        label: "PXHID",
+        sort: true
       },
       "nvid":{
         name: "nvid",
@@ -52,11 +56,6 @@ class PDH extends Component{
         name: "ngaytao",
         label: "Ngày Tạo",
         type: "date",
-        sort: true
-      },
-      "tinhtrang":{
-        name: "tinhtrang",
-        label: "Tình Trạng",
         sort: true
       },
       "ghichu":{
@@ -110,7 +109,7 @@ class PDH extends Component{
     }
   }
   render(){
-    const {listPDH, paging} = this.props;
+    const {listHDKH, paging} = this.props;
     const {options, meta} = this.state;
     return (
         <div className="mbv-grid container-fluid" style={{"zIndex": "9999983"}}>
@@ -139,7 +138,7 @@ class PDH extends Component{
                     <TFoot meta={meta} ></TFoot>
                   </tfoot>
                   <tbody>
-                    {listPDH && listPDH.map((item, index) =>{
+                    {listHDKH && listHDKH.map((item, index) =>{
                       return(
                         <TBody item={item} index={index} sort={options.sort} meta={meta} paging={paging} key={index}></TBody>
                       )
@@ -147,7 +146,7 @@ class PDH extends Component{
 
                   </tbody>
                 </table>
-                <div className="dataTables_info" id="example_info" role="status" aria-live="polite">Showing {paging && paging.page * paging.page_size+ 1} to {paging && paging.page * paging.page_size+ listPDH.length} of {paging && paging.total} entries</div>
+                <div className="dataTables_info" id="example_info" role="status" aria-live="polite">Showing {paging && paging.page * paging.page_size+ 1} to {paging && paging.page * paging.page_size+ listHDKH.length} of {paging && paging.total} entries</div>
                 <Pagination load={::this.paginationLoad} paging={paging}></Pagination>
               </div>
             </div>

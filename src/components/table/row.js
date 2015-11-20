@@ -40,13 +40,18 @@ export class THead extends Component {
         }else{
           classField = "sorting";
         }
+        thList.push(
+        <th className={classField} onClick={sortFunc(field.name)} key={field.name} tabIndex="0" aria-controls="example" rowSpan="1" colSpan="1" >{field.label}</th>
+        );
+      }else{
+        thList.push(
+        <th className={classField} key={field.name} tabIndex="0" aria-controls="example" rowSpan="1" colSpan="1" >{field.label}</th>
+        );
       }
       // if(field.type ==="number"){
       //   classField += " dt-body-right";
       // }
-      thList.push(
-        <th className={classField} onClick={sortFunc(field.name)} key={field.name} tabIndex="0" aria-controls="example" rowSpan="1" colSpan="1" >{field.label}</th>
-        );
+
     }
     return (
       <tr role="row">

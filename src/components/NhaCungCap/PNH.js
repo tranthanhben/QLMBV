@@ -37,9 +37,9 @@ class PNH extends Component{
       sort: ''
     },
     meta:{
-      "pmhid":{
-        name: "pmhid",
-        label: "PMHID",
+      "pnhid":{
+        name: "id",
+        label: "PNHID",
         sort: true
       },
       "lhid":{
@@ -50,11 +50,6 @@ class PNH extends Component{
       "nvid":{
         name: "nvid",
         label: "NVID",
-        sort: false
-      },
-      "khid":{
-        name: "khid",
-        label: "KHID",
         sort: false
       },
       "ngaytao":{
@@ -81,6 +76,12 @@ class PNH extends Component{
         name: "tinhtrang",
         label: "Tình Trạng",
         sort: true
+      },
+      "ghichu":{
+        name: "ghichu",
+        label: "Ghi Chú",
+        sort: false,
+        type:"content"
       }
     }
   }

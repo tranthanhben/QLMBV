@@ -68,6 +68,10 @@ const initialState = {
       href: '/profile',
       icon: 'user'
     }, {
+      label: 'Nhân Viên',
+      href: '/nhanvien',
+      icon: 'group'
+    }, {
       label: 'Logout',
       href: '/logout',
       icon: 'log-out'

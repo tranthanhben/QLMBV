@@ -50,7 +50,7 @@ class List extends Component{
       },
       "sdt":{
         name: "sdt",
-        label: "SDT",
+        label: "Điện Thoại",
         sort: false
       },
       "email":{
