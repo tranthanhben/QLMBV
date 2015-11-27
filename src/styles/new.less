@@ -4,7 +4,7 @@
   -ms-flex: 1 0 auto;
   flex: 1 0 auto;
   -webkit-flex: 1 0 auto;
-  z-index: 100;
+  // z-index: 100;
   margin-left: 0;
   position: relative;
   -webkit-transition: all .3s ease;
@@ -15,11 +15,13 @@
 }
 #nav-header{
   margin-left: 250px;
+  z-index: 20;
 }
 #body {
   margin-top: 40px;
   padding-top: 25px;
   padding-bottom: 40px;
+  z-index: 16px
 }
 .mbv-panel{
   color: #333;
@@ -365,4 +367,7 @@ table.dataTable.preline td, table.dataTable.preline th {
 }
 .dt-content{
   max-width: 300px;
+}
+.dt-center{
+  text-align: center;
 }
