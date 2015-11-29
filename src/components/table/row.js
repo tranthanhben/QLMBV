@@ -57,6 +57,7 @@ export class THead extends Component {
       <tr role="row">
         <th key="stt" tabIndex="0" aria-controls="example" >#</th>
         {thList}
+        <th key="control"></th>
       </tr>
     )
   }
@@ -110,6 +111,16 @@ export class TBody extends Component {
       <tr role="row" className={index%2===1 ? "even":"odd"}>
         <td>{paging.page*paging.page_size+1+index}</td>
         {trList}
+        <td key='control'>
+          <button className="btn btn-default"
+            disabled={true}>
+            <i className="fa fa-ban"/>
+          </button>
+          <button className="btn btn-success"
+            disabled={true}>
+            <i className={'fa ' + (true ? 'fa-cog fa-spin' : 'fa-cloud')}/>
+          </button>
+        </td>
       </tr>
     )
   }
@@ -136,6 +147,7 @@ export class TFoot extends Component {
       <tr role="row">
         <th key="stt" tabIndex="0" aria-controls="example" >#</th>
         {thList}
+        <th key="control"></th>
       </tr>
     )
   }

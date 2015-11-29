@@ -1,3 +1,8 @@
+import {
+  OPEN_MODAL,
+  CLOSE_MODAL
+} from 'actions/actionTypes';
+
 const initialState = {
   menu: [
     [{
@@ -94,10 +99,24 @@ const initialState = {
     '/kho':'Kho',
     'lohang': 'Lô Hàng',
     'loaivai': 'Loại Vải'
-  }
+  },
+
 };
 export default function layout(state = initialState, action = {}) {
   switch (action.type) {
-    default: return state;
+    case OPEN_MODAL:
+      return {
+        ...state,
+        openmodal: true
+      }
+    case CLOSE_MODAL:
+      return {
+        ...state,
+        openmodal: false
+      }
+    default: return {
+      ...state,
+      openmodal: false
+    };
   }
 }

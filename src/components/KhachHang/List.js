@@ -103,7 +103,7 @@ class List extends Component{
                     <input type="search" className="form-control " placeholder="Search Name" onChange={::this.searchField} aria-controls="example" />
                   </label>
                 </div>
-                <table id="example" className="table display nowrap dataTable"  role="grid" aria-describedby="example_info" >
+                <table id="example" className="table display nowrap dataTable" style={{"zoom": "0.94"}} role="grid" aria-describedby="example_info" >
                   <thead>
                     <THead meta={meta} sort={options.sort} sortFunc={::this.sortField} ></THead>
                   </thead>
@@ -116,7 +116,6 @@ class List extends Component{
                         <TBody item={item} index={index} sort={options.sort} meta={meta} paging={paging} key={index}></TBody>
                       )
                     })}
-
                   </tbody>
                 </table>
                 <div className="dataTables_info" id="example_info" role="status" aria-live="polite">Showing {paging && paging.page * paging.page_size+ 1} to {paging && paging.page * paging.page_size+ listKH.length} of {paging && paging.total} entries</div>

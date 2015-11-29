@@ -384,3 +384,6 @@ export const CNNCC_DELETE_SUCCESS = "CNNCC_DELETE_SUCCESS";
 export const CNNCC_DELETE_FAIL = "CNNCC_DELETE_FAIL";
 
 export const CNNCC_RESET = "CNNCC_RESET";
+
+export const OPEN_MODAL = "OPEN_MODAL";
+export const CLOSE_MODAL = "CLOSE_MODAL";

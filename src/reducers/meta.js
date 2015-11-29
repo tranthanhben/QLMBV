@@ -241,7 +241,7 @@ const initialState = {
       name: "succhua",
       label: "Sức Chứa",
       sort: true,
-      type: number,
+      type: "number",
       required: true,
       field: true
     },

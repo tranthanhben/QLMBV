@@ -2,6 +2,8 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import Modal from '../layout/Modal';
 import Create from './EditorKH';
+import * as layoutActions from '../../actions/layoutActions';
+
 const customStyle = {
   overlay: {
     position: 'fixed',
@@ -30,23 +32,28 @@ const customStyle = {
 }
 
 @connect(state =>({
-  menuparse: state.layout.menuparse
-}))
+  menuparse: state.layout.menuparse,
+  openmodal: state.layout.openmodal
+}),
+{...layoutActions})
 export default class KhachHang extends Component{
   static propTypes = {
-    menuparse : PropTypes.object
+    menuparse : PropTypes.object,
+    openmodal : PropTypes.bool,
+    openModal: PropTypes.func.isRequired
   }
   state = {
     isOpenEdit: false
   }
   toggleModal() {
     console.log("this", this);
+    this.props.openModal(!this.state.isOpenEdit);
     this.setState({isOpenEdit: !this.state.isOpenEdit})
   }
   render() {
-    const {menuparse} = this.props;
+    const {menuparse, openmodal} = this.props;
     return <div className='inner '>
-        <nav id="nav-header" className="navbar navbar-default navbar-fixed-top">
+        <nav id="nav-header" className="navbar navbar-default navbar-fixed-top" style={{"zIndex":(openmodal? '-2':'0')}}>
           <div className="container-fluid mbv-nav">
             <div className="row">
               <div className="col-xs-3 visible-xs" ></div>
