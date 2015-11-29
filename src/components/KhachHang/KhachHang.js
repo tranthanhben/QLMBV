@@ -37,7 +37,7 @@ export default class KhachHang extends Component{
     menuparse : PropTypes.object
   }
   state = {
-    isOpenEdit: true
+    isOpenEdit: false
   }
   toggleModal() {
     console.log("this", this);

@@ -11,7 +11,7 @@ import {isLoaded, loadList as loadKH} from '../../actions/khachhang/khachhangAct
     paging: state.khachhang.paging,
     error: state.khachhang.error,
     loading: state.khachhang.loading,
-    meta: state.khachhang.meta
+    meta: state.meta.khachhang
   }),
   {...khachhangActions})
 

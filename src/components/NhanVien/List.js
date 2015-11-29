@@ -10,7 +10,8 @@ import {Pagination} from '../table/pagination';
     listNV: state.nhanvien.list,
     paging: state.nhanvien.paging,
     error: state.nhanvien.error,
-    loading: state.nhanvien.loading
+    loading: state.nhanvien.loading,
+    meta: state.meta.nhanvien
   }),
   {...nhanvienActions})
 
@@ -20,6 +21,7 @@ class ListNV extends Component{
     listNV: PropTypes.array,
     error: PropTypes.object,
     paging: PropTypes.object,
+    meta: PropTypes.object,
     loading: PropTypes.bool,
     loadList:PropTypes.func.isRequired
   }
@@ -37,49 +39,6 @@ class ListNV extends Component{
       page_size: 10,
       name: '',
       sort: ''
-    },
-    meta:{
-      "nvid":{
-        name: "id",
-        label: "NVID",
-        sort: true,
-        up: true
-      },
-      "tennv":{
-        name: "tennv",
-        label: "Tên Nhân Viên",
-        sort: true
-      },
-      "sdt":{
-        name: "sdt",
-        label: "Điện Thoại",
-        sort: false
-      },
-      "email":{
-        name: "email",
-        label: "Email",
-        sort: false
-      },
-      "diachi":{
-        name: "diachi",
-        label: "Địa Chỉ",
-        sort: false
-      },
-      "username":{
-        name: "username",
-        label: "User Name",
-        sort: true
-      },
-      "password":{
-        name: "password",
-        label: "PassWord",
-        sort: false
-      },
-      "vaitro":{
-        name: "vaitro",
-        label: "Vai Trò",
-        sort: false
-      }
     }
   }
   changePageSize(){
@@ -123,8 +82,8 @@ class ListNV extends Component{
     }
   }
   render(){
-    const {listNV, paging} = this.props;
-    const {options, meta} = this.state;
+    const {listNV, paging, meta} = this.props;
+    const {options} = this.state;
     return (
       <div className="mbv-grid container-fluid" style={{"zIndex": "9999983"}}>
         <div className="row">

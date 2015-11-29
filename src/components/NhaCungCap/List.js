@@ -10,6 +10,7 @@ import {Pagination} from '../table/pagination';
     listNCC: state.nhacungcap.list,
     paging: state.nhacungcap.paging,
     error: state.nhacungcap.error,
+    meta: state.meta.nhacungcap,
     loading: state.nhacungcap.loading
   }),
   {...nhacungcapActions})
@@ -20,6 +21,7 @@ class List extends Component{
     listNCC: PropTypes.array,
     error: PropTypes.object,
     paging: PropTypes.object,
+    meta: PropTypes.object,
     loading: PropTypes.bool,
     loadList:PropTypes.func.isRequired
   }
@@ -33,34 +35,6 @@ class List extends Component{
       page_size: 10,
       name: '',
       sort: ''
-    },
-    meta:{
-      "nccid":{
-        name: "id",
-        label: "NCCID",
-        sort: true,
-        up: true
-      },
-      "tenncc":{
-        name: "tenncc",
-        label: "Nhà Cung Cấp",
-        sort: true
-      },
-      "sdt":{
-        name: "sdt",
-        label: "Điện Thoại",
-        sort: false
-      },
-      "email":{
-        name: "email",
-        label: "Email",
-        sort: false
-      },
-      "diachi":{
-        name: "diachi",
-        label: "Địa Chỉ",
-        sort: false
-      }
     }
   }
   changePageSize(){
@@ -104,8 +78,8 @@ class List extends Component{
     }
   }
   render(){
-    const {listNCC, paging} = this.props;
-    const {options, meta} = this.state;
+    const {listNCC, paging, meta} = this.props;
+    const {options} = this.state;
     return (
       <div className="mbv-grid container-fluid" style={{"zIndex": "9999983"}}>
         <div className="row">

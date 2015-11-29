@@ -4,7 +4,7 @@ import * as khachhangActions from '../../actions/khachhang/khachhangActions';
 import{initObject, renderField, preprocess, setValue, checkRequire, preprocessPost} from '../../meta';
 
 @connect(state =>({
-  meta: state.khachhang.meta,
+  meta: state.meta.khachhang,
   error: state.khachhang.postError,
   message: state.khachhang.message
 }),{...khachhangActions})
