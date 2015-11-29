@@ -23,7 +23,67 @@ import {
 } from 'actions/actionTypes';
 
 const initialState = {
-  loaded: false
+  loaded: false,
+  meta: {
+    "khid": {
+      name: "id",
+      label: "KHID",
+      sort: true,
+      up: true,
+      type: 'single',
+      field: false
+    },
+    "tenkh": {
+      name: "tenkh",
+      label: "Khách Hàng",
+      sort: true,
+      type: 'single',
+      required: true,
+      field: true
+    },
+    "sdt": {
+      name: "sdt",
+      label: "Điện Thoại",
+      sort: false,
+      type: 'single',
+      required: false,
+      field: true
+    },
+    "email": {
+      name: "email",
+      label: "Email",
+      sort: false,
+      type: 'single',
+      required: false,
+      field: true
+    },
+    "diachi": {
+      name: "diachi",
+      label: "Địa Chỉ",
+      sort: false,
+      type: "single",
+      required: false,
+      field: true
+    },
+    "stk": {
+      name: "stk",
+      label: "Số TK",
+      sort: false,
+      type: "single",
+      required: false,
+      field: true,
+      view: false
+    },
+    "tennh": {
+      name: "tennh",
+      label: "Ngân Hàng",
+      sort: false,
+      type: "single",
+      required: false,
+      field: true,
+      view: false
+    }
+  }
 }
 
 export default function khachhang(state = initialState, action = {}){

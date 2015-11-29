@@ -32,6 +32,9 @@ export class THead extends Component {
     for(let key in meta){
       let classField = '';
       let field = meta[key];
+      if(field.view === false){
+        continue;
+      }
       if(field.sort){
         if(sort === field.name){
           classField = "sorting_asc";
@@ -48,9 +51,6 @@ export class THead extends Component {
         <th className={classField} key={field.name} tabIndex="0" aria-controls="example" rowSpan="1" colSpan="1" >{field.label}</th>
         );
       }
-      // if(field.type ==="number"){
-      //   classField += " dt-body-right";
-      // }
 
     }
     return (
@@ -73,6 +73,9 @@ export class TBody extends Component {
     for(let key in meta){
       let classField = '';
       let field = meta[key];
+      if(field.view === false){
+        continue;
+      }
       if(field.sort){
         if(sort === field.name){
           classField = "sorting_1";
@@ -122,9 +125,9 @@ export class TFoot extends Component {
     for(let key in meta){
       let field = meta[key];
       let classField = '';
-      // if(field.type ==="number"){
-      //   classField += " dt-body-right";
-      // }
+      if(field.view === false){
+        continue;
+      }
       thList.push(
         <th  key={field.name} tabIndex="0" aria-controls="example" rowSpan="1" colSpan="1" >{field.label}</th>
         );

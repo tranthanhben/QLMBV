@@ -22,3 +22,9 @@ export function setValue(object, addr, value) {
   }
   return object;
 }
+export function setObjValue(event){
+  let obj = this.state.item;
+  let addr = event.target.dataset.addr;
+  let value = event.taget.value;
+  return setValue(obj, addr, value);
+}

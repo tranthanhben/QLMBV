@@ -4,7 +4,7 @@ export default function renderField(obj, meta, fn) {
   let fieldEvent = [];
   for (let key in meta) {
     let field = meta[key];
-    if (field.type !== "array")
+    if (field.type !== "array" && field.field !== false)
       fieldEvent.push(
         <div className='form-group' key={key}>
           <label>

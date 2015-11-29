@@ -10,7 +10,8 @@ import {isLoaded, loadList as loadKH} from '../../actions/khachhang/khachhangAct
     listKH: state.khachhang.list,
     paging: state.khachhang.paging,
     error: state.khachhang.error,
-    loading: state.khachhang.loading
+    loading: state.khachhang.loading,
+    meta: state.khachhang.meta
   }),
   {...khachhangActions})
 
@@ -20,6 +21,7 @@ class List extends Component{
     listKH: PropTypes.array,
     error: PropTypes.object,
     paging: PropTypes.object,
+    meta: PropTypes.object,
     loading: PropTypes.bool,
     loadList:PropTypes.func.isRequired
   }
@@ -35,34 +37,6 @@ class List extends Component{
       page_size: 10,
       name: '',
       sort: ''
-    },
-    meta:{
-      "khid":{
-        name: "id",
-        label: "KHID",
-        sort: true,
-        up: true
-      },
-      "tenkh":{
-        name: "tenkh",
-        label: "Khách Hàng",
-        sort: true
-      },
-      "sdt":{
-        name: "sdt",
-        label: "Điện Thoại",
-        sort: false
-      },
-      "email":{
-        name: "email",
-        label: "Email",
-        sort: false
-      },
-      "diachi":{
-        name: "diachi",
-        label: "Địa Chỉ",
-        sort: false
-      }
     }
   }
   changePageSize(){
@@ -108,8 +82,8 @@ class List extends Component{
     }
   }
   render(){
-    const {listKH, paging} = this.props;
-    const {options, meta} = this.state;
+    const {listKH, paging, meta} = this.props;
+    const {options} = this.state;
     return (
         <div className="mbv-grid container-fluid" style={{"zIndex": "9999983"}}>
           <div className="row">
@@ -129,7 +103,7 @@ class List extends Component{
                     <input type="search" className="form-control " placeholder="Search Name" onChange={::this.searchField} aria-controls="example" />
                   </label>
                 </div>
-                <table id="example" className="table display nowrap dataTable" cellSpacing="0" width="100%" role="grid" aria-describedby="example_info" style={{"width": "100%"}}>
+                <table id="example" className="table display nowrap dataTable"  role="grid" aria-describedby="example_info" >
                   <thead>
                     <THead meta={meta} sort={options.sort} sortFunc={::this.sortField} ></THead>
                   </thead>

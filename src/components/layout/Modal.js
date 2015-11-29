@@ -22,7 +22,8 @@ var styles = {
 let Modal = React.createClass({
   propTypes: {
     close: React.PropTypes.func.isRequired,
-    unstyled: React.PropTypes.bool },
+    unstyled: React.PropTypes.bool
+  },
   getDefaultProps: function () {
     return {
       overlayStyle: styles.overlay,

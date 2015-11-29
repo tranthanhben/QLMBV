@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import Modal from '../layout/Modal';
-
+import Create from './EditorKH';
 const customStyle = {
   overlay: {
     position: 'fixed',
@@ -9,24 +9,23 @@ const customStyle = {
     height: '100%',
     top: 0,
     left: 0,
-    backgroundColor: 'rgba(255, 255, 255, 0.75)',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
     overflowY:'auto'
   },
   content: {
-    '-webkit-transform': 'scale(1) rotateX(0deg)',
-    transition: 'all 150ms ease-in',
     position: 'absolute',
-    top: '40px',
-    left: '40px',
-    right: '40px',
-    bottom: '40px',
+    width: '60%',
+    top: '20px',
+    left: '20%',
+    // right: '40px',
+    bottom: '20px',
     border: '1px solid #ccc',
     background: '#fff',
     overflow: 'auto',
     WebkitOverflowScrolling: 'touch',
     borderRadius: '4px',
     outline: 'none',
-    padding: '20px'
+    padding: '10px 20px'
   }
 }
 
@@ -38,7 +37,7 @@ export default class KhachHang extends Component{
     menuparse : PropTypes.object
   }
   state = {
-    isOpenEdit: false
+    isOpenEdit: true
   }
   toggleModal() {
     console.log("this", this);
@@ -67,39 +66,23 @@ export default class KhachHang extends Component{
             </div>
           </div>
         </nav>
+        <div id="modal">
+
+        </div>
         <div id="body" className="">
         <div className="mbv-grid container-fluid" >
           <div className="row">
             <div className="col-xs-12">
               <div className="mbv-panel">
                 <div className="mbv-panel-body">
-                  {this.state.isOpenEdit?
+                {this.state.isOpenEdit?
                   <Modal  modalStyle={customStyle.content}
-                  overlayStyle= {{
-                    position: 'fixed',
-                    width: '100%',
-                    height: '100%',
-                    top: 0,
-                    left: 0,
-                    background: 'rgba(0,0,0,.5)',
-                    overflowY:'auto'
-                  }}
+                  overlayStyle= {customStyle.overlay}
                   close={::this.toggleModal}
                   overlayClassName='modaldumb modalOverlay modalOverlay--after-open '
                   modalClassName='dumb modalContent modalContent--after-open '
                   >
-                    <h4>Add/Edit Group</h4>
-                    <div>
-                      <hr/>
-                      <div className="row">
-                        <div className="col-md-6">
-
-                        </div>
-                        <div className="col-md-6">
-                          <button className ='btn  pull-right' onClick={::this.toggleModal}>Close</button>
-                        </div>
-                      </div>
-                    </div>
+                    <Create close={::this.toggleModal}></Create>
                   </Modal> : null}
                   {this.props.children}
                 </div>
