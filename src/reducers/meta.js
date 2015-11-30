@@ -75,6 +75,14 @@ const initialState = {
       required: true,
       field: true
     },
+    "sdt": {
+      name: "sdt",
+      label: "Điện Thoại",
+      sort: false,
+      type: "single",
+      required: false,
+      field: true
+    },
     "email": {
       name: "email",
       label: "Email",

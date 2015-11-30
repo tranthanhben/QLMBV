@@ -35,13 +35,16 @@ export class THead extends Component {
       if(field.view === false){
         continue;
       }
+      if(field.type === "number"){
+        classField += "dt-body-right";
+      }
       if(field.sort){
         if(sort === field.name){
-          classField = "sorting_asc";
+          classField += " sorting_asc";
         }else if(sort === "-"+field.name){
-          classField = "sorting_desc";
+          classField += " sorting_desc";
         }else{
-          classField = "sorting";
+          classField += " sorting";
         }
         thList.push(
         <th className={classField} onClick={sortFunc(field.name)} key={field.name} tabIndex="0" aria-controls="example" rowSpan="1" colSpan="1" >{field.label}</th>
@@ -77,6 +80,7 @@ export class TBody extends Component {
       if(field.view === false){
         continue;
       }
+
       if(field.sort){
         if(sort === field.name){
           classField = "sorting_1";
@@ -111,14 +115,12 @@ export class TBody extends Component {
       <tr role="row" className={index%2===1 ? "even":"odd"}>
         <td>{paging.page*paging.page_size+1+index}</td>
         {trList}
-        <td key='control'>
-          <button className="btn btn-default"
-            disabled={true}>
-            <i className="fa fa-ban"/>
+        <td key='control' className="group-edit">
+          <button className="btn btn-warning btn-table" title="View full" >
+            <i className="fa fa-eye"/>
           </button>
-          <button className="btn btn-success"
-            disabled={true}>
-            <i className={'fa ' + (true ? 'fa-cog fa-spin' : 'fa-cloud')}/>
+          <button className="btn btn-success btn-table" title="Edit" >
+            <i className='fa fa-pencil fa-fw'/>
           </button>
         </td>
       </tr>
@@ -138,6 +140,9 @@ export class TFoot extends Component {
       let classField = '';
       if(field.view === false){
         continue;
+      }
+      if(field.type === "number"){
+        classField += " dt-body-right";
       }
       thList.push(
         <th  key={field.name} tabIndex="0" aria-controls="example" rowSpan="1" colSpan="1" >{field.label}</th>
