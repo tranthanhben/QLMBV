@@ -51,8 +51,7 @@ let Modal = React.createClass({
       style: this.unstyled ? null : this.props.overlayStyle
     }, React.DOM.div({
       className: this.props.modalClassName,
-      style: this.unstyled ? null : this.props.modalStyle,
-      onClick: this.doNotPropogate
+      style: this.unstyled ? null : this.props.modalStyle
     }, this.props.children));
   }
 });

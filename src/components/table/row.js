@@ -69,10 +69,11 @@ export class TBody extends Component {
   static propTypes = {
     meta: PropTypes.object,
     sort: PropTypes.string,
-    item: PropTypes.object
+    item: PropTypes.object,
+    view: PropTypes.func.isRequired
   }
   render(){
-    const {meta, sort, item, index, paging} = this.props;
+    const {meta, sort, item, index, paging, view} = this.props;
     let trList = [];
     for(let key in meta){
       let classField = '';
@@ -116,7 +117,7 @@ export class TBody extends Component {
         <td>{paging.page*paging.page_size+1+index}</td>
         {trList}
         <td key='control' className="group-edit">
-          <button className="btn btn-warning btn-table" title="View full" >
+          <button className="btn btn-warning btn-table" title="View full" onClick={view?  view(item): function(){}}>
             <i className="fa fa-eye"/>
           </button>
           <button className="btn btn-success btn-table" title="Edit" >

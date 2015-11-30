@@ -46,7 +46,6 @@ export default class KhachHang extends Component{
     isOpenEdit: false
   }
   toggleModal() {
-    console.log("this", this);
     this.props.openModal(!this.state.isOpenEdit);
     this.setState({isOpenEdit: !this.state.isOpenEdit})
   }

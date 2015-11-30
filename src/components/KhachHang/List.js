@@ -1,10 +1,39 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import * as khachhangActions from '../../actions/khachhang/khachhangActions';
+import * as layoutActions from '../../actions/layoutActions';
 import {THead, TBody, TFoot} from '../table/row';
 import {Pagination} from '../table/pagination';
 import {isLoaded, loadList as loadKH} from '../../actions/khachhang/khachhangActions';
+import Modal from '../layout/Modal';
+import {ViewKH} from './Editor/ViewFull';
 
+const customStyle = {
+  overlay: {
+    position: 'fixed',
+    width: '100%',
+    height: '100%',
+    top: 0,
+    left: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    overflowY:'auto'
+  },
+  content: {
+    position: 'absolute',
+    width: '60%',
+    top: '20px',
+    left: '20%',
+    // right: '40px',
+    // bottom: '20px',
+    border: '1px solid #ccc',
+    background: '#fff',
+    overflow: 'auto',
+    WebkitOverflowScrolling: 'touch',
+    borderRadius: '4px',
+    outline: 'none',
+    padding: '10px 20px'
+  }
+}
 @connect(
   state =>({
     listKH: state.khachhang.list,
@@ -13,7 +42,7 @@ import {isLoaded, loadList as loadKH} from '../../actions/khachhang/khachhangAct
     loading: state.khachhang.loading,
     meta: state.meta.khachhang
   }),
-  {...khachhangActions})
+  {...khachhangActions, ...layoutActions})
 
 export default
 class List extends Component{
@@ -23,7 +52,8 @@ class List extends Component{
     paging: PropTypes.object,
     meta: PropTypes.object,
     loading: PropTypes.bool,
-    loadList:PropTypes.func.isRequired
+    loadList:PropTypes.func.isRequired,
+    openModal: PropTypes.func.isRequired
   }
 
   static fetchData(store){
@@ -37,7 +67,9 @@ class List extends Component{
       page_size: 10,
       name: '',
       sort: ''
-    }
+    },
+    openView: false,
+    itemView: {}
   }
   changePageSize(){
     let value = event.target.value;
@@ -81,9 +113,19 @@ class List extends Component{
       this.setState({options: opt});
     }
   }
+  viewItemFull(item){
+    return ()=>{
+      this.props.openModal(true);
+      this.setState({itemView: item, openView: true});
+    }
+  }
+  toggleModal() {
+    this.props.openModal(!this.state.openView);
+    this.setState({openView: !this.state.openView})
+  }
   render(){
     const {listKH, paging, meta} = this.props;
-    const {options} = this.state;
+    const {options, itemView, openView} = this.state;
     return (
         <div className="mbv-grid container-fluid" style={{"zIndex": "9999983"}}>
           <div className="row">
@@ -103,7 +145,7 @@ class List extends Component{
                     <input type="search" className="form-control " placeholder="Search Name" onChange={::this.searchField} aria-controls="example" />
                   </label>
                 </div>
-                <table id="example" className="table display nowrap dataTable" style={{"zoom": "0.94"}} role="grid" aria-describedby="example_info" >
+                <table id="example" className="table display nowrap dataTable" role="grid" aria-describedby="example_info" >
                   <thead>
                     <THead meta={meta} sort={options.sort} sortFunc={::this.sortField} ></THead>
                   </thead>
@@ -113,11 +155,20 @@ class List extends Component{
                   <tbody>
                     {listKH && listKH.map((item, index) =>{
                       return(
-                        <TBody item={item} index={index} sort={options.sort} meta={meta} paging={paging} key={index}></TBody>
+                        <TBody item={item} index={index} sort={options.sort} meta={meta} paging={paging} key={index} view={::this.viewItemFull}></TBody>
                       )
                     })}
                   </tbody>
                 </table>
+                {openView?
+                  <Modal  modalStyle={customStyle.content}
+                  overlayStyle= {customStyle.overlay}
+                  close={::this.toggleModal}
+                  overlayClassName='modaldumb modalOverlay modalOverlay--after-open '
+                  modalClassName='dumb modalContent modalContent--after-open '
+                  >
+                    <ViewKH meta={meta} item={itemView} close={::this.toggleModal} ></ViewKH>
+                  </Modal> : null}
                 <div className="dataTables_info" id="example_info" role="status" aria-live="polite">Showing {paging && paging.page * paging.page_size+ 1} to {paging && paging.page * paging.page_size+ listKH.length} of {paging && paging.total} entries</div>
                 <Pagination load={::this.paginationLoad} paging={paging}></Pagination>
               </div>
