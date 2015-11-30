@@ -20,7 +20,7 @@ const customStyle = {
     top: '20px',
     left: '20%',
     // right: '40px',
-    bottom: '20px',
+    // bottom: '20px',
     border: '1px solid #ccc',
     background: '#fff',
     overflow: 'auto',

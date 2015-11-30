@@ -1,17 +1,19 @@
 import {
   OPEN_MODAL,
-  ClOSE_MODAL
+  CLOSE_MODAL
 } from './actionTypes';
 
 export function openModal(fag){
   if(fag){
     return {
       type: OPEN_MODAL
-    }
+    };
   }else{
     return {
-      type: ClOSE_MODAL
-    }
+      type: CLOSE_MODAL
+    };
   }
-
+  return {
+    type: CLOSE_MODAL
+  };
 }

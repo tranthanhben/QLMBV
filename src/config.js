@@ -10,7 +10,7 @@ module.exports = {
   production: {
     isProduction: true,
     port: process.env.PORT,
-    apiPort: process.env.API_PORT,
+    apiPort: 8100,
     app: {
       name: 'QLMBV (production)'
     }
