@@ -62,9 +62,17 @@ class Create extends Component{
         <hr/>
         <div className="row">
           <div className="col-md-12">
-            {fieldRender}
+            <div className="row">
+              <div className="col-md-6 boder-right">
+                {fieldRender}
+              </div>
+              <div className="col-md-6">
+                Huong dan hay note gi cung duoc
+              </div>
+            </div>
           </div>
         </div>
+        <br/>
         <hr/>
         <div className="row">
           <div className="col-md-6">

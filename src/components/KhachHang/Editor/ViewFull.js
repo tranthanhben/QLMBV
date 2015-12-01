@@ -35,20 +35,29 @@ export class ViewKH extends Component {
     let info = [];
     for(const key in meta){
       const field = meta[key];
-      info.push(<li key={field.name}><span>{field.label + ": "}</span>{item[key]|| ''}</li>);
+      info.push(
+        <div className="info-group" key={key}>
+          <div className="row">
+            <div className="col-md-3 align-right">
+              <span>{field.label + ": "}</span>
+            </div>
+            <div className="col-md-9">
+              <p className={field.up? 'uppercase':''}>{(item[key]||'') + ' ' + (field.unit||'')}</p>
+            </div>
+          </div>
+        </div>
+      );
     }
     return (
-      <div>
-        <h4>Khách Hàng</h4>
+      <div className="info">
+        <h3 className="info-header">Thông Tin Khách Hàng</h3>
         <hr/>
         <div className="row">
           <div className="col-md-12">
-            <ul>
-            {info}
-            </ul>
+           {info}
           </div>
         </div>
-        <hr/>
+            <hr/>
         <div className="row">
           <div className="col-md-6">
           </div>

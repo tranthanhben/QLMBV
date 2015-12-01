@@ -20,9 +20,9 @@ const customStyle = {
   },
   content: {
     position: 'absolute',
-    width: '60%',
+    width: '50%',
     top: '20px',
-    left: '20%',
+    left: '25%',
     // right: '40px',
     // bottom: '20px',
     border: '1px solid #ccc',

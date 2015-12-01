@@ -2,7 +2,7 @@ module.exports = {
   development: {
     isProduction: false,
     port: 3001,
-    apiPort: 3030,
+    apiPort: 8100,
     app: {
       name: 'QLMBV (development)'
     }
