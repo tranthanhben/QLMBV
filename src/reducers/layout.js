@@ -115,8 +115,7 @@ export default function layout(state = initialState, action = {}) {
         openmodal: false
       }
     default: return {
-      ...state,
-      openmodal: false
+      ...state
     };
   }
 }

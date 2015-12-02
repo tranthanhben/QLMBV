@@ -1,26 +1,47 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import * as khachhangActions from '../../actions/khachhang/khachhangActions';
-import{initObject, renderField, preprocess, setValue, checkRequire, preprocessPost} from '../../meta';
+import{initObject, renderField, preprocess, setValue, checkRequire, preprocessPost} from '../../../meta';
+import * as khachhangActions from '../../../actions/khachhang/khachhangActions';
 
 @connect(state =>({
-  meta: state.meta.khachhang,
   error: state.khachhang.postError,
-  message: state.khachhang.message
-}),{...khachhangActions})
-
-export default
-class Create extends Component{
+  message: state.khachhang.message,
+  item: state.khachhang.editItem
+}), {...khachhangActions})
+export default class EditKH extends Component {
   static propTypes = {
+    id: PropTypes.string,
+    item: PropTypes.object,
     meta: PropTypes.object,
     error: PropTypes.object,
     message: PropTypes.bool,
     postItem: PropTypes.func.isRequired,
+    getItem: PropTypes.func.isRequired,
     close: PropTypes.func.isRequired
   }
   state = {
-    item: initObject(preprocess(this.props.meta)) || {},
+    item: initObject(this.props.meta) || {},
     edited: false
+  }
+  componentWillMount() {
+    if(this.props.id){
+      this.props.getItem(this.props.id);
+    }else{
+      this.props.reset();
+    }
+  }
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.item){
+      this.setState({
+        item: nextProps.item,
+        edited: false
+      })
+    }else{
+      this.setState({
+        item: initObject(this.props.meta) || {},
+        edited: false
+      })
+    }
   }
   handleChange(){
     let obj = this.state.item;
@@ -42,6 +63,7 @@ class Create extends Component{
     }
   }
   onClose(){
+    console.log("close");
     if(this.state.edited){
       let cf = confirm("Bạn chưa lưu thay đổi, bạn có muốn Close không?");
       if(cf) {
@@ -52,13 +74,13 @@ class Create extends Component{
     }
   }
   render() {
-    const {error, meta, message} = this.props;
-    const metaPP = preprocess(meta);
     const {item, edited, submited} = this.state;
+    const {meta, error, message} = this.props;
+    const metaPP = preprocess(meta);
     const fieldRender = renderField(item, metaPP, this) || [];
     return (
       <div>
-        <h4>Khách Hàng Mới</h4>
+        <h4>Khách Hàng</h4>
         <hr/>
         <div className="row">
           <div className="col-md-12">
@@ -77,7 +99,7 @@ class Create extends Component{
         <div className="row">
           <div className="col-md-6">
           <button className='btn btn-success' onClick={::this.onSubmit} disabled={(edited? '':'disabled')}>
-          {"Tạo mới"}
+          {"Edit"}
           </button>
           {(message && !edited)? (message === true?
             <p className='help-block success'>
@@ -100,4 +122,3 @@ class Create extends Component{
     );
   }
 }
-

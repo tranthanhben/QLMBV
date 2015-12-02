@@ -7,6 +7,7 @@ import {Pagination} from '../table/pagination';
 import {isLoaded, loadList as loadKH} from '../../actions/khachhang/khachhangActions';
 import Modal from '../layout/Modal';
 import {ViewKH} from './Editor/ViewFull';
+import EditKH from './Editor/EditKH';
 
 const customStyle = {
   overlay: {
@@ -69,7 +70,9 @@ class List extends Component{
       sort: ''
     },
     openView: false,
-    itemView: {}
+    openEdit: false,
+    itemView: {},
+    idEdit: ''
   }
   changePageSize(){
     let value = event.target.value;
@@ -119,13 +122,23 @@ class List extends Component{
       this.setState({itemView: item, openView: true});
     }
   }
-  toggleModal() {
+  viewModal() {
     this.props.openModal(!this.state.openView);
     this.setState({openView: !this.state.openView})
   }
+  editItem(id){
+    return ()=>{
+      this.props.openModal(true);
+      this.setState({idEdit: id, openEdit: true});
+    }
+  }
+  editModal() {
+    this.props.openModal(!this.state.openEdit);
+    this.setState({openEdit: !this.state.openEdit})
+  }
   render(){
     const {listKH, paging, meta} = this.props;
-    const {options, itemView, openView} = this.state;
+    const {options, itemView, openView, openEdit, idEdit} = this.state;
     return (
         <div className="mbv-grid container-fluid" style={{"zIndex": "9999983"}}>
           <div className="row">
@@ -155,7 +168,7 @@ class List extends Component{
                   <tbody>
                     {listKH && listKH.map((item, index) =>{
                       return(
-                        <TBody item={item} index={index} sort={options.sort} meta={meta} paging={paging} key={index} view={::this.viewItemFull}></TBody>
+                        <TBody item={item} index={index} sort={options.sort} meta={meta} paging={paging} key={index} view={::this.viewItemFull} edit={::this.editItem}></TBody>
                       )
                     })}
                   </tbody>
@@ -163,11 +176,20 @@ class List extends Component{
                 {openView?
                   <Modal  modalStyle={customStyle.content}
                   overlayStyle= {customStyle.overlay}
-                  close={::this.toggleModal}
+                  close={::this.viewModal}
                   overlayClassName='modaldumb modalOverlay modalOverlay--after-open '
                   modalClassName='dumb modalContent modalContent--after-open '
                   >
-                    <ViewKH meta={meta} item={itemView} close={::this.toggleModal} ></ViewKH>
+                    <ViewKH meta={meta} item={itemView} close={::this.viewModal} ></ViewKH>
+                  </Modal> : null}
+                  {openEdit?
+                  <Modal  modalStyle={customStyle.content}
+                  overlayStyle= {customStyle.overlay}
+                  close={::this.editModal}
+                  overlayClassName='modaldumb modalOverlay modalOverlay--after-open '
+                  modalClassName='dumb modalContent modalContent--after-open '
+                  >
+                    <EditKH meta={meta} id={idEdit} close={::this.editModal} ></EditKH>
                   </Modal> : null}
                 <div className="dataTables_info" id="example_info" role="status" aria-live="polite">Showing {paging && paging.page * paging.page_size+ 1} to {paging && paging.page * paging.page_size+ listKH.length} of {paging && paging.total} entries</div>
                 <Pagination load={::this.paginationLoad} paging={paging}></Pagination>

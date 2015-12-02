@@ -13,7 +13,4 @@ export function openModal(fag){
       type: CLOSE_MODAL
     };
   }
-  return {
-    type: CLOSE_MODAL
-  };
 }

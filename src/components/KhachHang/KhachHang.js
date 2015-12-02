@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import Modal from '../layout/Modal';
-import Create from './EditorKH';
+import Create from './Editor/Create';
 import * as layoutActions from '../../actions/layoutActions';
 
 const customStyle = {
@@ -51,6 +51,7 @@ export default class KhachHang extends Component{
   }
   render() {
     const {menuparse, openmodal} = this.props;
+    console.log("openmodal", openmodal);
     return <div className='inner '>
         <nav id="nav-header" className="navbar navbar-default navbar-fixed-top" style={{"zIndex":(openmodal? '-2':'0')}}>
           <div className="container-fluid mbv-nav">

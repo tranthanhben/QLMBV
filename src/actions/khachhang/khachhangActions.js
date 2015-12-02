@@ -20,12 +20,23 @@ import {
   KH_DELETE_SUCCESS,
   KH_DELETE_FAIL,
 
+  KH_GET,
+  KH_GET_SUCCESS,
+  KH_GET_FAIL,
+
   KH_RESET
 } from '../actionTypes';
 
 export function loadItem(id){
   return {
     types: [KH_ONE_LOAD, KH_ONE_LOAD_SUCCESS, KH_ONE_LOAD_FAIL],
+    promise: (client) => client.get('/khach_hang/'+id)
+  };
+}
+
+export function getItem(id){
+  return {
+    types: [KH_GET, KH_GET_SUCCESS, KH_GET_FAIL],
     promise: (client) => client.get('/khach_hang/'+id)
   };
 }

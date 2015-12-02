@@ -70,10 +70,11 @@ export class TBody extends Component {
     meta: PropTypes.object,
     sort: PropTypes.string,
     item: PropTypes.object,
-    view: PropTypes.func.isRequired
+    view: PropTypes.func.isRequired,
+    edit: PropTypes.func.isRequired
   }
   render(){
-    const {meta, sort, item, index, paging, view} = this.props;
+    const {meta, sort, item, index, paging, view, edit} = this.props;
     let trList = [];
     for(let key in meta){
       let classField = '';
@@ -120,7 +121,7 @@ export class TBody extends Component {
           <button className="btn btn-warning btn-table" title="View full" onClick={view?  view(item): function(){}}>
             <i className="fa fa-eye"/>
           </button>
-          <button className="btn btn-success btn-table" title="Edit" >
+          <button className="btn btn-success btn-table" title="Edit" onClick={edit?  edit(item.id): function(){}}>
             <i className='fa fa-pencil fa-fw'/>
           </button>
         </td>

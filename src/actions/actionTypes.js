@@ -39,6 +39,10 @@ export const KH_DELETE = "KH_DELETE";
 export const KH_DELETE_SUCCESS = "KH_DELETE_SUCCESS";
 export const KH_DELETE_FAIL = "KH_DELETE_FAIL";
 
+export const KH_GET = "KH_GET";
+export const KH_GET_SUCCESS = "KH_GET_SUCCESS";
+export const KH_GET_FAIL = "KH_GET_FAIL";
+
 export const KH_RESET = "KH_RESET";
 
 // NHA CUNG CAP

@@ -19,6 +19,10 @@ import {
   KH_DELETE_SUCCESS,
   KH_DELETE_FAIL,
 
+  KH_GET,
+  KH_GET_SUCCESS,
+  KH_GET_FAIL,
+
   KH_RESET
 } from 'actions/actionTypes';
 
@@ -127,6 +131,24 @@ export default function khachhang(state = initialState, action = {}){
         ...state,
         loadingOne: false,
         item: null,
+        error: action.error
+      };
+    case KH_GET:
+      return {
+        ...state,
+        getding: true
+      };
+    case KH_GET_SUCCESS:
+      return {
+        ...state,
+        getding: false,
+        editItem: action.result
+      };
+    case KH_GET_FAIL:
+      return {
+        ...state,
+        getding: false,
+        editItem: {},
         error: action.error
       };
 
