@@ -20,12 +20,22 @@ import {
   KHO_DELETE_SUCCESS,
   KHO_DELETE_FAIL,
 
+  KHO_GET,
+  KHO_GET_SUCCESS,
+  KHO_GET_FAIL,
+
   KHO_RESET
 } from './actionTypes';
 
 export function loadItem(id){
   return {
     types: [KHO_ONE_LOAD, KHO_ONE_LOAD_SUCCESS, KHO_ONE_LOAD_FAIL],
+    promise: (client) => client.get('/kho/'+id)
+  };
+}
+export function getItem(id){
+  return {
+    types: [KHO_GET, KHO_GET_SUCCESS, KHO_GET_FAIL],
     promise: (client) => client.get('/kho/'+id)
   };
 }
@@ -51,10 +61,10 @@ export function loadList(options = {}){
 }
 
 export function postItem(data){
-  if(data.id){
+  if(data.kid){
     return {
       types: [KHO_PUT, KHO_PUT_SUCCESS, KHO_PUT_FAIL],
-      promise: (client) => client.put(`/kho/${data.id}`, {
+      promise: (client) => client.put(`/kho/${data.kid}`, {
         data: JSON.stringify(data)
       })
     };

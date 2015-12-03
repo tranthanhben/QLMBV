@@ -69,13 +69,9 @@ const initialState = {
       icon: 'database'
     }],
     [{
-      label: 'Profile',
-      href: '/profile',
-      icon: 'user'
-    }, {
       label: 'Nhân Viên',
       href: '/nhanvien',
-      icon: 'group'
+      icon: 'user'
     }, {
       label: 'Logout',
       href: '/logout',

@@ -4,6 +4,9 @@ import {changeDTI} from './changeTime';
 export default function initObject(meta) {
   let newObj = {};
   for (var key in meta) {
+    if (meta[key].type ==="special" || meta[key].field === false){
+      continue;
+    }
     switch (meta[key].type) {
     case 'bool':
       newObj[key] = false;

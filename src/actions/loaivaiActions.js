@@ -20,12 +20,23 @@ import {
   LV_DELETE_SUCCESS,
   LV_DELETE_FAIL,
 
+  LV_GET,
+  LV_GET_SUCCESS,
+  LV_GET_FAIL,
+
   LV_RESET
 } from './actionTypes';
 
 export function loadItem(id){
   return {
     types: [LV_ONE_LOAD, LV_ONE_LOAD_SUCCESS, LV_ONE_LOAD_FAIL],
+    promise: (client) => client.get('/loai_vai/'+id)
+  };
+}
+
+export function getItem(id){
+  return {
+    types: [LV_GET, LV_GET_SUCCESS, LV_GET_FAIL],
     promise: (client) => client.get('/loai_vai/'+id)
   };
 }

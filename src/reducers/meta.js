@@ -5,7 +5,7 @@ const initialState = {
       label: "KHID",
       sort: true,
       up: true,
-      type: "single",
+      type: "special",
       field: false
     },
     "tenkh": {
@@ -40,8 +40,8 @@ const initialState = {
       required: false,
       field: true
     },
-    "sotk": {
-      name: "sotk",
+    "sotknh": {
+      name: "sotknh",
       label: "Số TK",
       sort: false,
       type: "single",
@@ -65,7 +65,7 @@ const initialState = {
       label: "NCCID",
       sort: true,
       up: true,
-      type: "single"
+      type: "special"
     },
     "tenncc": {
       name: "tenncc",
@@ -99,8 +99,8 @@ const initialState = {
       required: false,
       field: true
     },
-    "sotk": {
-      name: "sotk",
+    "sotknh": {
+      name: "sotknh",
       label: "Số TK",
       sort: false,
       type: "single",
@@ -200,14 +200,14 @@ const initialState = {
       label: "PBID",
       sort: true,
       up: true,
-      type: "",
+      type: "special",
       field: false
     },
     "tenpb": {
       name: "tenpb",
       label: "Tên Phòng Ban",
       sort: true,
-      type: "",
+      type: "single",
       required: true,
       field: true
     },
@@ -226,7 +226,7 @@ const initialState = {
       label: "KID",
       sort: true,
       up: true,
-      type: "single",
+      type: "special",
       field: false
     },
     "tenk": {

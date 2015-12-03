@@ -62,12 +62,15 @@ export default class KhachHang extends Component{
               </div>
               <div className="view-tabs col-xs-3 col-sm-8">
                 <ul className="nav-main pull-right">
-                  <li onClick={::this.toggleModal}>
-                  <a >
-                  <span key="icoen" className={'glyphicon glyphicon-user'}></span>
-                  {" KH Moi"}</a>
+                  <li >
+                    <a ><span key="icoen" className={'glyphicon glyphicon-new'}></span>{" Tao PXH"}</a>
                   </li>
-
+                  <li >
+                    <a ><span key="icoen" className={'glyphicon glyphicon-new'}></span>{" Tao PMH"}</a>
+                  </li>
+                  <li onClick={::this.toggleModal}>
+                    <a ><span key="icoen" className={'glyphicon glyphicon-user'}></span>{" KH Moi"}</a>
+                  </li>
                 </ul>
               </div>
             </div>

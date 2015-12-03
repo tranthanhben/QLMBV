@@ -23,7 +23,7 @@ export default class EditKH extends Component {
     item: initObject(this.props.meta) || {},
     edited: false
   }
-  componentWillMount() {
+  componentDidMount() {
     if(this.props.id){
       this.props.getItem(this.props.id);
     }else{
@@ -78,6 +78,7 @@ export default class EditKH extends Component {
     const {meta, error, message} = this.props;
     const metaPP = preprocess(meta);
     const fieldRender = renderField(item, metaPP, this) || [];
+    console.log(item);
     return (
       <div>
         <h4>Khách Hàng</h4>

@@ -20,12 +20,22 @@ import {
   NV_DELETE_SUCCESS,
   NV_DELETE_FAIL,
 
+  NV_GET,
+  NV_GET_SUCCESS,
+  NV_GET_FAIL,
+
   NV_RESET
 } from './actionTypes';
 
 export function loadItem(id){
   return {
     types: [NV_ONE_LOAD, NV_ONE_LOAD_SUCCESS, NV_ONE_LOAD_FAIL],
+    promise: (client) => client.get('/nhan_vien/'+id)
+  };
+}
+export function getItem(id){
+  return {
+    types: [NV_GET, NV_GET_SUCCESS, NV_GET_FAIL],
     promise: (client) => client.get('/nhan_vien/'+id)
   };
 }
@@ -52,10 +62,10 @@ export function loadList(options = {}){
 }
 
 export function postItem(data){
-  if(data.id){
+  if(data.nvid){
     return {
       types: [NV_PUT, NV_PUT_SUCCESS, NV_PUT_FAIL],
-      promise: (client) => client.put(`/nhan_vien/${data.id}`, {
+      promise: (client) => client.put(`/nhan_vien/${data.nvid}`, {
         data: JSON.stringify(data)
       })
     };

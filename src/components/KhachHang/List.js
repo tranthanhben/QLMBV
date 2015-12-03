@@ -134,7 +134,7 @@ class List extends Component{
   }
   editModal() {
     this.props.openModal(!this.state.openEdit);
-    this.setState({openEdit: !this.state.openEdit})
+    this.setState({openEdit: !this.state.openEdit, openView: false})
   }
   render(){
     const {listKH, paging, meta} = this.props;
@@ -180,7 +180,7 @@ class List extends Component{
                   overlayClassName='modaldumb modalOverlay modalOverlay--after-open '
                   modalClassName='dumb modalContent modalContent--after-open '
                   >
-                    <ViewKH meta={meta} item={itemView} close={::this.viewModal} ></ViewKH>
+                    <ViewKH meta={meta} item={itemView} close={::this.viewModal} edit={::this.editModal}></ViewKH>
                   </Modal> : null}
                   {openEdit?
                   <Modal  modalStyle={customStyle.content}
