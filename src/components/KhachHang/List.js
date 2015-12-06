@@ -8,33 +8,9 @@ import {isLoaded, loadList as loadKH} from '../../actions/khachhang/khachhangAct
 import Modal from '../layout/Modal';
 import {ViewKH} from './Editor/ViewFull';
 import EditKH from './Editor/EditKH';
+import {Style} from '../Style';
 
-const customStyle = {
-  overlay: {
-    position: 'fixed',
-    width: '100%',
-    height: '100%',
-    top: 0,
-    left: 0,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    overflowY:'auto'
-  },
-  content: {
-    position: 'absolute',
-    width: '50%',
-    top: '20px',
-    left: '25%',
-    // right: '40px',
-    // bottom: '20px',
-    border: '1px solid #ccc',
-    background: '#fff',
-    overflow: 'auto',
-    WebkitOverflowScrolling: 'touch',
-    borderRadius: '4px',
-    outline: 'none',
-    padding: '10px 20px'
-  }
-}
+
 @connect(
   state =>({
     listKH: state.khachhang.list,
@@ -67,7 +43,7 @@ class List extends Component{
     options :{
       page_size: 10,
       name: '',
-      sort: ''
+      sort: 'id'
     },
     openView: false,
     openEdit: false,
@@ -129,12 +105,12 @@ class List extends Component{
   editItem(id){
     return ()=>{
       this.props.openModal(true);
-      this.setState({idEdit: id, openEdit: true});
+      this.setState({idEdit: id, openEdit: true, openView: false});
     }
   }
   editModal() {
     this.props.openModal(!this.state.openEdit);
-    this.setState({openEdit: !this.state.openEdit, openView: false})
+    this.setState({openEdit: !this.state.openEdit})
   }
   render(){
     const {listKH, paging, meta} = this.props;
@@ -174,17 +150,17 @@ class List extends Component{
                   </tbody>
                 </table>
                 {openView?
-                  <Modal  modalStyle={customStyle.content}
-                  overlayStyle= {customStyle.overlay}
+                  <Modal  modalStyle={Style.content_50}
+                  overlayStyle= {Style.overlay}
                   close={::this.viewModal}
                   overlayClassName='modaldumb modalOverlay modalOverlay--after-open '
                   modalClassName='dumb modalContent modalContent--after-open '
                   >
-                    <ViewKH meta={meta} item={itemView} close={::this.viewModal} edit={::this.editModal}></ViewKH>
+                    <ViewKH meta={meta} item={itemView} close={::this.viewModal} edit={::this.editItem}></ViewKH>
                   </Modal> : null}
                   {openEdit?
-                  <Modal  modalStyle={customStyle.content}
-                  overlayStyle= {customStyle.overlay}
+                  <Modal  modalStyle={Style.content_50}
+                  overlayStyle= {Style.overlay}
                   close={::this.editModal}
                   overlayClassName='modaldumb modalOverlay modalOverlay--after-open '
                   modalClassName='dumb modalContent modalContent--after-open '

@@ -11,7 +11,7 @@ export default class SanPham extends Component{
     menuparse : PropTypes.object
   }
   state = {
-    viewfor: "lohang"
+    viewfor: "loaivai"
   }
   static fetchData(store){
     if(!isLoaded(store.getState)){

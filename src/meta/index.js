@@ -6,6 +6,7 @@ export {validateEmail} from './validate';
 export {setValue, setValueLogin, setObjValue} from './setValue';
 export {default as initObject} from './initObject';
 export {default as renderField} from './renderField';
+export {default as renderInfo} from './renderInfo';
 export {preprocess, preprocessPost} from './preprocess';
 export {default as checkRequire} from './checkRequire';
 export {default as makeQuery} from './makeQuery';

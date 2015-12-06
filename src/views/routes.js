@@ -11,7 +11,8 @@ import {
   NhaCungCap,
   ThongKe,
   SanPham,
-  NhanVien
+  NhanVien,
+  Kho
 } from 'components';
 import {
   ListKH,
@@ -43,14 +44,11 @@ export default (
         <Route path="/pnh" name="pnh nha cung cap" component={PNH}/>
         <Route path="/hdncc" name="hdncc nha cung cap" component={HDNCC}/>
       </Route>
-      <Route path="/nhanvien" name="nhanvien" component={NhanVien}>
-      </Route>
-      <Route path="/sanpham" name="sanpham" component={SanPham}>
-      </Route>
-
+      <Route path="/nhanvien" name="nhanvien" component={NhanVien} />
+      <Route path="/sanpham" name="sanpham" component={SanPham} />
+      <Route path="/kho" name="kho" component={Kho} />
       <Route path="/thongke" name="thongke" component={ThongKe}/>
     </Route>
-
     <Route path="/login" name="login" component={Login}/>
     <Route path="*" component={NotFound}/>
   </Route>

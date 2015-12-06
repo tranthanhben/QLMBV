@@ -8,7 +8,6 @@ import{initObject, renderField, preprocess, setValue, checkRequire, preprocessPo
   error: state.khachhang.postError,
   message: state.khachhang.message
 }),{...khachhangActions})
-
 export default
 class Create extends Component{
   static propTypes = {
@@ -56,6 +55,7 @@ class Create extends Component{
     const metaPP = preprocess(meta);
     const {item, edited, submited} = this.state;
     const fieldRender = renderField(item, metaPP, this) || [];
+    console.log("item", item);
     return (
       <div>
         <h4>Khách Hàng Mới</h4>

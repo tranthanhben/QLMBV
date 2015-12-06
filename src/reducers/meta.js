@@ -1,16 +1,17 @@
 const initialState = {
   khachhang: {
-    "khid": {
+    "id": {
       name: "id",
       label: "KHID",
       sort: true,
       up: true,
       type: "special",
+      disabled: true,
       field: false
     },
-    "tenkh": {
-      name: "tenkh",
-      label: "Khách Hàng",
+    "ten": {
+      name: "ten",
+      label: "Tên Khách Hàng",
       sort: true,
       type: "single",
       required: true,
@@ -38,10 +39,11 @@ const initialState = {
       sort: false,
       type: "single",
       required: false,
-      field: true
+      field: true,
+      view: false
     },
-    "sotknh": {
-      name: "sotknh",
+    "sotk": {
+      name: "sotk",
       label: "Số TK",
       sort: false,
       type: "single",
@@ -51,25 +53,64 @@ const initialState = {
     },
     "tennh": {
       name: "tennh",
-      label: "Ngân Hàng",
+      label: "Tên Ngân Hàng",
       sort: false,
       type: "single",
       required: false,
       field: true,
       view: false
+    },
+    "ngaytao": {
+      name: "ngaytao",
+      label: "Ngày Tạo",
+      sort: true,
+      type: "date",
+      required: false,
+      field: false,
+      view: true
+    },
+    "tongtien": {
+      name: "tongtien",
+      label: "Tổng Giao Dịch",
+      sort: false,
+      type: "number",
+      required: false,
+      disabled: true,
+      field: false,
+      view: false
+    },
+    "thanhtoan": {
+      name: "thanhtoan",
+      label: "Đã Thanh Toán",
+      sort: false,
+      type: "number",
+      required: false,
+      disabled: true,
+      field: false,
+      view: false
+    },
+    "congno": {
+      name: "congno",
+      label: "Còn Nợ",
+      sort: false,
+      type: "number",
+      required: false,
+      disabled: true,
+      field: false,
+      view: false
     }
   },
   nhacungcap: {
-    "nccid": {
+    "id": {
       name: "id",
       label: "NCCID",
       sort: true,
       up: true,
       type: "special"
     },
-    "tenncc": {
-      name: "tenncc",
-      label: "Nhà Cung Cấp",
+    "ten": {
+      name: "ten",
+      label: "Tên Nhà Cung Cấp",
       sort: true,
       type: "single",
       required: true,
@@ -97,10 +138,11 @@ const initialState = {
       sort: false,
       type: "single",
       required: false,
-      field: true
+      field: true,
+      view: false
     },
-    "sotknh": {
-      name: "sotknh",
+    "sotk": {
+      name: "sotk",
       label: "Số TK",
       sort: false,
       type: "single",
@@ -110,7 +152,7 @@ const initialState = {
     },
     "tennh": {
       name: "tennh",
-      label: "Ngân Hàng",
+      label: "Tên Ngân Hàng",
       sort: false,
       type: "single",
       required: false,
@@ -119,7 +161,7 @@ const initialState = {
     }
   },
   nhanvien: {
-    "nvid": {
+    "id": {
       name: "id",
       label: "NVID",
       sort: true,
@@ -127,8 +169,8 @@ const initialState = {
       type: "single",
       field: false
     },
-    "tennv": {
-      name: "tennv",
+    "ten": {
+      name: "ten",
       label: "Tên Nhân Viên",
       sort: true,
       type: "single",
@@ -203,8 +245,8 @@ const initialState = {
       type: "special",
       field: false
     },
-    "tenpb": {
-      name: "tenpb",
+    "ten": {
+      name: "ten",
       label: "Tên Phòng Ban",
       sort: true,
       type: "single",
@@ -229,8 +271,8 @@ const initialState = {
       type: "special",
       field: false
     },
-    "tenk": {
-      name: "tenk",
+    "ten": {
+      name: "ten",
       label: "Tên Kho",
       sort: true,
       type: "single",
@@ -270,8 +312,8 @@ const initialState = {
       type: "single",
       field: false
     },
-    "tenlv": {
-      name: "tenlv",
+    "ten": {
+      name: "ten",
       label: "Loại Vải",
       sort: true,
       type: "single",

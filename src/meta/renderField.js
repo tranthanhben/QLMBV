@@ -1,14 +1,14 @@
 import React from 'react';
 
-export default function renderField(obj, meta, fn) {
+export default function renderField(obj, meta, fn, flag) {
   let fieldEvent = [];
   for (let key in meta) {
     let field = meta[key];
-    if (field.type !== "array" && field.field !== false)
+    if (field.type !== "array" && (field.field !== false && field.type !== "special" || flag))
       fieldEvent.push(
         <div className='form-group' key={key}>
           <label>
-            <span>
+            <span className={field.disabled? 'field-disabled':''}>
               {field.label}
             </span>
             &nbsp;

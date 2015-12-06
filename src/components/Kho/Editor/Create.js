@@ -1,47 +1,25 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
+import * as khoActions from '../../../actions/khoActions';
 import{initObject, renderField, preprocess, setValue, checkRequire, preprocessPost} from '../../../meta';
-import * as khachhangActions from '../../../actions/khachhang/khachhangActions';
 
 @connect(state =>({
-  error: state.khachhang.postError,
-  message: state.khachhang.message,
-  item: state.khachhang.editItem
-}), {...khachhangActions})
-export default class EditKH extends Component {
+  meta: state.meta.kho,
+  error: state.kho.postError,
+  message: state.kho.message
+}),{...khoActions})
+export default
+class Create extends Component{
   static propTypes = {
-    id: PropTypes.string,
-    item: PropTypes.object,
     meta: PropTypes.object,
     error: PropTypes.object,
     message: PropTypes.bool,
     postItem: PropTypes.func.isRequired,
-    getItem: PropTypes.func.isRequired,
     close: PropTypes.func.isRequired
   }
   state = {
-    item: initObject(this.props.meta) || {},
+    item: initObject(preprocess(this.props.meta)) || {},
     edited: false
-  }
-  componentWillMount() {
-    if(this.props.id){
-      this.props.getItem(this.props.id);
-    }else{
-      this.props.reset();
-    }
-  }
-  componentWillReceiveProps(nextProps) {
-    if(nextProps.item){
-      this.setState({
-        item: nextProps.item,
-        edited: false
-      })
-    }else{
-      this.setState({
-        item: initObject(this.props.meta) || {},
-        edited: false
-      })
-    }
   }
   handleChange(){
     let obj = this.state.item;
@@ -73,25 +51,13 @@ export default class EditKH extends Component {
     }
   }
   render() {
-    const {item, edited, submited} = this.state;
-    const {meta, error, message} = this.props;
+    const {error, meta, message} = this.props;
     const metaPP = preprocess(meta);
-    const fieldRender = renderField(item, metaPP, this, true) || [];
+    const {item, edited, submited} = this.state;
+    const fieldRender = renderField(item, metaPP, this) || [];
     return (
       <div>
-        <div className="row">
-          <div className="col-md-4">
-            <h4>Khách Hàng</h4>
-          </div>
-          <div className="col-md-8 flex-right">
-          {submited ? <p className='help-block required'>
-              {checkRequire(metaPP, item)}&nbsp;&nbsp;
-            </p>:null}
-          <button className='btn btn-warning' onClick={::this.onSubmit} disabled={(edited? '':'disabled')}>
-          {"Sửa"}
-          </button>
-          </div>
-        </div>
+        <h4>Nha Cung Cap Moi</h4>
         <hr/>
         <div className="row">
           <div className="col-md-12">
@@ -100,7 +66,8 @@ export default class EditKH extends Component {
                 {fieldRender}
               </div>
               <div className="col-md-6">
-                Huong dan hay note gi cung duoc
+                Huong dan
+                Note
               </div>
             </div>
           </div>
@@ -109,15 +76,15 @@ export default class EditKH extends Component {
         <hr/>
         <div className="row">
           <div className="col-md-6">
-          <button className='btn btn-warning' onClick={::this.onSubmit} disabled={(edited? '':'disabled')}>
-          {"Sửa"}
+          <button className='btn btn-success' onClick={::this.onSubmit} disabled={(edited? '':'disabled')}>
+          {"Tạo mới"}
           </button>
           {(message && !edited)? (message === true?
             <p className='help-block success'>
-            {"Cập nhật thành công!!"}
+            {"Submit Success!"}
             </p>:
             <p className='help-block required'>
-            {"Cập nhật thất bại!"}
+            {"Submit Fail!"}
             </p>
             ):null}
           {submited ? <p className='help-block required'>
@@ -126,10 +93,11 @@ export default class EditKH extends Component {
 
           </div>
           <div className="col-md-6">
-            <button className ='btn  pull-right' onClick={::this.onClose}>Đóng</button>
+            <button className ='btn  pull-right' onClick={::this.onClose}>Close</button>
           </div>
         </div>
       </div>
     );
   }
 }
+

@@ -45,11 +45,11 @@ const initialState = {
       },{
         label: 'Phiếu Đặt Hàng',
         href: '/nhacungcap/pdh',
-        icon: 'shopping-cart'
+        icon: 'shopping-cart fa-flip-horizontal'
       },{
         label: 'Phiếu Nhập Hàng',
         href: '/nhacungcap/pnh',
-        icon: 'truck'
+        icon: 'truck fa-flip-horizontal'
       },{
         label: 'Hóa Đơn',
         href: '/nhacungcap/hdncc',
@@ -73,7 +73,7 @@ const initialState = {
       href: '/nhanvien',
       icon: 'user'
     }, {
-      label: 'Logout',
+      label: 'Đăng xuất',
       href: '/logout',
       icon: 'log-out'
     }]

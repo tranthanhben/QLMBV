@@ -11,9 +11,9 @@ export default class Redirect extends Component {
     user: PropTypes.object
   }
   static fetchData(store){
-    if(!isLoaded(store.getState())){
-      return store.dispatch(loadMe());
-    }
+    // if(!isLoaded(store.getState())){
+    //   return store.dispatch(loadMe());
+    // }
   }
   componentDidMount(){
     // if(!this.props.user){

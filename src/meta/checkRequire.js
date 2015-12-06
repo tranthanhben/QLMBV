@@ -4,7 +4,7 @@ export default function checkRequire(meta, item) {
       continue;
     let metaField = meta[field];
     if (metaField.required && !item[field]) {
-      return 'Require: ' + metaField.label;
+      return 'Vui lòng nhập: ' + metaField.label;
     }
   }
   return '';

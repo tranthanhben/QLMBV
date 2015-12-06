@@ -66,6 +66,10 @@ export const NCC_DELETE = "NCC_DELETE";
 export const NCC_DELETE_SUCCESS = "NCC_DELETE_SUCCESS";
 export const NCC_DELETE_FAIL = "NCC_DELETE_FAIL";
 
+export const NCC_GET = "NCC_GET";
+export const NCC_GET_SUCCESS = "NCC_GET_SUCCESS";
+export const NCC_GET_FAIL = "NCC_GET_FAIL";
+
 export const NCC_RESET = "NCC_RESET";
 
 // NHAN VIEN
@@ -88,6 +92,10 @@ export const NV_PUT_FAIL = "NV_PUT_FAIL";
 export const NV_DELETE = "NV_DELETE";
 export const NV_DELETE_SUCCESS = "NV_DELETE_SUCCESS";
 export const NV_DELETE_FAIL = "NV_DELETE_FAIL";
+
+export const NV_GET = "NV_GET";
+export const NV_GET_SUCCESS = "NV_GET_SUCCESS";
+export const NV_GET_FAIL = "NV_GET_FAIL";
 
 export const NV_RESET = "NV_RESET";
 
@@ -112,6 +120,10 @@ export const KHO_DELETE = "KHO_DELETE";
 export const KHO_DELETE_SUCCESS = "KHO_DELETE_SUCCESS";
 export const KHO_DELETE_FAIL = "KHO_DELETE_FAIL";
 
+export const KHO_GET = "KHO_GET";
+export const KHO_GET_SUCCESS = "KHO_GET_SUCCESS";
+export const KHO_GET_FAIL = "KHO_GET_FAIL";
+
 export const KHO_RESET = "KHO_RESET";
 
 // LOAI VAI
@@ -134,6 +146,10 @@ export const LV_PUT_FAIL = "LV_PUT_FAIL";
 export const LV_DELETE = "LV_DELETE";
 export const LV_DELETE_SUCCESS = "LV_DELETE_SUCCESS";
 export const LV_DELETE_FAIL = "LV_DELETE_FAIL";
+
+export const LV_GET = "LV_GET";
+export const LV_GET_SUCCESS = "LV_GET_SUCCESS";
+export const LV_GET_FAIL = "LV_GET_FAIL";
 
 export const LV_RESET = "LV_RESET";
 

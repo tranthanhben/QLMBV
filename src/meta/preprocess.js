@@ -24,6 +24,7 @@ inputs.default = function (field) {
     let address = addr ? addr + field.name : field.name;
     return (
       <input className='form-control'
+        disabled={field.disabled}
         data-addr={address}
         onChange={::fn.handleChange}
         placeholder={field.label}
@@ -37,7 +38,9 @@ inputs.date = function (field) {
     let address = addr ? addr + field.name : field.name;
     let value = changeDTI(datetime(new Date(scope[field.name])))
     return (
-      <input className='form-control' type='date'
+      <input className='form-control'
+        disabled={field.disabled}
+        type='date'
         data-addr={address}
         data-test={changeDTI(scope[field.name])}
         onChange={::fn.handleChange}
@@ -51,6 +54,7 @@ inputs.image = function (field) {
     let address = addr ? addr + field.name : field.name;
     return (
       <input className='form-control'
+        disabled={field.disabled}
         data-addr={address}
         onChange={::fn.handleChange}
         placeholder={field.label}
@@ -64,10 +68,11 @@ inputs.number = function (field) {
     let address = addr ? addr + field.name : field.name;
     return (
       <input className='form-control' step='1' type='number'
+        disabled={field.disabled}
         data-addr={address}
         onChange={::fn.handleChange}
         placeholder={field.label}
-        value={scope[field.name] || ''}/>
+        value={scope[field.name]===0? scope[field.name]:(scope[field.name]|| '')}/>
     );
   };
 };
@@ -76,6 +81,7 @@ inputs.single = function (field) {
     let address = addr ? addr + field.name : field.name;
     return (
       <input className='form-control'
+        disabled={field.disabled}
         data-addr={address}
         onChange={::fn.handleChange}
         placeholder={field.label}
@@ -88,6 +94,7 @@ inputs.multiline = function (field) {
     let address = addr ? addr + field.name : field.name;
     return (
       <textarea className='form-control' type='text'
+        disabled={field.disabled}
         data-addr={address}
         onChange={::fn.handleChange}
         placeholder={field.label}
@@ -115,6 +122,7 @@ inputs.bool = function (field) {
     return (
       <div className='input-checkbox'>
         <input type='checkbox'
+          disabled={field.disabled}
           checked={scope[field.name] === true ? 'checked' : ''}
           data-addr={address}
           onChange={::fn.handleChange}/>
@@ -242,6 +250,9 @@ export function preprocess(fields) {
 export function preprocessPost(object, meta){
   for (let i in meta) {
     let field = meta[i];
+    if(field.field === false){
+      continue;
+    }
     if (!!field.children && field.type === "object")
       object[i] = parseNumber(object[i], field.children);
     if (field.type === "number"){

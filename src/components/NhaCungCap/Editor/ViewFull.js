@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {renderInfo } from '../../../meta';
 
-export class ViewKH extends Component {
+export class ViewNCC extends Component {
   static propTypes = {
     meta: PropTypes.object,
     item: PropTypes.object,
@@ -17,11 +17,11 @@ export class ViewKH extends Component {
       info.push(
         <div className="info-group" key={key}>
           <div className="row">
-            <div className="col-md-4 align-right">
+            <div className="col-md-3 align-right">
               <span>{field.label + ": "}</span>
             </div>
-            <div className="col-md-8">
-              <p className={field.up? 'uppercase':''}>{(item[key] === 0 ? item[key]:(item[key]||'')) + ' ' + (field.unit||'')}</p>
+            <div className="col-md-9">
+              <p className={field.up? 'uppercase':''}>{(item[key]||'') + ' ' + (field.unit||'')}</p>
             </div>
           </div>
         </div>
@@ -39,7 +39,7 @@ export class ViewKH extends Component {
             <hr/>
         <div className="row">
           <div className="col-md-6">
-          <button className ='btn  btn-warning' onClick={::this.props.edit(item.id)}>Edit</button>
+          <button className ='btn  btn-warning' onClick={::this.props.edit(item.nccid)}>Edit</button>
           </div>
           <div className="col-md-6">
             <button className ='btn  pull-right' onClick={()=>this.props.close()}>Close</button>
@@ -49,7 +49,7 @@ export class ViewKH extends Component {
   }
 }
 
-export class ViewPMH extends Component {
+export class ViewPDH extends Component {
   static propTypes = {
     meta: PropTypes.object,
     item: PropTypes.object,
@@ -71,7 +71,7 @@ export class ViewPMH extends Component {
             <hr/>
         <div className="row">
           <div className="col-md-6">
-          <button className ='btn  btn-warning' onClick={()=>this.props.edit(item.id)}>Edit</button>
+          <button className ='btn  btn-warning' onClick={()=>this.props.edit(item.nccid)}>Edit</button>
           </div>
           <div className="col-md-6">
             <button className ='btn  pull-right' onClick={()=>this.props.close()}>Close</button>
@@ -81,7 +81,7 @@ export class ViewPMH extends Component {
   }
 }
 
-export class ViewPXH extends Component {
+export class ViewPNH extends Component {
   static propTypes = {
     meta: PropTypes.object,
     item: PropTypes.object,

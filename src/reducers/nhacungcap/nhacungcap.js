@@ -19,6 +19,10 @@ import {
   NCC_DELETE_SUCCESS,
   NCC_DELETE_FAIL,
 
+  NCC_GET,
+  NCC_GET_SUCCESS,
+  NCC_GET_FAIL,
+
   NCC_RESET
 } from 'actions/actionTypes';
 
@@ -67,6 +71,25 @@ export default function nhacungcap(state = initialState, action = {}){
         ...state,
         loadingOne: false,
         item: null,
+        error: action.error
+      };
+
+    case NCC_GET:
+      return {
+        ...state,
+        getding: true
+      };
+    case NCC_GET_SUCCESS:
+      return {
+        ...state,
+        getding: false,
+        editItem: action.result
+      };
+    case NCC_GET_FAIL:
+      return {
+        ...state,
+        getding: false,
+        editItem: {},
         error: action.error
       };
 

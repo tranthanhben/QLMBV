@@ -35,9 +35,9 @@ export class THead extends Component {
       if(field.view === false){
         continue;
       }
-      if(field.type === "number"){
-        classField += "dt-body-right";
-      }
+      // if(field.type === "number"){
+      //   classField += "dt-body-right";
+      // }
       if(field.sort){
         if(sort === field.name){
           classField += " sorting_asc";
@@ -76,17 +76,12 @@ export class TBody extends Component {
   render(){
     const {meta, sort, item, index, paging, view, edit} = this.props;
     let trList = [];
-    let id = '';
     for(let key in meta){
       let classField = '';
       let field = meta[key];
-      if (field.name === 'id') {
-        id = key;
-      }
       if(field.view === false){
         continue;
       }
-
       if(field.sort){
         if(sort === field.name){
           classField = "sorting_1";
@@ -106,7 +101,7 @@ export class TBody extends Component {
           <td className={classField} key={field.name} >{formatDate(item[key])}</td>
         );
       }else if(field.type ==="number"){
-        classField += " dt-body-right";
+        // classField += " dt-body-right";
         trList.push(
         <td className={classField} key={field.name} >{numeral(item[key]).format('0,0')+(field.unit|| '')}</td>
         );
@@ -125,7 +120,7 @@ export class TBody extends Component {
           <button className="btn btn-warning btn-table" title="View full" onClick={view?  view(item): function(){}}>
             <i className="fa fa-eye"/>
           </button>
-          <button className="btn btn-success btn-table" title="Edit" onClick={edit?  edit(item[id]): function(){}}>
+          <button className="btn btn-success btn-table" title="Edit" onClick={edit?  edit(item.id): function(){}}>
             <i className='fa fa-pencil fa-fw'/>
           </button>
         </td>
@@ -147,11 +142,11 @@ export class TFoot extends Component {
       if(field.view === false){
         continue;
       }
-      if(field.type === "number"){
-        classField += " dt-body-right";
-      }
+      // if(field.type === "number"){
+      //   classField += " dt-body-right";
+      // }
       thList.push(
-        <th  key={field.name} tabIndex="0" aria-controls="example" rowSpan="1" colSpan="1" >{field.label}</th>
+        <th className={classField} key={field.name} tabIndex="0" aria-controls="example" rowSpan="1" colSpan="1" >{field.label}</th>
         );
     }
     return (
