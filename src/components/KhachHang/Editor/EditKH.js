@@ -6,7 +6,8 @@ import * as khachhangActions from '../../../actions/khachhang/khachhangActions';
 @connect(state =>({
   error: state.khachhang.postError,
   message: state.khachhang.message,
-  item: state.khachhang.editItem
+  item: state.khachhang.editItem,
+  meta: state.meta.khachhang
 }), {...khachhangActions})
 export default class EditKH extends Component {
   static propTypes = {
@@ -17,30 +18,26 @@ export default class EditKH extends Component {
     message: PropTypes.bool,
     postItem: PropTypes.func.isRequired,
     getItem: PropTypes.func.isRequired,
-    close: PropTypes.func.isRequired
+    close: PropTypes.func.isRequired,
+    reset: PropTypes.func.isRequired
   }
   state = {
     item: initObject(this.props.meta) || {},
-    edited: false
+    edited: false,
+    showFullField: false
   }
   componentWillMount() {
     if(this.props.id){
       this.props.getItem(this.props.id);
-    }else{
-      this.props.reset();
     }
   }
   componentWillReceiveProps(nextProps) {
     if(nextProps.item){
       this.setState({
         item: nextProps.item,
+        id: nextProps.id,
         edited: false
-      })
-    }else{
-      this.setState({
-        item: initObject(this.props.meta) || {},
-        edited: false
-      })
+      });
     }
   }
   handleChange(){
@@ -52,6 +49,9 @@ export default class EditKH extends Component {
       edited: true,
       submited: false
     })
+  }
+  showFull(){
+    this.setState({showFullField: !this.state.showFullField});
   }
   onSubmit(){
     if(checkRequire(this.props.meta, this.state.item)){
@@ -66,17 +66,20 @@ export default class EditKH extends Component {
     if(this.state.edited){
       let cf = confirm("Bạn chưa lưu thay đổi, bạn có muốn Close không?");
       if(cf) {
+        this.props.reset();
         this.props.close();
       }
     }else{
+      this.props.reset();
       this.props.close();
     }
   }
   render() {
-    const {item, edited, submited} = this.state;
-    const {meta, error, message} = this.props;
+    const {meta, error, message, id} = this.props;
+    const {item, edited, submited, showFullField} = this.state;
     const metaPP = preprocess(meta);
-    const fieldRender = renderField(item, metaPP, this, true) || [];
+    const fieldRender = showFullField && id? renderField(item, metaPP, this, true):renderField(item, metaPP, this);
+    console.log(message, edited, message && !edited);
     return (
       <div>
         <div className="row">
@@ -87,9 +90,10 @@ export default class EditKH extends Component {
           {submited ? <p className='help-block required'>
               {checkRequire(metaPP, item)}&nbsp;&nbsp;
             </p>:null}
-          <button className='btn btn-warning' onClick={::this.onSubmit} disabled={(edited? '':'disabled')}>
-          {"Sửa"}
-          </button>
+          {id? <button className='btn btn-warning' onClick={::this.onSubmit} disabled={(edited? '':'disabled')}>
+          {"Cập Nhật"}
+          </button>: <button className='btn btn-success' onClick={::this.onSubmit} disabled={(edited? '':'disabled')}>
+          {"Tạo mới"}</button>}
           </div>
         </div>
         <hr/>
@@ -100,7 +104,25 @@ export default class EditKH extends Component {
                 {fieldRender}
               </div>
               <div className="col-md-6">
-                Huong dan hay note gi cung duoc
+              <div className="row">
+                {id? <div className="col-md-12" style={{"lineHeight":"30px"}}>
+                    Hiển thị đầy đủ các thuộc tính
+                    <div className="switch">
+                      <input type="checkbox" id="showfullfield" name="showfullfield" className="control" checked={showFullField === true ? 'checked' : ''} onChange={::this.showFull}/>
+                      <label htmlFor="showfullfield" className="checkboxs"></label>
+                    </div>
+                  </div>: null}
+                  <div className="col-md-12">
+                    {(message && !edited)? (message === true?
+                      <p className='help-block success'>
+                      <span className="fa fa-check"></span>{' Cập nhật thành công!!'}
+                      </p>:
+                      <p className='help-block required'>
+                      <span className="fa fa-close"></span>{" Cập nhật thất bại!"}
+                      </p>
+                      ):null}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -108,25 +130,15 @@ export default class EditKH extends Component {
         <br/>
         <hr/>
         <div className="row">
-          <div className="col-md-6">
-          <button className='btn btn-warning' onClick={::this.onSubmit} disabled={(edited? '':'disabled')}>
-          {"Sửa"}
-          </button>
-          {(message && !edited)? (message === true?
-            <p className='help-block success'>
-            {"Cập nhật thành công!!"}
-            </p>:
-            <p className='help-block required'>
-            {"Cập nhật thất bại!"}
-            </p>
-            ):null}
+          <div className="col-md-12 flex-right">
           {submited ? <p className='help-block required'>
               {checkRequire(metaPP, item)}
-            </p>:null}
-
-          </div>
-          <div className="col-md-6">
-            <button className ='btn  pull-right' onClick={::this.onClose}>Đóng</button>
+            </p>:null}&nbsp;&nbsp;
+          {id? <button className='btn btn-warning' onClick={::this.onSubmit} disabled={(edited? '':'disabled')}>
+          {"Cập Nhật"}
+          </button>: <button className='btn btn-success' onClick={::this.onSubmit} disabled={(edited? '':'disabled')}>
+          {"Tạo mới"}</button>}&nbsp;&nbsp;&nbsp;&nbsp;
+            <button className ='btn' onClick={::this.onClose}>Đóng</button>
           </div>
         </div>
       </div>

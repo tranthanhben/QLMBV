@@ -41,6 +41,7 @@ export default function khachhang(state = initialState, action = {}){
       return {
         ...state,
         loadding: false,
+        reloadList: false,
         loaded: true,
         list: action.result.items,
         paging: action.result.paging
@@ -161,8 +162,9 @@ export default function khachhang(state = initialState, action = {}){
       return {
         ...state,
         loaded: false,
+        reloadList: true,
         editItem: null,
-        massage: false,
+        message: false,
         errorPost:null
       };
     default:

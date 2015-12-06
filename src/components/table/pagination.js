@@ -23,11 +23,11 @@ export class Pagination extends Component {
     let nextClass = "paginate_button btn btn-outlined btn-success next" + (paging && paging.page === (numPage-1)? " disabled":"");
     return (
       <div className="dataTables_paginate paging_simple_numbers" id="example_paginate">
-        {paging && <a className={preClass} aria-controls="example" data-dt-idx="0" tabIndex="0" id="example_previous" onClick={load(paging.page-1)}>Previous</a>}
+        {paging && <a className={preClass} aria-controls="example" data-dt-idx="0" tabIndex="0" id="example_previous" onClick={load(paging.page-1)}>Trước</a>}
         <span>
         {btnPage}
         </span>
-        {paging && <a className={nextClass} aria-controls="example" data-dt-idx={numPage+1} tabIndex="0" id="example_next" onClick={load(paging.page+1)}>Next</a>}
+        {paging && <a className={nextClass} aria-controls="example" data-dt-idx={numPage+1} tabIndex="0" id="example_next" onClick={load(paging.page+1)}>Sau</a>}
       </div>
     )
   }

@@ -3,7 +3,7 @@ export default function checkRequire(meta, item) {
     if (!meta[field])
       continue;
     let metaField = meta[field];
-    if (metaField.required && !item[field]) {
+    if (metaField.required && !item[field].trim()) {
       return 'Vui lòng nhập: ' + metaField.label;
     }
   }

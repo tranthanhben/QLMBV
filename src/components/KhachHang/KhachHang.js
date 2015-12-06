@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import Modal from '../layout/Modal';
-import Create from './Editor/Create';
+import EditKH from './Editor/EditKH';
 import * as layoutActions from '../../actions/layoutActions';
 import {Style} from '../Style';
 
@@ -62,7 +62,7 @@ export default class KhachHang extends Component{
                   overlayClassName='modaldumb modalOverlay modalOverlay--after-open '
                   modalClassName='dumb modalContent modalContent--after-open '
                   >
-                    <Create close={::this.toggleModal}></Create>
+                    <EditKH close={::this.toggleModal}></EditKH>
                   </Modal> : null}
                   {this.props.children}
                 </div>

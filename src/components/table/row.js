@@ -1,25 +1,6 @@
 import React, {Component, PropTypes} from 'react';
-import {formatDate} from '../../meta';
-import numeral from 'numeral';
-numeral.language('vi', {
-    delimiters: {
-        thousands: '.',
-        decimal: ','
-    },
-    abbreviations: {
-        thousand: 'k',
-        million: 'm',
-        billion: 'b',
-        trillion: 't'
-    },
-    ordinal : function (number) {
-        return number === 1 ? 'er' : 'ème';
-    },
-    currency: {
-        symbol: 'VND'
-    }
-});
-numeral.language('vi');
+import {formatDate, numeral} from '../../meta';
+
 export class THead extends Component {
   static propTypes = {
     meta: PropTypes.object,

@@ -66,6 +66,7 @@ const initialState = {
       sort: true,
       type: "date",
       required: false,
+      disabled: true,
       field: false,
       view: true
     },
@@ -77,7 +78,8 @@ const initialState = {
       required: false,
       disabled: true,
       field: false,
-      view: false
+      view: false,
+      unit: ' VND'
     },
     "thanhtoan": {
       name: "thanhtoan",
@@ -87,7 +89,8 @@ const initialState = {
       required: false,
       disabled: true,
       field: false,
-      view: false
+      view: false,
+      unit: ' VND'
     },
     "congno": {
       name: "congno",
@@ -97,7 +100,8 @@ const initialState = {
       required: false,
       disabled: true,
       field: false,
-      view: false
+      view: false,
+      unit: ' VND'
     }
   },
   nhacungcap: {

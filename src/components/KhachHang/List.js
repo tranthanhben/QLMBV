@@ -17,7 +17,8 @@ import {Style} from '../Style';
     paging: state.khachhang.paging,
     error: state.khachhang.error,
     loading: state.khachhang.loading,
-    meta: state.meta.khachhang
+    meta: state.meta.khachhang,
+    reload: state.khachhang.reloadList
   }),
   {...khachhangActions, ...layoutActions})
 
@@ -29,6 +30,7 @@ class List extends Component{
     paging: PropTypes.object,
     meta: PropTypes.object,
     loading: PropTypes.bool,
+    reload: PropTypes.bool,
     loadList:PropTypes.func.isRequired,
     openModal: PropTypes.func.isRequired
   }
@@ -38,7 +40,11 @@ class List extends Component{
       return store.dispatch(loadKH());
     }
   }
-
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.reload === true){
+      this.props.loadList(this.state.options);
+    }
+  }
   state = {
     options :{
       page_size: 10,
@@ -121,13 +127,14 @@ class List extends Component{
             <div className="col-xs-12">
               <div id="example_wrapper" className="dataTables_wrapper">
                 <div className="dataTables_length" id="example_length" style={{"display": "inline-flex"}}>
-                  <label className="line-height" style={{"display": "flex"}}>Show
+                  <label className="line-height" style={{"display": "inline-flex"}}>
+                  <span style={{"display": "inline-table"}}>{"Hiển thị "}</span>
                     <select name="example_length" aria-controls="example" className=" form-control" onChange={::this.changePageSize} value={this.state.options.page_size}>
                       <option value="10">10</option>
                       <option value="25">25</option>
                       <option value="50">50</option>
                       <option value="100">100</option>
-                    </select> entries</label>
+                    </select>{" mục"}</label>
                 </div>
                 <div id="example_filter" className="dataTables_filter" style={{"display": "inline-flex", "float":"right"}}>
                   <label className="line-height" style={{"display": "flex"}}>Search:
@@ -165,9 +172,9 @@ class List extends Component{
                   overlayClassName='modaldumb modalOverlay modalOverlay--after-open '
                   modalClassName='dumb modalContent modalContent--after-open '
                   >
-                    <EditKH meta={meta} id={idEdit} close={::this.editModal} ></EditKH>
+                    <EditKH id={idEdit} close={::this.editModal} ></EditKH>
                   </Modal> : null}
-                <div className="dataTables_info" id="example_info" role="status" aria-live="polite">Showing {paging && paging.page * paging.page_size+ 1} to {paging && paging.page * paging.page_size+ listKH.length} of {paging && paging.total} entries</div>
+                <div className="dataTables_info" id="example_info" role="status" aria-live="polite">Hiển thị từ {paging && paging.page * paging.page_size+ 1} đến {paging && paging.page * paging.page_size+ listKH.length} của {paging && paging.total}  mục.</div>
                 <Pagination load={::this.paginationLoad} paging={paging}></Pagination>
               </div>
             </div>
