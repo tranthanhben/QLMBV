@@ -19,6 +19,10 @@ import {
   KHO_DELETE_SUCCESS,
   KHO_DELETE_FAIL,
 
+  KHO_GET,
+  KHO_GET_SUCCESS,
+  KHO_GET_FAIL,
+
   KHO_RESET
 } from 'actions/actionTypes';
 
@@ -38,6 +42,7 @@ export default function kho(state = initialState, action = {}){
         ...state,
         loadding: false,
         loaded: true,
+        reloadList: false,
         list: action.result.items,
         paging: action.result.paging
       };
@@ -47,6 +52,7 @@ export default function kho(state = initialState, action = {}){
         loading: false,
         loaded: false,
         list: [],
+        reloadList: false,
         paging: null,
         error: action.error
       };
@@ -69,7 +75,24 @@ export default function kho(state = initialState, action = {}){
         item: null,
         error: action.error
       };
-
+    case KHO_GET:
+      return {
+        ...state,
+        getding: true
+      };
+    case KHO_GET_SUCCESS:
+      return {
+        ...state,
+        getding: false,
+        editItem: action.result
+      };
+    case KHO_GET_FAIL:
+      return {
+        ...state,
+        getding: false,
+        editItem: {},
+        error: action.error
+      };
     case KHO_POST:
       return {
         ...state,
@@ -140,7 +163,8 @@ export default function kho(state = initialState, action = {}){
         ...state,
         loaded: false,
         editItem: null,
-        massage: false,
+        reloadList: true,
+        message: false,
         errorPost:null
       };
     default:

@@ -82,3 +82,6 @@ export function reset(){
     type: KHO_RESET
   }
 }
+export function isLoaded(globalState) {
+  return globalState.kho && globalState.kho.loaded;
+}

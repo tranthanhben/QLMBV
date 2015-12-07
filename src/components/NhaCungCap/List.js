@@ -16,7 +16,8 @@ import {Style} from '../Style';
     paging: state.nhacungcap.paging,
     error: state.nhacungcap.error,
     meta: state.meta.nhacungcap,
-    loading: state.nhacungcap.loading
+    loading: state.nhacungcap.loading,
+    reload: state.nhacungcap.reloadList
   }),
   {...nhacungcapActions, ...layoutActions})
 
@@ -28,12 +29,18 @@ class List extends Component{
     paging: PropTypes.object,
     meta: PropTypes.object,
     loading: PropTypes.bool,
+    reload: PropTypes.bool,
     loadList:PropTypes.func.isRequired,
     openModal: PropTypes.func.isRequired
   }
   static fetchData(store){
     if(!isLoaded(store.getState)){
       return store.dispatch(loadNCC());
+    }
+  }
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.reload === true){
+      this.props.loadList(this.state.options);
     }
   }
   state = {
@@ -118,17 +125,19 @@ class List extends Component{
           <div className="col-xs-12">
             <div id="example_wrapper" className="dataTables_wrapper">
               <div className="dataTables_length" id="example_length" style={{"display": "inline-flex"}}>
-                <label className="line-height" style={{"display": "flex"}}>Show
-                  <select name="example_length" aria-controls="example" className=" form-control" onChange={::this.changePageSize} value={this.state.options.page_size}>
-                    <option value="10">10</option>
-                    <option value="25">25</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
-                  </select> entries</label>
-              </div>
+                  <label className="line-height" style={{"display": "inline-flex"}}>
+                  <span style={{"display": "inline-table"}}>{"Hiển thị "}</span>
+                    <select name="example_length" aria-controls="example" className=" form-control" onChange={::this.changePageSize} value={this.state.options.page_size}>
+                      <option value="10">10</option>
+                      <option value="25">25</option>
+                      <option value="50">50</option>
+                      <option value="100">100</option>
+                    </select>{" mục"}</label>
+                </div>
               <div id="example_filter" className="dataTables_filter" style={{"display": "inline-flex", "float":"right"}}>
-                <label className="line-height" style={{"display": "flex"}}>Search:
-                  <input type="search" className="form-control " placeholder="Search Name" onChange={::this.searchField} aria-controls="example" />
+                <label className="line-height" style={{"display": "flex"}}>
+                  <span style={{"display": "inline-table"}}>{"Tìm kiếm "}</span>
+                  <input type="search" className="form-control " placeholder="Theo Tên" onChange={::this.searchField} aria-controls="example" />
                 </label>
               </div>
               <table id="example" className="table display nowrap dataTable" cellSpacing="0" width="100%" role="grid" aria-describedby="example_info" style={{"width": "100%"}}>
@@ -144,7 +153,6 @@ class List extends Component{
                       <TBody item={item} index={index} sort={options.sort} meta={meta} paging={paging} key={index} view={::this.viewItemFull} edit={::this.editItem}></TBody>
                     )
                   })}
-
                 </tbody>
               </table>
               {openView?
@@ -165,7 +173,7 @@ class List extends Component{
                   >
                     <EditNCC meta={meta} id={idEdit} close={::this.editModal} ></EditNCC>
                   </Modal> : null}
-              <div className="dataTables_info" id="example_info" role="status" aria-live="polite">Showing {paging && paging.page * paging.page_size+ 1} to {paging && paging.page * paging.page_size+ listNCC.length} of {paging && paging.total} entries</div>
+              <div className="dataTables_info" id="example_info" role="status" aria-live="polite">Hiển thị từ {paging && paging.page * paging.page_size+ 1} đến {paging && paging.page * paging.page_size+ listNCC.length} của {paging && paging.total}  mục.</div>
               <Pagination load={::this.paginationLoad} paging={paging}></Pagination>
             </div>
           </div>

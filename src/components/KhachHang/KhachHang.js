@@ -31,7 +31,7 @@ export default class KhachHang extends Component{
             <div className="row">
               <div className="col-xs-3 visible-xs" ></div>
               <div className="col-xs-6 col-sm-4">
-              <h4 style={{"lineHeight": "30px"}}>{menuparse[this.props.location.pathname]}</h4>
+                <h4 style={{"lineHeight": "30px"}}>{menuparse[this.props.location.pathname]}</h4>
               </div>
               <div className="view-tabs col-xs-3 col-sm-8">
                 <ul className="nav-main pull-right">

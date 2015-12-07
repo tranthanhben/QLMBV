@@ -1,15 +1,15 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import{initObject, renderField, preprocess, setValue, checkRequire, preprocessPost} from '../../../meta';
-import * as nhanvienActions from '../../../actions/nhanvienActions';
+import * as loaivaiActions from '../../../actions/loaivaiActions';
 
 @connect(state =>({
-  error: state.kho.postError,
-  message: state.kho.message,
-  item: state.kho.editItem,
-  meta: state.meta.kho
-}), {...nhanvienActions})
-export default class EditNV extends Component {
+  error: state.loaivai.postError,
+  message: state.loaivai.message,
+  item: state.loaivai.editItem,
+  meta: state.meta.loaivai
+}), {...loaivaiActions})
+export default class EditLV extends Component {
   static propTypes = {
     id: PropTypes.string,
     item: PropTypes.object,
@@ -80,11 +80,12 @@ export default class EditNV extends Component {
     const {item, edited, submited, showFullField, id} = this.state;
     const metaPP = preprocess(meta);
     const fieldRender = showFullField && id? renderField(item, metaPP, this, true):renderField(item, metaPP, this);
+    console.log(message, edited, message && !edited);
     return (
       <div>
         <div className="row">
           <div className="col-md-4">
-            <h4>Kho</h4>
+            <h4>Loai Vai</h4>
           </div>
           <div className="col-md-8 flex-right">
           {submited ? <p className='help-block required'>

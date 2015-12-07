@@ -203,7 +203,8 @@ const initialState = {
       sort: false,
       type: "single",
       required: false,
-      field: true
+      field: true,
+      view: false
     },
     "phongban": {
       name: "phongban",
@@ -211,7 +212,8 @@ const initialState = {
       sort: false,
       type: "single",
       required: false,
-      field: true
+      field: true,
+      view: false
     },
     "chucvu": {
       name: "chucvu",
@@ -267,7 +269,7 @@ const initialState = {
     }
   },
   kho: {
-    "kid": {
+    "id": {
       name: "id",
       label: "KID",
       sort: true,
@@ -299,8 +301,8 @@ const initialState = {
       required: true,
       field: true
     },
-    "controng": {
-      name: "controng",
+    "trong": {
+      name: "trong",
       label: "Còn Trống",
       sort: true,
       type: "number",
@@ -308,7 +310,7 @@ const initialState = {
     }
   },
   loaivai: {
-    "lvid": {
+    "id": {
       name: "id",
       label: "LVID",
       sort: true,
@@ -318,7 +320,7 @@ const initialState = {
     },
     "ten": {
       name: "ten",
-      label: "Loại Vải",
+      label: "Tên Loại Vải",
       sort: true,
       type: "single",
       required: true,
@@ -340,6 +342,16 @@ const initialState = {
       required: false,
       field: true
     },
+    "ngaytao": {
+      name: "ngaytao",
+      label: "Ngày Tạo",
+      sort: true,
+      type: "date",
+      required: false,
+      disabled: true,
+      field: false,
+      view: true
+    },
     "giaban": {
       name: "giaban",
       label: "Giá Bán",
@@ -358,9 +370,9 @@ const initialState = {
     }
   },
   giaodich: {
-    "gdid": {
+    "id": {
       name: "id",
-      label: "gdid",
+      label: "GDID",
       sort: true,
       up: true,
       type: "single",

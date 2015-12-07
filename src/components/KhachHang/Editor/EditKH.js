@@ -24,7 +24,8 @@ export default class EditKH extends Component {
   state = {
     item: initObject(this.props.meta) || {},
     edited: false,
-    showFullField: false
+    showFullField: false,
+    id: this.props.id
   }
   componentWillMount() {
     if(this.props.id){
@@ -35,7 +36,7 @@ export default class EditKH extends Component {
     if(nextProps.item){
       this.setState({
         item: nextProps.item,
-        id: nextProps.id,
+        id: nextProps.item.id,
         edited: false
       });
     }
@@ -75,11 +76,10 @@ export default class EditKH extends Component {
     }
   }
   render() {
-    const {meta, error, message, id} = this.props;
-    const {item, edited, submited, showFullField} = this.state;
+    const {meta, error, message} = this.props;
+    const {item, edited, submited, showFullField, id} = this.state;
     const metaPP = preprocess(meta);
     const fieldRender = showFullField && id? renderField(item, metaPP, this, true):renderField(item, metaPP, this);
-    console.log(message, edited, message && !edited);
     return (
       <div>
         <div className="row">
@@ -115,10 +115,10 @@ export default class EditKH extends Component {
                   <div className="col-md-12">
                     {(message && !edited)? (message === true?
                       <p className='help-block success'>
-                      <span className="fa fa-check"></span>{' Cập nhật thành công!!'}
+                      <span className="fa fa-check"></span>{id? ' Cập nhật thành công!!':' Tạo mới thành công!!' }
                       </p>:
                       <p className='help-block required'>
-                      <span className="fa fa-close"></span>{" Cập nhật thất bại!"}
+                      <span className="fa fa-close"></span>{id? ' Cập nhật thất bại!':' Tạo mới thất bại!' }
                       </p>
                       ):null}
                   </div>

@@ -140,7 +140,7 @@ export default function congnoKH(state = initialState, action = {}){
         ...state,
         loaded: false,
         editItem: null,
-        massage: false,
+        message: false,
         errorPost:null
       };
     default:

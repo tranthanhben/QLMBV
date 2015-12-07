@@ -19,6 +19,10 @@ import {
   LV_DELETE_SUCCESS,
   LV_DELETE_FAIL,
 
+  LV_GET,
+  LV_GET_SUCCESS,
+  LV_GET_FAIL,
+
   LV_RESET
 } from 'actions/actionTypes';
 
@@ -37,6 +41,7 @@ export default function loaivai(state = initialState, action = {}){
       return {
         ...state,
         loadding: false,
+        reloadList: false,
         loaded: true,
         list: action.result.items,
         paging: action.result.paging
@@ -69,7 +74,24 @@ export default function loaivai(state = initialState, action = {}){
         item: null,
         error: action.error
       };
-
+    case LV_GET:
+      return {
+        ...state,
+        getding: true
+      };
+    case LV_GET_SUCCESS:
+      return {
+        ...state,
+        getding: false,
+        editItem: action.result
+      };
+    case LV_GET_FAIL:
+      return {
+        ...state,
+        getding: false,
+        editItem: {},
+        error: action.error
+      };
     case LV_POST:
       return {
         ...state,
@@ -78,9 +100,7 @@ export default function loaivai(state = initialState, action = {}){
     case LV_POST_SUCCESS:
       return {
         ...state,
-        reset: true,
         editItem: action.result,
-        reloadList: true,
         message: true,
         posting: false,
       };
@@ -123,7 +143,7 @@ export default function loaivai(state = initialState, action = {}){
     case LV_DELETE_SUCCESS:
       return {
         ...state,
-        reset: true,
+        reloadList: true,
         deleting: false,
         item: null
       };
@@ -140,7 +160,8 @@ export default function loaivai(state = initialState, action = {}){
         ...state,
         loaded: false,
         editItem: null,
-        massage: false,
+        reloadList: true,
+        message: false,
         errorPost:null
       };
     default:

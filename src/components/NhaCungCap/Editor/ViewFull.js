@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {renderInfo } from '../../../meta';
+import {renderInfo, formatDate, numeral} from '../../../meta';
 
 export class ViewNCC extends Component {
   static propTypes = {
@@ -14,14 +14,21 @@ export class ViewNCC extends Component {
     let info = [];
     for(const key in meta){
       const field = meta[key];
+      let value = item[key] || '';
+      if(field.type === "date"){
+        value =formatDate(item[key]);
+      }
+      if(field.type === "number"){
+        value = numeral(item[key]).format('0,0')+(field.unit|| '');
+      }
       info.push(
         <div className="info-group" key={key}>
           <div className="row">
-            <div className="col-md-3 align-right">
+            <div className="col-md-4 align-right">
               <span>{field.label + ": "}</span>
             </div>
-            <div className="col-md-9">
-              <p className={field.up? 'uppercase':''}>{(item[key]||'') + ' ' + (field.unit||'')}</p>
+            <div className="col-md-8">
+              <p className={field.up? 'uppercase':''}>{value}</p>
             </div>
           </div>
         </div>
@@ -29,7 +36,7 @@ export class ViewNCC extends Component {
     }
     return (
       <div className="info">
-        <h3 className="info-header">Thông Tin Khách Hàng</h3>
+        <h3 className="info-header">Thông Tin Nha Cung Cap</h3>
         <hr/>
         <div className="row">
           <div className="col-md-12">
@@ -39,10 +46,10 @@ export class ViewNCC extends Component {
             <hr/>
         <div className="row">
           <div className="col-md-6">
-          <button className ='btn  btn-warning' onClick={::this.props.edit(item.nccid)}>Edit</button>
+          <button className ='btn btn-warning' onClick={::this.props.edit(item.id)}>Sửa</button>
           </div>
           <div className="col-md-6">
-            <button className ='btn  pull-right' onClick={()=>this.props.close()}>Close</button>
+            <button className ='btn  pull-right' onClick={()=>this.props.close()}>Đóng</button>
           </div>
         </div>
       </div>);
@@ -71,7 +78,7 @@ export class ViewPDH extends Component {
             <hr/>
         <div className="row">
           <div className="col-md-6">
-          <button className ='btn  btn-warning' onClick={()=>this.props.edit(item.nccid)}>Edit</button>
+          <button className ='btn btn-warning' onClick={()=>this.props.edit(item.id)}>Edit</button>
           </div>
           <div className="col-md-6">
             <button className ='btn  pull-right' onClick={()=>this.props.close()}>Close</button>
@@ -103,7 +110,7 @@ export class ViewPNH extends Component {
             <hr/>
         <div className="row">
           <div className="col-md-6">
-          <button className ='btn  btn-warning' onClick={()=>this.props.edit(item.id)}>Edit</button>
+          <button className ='btn btn-warning' onClick={()=>this.props.edit(item.id)}>Edit</button>
           </div>
           <div className="col-md-6">
             <button className ='btn  pull-right' onClick={()=>this.props.close()}>Close</button>

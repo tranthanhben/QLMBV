@@ -1,8 +1,8 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {renderInfo } from '../../../meta';
+import {renderInfo, formatDate, numeral} from '../../../meta';
 
-export default class View extends Component {
+export class ViewK extends Component {
   static propTypes = {
     meta: PropTypes.object,
     item: PropTypes.object,
@@ -14,14 +14,21 @@ export default class View extends Component {
     let info = [];
     for(const key in meta){
       const field = meta[key];
+      let value = item[key] || '';
+      if(field.type === "date"){
+        value =formatDate(item[key]);
+      }
+      if(field.type === "number"){
+        value = numeral(item[key]).format('0,0')+(field.unit|| '');
+      }
       info.push(
         <div className="info-group" key={key}>
           <div className="row">
-            <div className="col-md-3 align-right">
+            <div className="col-md-4 align-right">
               <span>{field.label + ": "}</span>
             </div>
-            <div className="col-md-9">
-              <p className={field.up? 'uppercase':''}>{(item[key]||'') + ' ' + (field.unit||'')}</p>
+            <div className="col-md-8">
+              <p className={field.up? 'uppercase':''}>{value}</p>
             </div>
           </div>
         </div>
@@ -36,13 +43,13 @@ export default class View extends Component {
            {info}
           </div>
         </div>
-            <hr/>
+        <hr/>
         <div className="row">
           <div className="col-md-6">
-          <button className ='btn  btn-warning' onClick={()=>this.props.edit(item.khid)}>Edit</button>
+          <button className ='btn btn-warning' onClick={::this.props.edit(item.id)}>Sửa</button>
           </div>
           <div className="col-md-6">
-            <button className ='btn  pull-right' onClick={()=>this.props.close()}>Close</button>
+            <button className ='btn pull-right' onClick={()=>this.props.close()}>Đóng</button>
           </div>
         </div>
       </div>);

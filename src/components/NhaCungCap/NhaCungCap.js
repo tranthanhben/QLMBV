@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import Modal from '../layout/Modal';
-import Create from './Editor/Create';
+import EditNCC from './Editor/EditNCC';
 import * as layoutActions from '../../actions/layoutActions';
 import {Style} from '../Style';
 
@@ -26,7 +26,7 @@ export default class NhaCungCap extends Component {
   render(){
     const {menuparse, openmodal} = this.props;
     return <div className='inner '>
-        <nav id="nav-header" className="navbar navbar-default navbar-fixed-top">
+        <nav id="nav-header" className="navbar navbar-default navbar-fixed-top" style={{"zIndex":(openmodal? '-2':'0')}}>
           <div className="container-fluid mbv-nav">
             <div className="row">
               <div className="col-xs-3 visible-xs" ></div>
@@ -64,7 +64,7 @@ export default class NhaCungCap extends Component {
                   overlayClassName='modaldumb modalOverlay modalOverlay--after-open '
                   modalClassName='dumb modalContent modalContent--after-open '
                   >
-                    <Create close={::this.toggleModal}></Create>
+                    <EditNCC close={::this.toggleModal}></EditNCC>
                   </Modal> : null}
                   {this.props.children}
                 </div>

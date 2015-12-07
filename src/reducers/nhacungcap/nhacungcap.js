@@ -42,6 +42,7 @@ export default function nhacungcap(state = initialState, action = {}){
         ...state,
         loadding: false,
         loaded: true,
+        reloadList: false,
         list: action.result.items,
         paging: action.result.paging
       };
@@ -51,6 +52,7 @@ export default function nhacungcap(state = initialState, action = {}){
         loading: false,
         loaded: false,
         list: [],
+        reloadList: false,
         paging: null,
         error: action.error
       };
@@ -163,7 +165,8 @@ export default function nhacungcap(state = initialState, action = {}){
         ...state,
         loaded: false,
         editItem: null,
-        massage: false,
+        reloadList: true,
+        message: false,
         errorPost:null
       };
     default:

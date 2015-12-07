@@ -1,13 +1,13 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import * as nhacungcapActions from '../../../actions/nhacungcap/nhacungcapActions';
+import * as khachhangActions from '../../../actions/khachhang/khachhangActions';
 import{initObject, renderField, preprocess, setValue, checkRequire, preprocessPost} from '../../../meta';
 
 @connect(state =>({
-  meta: state.meta.nhacungcap,
-  error: state.nhacungcap.postError,
-  message: state.nhacungcap.message
-}),{...nhacungcapActions})
+  meta: state.meta.khachhang,
+  error: state.khachhang.postError,
+  message: state.khachhang.message
+}),{...khachhangActions})
 export default
 class Create extends Component{
   static propTypes = {
@@ -55,9 +55,10 @@ class Create extends Component{
     const metaPP = preprocess(meta);
     const {item, edited, submited} = this.state;
     const fieldRender = renderField(item, metaPP, this) || [];
+    console.log("item", item);
     return (
       <div>
-        <h4>Nha Cung Cap Moi</h4>
+        <h4>Khách Hàng Mới</h4>
         <hr/>
         <div className="row">
           <div className="col-md-12">
@@ -66,8 +67,7 @@ class Create extends Component{
                 {fieldRender}
               </div>
               <div className="col-md-6">
-                Huong dan
-                Note
+                Huong dan hay note gi cung duoc
               </div>
             </div>
           </div>
