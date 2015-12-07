@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {isLoaded, loadList as loadK} from '../../actions/khoActions';
+import {isLoaded, loadList as loadNV} from '../../actions/nhanvienActions';
 import ListNV from './List';
 import Modal from '../layout/Modal';
 import * as layoutActions from '../../actions/layoutActions';
@@ -22,7 +22,7 @@ export default class SanPham extends Component{
   }
   static fetchData(store){
     if(!isLoaded(store.getState)){
-      return store.dispatch(loadK());
+      return store.dispatch(loadNV());
     }
   }
   toggleModal() {
