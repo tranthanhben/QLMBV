@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {initObject, ATO, OTA, preprocess, datetime, changeDTI} from '../../../meta';
+import {initObject, ATO, OTA, preprocess, datetime, changeDTI, renderLabel, setValue} from '../../../meta';
+import {THead, TBody} from '../../table/rowForPDH';
 import * as pdhActions from '../../../actions/nhacungcap/pdhActions';
 import * as giaodichActions from '../../../actions/giaodichActions';
 
@@ -8,14 +9,15 @@ import * as giaodichActions from '../../../actions/giaodichActions';
   gdItem: state.phieudathang.editItem,
   meta: state.meta.phieudathang,
   listNCC: state.giaodich.listNCC,
-  listLV: state.giaodich.listLV
-
+  listLV: state.giaodich.listLV,
+  user: state.user.user
 }),{...pdhActions, ...giaodichActions})
 export default class EditPDH extends Component {
   static propTypes = {
     gdid: PropTypes.string,
     gdItem: PropTypes.object,
     meta: PropTypes.object,
+    user: PropTypes.object,
     postItem: PropTypes.func.isRequired,
     getItem: PropTypes.func.isRequired,
     close: PropTypes.func.isRequired,
@@ -36,8 +38,9 @@ export default class EditPDH extends Component {
     this.props.loadNCC();
     this.props.loadLV();
     let gdItem = {
-      nvid: "nv_1000",
-      trangthai: "chuahoanthanh",
+      nvid: this.props.user.nhanvienid || 'admin',
+      trangthai: 'chuaxuly',
+      doitacid: '',
       ngayhoanthanh: changeDTI(datetime(new Date()))
     };
     this.state.gdItem = gdItem;
@@ -55,20 +58,21 @@ export default class EditPDH extends Component {
     }
   }
   handleChange(){
-    let obj = this.state.item;
+    let obj = this.state.gdItem;
     let addr = event.target.dataset.addr;
     let value = event.target.value;
     this.setState({
-      edited: true
+      edited: true,
+      gdItem: setValue(obj, addr, value)
     })
   }
   onSubmit(){
-    if(checkRequire(this.props.meta, this.state.item)){
+    if(checkRequire(this.props.meta, this.state.gdItem)){
       this.setState({
         submited: true
       })
     }else {
-      this.props.postItem(preprocessPost(this.state.item, this.props.meta));
+      this.props.postItem(preprocessPost(this.state.gdItem, this.props.meta));
     }
   }
   onClose(){
@@ -84,16 +88,16 @@ export default class EditPDH extends Component {
     }
   }
   render() {
-    const {meta, error, message} = this.props;
+    const {meta, error, message, listNCC, listLV} = this.props;
     const {gdItem, edited, submited, showFullField, gdid} = this.state;
     const metaGD = meta && preprocess(meta.giaodich) || {};
     const metaCTDH = meta && preprocess(meta.chitietdonhang) || {};
-    console.log("state props", this.state, this.props);
+    console.log("state props", this.state.gdItem, listNCC);
     return (
       <div>
         <div className="row">
           <div className="col-md-4">
-            <h4>Nha Cung Cap</h4>
+            <h4>Phiếu Đặt Hàng</h4>
           </div>
           <div className="col-md-8 flex-right">
           </div>
@@ -102,13 +106,42 @@ export default class EditPDH extends Component {
         <div className="row">
           <div className="col-md-12">
             <div className="row">
-              <div className="col-md-6 boder-right">
-
+              <div className="col-md-8 boder-right">
+                <div className='form-group' key="khachhang">
+                  {renderLabel(metaGD.doitacid)}
+                  &nbsp;
+                  <select className='form-control' data-addr='doitacid'
+                  onChange={::this.handleChange}
+                  value={gdItem.doitacid || ''}>
+                  <option key='doitacid'>-- Nha Cung Cap --</option>
+                  {listNCC && listNCC.map(b => {
+                    return (
+                      <option key={b.id} value={b.id}>
+                        {b.ten}
+                      </option>
+                    );
+                  })}
+                  </select>
+                </div>
+                <div className='form-group' key="trangthai">
+                  {renderLabel(metaGD.trangthai)}
+                  {metaGD && metaGD["trangthai"].$input(gdItem,this)}
+                </div>
               </div>
-              <div className="col-md-6">
-
+              <div className="col-md-4">
               </div>
             </div>
+          </div>
+          <div className="col-md-12">
+            <table id="example" className="table display nowrap dataTable" role="grid" aria-describedby="example_info" >
+              <thead>
+                <THead meta={metaCTDH}></THead>
+              </thead>
+
+              <tbody>
+
+              </tbody>
+            </table>
           </div>
         </div>
         <br/>

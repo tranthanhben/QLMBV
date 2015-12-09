@@ -162,6 +162,39 @@ const initialState = {
       required: false,
       field: true,
       view: false
+    },
+    "tongtien": {
+      name: "tongtien",
+      label: "Tổng Giao Dịch",
+      sort: false,
+      type: "number",
+      required: false,
+      disabled: true,
+      field: false,
+      view: false,
+      unit: ' VND'
+    },
+    "thanhtoan": {
+      name: "thanhtoan",
+      label: "Đã Thanh Toán",
+      sort: false,
+      type: "number",
+      required: false,
+      disabled: true,
+      field: false,
+      view: false,
+      unit: ' VND'
+    },
+    "congno": {
+      name: "congno",
+      label: "Còn Nợ",
+      sort: false,
+      type: "number",
+      required: false,
+      disabled: true,
+      field: false,
+      view: false,
+      unit: ' VND'
     }
   },
   nhanvien: {
@@ -386,8 +419,8 @@ const initialState = {
       type: "single",
       field: false
     },
-    "dtid": {
-      name: "dtid",
+    "doitacid": {
+      name: "doitacid",
       label: "DTID",
       sort: true,
       up: false,
@@ -421,9 +454,9 @@ const initialState = {
         type: "special",
         field: false
       },
-      "dtid": {
-        name: "dtid",
-        label: "DTID",
+      "doitacid": {
+        name: "doitacid",
+        label: "Nha Cung Cap",
         sort: true,
         up: false,
         type: "special",
@@ -439,9 +472,12 @@ const initialState = {
         name: "trangthai",
         label: "Trang Thai",
         type: "select",
-        children:[{
-          value: "dangsuly",
-          label: "Dang Su Ly"
+        options:[{
+          value: "chuaxuly",
+          label: "Chua Xu Ly"
+        },{
+          value: "dangxuly",
+          label: "Dang Xu Ly"
         },{
           value: "hoanthanh",
           label: "Hoan Thanh"
@@ -457,12 +493,13 @@ const initialState = {
         type: "date",
       }
     },
-    chitietdonhang:{
+    ctdh:{
       "gdid": {
         name: "gdid",
         label: "GDID",
         type: "special",
-        field: false
+        field: false,
+        view: false
       },
       "loaivaiid": {
         name: "loaivaiid",
@@ -474,11 +511,12 @@ const initialState = {
         name: "loaigd",
         label: "Loai Giao Dich",
         type: "special",
-        field: false
+        field: false,
+        view: false
       },
       "soluong": {
         name: "soluong",
-        label: "Loai Giao Dich",
+        label: "So Luong",
         type: "special",
         field: false
       },

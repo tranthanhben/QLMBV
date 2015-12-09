@@ -3,6 +3,7 @@ export {default as datetime} from './datetime';
 export {default as parseError} from './parseError';
 export {changeITD, parseDate, changeDTI, formatDate} from './changeTime';
 export {validateEmail} from './validate';
+export {renderLabel} from './renderLabel';
 export {setValue, setValueLogin, setObjValue} from './setValue';
 export {default as initObject} from './initObject';
 export {default as renderField} from './renderField';
