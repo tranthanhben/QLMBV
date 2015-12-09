@@ -21,13 +21,13 @@ class App extends Component {
     router.addTransitionHook(createTransitionHook(store));
   }
   render() {
-    // if(!this.props.user){
-    //   return (
-    //     <div className="wrapper">
-    //     {this.props.children}
-    //     </div>
-    //   );
-    // }
+    if(!this.props.user){
+      return (
+        <div className="wrapper">
+        {this.props.children}
+        </div>
+      );
+    }
 
     return (
       <div className="wrapper">

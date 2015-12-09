@@ -1,9 +1,19 @@
 export const ME_LOAD = "ME_LOAD";
 export const ME_LOAD_SUCCESS = "ME_LOAD_SUCCESS";
 export const ME_LOAD_FAIL = "ME_LOAD_FAIL";
+
 export const LOGIN_LOAD = "LOGIN_LOAD";
 export const LOGIN_LOAD_SUCCESS = "LOGIN_LOAD_SUCCESS";
 export const LOGIN_LOAD_FAIL = "LOGIN_LOAD_FAIL";
+
+export const REGISTER_LOAD = "REGISTER_LOAD";
+export const REGISTER_LOAD_SUCCESS = "REGISTER_LOAD_SUCCESS";
+export const REGISTER_LOAD_FAIL = "REGISTER_LOAD_FAIL";
+
+export const UPDATE_USER = "UPDATE_USER";
+export const UPDATE_USER_SUCCESS = "UPDATE_USER_SUCCESS";
+export const UPDATE_USER_FAIL = "UPDATE_USER_FAIL";
+
 export const LOGOUT_LOAD = "LOGOUT_LOAD";
 export const LOGOUT_LOAD_SUCCESS = "LOGOUT_LOAD_SUCCESS";
 export const LOGOUT_LOAD_FAIL = "LOGOUT_LOAD_FAIL";
@@ -407,3 +417,17 @@ export const CNNCC_RESET = "CNNCC_RESET";
 
 export const OPEN_MODAL = "OPEN_MODAL";
 export const CLOSE_MODAL = "CLOSE_MODAL";
+
+// GIAO DICH
+export const GD_LISTKH = "GD_LISTKH";
+export const GD_LISTKH_SUCCESS = "GD_LISTKH_SUCCESS";
+export const GD_LISTKH_FAIL = "GD_LISTKH_FAIL";
+
+export const GD_LISTNCC = "GD_LISTNCC";
+export const GD_LISTNCC_SUCCESS = "GD_LISTNCC_SUCCESS";
+export const GD_LISTNCC_FAIL = "GD_LISTNCC_FAIL";
+
+export const GD_LISTLV = "GD_LISTLV";
+export const GD_LISTLV_SUCCESS = "GD_LISTLV_SUCCESS";
+export const GD_LISTLV_FAIL = "GD_LISTLV_FAIL";
+

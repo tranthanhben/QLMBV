@@ -8,6 +8,15 @@ import {
   LOGOUT_LOAD,
   LOGOUT_LOAD_SUCCESS,
   LOGOUT_LOAD_FAIL,
+
+  REGISTER_LOAD,
+  REGISTER_LOAD_SUCCESS,
+  REGISTER_LOAD_FAIL,
+
+  UPDATE_USER,
+  UPDATE_USER_SUCCESS,
+  UPDATE_USER_FAIL
+
 } from '../actions/actionTypes';
 
 const initialState = {
@@ -33,14 +42,14 @@ export default function user(state = initialState, action = {}) {
           loadingUser: false,
           loaded: true,
           user: null,
-          errorUser: action.error
+          errorUser: action.result
         }
       case LOGIN_LOAD:
         return {
           ...state
         };
       case LOGIN_LOAD_SUCCESS:
-        location.assign('/');
+        location.assign('/sanpham');
         return {
           ...state
         };

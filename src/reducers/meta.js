@@ -193,7 +193,7 @@ const initialState = {
       name: "email",
       label: "Email",
       sort: false,
-      type: "",
+      type: "single",
       required: false,
       field: true
     },
@@ -401,6 +401,93 @@ const initialState = {
       up: false,
       type: "select",
       field: false
+    }
+  },
+  phieudathang:{
+    giaodich: {
+      "id": {
+        name: "id",
+        label: "GDID",
+        sort: true,
+        up: true,
+        type: "single",
+        field: false
+      },
+      "nvid": {
+        name: "nvid",
+        label: "NVID",
+        sort: true,
+        up: false,
+        type: "special",
+        field: false
+      },
+      "dtid": {
+        name: "dtid",
+        label: "DTID",
+        sort: true,
+        up: false,
+        type: "special",
+        field: false
+      },
+      "tongtien":{
+        name: "tongtien",
+        label: "Tong tien du tinh",
+        type: "special",
+        unit: " VND"
+      },
+      "trangthai":{
+        name: "trangthai",
+        label: "Trang Thai",
+        type: "select",
+        children:[{
+          value: "dangsuly",
+          label: "Dang Su Ly"
+        },{
+          value: "hoanthanh",
+          label: "Hoan Thanh"
+        },{
+          value: "dahuy",
+          label: "Da Huy"
+        }],
+        field: true
+      },
+      "ngayhoanthanh":{
+        name: "ngayhoanthanh",
+        label: "Ngay Hoan Thanh",
+        type: "date",
+      }
+    },
+    chitietdonhang:{
+      "gdid": {
+        name: "gdid",
+        label: "GDID",
+        type: "special",
+        field: false
+      },
+      "loaivaiid": {
+        name: "loaivaiid",
+        label: "Loai Vai",
+        type: "special",
+        field: false
+      },
+      "loaigd": {
+        name: "loaigd",
+        label: "Loai Giao Dich",
+        type: "special",
+        field: false
+      },
+      "soluong": {
+        name: "soluong",
+        label: "Loai Giao Dich",
+        type: "special",
+        field: false
+      },
+      "gia": {
+        name: "gia",
+        label: "Gia du tinh",
+        type: "number",
+        field: false
+      }
     }
   }
 }

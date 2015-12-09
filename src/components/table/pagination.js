@@ -20,7 +20,7 @@ export class Pagination extends Component {
       }
     }
     let preClass = "paginate_button btn btn-outlined btn-success previous" + (paging && paging.page === 0? " disabled":"");
-    let nextClass = "paginate_button btn btn-outlined btn-success next" + (paging && paging.page === (numPage-1)? " disabled":"");
+    let nextClass = "paginate_button btn btn-outlined btn-success next" + (paging && paging.page >= (numPage-1)? " disabled":"");
     return (
       <div className="dataTables_paginate paging_simple_numbers" id="example_paginate">
         {paging && <a className={preClass} aria-controls="example" data-dt-idx="0" tabIndex="0" id="example_previous" onClick={load(paging.page-1)}>Trước</a>}

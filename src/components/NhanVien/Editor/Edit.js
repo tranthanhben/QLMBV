@@ -4,10 +4,10 @@ import{initObject, renderField, preprocess, setValue, checkRequire, preprocessPo
 import * as nhanvienActions from '../../../actions/nhanvienActions';
 
 @connect(state =>({
-  error: state.kho.postError,
-  message: state.kho.message,
-  item: state.kho.editItem,
-  meta: state.meta.kho
+  error: state.nhanvien.postError,
+  message: state.nhanvien.message,
+  item: state.nhanvien.editItem,
+  meta: state.meta.nhanvien
 }), {...nhanvienActions})
 export default class EditNV extends Component {
   static propTypes = {
@@ -84,7 +84,7 @@ export default class EditNV extends Component {
       <div>
         <div className="row">
           <div className="col-md-4">
-            <h4>Kho</h4>
+            <h4>Nhan Vien</h4>
           </div>
           <div className="col-md-8 flex-right">
           {submited ? <p className='help-block required'>

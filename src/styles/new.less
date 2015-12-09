@@ -44,7 +44,8 @@
 }
 
 #avatar-col {
-  margin-left: -15px
+  margin-left: -15px;
+  margin-top: 5px;
 }
 .mbv-grid{
   padding-right: 15px;
@@ -411,7 +412,7 @@ table.dataTable.preline td, table.dataTable.preline th {
 .boder-right{
   padding-top: 10px;
   margin-top: -10px;
-  border-right:  2px solid #888;
+  border-right: 1px solid #888;
 }
 span.field-disabled{
   font-weight: lighter;
@@ -486,3 +487,87 @@ tr.disabled td {
 // thead > tr, tfoot>tr, tbody{
 //   display: block !important;
 // }
+.profilecover {
+  display: inline-flex;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+.profilecover-group{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.from-group-profile {
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.title-profile > label {
+    margin: 0 30px 0 10px;
+}
+.from-profile-btn {
+    padding: 30px 0 0;
+}
+.profile-btn {
+    color: #fff;
+    border-radius: 0;
+    font: 400 16px 'Roboto Slab';
+    margin: 15px auto;
+    background-color: #ec222b;
+    text-transform: uppercase;
+}
+.avatar-profile-cover {
+  height: 120px;
+  width: 120px;
+  border: 1px solid #e9f5f7;
+  border-radius: 50%;
+  /*  background-color: #eb232a;*/
+}
+.update-img-cover {
+    text-transform: uppercase;
+    border-radius: 2px;
+    color: #999999;
+    font: 700 13px RobotoSlab;
+    width: 112px;
+    height: 28px;
+    background-color: #ffffff;
+    margin-top: 10px;
+}
+.name_profile {
+    color: #414141;
+    font: 700 32px / 34px RobotoSlab;
+}
+
+.profile {
+    display: inline-flex;
+    max-height: 60px;
+}
+
+.job_profile {
+    color: #414141;
+    font: 400 18px / 34px Roboto;
+    // text-transform: uppercase;
+}
+
+.info_profile_group {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+  padding-bottom: 7px;
+  justify-content: center;
+  /* text-align: center; */
+  align-items: center;
+  height: 120px;
+}
+.btn-close{
+  position: fixed;
+  top: 0;
+  right: 0;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  color: #c9302c;
+  font-size: 20px;
+  font-weight: lighter;
+}

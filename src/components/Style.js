@@ -11,7 +11,7 @@ export const Style = {
   content_90: {
     position: 'absolute',
     width: '90%',
-    top: '20px',
+    top: '10px',
     left: '5%',
     border: '1px solid #ccc',
     background: '#fff',
@@ -24,7 +24,7 @@ export const Style = {
   content_80: {
     position: 'absolute',
     width: '80%',
-    top: '20px',
+    top: '10px',
     left: '20%',
     border: '1px solid #ccc',
     background: '#fff',
@@ -37,7 +37,7 @@ export const Style = {
   content_70: {
     position: 'absolute',
     width: '70%',
-    top: '20px',
+    top: '10px',
     left: '15%',
     border: '1px solid #ccc',
     background: '#fff',
@@ -50,7 +50,7 @@ export const Style = {
   content_60: {
     position: 'absolute',
     width: '60%',
-    top: '20px',
+    top: '10px',
     left: '20%',
     border: '1px solid #ccc',
     background: '#fff',
@@ -63,8 +63,21 @@ export const Style = {
   content_50: {
     position: 'absolute',
     width: '50%',
-    top: '20px',
+    top: '10px',
     left: '25%',
+    border: '1px solid #ccc',
+    background: '#fff',
+    overflow: 'auto',
+    WebkitOverflowScrolling: 'touch',
+    borderRadius: '4px',
+    outline: 'none',
+    padding: '10px 20px'
+  },
+  content_40: {
+    position: 'absolute',
+    width: '40%',
+    top: '10px',
+    left: '30%',
     border: '1px solid #ccc',
     background: '#fff',
     overflow: 'auto',

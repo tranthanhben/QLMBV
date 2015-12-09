@@ -3,15 +3,21 @@ import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import {logout} from '../../actions/userActions';
 import {bindActionCreators} from 'redux';
+import Modal from './Modal';
+import {Style} from '../Style';
+import UserInfo from './userInfo';
+// ten khong qua 17 ky tu
 
 class LeftNav extends Component {
   static propTypes = {
     menu: PropTypes.array,
     params: PropTypes.object,
-    logout: PropTypes.func.isRequired
+    user: PropTypes.object,
+    logout: PropTypes.func.isRequired,
   }
   state = {
-    openTabs:{}
+    openTabs:{},
+    isOpenUser: false
   }
   logout(){
     this.props.logout();
@@ -28,20 +34,34 @@ class LeftNav extends Component {
       this.setState({openTabs: obj});
     }
   }
+  toggleModal() {
+    this.setState({isOpenUser: !this.state.isOpenUser})
+  }
   render (){
-    const {menu, params} = this.props;
+    const {menu, params, user, openmodal} = this.props;
     let openTabs = this.state.openTabs;
     return (
-      <div className='tabs sidebar-nav-container'>
+      <div className='tabs sidebar-nav-container' style={{"zIndex":(this.state.isOpenUser? '23':'22')}}>
       <div id="avatar" >
         <div className="mbv-grid container-fluid" style={{"zIndex":"9999998" }}>
-          <div className="row fg-white" >
-            <div className="col-xs-4 col-xs-collapse-right" ><img src="/images/avatar0.png" width="40" height="40" /></div>
+          <div className="row fg-white" onClick={::this.toggleModal}>
+            <div className="col-xs-4 col-xs-collapse-right" ><img src={"/images/avatar0.png"} width="40" height="40" /></div>
             <div id="avatar-col" className="col-xs-8 col-xs-collapse-left" >
-              <div style={{"textAlign":"center","fontSize":"16px","position":"relative"}} >Anna Sanchez</div>
-              <div style={{"textAlign":"center","fontSize":"12px","position":"relative"}} >Nhan Vien</div>
+              <div style={{"textAlign":"center","fontSize":"16px","position":"relative"}} >{user.nhanvien? user.nhanvien.name: 'Admin'}</div>
+              <div style={{"textAlign":"center","fontSize":"11px","position":"relative"}} >{user.nhanvienid? 'Nhân Viên':'Admin'}</div>
             </div>
           </div>
+          {
+            this.state.isOpenUser?
+            <Modal  modalStyle={Style.content_40}
+            overlayStyle= {Style.overlay}
+            close={::this.toggleModal}
+            overlayClassName='modaldumb modalOverlay modalOverlay--after-open '
+            modalClassName='dumb modalContent modalContent--after-open '
+            >
+              <UserInfo close={::this.toggleModal}></UserInfo>
+            </Modal> : null
+          }
         </div>
       </div>
       {menu.map((items, index) => {
@@ -109,17 +129,19 @@ class LeftNav extends Component {
 }
 
 @connect(state => ({
-  menu: state.layout.menu
+  menu: state.layout.menu,
+  user: state.user.user
 }))
 
 export default class LeftNavContainer {
   static propTypes = {
     menu : PropTypes.array,
     params: PropTypes.object,
+    user: PropTypes.object,
     dispatch: PropTypes.func.isRequired
   }
   render(){
-    const {menu, params, dispatch} = this.props;
-    return (<LeftNav menu={menu} params={params} {...bindActionCreators({logout}, dispatch)}></LeftNav>);
+    const {menu, params, user, dispatch} = this.props;
+    return (<LeftNav menu={menu} user={user} params={params} {...bindActionCreators({logout}, dispatch)}></LeftNav>);
   }
 }

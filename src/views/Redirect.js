@@ -11,21 +11,20 @@ export default class Redirect extends Component {
     user: PropTypes.object
   }
   static fetchData(store){
-    // if(!isLoaded(store.getState())){
-    //   return store.dispatch(loadMe());
-    // }
+    if(!isLoaded(store.getState())){
+      return store.dispatch(loadMe());
+    }
   }
   componentDidMount(){
-    // if(!this.props.user){
-    //   window.location = "/khachhang";
-    // }else{
-    //   if(location.pathname === "/" ){
-    //    location.assign("/khachhang");
-    //   }
-    // }
+    if(!this.props.user){
+      location.assign("/login");
+    }else{
+      if(this.props.location.pathname === "/" ){
+       location.assign("/sanpham");
+      }
+    }
   }
   render() {
-
     return (this.props.children || <div></div>);
   }
 }

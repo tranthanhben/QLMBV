@@ -7,13 +7,11 @@ import {setValueLogin, validateEmail, parseError} from '../meta';
 
 function checkRequire(user){
   user = user || {};
-  if(!user.email){
-    return "Vui lòng nhập email!"
-  }else if(validateEmail(user.email)){
-    return validateEmail(user.email);
+  if(!user.username){
+    return "Vui lòng nhập Username!"
   }
   if(!user.password){
-    return "Vui lòng nhập password!"
+    return "Vui lòng nhập Password!"
   }
   return '';
 }
@@ -25,20 +23,30 @@ class LoginPage extends Component {
 
   state = {
     user: {
-      email:"",
+      username:"",
       password:""
     },
-    message:""
+    message:"",
+    submiting: false,
+    submited: false
   }
-
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.error){
+      this.setState({
+        submiting: false,
+        message: parseError(nextProps.error.code)
+      });
+    }
+  }
   onSubmit(){
     event.preventDefault();
+    this.setState({submiting: true, submited: true});
     let user = {};
     let refs = this.refs
-    user.email = refs.email.getDOMNode().value.trim();
+    user.username = refs.username.getDOMNode().value.trim();
     user.password = refs.password.getDOMNode().value.trim();
     if(checkRequire(user)){
-      this.setState({message: checkRequire(user)});
+      this.setState({message: checkRequire(user), submiting: false});
     }else{
       this.props.login(user);
     }
@@ -47,10 +55,8 @@ class LoginPage extends Component {
   handleRequireEmail(){
     let mes = '';
     let user = this.state.user;
-    if(!user.email){
-      mes = "Vui lòng nhập email!"
-    }else {
-      mes = validateEmail(user.email);
+    if(!user.username){
+      mes = "Vui lòng nhập Username!"
     }
     this.setState({message: mes});
   }
@@ -65,28 +71,27 @@ class LoginPage extends Component {
   }
 
   handleChange(event) {
-    this.setState({ user: setValueLogin(event, this.state.user) });
+    this.setState({ user: setValueLogin(event, this.state.user), submited: false });
   }
 
   render(){
-    const {user, message}= this.state;
-    let error = '';
-    if(this.props.error){
-      error = parseError(this.props.error.code);
-    }
+    const {user, message, submited, submiting}= this.state;
     let flag = checkRequire(user);
     return (
       <div className='page login'>
         <form onSubmit={::this.onSubmit}>
         <div className="logo"></div>
         <div className="login-block">
-            <h1>Login</h1>
-            <input id="username" type="email" data-addr='email' ref="email" placeholder='Email'
+            <h1>Đăng Nhập</h1>
+            <input id="username" type="username" data-addr='username' ref="username" placeholder='Username'
                   onChange={::this.handleChange} onBlur={::this.handleRequireEmail} />
             <input id="password" data-addr='password' ref="password" placeholder='Password'
                   type='password'
                   onChange={::this.handleChange} onBlur={::this.handleRequirePassword} />
-            <button className='btn btn-success form-control' type='submit'  value='Login' disabled={flag ? 'disabled' : ''}>Submit</button>
+            <button className='btn btn-success form-control' type='submit'  value='Login' disabled={flag || submited ? 'disabled' : ''}>{submiting? <span className="fa fa-spinner fa-pulse"></span>:'Đăng nhập'}</button>
+            {message && submited && !submiting? <p className='help-block required'>
+              {message}
+            </p>:null}
         </div>
         </form>
       </div>

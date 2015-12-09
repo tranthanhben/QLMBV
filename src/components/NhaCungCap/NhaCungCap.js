@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import Modal from '../layout/Modal';
 import EditNCC from './Editor/EditNCC';
+import EditPDH from './Editor/EditPDH';
 import * as layoutActions from '../../actions/layoutActions';
 import {Style} from '../Style';
 
@@ -17,11 +18,17 @@ export default class NhaCungCap extends Component {
     openModal: PropTypes.func.isRequired
   }
   state = {
-    isOpenEdit: false
+    isOpenEdit: false,
+    isEditPDH: false,
+    isEditPNH: false
   }
   toggleModal() {
     this.props.openModal(!this.state.isOpenEdit);
     this.setState({isOpenEdit: !this.state.isOpenEdit});
+  }
+  openPDH(){
+    this.props.openModal(!this.state.isEditPDH);
+    this.setState({isEditPDH: !this.state.isEditPDH});
   }
   render(){
     const {menuparse, openmodal} = this.props;
@@ -37,13 +44,13 @@ export default class NhaCungCap extends Component {
                 <div className="navbar-content pull-right">
                 <ul className="nav-main pull-right">
                   <li >
-                    <a ><span key="icoen" className={'fa fa-truck fa-flip-horizontal'}></span>{" Tao PNH"}</a>
+                    <a ><span key="icoen" className={'fa fa-truck fa-flip-horizontal'}></span>{" Tạo PNH"}</a>
                   </li>
-                  <li >
-                    <a ><span key="icoen" className={'fa fa-shopping-cart fa-flip-horizontal'}></span>{" Tao PDH"}</a>
+                  <li onClick={::this.openPDH}>
+                    <a ><span key="icoen" className={'fa fa-shopping-cart fa-flip-horizontal'}></span>{" Tạo PDH"}</a>
                   </li>
                   <li onClick={::this.toggleModal}>
-                    <a ><span key="icoen" className={'fa fa-user'}></span>{" Tao NCC"}</a>
+                    <a ><span key="icoen" className={'fa fa-user'}></span>{" Tạo NCC"}</a>
                   </li>
                 </ul>
                 </div>
@@ -57,16 +64,29 @@ export default class NhaCungCap extends Component {
             <div className="col-xs-12">
               <div className="mbv-panel">
                 <div className="mbv-panel-body">
-                {this.state.isOpenEdit?
+                {
+                  this.state.isOpenEdit?
                   <Modal  modalStyle={Style.content_60}
                   overlayStyle= {Style.overlay}
-                  close={::this.toggleModal}
+                  close = {::this.toggleModal}
                   overlayClassName='modaldumb modalOverlay modalOverlay--after-open '
                   modalClassName='dumb modalContent modalContent--after-open '
                   >
                     <EditNCC close={::this.toggleModal}></EditNCC>
-                  </Modal> : null}
-                  {this.props.children}
+                  </Modal> : null
+                }
+                {
+                  this.state.isEditPDH?
+                  <Modal  modalStyle={Style.content_60}
+                  overlayStyle= {Style.overlay}
+                  close = {::this.openPDH}
+                  overlayClassName='modaldumb modalOverlay modalOverlay--after-open '
+                  modalClassName='dumb modalContent modalContent--after-open '
+                  >
+                    <EditPDH close={::this.openPDH}></EditPDH>
+                  </Modal> : null
+                }
+                {this.props.children}
                 </div>
               </div>
             </div>

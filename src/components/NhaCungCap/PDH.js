@@ -1,9 +1,9 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import * as pdhAtions from '../../actions/nhacungcap/pdhAtions';
+import * as pdhActions from '../../actions/nhacungcap/pdhActions';
 import {THead, TBody, TFoot} from '../table/row';
 import {Pagination} from '../table/pagination';
-import {isLoaded, loadList as loadPDH} from '../../actions/nhacungcap/pdhAtions';
+import {isLoaded, loadList as loadPDH} from '../../actions/nhacungcap/pdhActions';
 
 @connect(
   state =>({
@@ -12,7 +12,7 @@ import {isLoaded, loadList as loadPDH} from '../../actions/nhacungcap/pdhAtions'
     error: state.phieudathang.error,
     loading: state.phieudathang.loading
   }),
-  {...pdhAtions})
+  {...pdhActions})
 
 export default
 class PDH extends Component{
