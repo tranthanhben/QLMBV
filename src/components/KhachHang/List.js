@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import * as khachhangActions from '../../actions/khachhang/khachhangActions';
 import * as layoutActions from '../../actions/layoutActions';
 import {THead, TBody, TFoot} from '../table/row';
-import {Pagination} from '../table/pagination';
+import {Pagination, PageShow} from '../table/pagination';
 import {isLoaded, loadList as loadKH} from '../../actions/khachhang/khachhangActions';
 import Modal from '../layout/Modal';
 import {ViewKH} from './Editor/ViewFull';
@@ -174,7 +174,7 @@ class List extends Component{
                   >
                     <EditKH id={idEdit} close={::this.editModal} ></EditKH>
                   </Modal> : null}
-                <div className="dataTables_info" id="example_info" role="status" aria-live="polite">Hiển thị từ {paging && paging.page * paging.page_size+ 1} đến {paging && paging.page * paging.page_size+ listKH.length} của {paging && paging.total}  mục.</div>
+                <PageShow paging={paging} length={listKH.length}></PageShow>
                 <Pagination load={::this.paginationLoad} paging={paging}></Pagination>
               </div>
             </div>

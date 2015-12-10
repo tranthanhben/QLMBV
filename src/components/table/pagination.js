@@ -33,3 +33,15 @@ export class Pagination extends Component {
   }
 }
 
+export class PageShow extends Component {
+  static propTypes ={
+    paging: PropTypes.object,
+    length: PropTypes.string
+  }
+  render(){
+    const {paging, length} = this.props;
+    return (
+      <div className="dataTables_info" id="example_info" role="status" aria-live="polite">Hiển thị từ {paging && paging.total? paging.page * paging.page_size+ 1: '0'} đến {paging && paging.page * paging.page_size + length || 0} của {paging && paging.total || 0}  mục.</div>
+    );
+  }
+}

@@ -11,6 +11,19 @@ import {
   GD_LISTLV,
   GD_LISTLV_SUCCESS,
   GD_LISTLV_FAIL,
+
+  GD_DEL_CTDH,
+  GD_DEL_CTDH_SUCCESS,
+  GD_DEL_CTDH_FAIL,
+
+  GD_POST,
+  GD_POST_SUCCESS,
+  GD_POST_FAIL,
+
+  GD_PUT,
+  GD_PUT_SUCCESS,
+  GD_PUT_FAIL,
+
 } from './actionTypes';
 
 export function loadKH(){
@@ -21,7 +34,7 @@ export function loadKH(){
         page: 0,
         page_size : 100,
         name: '',
-        sort:'name'
+        sort:'ten'
       })
     })
   };
@@ -34,7 +47,7 @@ export function loadNCC(){
         page: 0,
         page_size : 100,
         name: '',
-        sort:'name'
+        sort:'ten'
       })
     })
   };
@@ -47,9 +60,32 @@ export function loadLV(){
         page: 0,
         page_size : 100,
         name: '',
-        sort:'name'
+        sort:'ten'
       })
     })
+  };
+}
+export function postGD(data, kind){
+  if(data.id){
+    return {
+      types: [GD_PUT, GD_PUT_SUCCESS, GD_PUT_FAIL],
+      promise: (client) => client.put(`/giaodich/${kind}/${data.id}`, {
+        data: JSON.stringify(data)
+      })
+    };
+  }
+  return {
+    types: [GD_POST, GD_POST_SUCCESS, GD_POST_FAIL],
+    promise: (client) => client.post(`/giaodich/${kind}`, {
+      data: JSON.stringify(data)
+    })
+  };
+}
+
+export function delCTDH(id){
+  return {
+    types: [GD_DEL_CTDH, GD_DEL_CTDH_SUCCESS, GD_DEL_CTDH_FAIL],
+    promise: (client) => client.del('/chi_tiet_don_hang/'+ id)
   };
 }
 export function isLoaded(globalState) {

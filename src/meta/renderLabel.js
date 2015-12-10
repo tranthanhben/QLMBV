@@ -3,7 +3,7 @@ export function renderLabel(field) {
   if (!field)
     field = {};
   return (
-    <label className='control-label'>
+    <label className='control-label' key={field.label}>
       <span>
         {field.label}
       </span>

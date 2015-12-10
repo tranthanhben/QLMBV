@@ -209,7 +209,7 @@ inputs.select = function (field) {
         <option key='select' value=''>{'-- ' + field.label + ' --'}</option>
         {field.options.map(function (f) {
           return (
-            <option key={f.name} value={f.value}>
+            <option key={f.label} value={f.value}>
               {f.label}
             </option>
           );
@@ -256,6 +256,7 @@ export function preprocessPost(object, meta){
     if (!!field.children && field.type === "object")
       object[i] = parseNumber(object[i], field.children);
     if (field.type === "number"){
+      console.log("here number");
       object[i] = parseFloat(object[i]) || 0;
     }
     if (field.type ==="date"){

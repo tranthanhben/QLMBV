@@ -10,6 +10,18 @@ import {
   GD_LISTLV,
   GD_LISTLV_SUCCESS,
   GD_LISTLV_FAIL,
+
+  GD_DEL_CTDH,
+  GD_DEL_CTDH_SUCCESS,
+  GD_DEL_CTDH_FAIL,
+
+  GD_POST,
+  GD_POST_SUCCESS,
+  GD_POST_FAIL,
+
+  GD_PUT,
+  GD_PUT_SUCCESS,
+  GD_PUT_FAIL,
 } from 'actions/actionTypes';
 const initialState = {
   loadKH: false,
@@ -37,7 +49,7 @@ export default function loaivai(state = initialState, action = {}){
         loadKH: true,
         listKH: [],
         pagingKH: {},
-        errorLoadKH: action.error
+        errorLoadKH: action.result
       };
     case GD_LISTNCC:
       return {
@@ -57,7 +69,7 @@ export default function loaivai(state = initialState, action = {}){
         loadNCC: true,
         listNCC: [],
         pagingNCC: {},
-        errorLoadNCC: action.error
+        errorLoadNCC: action.result
       };
     case GD_LISTLV:
       return {
@@ -77,8 +89,61 @@ export default function loaivai(state = initialState, action = {}){
         loadLV: true,
         listLV: [],
         pagingLV: {},
-        errorLoadLV: action.error
+        errorLoadLV: action.result
       };
+    case GD_DEL_CTDH:
+      return {
+        ...state,
+        deletingCTDH: true
+      };
+    case GD_DEL_CTDH_SUCCESS:
+      return {
+        ...state,
+        delCTDH: true
+      };
+    case GD_DEL_CTDH_FAIL:
+      return {
+        ...state,
+        delCTDH: false,
+        errorDel: action.result
+      };
+    case GD_PUT:
+      return{
+        ...state,
+        posting: true
+      };
+    case GD_PUT_SUCCESS:
+      return{
+        ...state,
+        posting: false,
+        gdItem: action.result,
+      };
+    case GD_PUT_FAIL:
+      return{
+        ...state,
+        posting: false,
+        gdItem: null,
+        errorPost: action.result
+      };
+    case GD_POST:
+      return{
+        ...state,
+        posting: true
+      };
+    case GD_POST_SUCCESS:
+      return{
+        ...state,
+        posting: false,
+        gdItem: action.result,
+      };
+    case GD_POST_FAIL:
+      return{
+        ...state,
+        posting: false,
+        gdItem: null,
+        errorPost: action.result
+      };
+
     default:
       return state;
   }

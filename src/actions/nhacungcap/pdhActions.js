@@ -20,6 +20,10 @@ import {
   PDH_DELETE_SUCCESS,
   PDH_DELETE_FAIL,
 
+  PDH_CTDH,
+  PDH_CTDH_SUCCESS,
+  PDH_CTDH_FAIL,
+
   PDH_GET,
   PDH_GET_SUCCESS,
   PDH_GET_FAIL,
@@ -73,6 +77,15 @@ export function postItem(data){
   return {
     types: [PDH_POST, PDH_POST_SUCCESS, PDH_POST_FAIL],
     promise: (client) => client.post('/giaodich/phieu_dat_hang', {
+      data: JSON.stringify(data)
+    })
+  };
+}
+export function postCTDH(data){
+  console.log("data", data);
+  return {
+    types: [PDH_CTDH, PDH_CTDH_SUCCESS, PDH_CTDH_FAIL],
+    promise: (client) => client.post('/chi_tiet_don_hang', {
       data: JSON.stringify(data)
     })
   };

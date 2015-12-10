@@ -19,6 +19,10 @@ import {
   PDH_DELETE_SUCCESS,
   PDH_DELETE_FAIL,
 
+  PDH_CTDH,
+  PDH_CTDH_SUCCESS,
+  PDH_CTDH_FAIL,
+
   PDH_RESET
 } from 'actions/actionTypes';
 
@@ -134,7 +138,24 @@ export default function phieudathang(state = initialState, action = {}){
         item: null,
         errorDel: action.error
       };
-
+    case PDH_CTDH:
+      return {
+        ...state,
+        postingCTDH: true
+      };
+    case PDH_CTDH_SUCCESS:
+      return {
+        ...state,
+        postingCTDH: false,
+        ctdh: action.result,
+      };
+    case PDH_CTDH_FAIL:
+      return {
+        ...state,
+        postingCTDH: false,
+        ctdh: null,
+        errorPost: action.result
+      };
     case PDH_RESET:
       return {
         ...state,

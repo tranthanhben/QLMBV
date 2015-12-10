@@ -446,8 +446,8 @@ const initialState = {
         type: "single",
         field: false
       },
-      "nvid": {
-        name: "nvid",
+      "nhanvienid": {
+        name: "nhanvienid",
         label: "NVID",
         sort: true,
         up: false,
@@ -460,13 +460,15 @@ const initialState = {
         sort: true,
         up: false,
         type: "special",
+        required: true,
         field: false
       },
       "tongtien":{
         name: "tongtien",
         label: "Tong tien du tinh",
-        type: "special",
-        unit: " VND"
+        type: "number",
+        unit: " VND",
+        field: true
       },
       "trangthai":{
         name: "trangthai",
@@ -491,11 +493,23 @@ const initialState = {
         name: "ngayhoanthanh",
         label: "Ngay Hoan Thanh",
         type: "date",
+        required: false,
+        field: true,
+        view: true
       }
     },
     ctdh:{
-      "gdid": {
-        name: "gdid",
+      "id": {
+        name: "id",
+        label: "DHID",
+        sort: true,
+        up: true,
+        type: "single",
+        field: false,
+        view: false
+      },
+      "giaodichid": {
+        name: "giaodichid",
         label: "GDID",
         type: "special",
         field: false,
@@ -517,14 +531,14 @@ const initialState = {
       "soluong": {
         name: "soluong",
         label: "So Luong",
-        type: "special",
-        field: false
+        type: "number",
+        field: true
       },
       "gia": {
         name: "gia",
         label: "Gia du tinh",
         type: "number",
-        field: false
+        field: true
       }
     }
   }
