@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import * as khachhangActions from '../../actions/khachhang/khachhangActions';
 import * as layoutActions from '../../actions/layoutActions';
-import {THead, TBody, TFoot} from '../table/row';
+import {THead, TBody, TFoot} from '../table/rowForCN';
 import {Pagination, PageShow} from '../table/pagination';
 import Modal from '../layout/Modal';
 import {ViewKH} from './Editor/ViewFull';

@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import * as nhacungcapActions from '../../actions/nhacungcap/nhacungcapActions';
 
-import {THead, TBody, TFoot} from '../table/row';
+import {THead, TBody, TFoot} from '../table/rowForCN';
 import {Pagination, PageShow} from '../table/pagination';
 import * as layoutActions from '../../actions/layoutActions';
 import Modal from '../layout/Modal';
@@ -148,19 +148,19 @@ class List extends Component{
                 <tbody>
                   {listNCC && listNCC.map((item, index) =>{
                     return(
-                      <TBody item={item} index={index} sort={options.sort} meta={meta} paging={paging} key={index} view={::this.viewItemFull} edit={::this.editItem}></TBody>
+                      <TBody item={item} index={index} sort={options.sort} meta={meta} paging={paging} key={index} view={::this.viewItemFull} ></TBody>
                     )
                   })}
                 </tbody>
               </table>
               {openView?
-                  <Modal  modalStyle={Style.content_60}
+                  <Modal  modalStyle={Style.content_50}
                   overlayStyle= {Style.overlay}
                   close={::this.viewModal}
                   overlayClassName='modaldumb modalOverlay modalOverlay--after-open '
                   modalClassName='dumb modalContent modalContent--after-open '
                   >
-                    <ViewNCC meta={meta} item={itemView} close={::this.viewModal} edit={::this.editItem}></ViewNCC>
+                    <ViewNCC meta={meta} item={itemView} close={::this.viewModal}></ViewNCC>
                   </Modal> : null}
               <PageShow paging={paging} length={listNCC &&listNCC.length} />
               <Pagination load={::this.paginationLoad} paging={paging}></Pagination>
