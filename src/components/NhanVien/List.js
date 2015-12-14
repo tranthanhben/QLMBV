@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import * as nhanvienActions from '../../actions/nhanvienActions';
 import * as layoutActions from '../../actions/layoutActions';
 import {THead, TBody, TFoot} from '../table/row';
-import {Pagination} from '../table/pagination';
+import {Pagination, PageShow} from '../table/pagination';
 import EditNV from './Editor/Edit';
 import {ViewNV} from './Editor/ViewFull';
 import {Style} from '../Style';
@@ -167,7 +167,7 @@ class List extends Component{
                   >
                     <EditNV id={idEdit} close={::this.editModal} ></EditNV>
                   </Modal> : null}
-                <div className="dataTables_info" id="example_info" role="status" aria-live="polite">Hiển thị từ {paging && paging.page * paging.page_size+ 1} đến {paging && paging.page * paging.page_size+ listNV.length} của {paging && paging.total}  mục.</div>
+                <PageShow paging={paging} length={listNV.length}/>
                 <Pagination load={::this.paginationLoad} paging={paging}></Pagination>
               </div>
             </div>

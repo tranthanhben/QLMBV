@@ -257,6 +257,10 @@ export const PDH_CTDH = "PDH_CTDH";
 export const PDH_CTDH_SUCCESS = "PDH_CTDH_SUCCESS";
 export const PDH_CTDH_FAIL = "PDH_CTDH_FAIL";
 
+export const PDH_GET = "PDH_GET";
+export const PDH_GET_SUCCESS = "PDH_GET_SUCCESS";
+export const PDH_GET_FAIL = "PDH_GET_FAIL";
+
 export const PDH_RESET = "PDH_RESET";
 
 // PHIEU NHAP HANG TU NHA CUNG CAP
@@ -279,6 +283,10 @@ export const PNH_PUT_FAIL = "PNH_PUT_FAIL";
 export const PNH_DELETE = "PNH_DELETE";
 export const PNH_DELETE_SUCCESS = "PNH_DELETE_SUCCESS";
 export const PNH_DELETE_FAIL = "PNH_DELETE_FAIL";
+
+export const PNH_CTDH = "PNH_CTDH";
+export const PNH_CTDH_SUCCESS = "PNH_CTDH_SUCCESS";
+export const PNH_CTDH_FAIL = "PNH_CTDH_FAIL";
 
 export const PNH_RESET = "PNH_RESET";
 

@@ -23,6 +23,10 @@ import {
   PDH_CTDH_SUCCESS,
   PDH_CTDH_FAIL,
 
+  PDH_GET,
+  PDH_GET_SUCCESS,
+  PDH_GET_FAIL,
+
   PDH_RESET
 } from 'actions/actionTypes';
 
@@ -72,6 +76,28 @@ export default function phieudathang(state = initialState, action = {}){
         loadingOne: false,
         item: {},
         error: action.error
+      };
+
+    case PDH_GET:
+      return {
+        ...state,
+        getding: true
+      };
+    case PDH_GET_SUCCESS:
+      console.log("success");
+      return {
+        ...state,
+        getding: false,
+        editItem: action.result,
+        ctdh: action.result.chitietdonhang
+      };
+    case PDH_GET_FAIL:
+      console.log("success");
+      return {
+        ...state,
+        getding: false,
+        editItem: null,
+        error: action.result
       };
 
     case PDH_POST:

@@ -54,7 +54,7 @@ export default function nhacungcap(state = initialState, action = {}){
         list: [],
         reloadList: false,
         paging: null,
-        error: action.error
+        error: action.result
       };
 
     case NCC_ONE_LOAD:
@@ -73,7 +73,7 @@ export default function nhacungcap(state = initialState, action = {}){
         ...state,
         loadingOne: false,
         item: null,
-        error: action.error
+        error: action.result
       };
 
     case NCC_GET:
@@ -92,7 +92,7 @@ export default function nhacungcap(state = initialState, action = {}){
         ...state,
         getding: false,
         editItem: {},
-        error: action.error
+        error: action.result
       };
 
     case NCC_POST:
@@ -115,7 +115,7 @@ export default function nhacungcap(state = initialState, action = {}){
         editItem: null,
         message: false,
         posting: false,
-        errorPost: action.error
+        errorPost: action.result
       };
 
     case NCC_PUT:
@@ -137,7 +137,7 @@ export default function nhacungcap(state = initialState, action = {}){
         editItem: null,
         message: false,
         posting: false,
-        errorPost: action.error
+        errorPost: action.result
       };
 
     case NCC_DELETE:
@@ -157,7 +157,7 @@ export default function nhacungcap(state = initialState, action = {}){
         ...state,
         deleting: false,
         item: null,
-        errorDel: action.error
+        errorDel: action.result
       };
 
     case NCC_RESET:

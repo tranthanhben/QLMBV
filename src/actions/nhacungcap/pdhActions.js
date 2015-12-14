@@ -41,7 +41,7 @@ export function loadItem(id){
 export function getItem(id){
   return {
     types: [PDH_GET, PDH_GET_SUCCESS, PDH_GET_FAIL],
-    promise: (client) => client.get('/giaodich/phieu_dat_hang/'+id)
+    promise: (client) => client.get('/giaodich/phieu_dat_hang/'+ id)
   };
 }
 

@@ -94,7 +94,9 @@ const initialState = {
     '/nhanvien':'Nhân Viên',
     '/kho':'Kho',
     'lohang': 'Lô Hàng',
-    'loaivai': 'Loại Vải'
+    'loaivai': 'Loại Vải',
+    'khachhang': 'Công Nợ Khách Hàng',
+    'nhacungcap': 'Công Nợ Nhà Cung Cấp'
   },
 
 };

@@ -86,10 +86,17 @@ export class TBody extends Component {
         trList.push(
         <td className={classField} key={field.name} >{numeral(item[key]).format('0,0')+(field.unit|| '')}</td>
         );
+      }else if(field.type === "gia"){
+        if(item[key]=== -1){
+          trList.push(<td className={classField} key={field.name} >Chưa cập nhật</td>);
+        }else{
+          trList.push(
+          <td className={classField} key={field.name} >{numeral(item[key]).format('0,0')+(field.unit|| '')}</td>
+          );
+        }
       }else{
         trList.push(
-        <td className={classField} key={field.name} >{item[key]}</td>
-        );
+        <td className={classField} key={field.name} >{item[key]}</td>);
       }
 
     }

@@ -27,12 +27,6 @@ export default class EditPDH extends Component {
     loadLV: PropTypes.func.isRequired,
   }
   state = {
-    gdItem: {
-      nhanvienid: this.props.user.nhanvienid || 'admin',
-      tinhtrangdonhang: 'chuaxuly',
-      doitacid: '',
-      ngayhoanthanh: changeDTI(datetime(new Date()))
-    },
     giaodichid: this.props.giaodichid,
     ctdh:this.props.gdItem && this.props.gdItem.chitietdonhang || [],
     edited: false,
@@ -49,11 +43,18 @@ export default class EditPDH extends Component {
   }
   componentWillMount(){
     if(this.props.giaodichid){
-      this.props.getItem(this.props.giaodichid);
+      this.props.getGD(giaodichid);
       this.state.newGD = false;
     }
     this.props.loadNCC();
     this.props.loadLV();
+    let gdItem = {
+      nhanvienid: this.props.user.nhanvienid || 'admin',
+      trangthai: 'chuaxuly',
+      doitacid: '',
+      ngayhoanthanh: changeDTI(datetime(new Date()))
+    };
+    this.state.gdItem = gdItem;
   }
   componentWillReceiveProps(nextProps) {
     if(nextProps.gdItem && this.state.submiting){
@@ -67,20 +68,18 @@ export default class EditPDH extends Component {
         submiting: false
       });
     }else if(nextProps.gdItem){
-      console.log("set item");
       this.setState({
         giaodichid: nextProps.gdItem.id,
         ctdh: nextProps.gdItem.chitietdonhang ||[],
         gdItem: nextProps.gdItem,
         newGD: false,
-        edited: false,
         submiting: false
       });
     }
     if(nextProps.ctdh){
+      console.log(nextProps.ctdh);
       this.setState({
-        ctdh: nextProps.ctdh || [],
-        editedDH: false
+        ctdh: nextProps.ctdh || []
       });
     }
   }
@@ -179,7 +178,6 @@ export default class EditPDH extends Component {
     const {gdItem, edited, submited, showFullField, giaodichid, ctdh, editedDH} = this.state;
     const metaGD = meta && preprocess(meta.giaodich) || {};
     const metaCTDH = meta && preprocess(meta.ctdh) || {};
-    console.log(this.props.gdItem, gdItem)
     return (
       <div>
         <div className="row">
@@ -210,9 +208,9 @@ export default class EditPDH extends Component {
                   })}
                   </select>
                 </div>
-                <div className='form-group' key="tinhtrangdonhang">
-                  {renderLabel(metaGD.tinhtrangdonhang)}
-                  {metaGD && metaGD["tinhtrangdonhang"].$input(gdItem,this)}
+                <div className='form-group' key="trangthai">
+                  {renderLabel(metaGD.trangthai)}
+                  {metaGD && metaGD["trangthai"].$input(gdItem,this)}
                 </div>
               </div>
               <div className="col-md-4">

@@ -19,10 +19,6 @@ import {
   PNH_DELETE_SUCCESS,
   PNH_DELETE_FAIL,
 
-  PNH_CTDH,
-  PNH_CTDH_SUCCESS,
-  PNH_CTDH_FAIL,
-
   PNH_RESET
 } from 'actions/actionTypes';
 
@@ -30,7 +26,7 @@ const initialState = {
   loaded: false
 }
 
-export default function phieudathang(state = initialState, action = {}){
+export default function phieunhaphang(state = initialState, action = {}){
   switch (action.type){
     case PNH_LIST_LOAD:
       return {
@@ -138,24 +134,7 @@ export default function phieudathang(state = initialState, action = {}){
         item: null,
         errorDel: action.error
       };
-    case PNH_CTDH:
-      return {
-        ...state,
-        postingCTDH: true
-      };
-    case PNH_CTDH_SUCCESS:
-      return {
-        ...state,
-        postingCTDH: false,
-        ctdh: action.result,
-      };
-    case PNH_CTDH_FAIL:
-      return {
-        ...state,
-        postingCTDH: false,
-        ctdh: null,
-        errorPost: action.result
-      };
+
     case PNH_RESET:
       return {
         ...state,

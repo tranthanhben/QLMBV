@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import * as pmhActions from '../../actions/khachhang/pmhActions';
 import {THead, TBody, TFoot} from '../table/row';
-import {Pagination} from '../table/pagination';
+import {Pagination, PageShow} from '../table/pagination';
 import {isLoaded, loadList as loadPMH} from '../../actions/khachhang/pmhActions';
 
 @connect(
@@ -164,7 +164,7 @@ class PMH extends Component{
 
                   </tbody>
                 </table>
-                <div className="dataTables_info" id="example_info" role="status" aria-live="polite">Showing {paging && paging.page * paging.page_size+ 1} to {paging && paging.page * paging.page_size+ listPMH.length} of {paging && paging.total} entries</div>
+                <PageShow paging={paging} length={listPMH.length}/>
                 <Pagination load={::this.paginationLoad} paging={paging}></Pagination>
               </div>
             </div>

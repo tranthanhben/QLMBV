@@ -11,7 +11,7 @@ import EditK from './Editor/Edit';
   menuparse: state.layout.menuparse,
   openmodal: state.layout.openmodal
 }), {...layoutActions})
-export default class SanPham extends Component{
+export default class Kho extends Component{
   static propTypes = {
     menuparse : PropTypes.object,
     openmodal : PropTypes.bool,

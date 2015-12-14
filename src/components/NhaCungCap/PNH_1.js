@@ -1,23 +1,23 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import * as pxhActions from '../../actions/khachhang/pxhActions';
+import * as pnhActions from '../../actions/nhacungcap/pnhActions';
 import {THead, TBody, TFoot} from '../table/row';
 import {Pagination, PageShow} from '../table/pagination';
-import {isLoaded, loadList as loadPXH} from '../../actions/khachhang/pxhActions';
+import {isLoaded, loadList as loadPNH} from '../../actions/nhacungcap/pnhActions';
 
 @connect(
   state =>({
-    listPXH: state.phieuxuathang.list,
-    paging: state.phieuxuathang.paging,
-    error: state.phieuxuathang.error,
-    loading: state.phieuxuathang.loading
+    listPNH: state.phieunhaphang.list,
+    paging: state.phieunhaphang.paging,
+    error: state.phieunhaphang.error,
+    loading: state.phieunhaphang.loading
   }),
-  {...pxhActions})
+  {...pnhActions})
 
 export default
-class PXH extends Component{
+class PNH extends Component{
   static propTypes = {
-    listPXH: PropTypes.array,
+    listPNH: PropTypes.array,
     error: PropTypes.object,
     paging: PropTypes.object,
     loading: PropTypes.bool,
@@ -26,7 +26,7 @@ class PXH extends Component{
 
   static fetchData(store){
     if(!isLoaded(store.getState)){
-      return store.dispatch(loadPXH());
+      return store.dispatch(loadPNH());
     }
   }
 
@@ -37,15 +37,15 @@ class PXH extends Component{
       sort: ''
     },
     meta:{
-      "pxhid":{
+      "pnhid":{
         name: "id",
-        label: "PXHID",
+        label: "PNHID",
         sort: true
       },
-      "pmhid":{
-        name: "pmhid",
-        label: "PMHID",
-        sort: true
+      "lhid":{
+        name: "lhid",
+        label: "LHID",
+        sort: false
       },
       "nvid":{
         name: "nvid",
@@ -128,7 +128,7 @@ class PXH extends Component{
     }
   }
   render(){
-    const {listPXH, paging} = this.props;
+    const {listPNH, paging} = this.props;
     const {options, meta} = this.state;
     return (
         <div className="mbv-grid container-fluid" style={{"zIndex": "9999983"}}>
@@ -157,7 +157,7 @@ class PXH extends Component{
                     <TFoot meta={meta} ></TFoot>
                   </tfoot>
                   <tbody>
-                    {listPXH && listPXH.map((item, index) =>{
+                    {listPNH && listPNH.map((item, index) =>{
                       return(
                         <TBody item={item} index={index} sort={options.sort} meta={meta} paging={paging} key={index}></TBody>
                       )
@@ -165,7 +165,7 @@ class PXH extends Component{
 
                   </tbody>
                 </table>
-                <PageShow paging={paging} length={listPXH.length}/>
+                <PageShow paging={paging} length={listPNH.length}/>
                 <Pagination load={::this.paginationLoad} paging={paging}></Pagination>
               </div>
             </div>

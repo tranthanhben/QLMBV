@@ -20,28 +20,13 @@ import {
   PNH_DELETE_SUCCESS,
   PNH_DELETE_FAIL,
 
-  PNH_CTDH,
-  PNH_CTDH_SUCCESS,
-  PNH_CTDH_FAIL,
-
-  PNH_GET,
-  PNH_GET_SUCCESS,
-  PNH_GET_FAIL,
-
   PNH_RESET
 } from '../actionTypes';
 
 export function loadItem(id){
   return {
     types: [PNH_ONE_LOAD, PNH_ONE_LOAD_SUCCESS, PNH_ONE_LOAD_FAIL],
-    promise: (client) => client.get('/giaodich/phieu_nhap_hang/'+id)
-  };
-}
-
-export function getItem(id){
-  return {
-    types: [PNH_GET, PNH_GET_SUCCESS, PNH_GET_FAIL],
-    promise: (client) => client.get('/giaodich/phieu_nhap_hang/'+id)
+    promise: (client) => client.get('/phieu_nhap_hang/'+id)
   };
 }
 
@@ -55,7 +40,7 @@ export function deleteItem(id){
 export function loadList(options = {}){
   return {
     types: [PNH_LIST_LOAD, PNH_LIST_LOAD_SUCCESS, PNH_LIST_LOAD_FAIL],
-    promise: (client) => client.get('/giaodich/phieu_nhap_hang',{
+    promise: (client) => client.get('/phieu_nhap_hang',{
       params: makeQuery({
         page: options.page || 0,
         page_size : options.page_size || 10,
@@ -69,23 +54,14 @@ export function postItem(data){
   if(data.id){
     return {
       types: [PNH_PUT, PNH_PUT_SUCCESS, PNH_PUT_FAIL],
-      promise: (client) => client.put(`/giaodich/phieu_nhap_hang/${data.id}`, {
+      promise: (client) => client.put(`/phieu_nhap_hang/${data.id}`, {
         data: JSON.stringify(data)
       })
     };
   }
   return {
     types: [PNH_POST, PNH_POST_SUCCESS, PNH_POST_FAIL],
-    promise: (client) => client.post('/giaodich/phieu_nhap_hang', {
-      data: JSON.stringify(data)
-    })
-  };
-}
-export function postCTDH(data){
-  console.log("data", data);
-  return {
-    types: [PNH_CTDH, PNH_CTDH_SUCCESS, PNH_CTDH_FAIL],
-    promise: (client) => client.post('/chi_tiet_don_hang', {
+    promise: (client) => client.post('/phieu_nhap_hang', {
       data: JSON.stringify(data)
     })
   };
@@ -97,5 +73,5 @@ export function reset(){
   }
 }
 export function isLoaded(globalState) {
-  return globalState.phieudathang && globalState.phieudathang.loaded;
+  return globalState.phieunhaphang && globalState.phieunhaphang.loaded;
 }

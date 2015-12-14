@@ -12,7 +12,8 @@ import {
   ThongKe,
   SanPham,
   NhanVien,
-  Kho
+  Kho,
+  CongNo
 } from 'components';
 import {
   ListKH,
@@ -46,6 +47,7 @@ export default (
       </Route>
       <Route path="/nhanvien" name="nhanvien" component={NhanVien} />
       <Route path="/sanpham" name="sanpham" component={SanPham} />
+      <Route path="/congno" name="congno" component={CongNo} />
       <Route path="/kho" name="kho" component={Kho} />
       <Route path="/thongke" name="thongke" component={ThongKe}/>
     </Route>

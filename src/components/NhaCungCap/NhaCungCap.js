@@ -77,7 +77,7 @@ export default class NhaCungCap extends Component {
                 }
                 {
                   this.state.isEditPDH?
-                  <Modal  modalStyle={Style.content_60}
+                  <Modal  modalStyle={Style.content_80}
                   overlayStyle= {Style.overlay}
                   close = {::this.openPDH}
                   overlayClassName='modaldumb modalOverlay modalOverlay--after-open '

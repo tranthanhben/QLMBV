@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import * as nhacungcapActions from '../../actions/nhacungcap/nhacungcapActions';
 import {isLoaded, loadList as loadNCC} from '../../actions/nhacungcap/nhacungcapActions';
 import {THead, TBody, TFoot} from '../table/row';
-import {Pagination} from '../table/pagination';
+import {Pagination, PageShow} from '../table/pagination';
 import * as layoutActions from '../../actions/layoutActions';
 import Modal from '../layout/Modal';
 import {ViewNCC} from './Editor/ViewFull';
@@ -173,7 +173,7 @@ class List extends Component{
                   >
                     <EditNCC meta={meta} id={idEdit} close={::this.editModal} ></EditNCC>
                   </Modal> : null}
-              <div className="dataTables_info" id="example_info" role="status" aria-live="polite">Hiển thị từ {paging && paging.page * paging.page_size+ 1} đến {paging && paging.page * paging.page_size+ listNCC.length} của {paging && paging.total}  mục.</div>
+              <PageShow paging={paging} length={listNCC.length} />
               <Pagination load={::this.paginationLoad} paging={paging}></Pagination>
             </div>
           </div>

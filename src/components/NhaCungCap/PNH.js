@@ -1,23 +1,61 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import * as pnhActions from '../../actions/nhacungcap/pnhActions';
+import * as pdhActions from '../../actions/nhacungcap/pdhActions';
 import {THead, TBody, TFoot} from '../table/row';
-import {Pagination} from '../table/pagination';
-import {isLoaded, loadList as loadPNH} from '../../actions/nhacungcap/pnhActions';
+import {Pagination, PageShow} from '../table/pagination';
+import {isLoaded, loadList as loadPDH} from '../../actions/nhacungcap/pdhActions';
+import layoutActions from '../../actions/layoutActions';
+import Modal from '../layout/Modal';
+import EditPDH from './Editor/EditPDH';
+import {Style} from '../Style';
+import {ViewPDH} from './Editor/ViewFull';
+
+const metaConst = {
+  "id": {
+    name: "id",
+    label: "PDHID",
+    sort: true,
+    up: true
+  },
+  "nhanvienid": {
+    name: "nhanvienid",
+    label: "NVID",
+    sort: false,
+    up: true
+  },
+  "ngaytao": {
+    name: "ngaytao",
+    label: "Ngày Tạo",
+    type: "date",
+    sort: true
+  },
+  "tinhtrang": {
+    name: "tinhtrang",
+    label: "Tình Trạng",
+    sort: true
+  },
+  "ghichu": {
+    name: "ghichu",
+    label: "Ghi Chú",
+    sort: false,
+    type: "content"
+  }
+};
 
 @connect(
   state =>({
-    listPNH: state.phieunhaphang.list,
-    paging: state.phieunhaphang.paging,
-    error: state.phieunhaphang.error,
-    loading: state.phieunhaphang.loading
+    listPDH: state.phieudathang.list,
+    paging: state.phieudathang.paging,
+    error: state.phieudathang.error,
+    loading: state.phieudathang.loading,
+    reload: state.phieudathang.reloadList
   }),
-  {...pnhActions})
+  {...pdhActions, ...layoutActions})
 
 export default
-class PNH extends Component{
+class PDH extends Component{
   static propTypes = {
-    listPNH: PropTypes.array,
+    listPDH: PropTypes.array,
     error: PropTypes.object,
     paging: PropTypes.object,
     loading: PropTypes.bool,
@@ -26,7 +64,7 @@ class PNH extends Component{
 
   static fetchData(store){
     if(!isLoaded(store.getState)){
-      return store.dispatch(loadPNH());
+      return store.dispatch(loadPDH());
     }
   }
 
@@ -36,54 +74,11 @@ class PNH extends Component{
       name: '',
       sort: ''
     },
-    meta:{
-      "pnhid":{
-        name: "id",
-        label: "PNHID",
-        sort: true
-      },
-      "lhid":{
-        name: "lhid",
-        label: "LHID",
-        sort: false
-      },
-      "nvid":{
-        name: "nvid",
-        label: "NVID",
-        sort: false
-      },
-      "ngaytao":{
-        name: "ngaytao",
-        label: "Ngày Tạo",
-        type: "date",
-        sort: true
-      },
-      "soluong":{
-        name: "soluong",
-        label: "Số Lượng",
-        sort: false,
-        type: "number",
-        unit: ' Cây'
-      },
-      "tongtien":{
-        name: "tongtien",
-        label: "Tổng Tiền",
-        sort: true,
-        type: "number",
-        unit: ' VND'
-      },
-      "tinhtrang":{
-        name: "tinhtrang",
-        label: "Tình Trạng",
-        sort: true
-      },
-      "ghichu":{
-        name: "ghichu",
-        label: "Ghi Chú",
-        sort: false,
-        type:"content"
-      }
-    }
+    openView: false,
+    openEdit: false,
+    itemView: {},
+    idEdit: '',
+    meta: metaConst
   }
   changePageSize(){
     let value = event.target.value;
@@ -127,9 +122,30 @@ class PNH extends Component{
       this.setState({options: opt});
     }
   }
+  viewItemFull(item){
+    return ()=>{
+      this.props.openModal(true);
+      this.setState({itemView: item, openView: true});
+    }
+  }
+  viewModal() {
+    this.props.openModal(!this.state.openView);
+    this.setState({openView: !this.state.openView})
+  }
+  editItem(id){
+    return ()=>{
+      console.log("id", id);
+      this.props.openModal(true);
+      this.setState({idEdit: id, openEdit: true});
+    }
+  }
+  editModal() {
+    this.props.openModal(!this.state.openEdit);
+    this.setState({openEdit: !this.state.openEdit, openView: false})
+  }
   render(){
-    const {listPNH, paging} = this.props;
-    const {options, meta} = this.state;
+    const {listPDH, paging} = this.props;
+    const {options, meta, itemView, openView, openEdit, idEdit} = this.state;
     return (
         <div className="mbv-grid container-fluid" style={{"zIndex": "9999983"}}>
           <div className="row">
@@ -157,15 +173,32 @@ class PNH extends Component{
                     <TFoot meta={meta} ></TFoot>
                   </tfoot>
                   <tbody>
-                    {listPNH && listPNH.map((item, index) =>{
+                    {listPDH && listPDH.map((item, index) =>{
                       return(
-                        <TBody item={item} index={index} sort={options.sort} meta={meta} paging={paging} key={index}></TBody>
-                      )
+                        <TBody item={item} index={index} sort={options.sort} meta={meta} paging={paging} key={index}view={::this.viewItemFull} edit={::this.editItem} />
+                      );
                     })}
-
                   </tbody>
                 </table>
-                <div className="dataTables_info" id="example_info" role="status" aria-live="polite">Showing {paging && paging.page * paging.page_size+ 1} to {paging && paging.page * paging.page_size+ listPNH.length} of {paging && paging.total} entries</div>
+                {openView?
+                  <Modal  modalStyle={Style.content_60}
+                  overlayStyle= {Style.overlay}
+                  close={::this.viewModal}
+                  overlayClassName='modaldumb modalOverlay modalOverlay--after-open '
+                  modalClassName='dumb modalContent modalContent--after-open '
+                  >
+                    <ViewNCC meta={meta} item={itemView} close={::this.viewModal} edit={::this.editItem}></ViewNCC>
+                  </Modal> : null}
+                  {openEdit?
+                  <Modal  modalStyle={Style.content_60}
+                  overlayStyle= {Style.overlay}
+                  close={::this.editModal}
+                  overlayClassName='modaldumb modalOverlay modalOverlay--after-open '
+                  modalClassName='dumb modalContent modalContent--after-open '
+                  >
+                    <EditPDH meta={meta} id={idEdit} close={::this.editModal} ></EditPDH>
+                  </Modal> : null}
+                <PageShow paging={paging} length={listPDH.length}></PageShow>
                 <Pagination load={::this.paginationLoad} paging={paging}></Pagination>
               </div>
             </div>

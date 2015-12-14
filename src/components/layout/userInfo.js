@@ -67,7 +67,6 @@ export default class InfoUser extends Component {
             <div className="col-md-12">
               <div className="account">
                 <div className="profilecover">
-
                     <div className="col-md-4 ">
                       <div className="profilecover-group">
                         <img className="avatar-profile-cover" src={'/images/avatar0.png'}  />

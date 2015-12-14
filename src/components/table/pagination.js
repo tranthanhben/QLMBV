@@ -36,7 +36,7 @@ export class Pagination extends Component {
 export class PageShow extends Component {
   static propTypes ={
     paging: PropTypes.object,
-    length: PropTypes.string
+    length: PropTypes.number
   }
   render(){
     const {paging, length} = this.props;
