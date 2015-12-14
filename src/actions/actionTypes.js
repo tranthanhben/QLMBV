@@ -284,9 +284,13 @@ export const PNH_DELETE = "PNH_DELETE";
 export const PNH_DELETE_SUCCESS = "PNH_DELETE_SUCCESS";
 export const PNH_DELETE_FAIL = "PNH_DELETE_FAIL";
 
-export const PNH_CTDH = "PNH_CTDH";
-export const PNH_CTDH_SUCCESS = "PNH_CTDH_SUCCESS";
-export const PNH_CTDH_FAIL = "PNH_CTDH_FAIL";
+export const PNH_CTK = "PNH_CTK";
+export const PNH_CTK_SUCCESS = "PNH_CTK_SUCCESS";
+export const PNH_CTK_FAIL = "PNH_CTK_FAIL";
+
+export const PNH_GET = "PNH_GET";
+export const PNH_GET_SUCCESS = "PNH_GET_SUCCESS";
+export const PNH_GET_FAIL = "PNH_GET_FAIL";
 
 export const PNH_RESET = "PNH_RESET";
 
@@ -442,6 +446,10 @@ export const GD_LISTNCC_FAIL = "GD_LISTNCC_FAIL";
 export const GD_LISTLV = "GD_LISTLV";
 export const GD_LISTLV_SUCCESS = "GD_LISTLV_SUCCESS";
 export const GD_LISTLV_FAIL = "GD_LISTLV_FAIL";
+
+export const GD_LISTK = "GD_LISTK";
+export const GD_LISTK_SUCCESS = "GD_LISTK_SUCCESS";
+export const GD_LISTK_FAIL = "GD_LISTK_FAIL";
 
 export const GD_DEL_CTDH = "GD_DEL_CTDH";
 export const GD_DEL_CTDH_SUCCESS = "GD_DEL_CTDH_SUCCESS";

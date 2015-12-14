@@ -138,7 +138,7 @@ export default class EditK extends Component {
           {"Cập Nhật"}
           </button>: <button className='btn btn-success' onClick={::this.onSubmit} disabled={(edited? '':'disabled')}>
           {"Tạo mới"}</button>}&nbsp;&nbsp;&nbsp;&nbsp;
-            <button className ='btn' onClick={::this.onClose}>Đóng</button>
+            <button className ='btn btn-default' onClick={::this.onClose}>Đóng</button>
           </div>
         </div>
       </div>

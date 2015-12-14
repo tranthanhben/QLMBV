@@ -392,6 +392,7 @@ const initialState = {
       type: "gia",
       unit: " VND",
       required: false,
+      disabled: true,
       field: false
     },
     "giamua": {
@@ -400,41 +401,8 @@ const initialState = {
       sort: false,
       type: "gia",
       unit: " VND",
+      disabled: true,
       required: false,
-      field: false
-    }
-  },
-  giaodich: {
-    "id": {
-      name: "id",
-      label: "GDID",
-      sort: true,
-      up: true,
-      type: "single",
-      field: false
-    },
-    "nvid": {
-      name: "nvid",
-      label: "NVID",
-      sort: true,
-      up: false,
-      type: "single",
-      field: false
-    },
-    "doitacid": {
-      name: "doitacid",
-      label: "DTID",
-      sort: true,
-      up: false,
-      type: "single",
-      field: false
-    },
-    "hoanthanh":{
-      name: "hoanthanh",
-      label: "Hoàn Thành",
-      sort: true,
-      up: false,
-      type: "select",
       field: false
     }
   },

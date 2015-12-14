@@ -46,6 +46,7 @@ export default function phieudathang(state = initialState, action = {}){
         ...state,
         loadding: false,
         loaded: true,
+        reloadList: false,
         list: action.result.items,
         paging: action.result.paging
       };
@@ -84,7 +85,6 @@ export default function phieudathang(state = initialState, action = {}){
         getding: true
       };
     case PDH_GET_SUCCESS:
-      console.log("success");
       return {
         ...state,
         getding: false,
@@ -92,7 +92,6 @@ export default function phieudathang(state = initialState, action = {}){
         ctdh: action.result.chitietdonhang
       };
     case PDH_GET_FAIL:
-      console.log("success");
       return {
         ...state,
         getding: false,
@@ -187,6 +186,7 @@ export default function phieudathang(state = initialState, action = {}){
         ...state,
         loaded: false,
         editItem: null,
+        reloadList: true,
         message: false,
         errorPost:null
       };

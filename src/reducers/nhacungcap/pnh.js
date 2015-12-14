@@ -19,9 +19,13 @@ import {
   PNH_DELETE_SUCCESS,
   PNH_DELETE_FAIL,
 
-  PNH_CTDH,
-  PNH_CTDH_SUCCESS,
-  PNH_CTDH_FAIL,
+  PNH_CTK,
+  PNH_CTK_SUCCESS,
+  PNH_CTK_FAIL,
+
+  PNH_GET,
+  PNH_GET_SUCCESS,
+  PNH_GET_FAIL,
 
   PNH_RESET
 } from 'actions/actionTypes';
@@ -42,6 +46,7 @@ export default function phieudathang(state = initialState, action = {}){
         ...state,
         loadding: false,
         loaded: true,
+        reloadList: false,
         list: action.result.items,
         paging: action.result.paging
       };
@@ -72,6 +77,26 @@ export default function phieudathang(state = initialState, action = {}){
         loadingOne: false,
         item: {},
         error: action.error
+      };
+
+    case PNH_GET:
+      return {
+        ...state,
+        getding: true
+      };
+    case PNH_GET_SUCCESS:
+      return {
+        ...state,
+        getding: false,
+        editItem: action.result,
+        ctk: action.result.chitietdonhang
+      };
+    case PNH_GET_FAIL:
+      return {
+        ...state,
+        getding: false,
+        editItem: null,
+        error: action.result
       };
 
     case PNH_POST:
@@ -138,22 +163,22 @@ export default function phieudathang(state = initialState, action = {}){
         item: null,
         errorDel: action.error
       };
-    case PNH_CTDH:
+    case PNH_CTK:
       return {
         ...state,
-        postingCTDH: true
+        postingCTK: true
       };
-    case PNH_CTDH_SUCCESS:
+    case PNH_CTK_SUCCESS:
       return {
         ...state,
-        postingCTDH: false,
-        ctdh: action.result,
+        postingCTK: false,
+        ctk: action.result,
       };
-    case PNH_CTDH_FAIL:
+    case PNH_CTK_FAIL:
       return {
         ...state,
-        postingCTDH: false,
-        ctdh: null,
+        postingCTK: false,
+        ctk: null,
         errorPost: action.result
       };
     case PNH_RESET:
@@ -161,6 +186,7 @@ export default function phieudathang(state = initialState, action = {}){
         ...state,
         loaded: false,
         editItem: null,
+        reloadList: true,
         message: false,
         errorPost:null
       };

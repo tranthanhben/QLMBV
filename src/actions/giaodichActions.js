@@ -12,6 +12,10 @@ import {
   GD_LISTLV_SUCCESS,
   GD_LISTLV_FAIL,
 
+  GD_LISTK,
+  GD_LISTK_SUCCESS,
+  GD_LISTK_FAIL,
+
   GD_DEL_CTDH,
   GD_DEL_CTDH_SUCCESS,
   GD_DEL_CTDH_FAIL,
@@ -56,6 +60,19 @@ export function loadLV(){
   return {
     types: [GD_LISTLV, GD_LISTLV_SUCCESS, GD_LISTLV_FAIL],
     promise: (client) => client.get('/loai_vai',{
+      params: makeQuery({
+        page: 0,
+        page_size : 100,
+        name: '',
+        sort:'ten'
+      })
+    })
+  };
+}
+export function loadK(){
+  return {
+    types: [GD_LISTK, GD_LISTK_SUCCESS, GD_LISTK_FAIL],
+    promise: (client) => client.get('/kho',{
       params: makeQuery({
         page: 0,
         page_size : 100,

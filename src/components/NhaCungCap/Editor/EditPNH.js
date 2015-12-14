@@ -2,65 +2,73 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {initObject, ATO, OTA, preprocess, datetime, changeDTI, renderLabel, setValue, checkRequire, preprocessPost} from '../../../meta';
 import {THead, TBody} from '../../table/rowForPDH';
-import * as pdhActions from '../../../actions/nhacungcap/pdhActions';
+import * as pnhActions from '../../../actions/nhacungcap/pnhActions';
 import * as giaodichActions from '../../../actions/giaodichActions';
 
 @connect(state =>({
-  gdItem: state.phieudathang.editItem,
-  meta: state.meta.phieudathang,
+  gdItem: state.phieunhaphang.editItem,
+  meta: state.meta.phieunhaphang,
   listNCC: state.giaodich.listNCC,
   listLV: state.giaodich.listLV,
+  listK: state.giaodich.listK,
+  listPDH: state.phieudathang.list,
   user: state.user.user,
-  ctdh: state.phieudathang.ctdh
-}),{...pdhActions, ...giaodichActions})
-export default class EditPDH extends Component {
+  ctk: state.phieunhaphang.ctk
+}),{...pnhActions, ...giaodichActions})
+export default class EditPNH extends Component {
   static propTypes = {
     giaodichid: PropTypes.string,
+    listK: PropTypes.array,
+    listLV: PropTypes.array,
+    listNCC: PropTypes.array,
+    listPDH: PropTypes.array,
     gdItem: PropTypes.object,
     meta: PropTypes.object,
     user: PropTypes.object,
     postItem: PropTypes.func.isRequired,
-    postCTDH: PropTypes.func.isRequired,
+    postCTK: PropTypes.func.isRequired,
     getItem: PropTypes.func.isRequired,
     close: PropTypes.func.isRequired,
     loadNCC: PropTypes.func.isRequired,
     loadLV: PropTypes.func.isRequired,
+    loadK: PropTypes.func.isRequired
   }
   state = {
+    gdItem: {
+      nhanvienid: this.props.user.nhanvienid || 'admin',
+      tinhtrangkho: 'chuaxuly',
+      doitacid: '',
+      ngayhoanthanh: changeDTI(datetime(new Date()))
+    },
     giaodichid: this.props.giaodichid,
-    ctdh:this.props.gdItem && this.props.gdItem.chitietdonhang || [],
+    ctk:this.props.gdItem && this.props.gdItem.chitietkho || [],
     edited: false,
     editedDH: false,
     submiting: false,
-    ctdh_init: {
+    ctk_init: {
       giaodichid: this.props.giaodichid || '',
       loaivaiid:'',
       soluong:'',
       gia:'',
-      loaigiaodich:"pdh"
+      khoid:'',
+      loaigiaodich:"pnh"
     },
     newGD: true
   }
   componentWillMount(){
     if(this.props.giaodichid){
-      this.props.getGD(giaodichid);
+      this.props.getItem(this.props.giaodichid);
       this.state.newGD = false;
     }
     this.props.loadNCC();
     this.props.loadLV();
-    let gdItem = {
-      nhanvienid: this.props.user.nhanvienid || 'admin',
-      trangthai: 'chuaxuly',
-      doitacid: '',
-      ngayhoanthanh: changeDTI(datetime(new Date()))
-    };
-    this.state.gdItem = gdItem;
+    this.props.loadK();
   }
   componentWillReceiveProps(nextProps) {
     if(nextProps.gdItem && this.state.submiting){
-      let ctdh = this.state.ctdh;
-      ctdh = this.setgiaodichid(ctdh,nextProps.gdItem.id);
-      this.props.postCTDH(this.xulytruoc(ctdh));
+      let ctk = this.state.ctk;
+      ctk = this.setgiaodichid(ctk,nextProps.gdItem.id);
+      this.props.postCTK(this.xulytruoc(ctk));
       this.setState({
         giaodichid: nextProps.gdItem.id,
         gdItem: nextProps.gdItem,
@@ -68,18 +76,20 @@ export default class EditPDH extends Component {
         submiting: false
       });
     }else if(nextProps.gdItem){
+      console.log("set item");
       this.setState({
         giaodichid: nextProps.gdItem.id,
-        ctdh: nextProps.gdItem.chitietdonhang ||[],
+        ctk: nextProps.gdItem.chitietkho ||[],
         gdItem: nextProps.gdItem,
         newGD: false,
+        edited: false,
         submiting: false
       });
     }
-    if(nextProps.ctdh){
-      console.log(nextProps.ctdh);
+    if(nextProps.ctk){
       this.setState({
-        ctdh: nextProps.ctdh || []
+        ctk: nextProps.ctk || [],
+        editedDH: false
       });
     }
   }
@@ -97,8 +107,8 @@ export default class EditPDH extends Component {
     if(checkRequire(this.props.meta.giaodich, this.state.gdItem)) {
       return checkRequire(this.props.meta.giaodich, this.state.gdItem);
     }
-    if(this.state.ctdh.length === 0){
-      return 'Vui lòng thêm chi tiết đơn hàng';
+    if(this.state.ctk.length === 0){
+      return 'Vui lòng thêm chi tiết kho';
     }
     return '';
   }
@@ -113,22 +123,22 @@ export default class EditPDH extends Component {
       this.props.postItem(preprocessPost(this.state.gdItem, this.props.meta.giaodich));
     }
   }
-  xulytruoc(ctdh){
+  xulytruoc(ctk){
     console.log("xulytruoc");
-    let ctdhPP = [];
-    for (var i = 0; i < ctdh.length; i++) {
-      let dh = preprocessPost(ctdh[i], this.props.meta.ctdh);
+    let ctkPP = [];
+    for (var i = 0; i < ctk.length; i++) {
+      let dh = preprocessPost(ctk[i], this.props.meta.ctk);
       if(dh.loaivaiid){
-        ctdhPP.push(dh);
+        ctkPP.push(dh);
       }
     };
-    return ctdhPP;
+    return ctkPP;
   }
-  setgiaodichid(ctdh, giaodichid){
-    for(let i = 0; i<ctdh.length; i++){
-      ctdh[i].giaodichid = giaodichid;
+  setgiaodichid(ctk, giaodichid){
+    for(let i = 0; i<ctk.length; i++){
+      ctk[i].giaodichid = giaodichid;
     }
-    return ctdh;
+    return ctk;
   }
   onClose(){
     if(this.state.edited){
@@ -142,42 +152,42 @@ export default class EditPDH extends Component {
       this.props.close();
     }
   }
-  addCTDH(index) {
+  addCTK(index) {
     return () =>{
-      let ctdh = this.state.ctdh || [];
-      const init = this.state.ctdh_init || [];
-      let befor_ctdh = ctdh.splice(0, index + 1);
-      console.log(befor_ctdh, ctdh);
-      befor_ctdh= [...befor_ctdh, {...init}];
-      ctdh = [...befor_ctdh,...ctdh];
-      this.setState({ctdh : ctdh});
+      let ctk = this.state.ctk || [];
+      const init = this.state.ctk_init || [];
+      let befor_ctk = ctk.splice(0, index + 1);
+      console.log(befor_ctk, ctk);
+      befor_ctk= [...befor_ctk, {...init}];
+      ctk = [...befor_ctk,...ctk];
+      this.setState({ctk : ctk});
     }
   }
-  delCTDH(index) {
+  delCTK(index) {
     return () =>{
-      let ctdh = this.state.ctdh;
-      if(ctdh[index].id) {
-        this.props.delCTDH(ctdh[index].id);
+      let ctk = this.state.ctk;
+      if(ctk[index].id) {
+        this.props.delCTK(ctk[index].id);
       }
-      delete ctdh[index];
-      ctdh.splice(index, 1);
-      this.setState({ctdh: ctdh});
+      delete ctk[index];
+      ctk.splice(index, 1);
+      this.setState({ctk: ctk});
     }
   }
-  handleChangeCTDH(index){
+  handleChangeCTK(index){
     return ()=>{
-      let ctdh = this.state.ctdh;
+      let ctk = this.state.ctk;
       let addr = event.target.dataset.addr;
       let value = event.target.value;
-      ctdh[index][addr] = value;
-      this.setState({ctdh: ctdh, editedDH: true});
+      ctk[index][addr] = value;
+      this.setState({ctk: ctk, editedDH: true});
     }
   }
   render() {
-    const {meta, error, message, listNCC, listLV} = this.props;
-    const {gdItem, edited, submited, showFullField, giaodichid, ctdh, editedDH} = this.state;
+    const {meta, error, message, listNCC, listLV, listK} = this.props;
+    const {gdItem, edited, submited, showFullField, giaodichid, ctk, editedDH} = this.state;
     const metaGD = meta && preprocess(meta.giaodich) || {};
-    const metaCTDH = meta && preprocess(meta.ctdh) || {};
+    const metaCTK = meta && preprocess(meta.ctk) || {};
     return (
       <div>
         <div className="row">
@@ -208,33 +218,33 @@ export default class EditPDH extends Component {
                   })}
                   </select>
                 </div>
-                <div className='form-group' key="trangthai">
-                  {renderLabel(metaGD.trangthai)}
-                  {metaGD && metaGD["trangthai"].$input(gdItem,this)}
+                <div className='form-group' key="tinhtrangdonhang">
+                  {renderLabel(metaGD.tinhtrangdonhang)}
+                  {metaGD && metaGD["tinhtrangdonhang"].$input(gdItem,this)}
                 </div>
               </div>
               <div className="col-md-4">
               </div>
             </div>
           </div>
-          <div className="col-md-12" key="ctdh">
+          <div className="col-md-12" key="ctk">
             <br/>
             <strong>Chi tiết đơn hàng:</strong>
             <table id="example" className="table display nowrap dataTable" role="grid" aria-describedby="example_info" >
               <thead>
-                <THead meta={metaCTDH} add={::this.addCTDH(0)}></THead>
+                <THead meta={metaCTK} add={::this.addCTK(0)}></THead>
               </thead>
               <tbody>
-                {ctdh && ctdh.map((dh, index)=>{
+                {ctk && ctk.map((dh, index)=>{
                   return <TBody
                     key={index}
-                    meta = {metaCTDH}
+                    meta = {metaCTK}
                     item = {dh}
                     index = {index}
                     listLV = {listLV}
-                    edit ={::this.handleChangeCTDH(index)}
-                    add = {::this.addCTDH(index)}
-                    del = {::this.delCTDH(index)}/>
+                    edit ={::this.handleChangeCTK(index)}
+                    add = {::this.addCTK(index)}
+                    del = {::this.delCTK(index)}/>
                 })}
               </tbody>
             </table>
@@ -251,7 +261,7 @@ export default class EditPDH extends Component {
           {"Cập Nhật"}
           </button>: <button className='btn btn-success' onClick={::this.onSubmit} disabled={(edited||editedDH? '':'disabled')}>
           {"Tạo mới"}</button>}&nbsp;&nbsp;&nbsp;&nbsp;
-            <button className ='btn' onClick={::this.onClose}>Đóng</button>
+            <button className ='btn btn-default' onClick={::this.onClose}>Đóng</button>
           </div>
         </div>
       </div>

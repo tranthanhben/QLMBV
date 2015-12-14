@@ -25,7 +25,7 @@ export const Style = {
     position: 'absolute',
     width: '80%',
     top: '10px',
-    left: '20%',
+    left: '10%',
     border: '1px solid #ccc',
     background: '#fff',
     overflow: 'auto',

@@ -38,7 +38,11 @@ class PDH extends Component{
       return store.dispatch(loadPDH());
     }
   }
-
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.reload === true){
+      this.props.loadList(this.state.options);
+    }
+  }
   state = {
     options :{
       page_size: 10,
@@ -158,7 +162,7 @@ class PDH extends Component{
                   overlayClassName='modaldumb modalOverlay modalOverlay--after-open '
                   modalClassName='dumb modalContent modalContent--after-open '
                   >
-                    <ViewPDH meta={metagd} item={itemView} close={::this.viewModal} edit={::this.editItem}></ViewPDH>
+                    <ViewPDH meta={meta} item={itemView} close={::this.viewModal} edit={::this.editItem}></ViewPDH>
                   </Modal> : null}
                   {openEdit?
                   <Modal  modalStyle={Style.content_80}

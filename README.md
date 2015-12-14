@@ -16,5 +16,7 @@ npm run dev
 
 ```
 npm run build
+export PORT=3001
+export API_PORT=8100
 npm run start
 ```

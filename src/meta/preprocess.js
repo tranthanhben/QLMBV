@@ -14,6 +14,7 @@ let types = {
   md: { def: '' },
   select: { def: '' },
   special: { def: '' },
+  gia: { def: '' },
   object: { def: {} },
   multiline: { def: '' },
   multiselect: { def: '' },

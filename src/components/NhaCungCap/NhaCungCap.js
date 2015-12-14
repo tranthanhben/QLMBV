@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import Modal from '../layout/Modal';
 import EditNCC from './Editor/EditNCC';
 import EditPDH from './Editor/EditPDH';
+import EditPNH from './Editor/EditPNH';
 import * as layoutActions from '../../actions/layoutActions';
 import {Style} from '../Style';
 
@@ -30,6 +31,10 @@ export default class NhaCungCap extends Component {
     this.props.openModal(!this.state.isEditPDH);
     this.setState({isEditPDH: !this.state.isEditPDH});
   }
+  openPNH(){
+    this.props.openModal(!this.state.isEditPNH);
+    this.setState({isEditPNH: !this.state.isEditPNH});
+  }
   render(){
     const {menuparse, openmodal} = this.props;
     return <div className='inner '>
@@ -43,7 +48,7 @@ export default class NhaCungCap extends Component {
               <div className="view-tabs col-xs-3 col-sm-8">
                 <div className="navbar-content pull-right">
                 <ul className="nav-main pull-right">
-                  <li >
+                  <li onClick={::this.openPNH}>
                     <a ><span key="icoen" className={'fa fa-truck fa-flip-horizontal'}></span>{" Tạo PNH"}</a>
                   </li>
                   <li onClick={::this.openPDH}>
@@ -66,7 +71,7 @@ export default class NhaCungCap extends Component {
                 <div className="mbv-panel-body">
                 {
                   this.state.isOpenEdit?
-                  <Modal  modalStyle={Style.content_60}
+                  <Modal  modalStyle={Style.content_50}
                   overlayStyle= {Style.overlay}
                   close = {::this.toggleModal}
                   overlayClassName='modaldumb modalOverlay modalOverlay--after-open '
@@ -84,6 +89,17 @@ export default class NhaCungCap extends Component {
                   modalClassName='dumb modalContent modalContent--after-open '
                   >
                     <EditPDH close={::this.openPDH}></EditPDH>
+                  </Modal> : null
+                }
+                {
+                  this.state.isEditPNH?
+                  <Modal  modalStyle={Style.content_80}
+                  overlayStyle= {Style.overlay}
+                  close = {::this.openPNH}
+                  overlayClassName='modaldumb modalOverlay modalOverlay--after-open '
+                  modalClassName='dumb modalContent modalContent--after-open '
+                  >
+                    <EditPNH close={::this.openPNH}></EditPNH>
                   </Modal> : null
                 }
                 {this.props.children}

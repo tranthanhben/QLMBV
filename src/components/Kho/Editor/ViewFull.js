@@ -46,10 +46,10 @@ export class ViewK extends Component {
         <hr/>
         <div className="row">
           <div className="col-md-6">
-          <button className ='btn btn-warning' onClick={::this.props.edit(item.id)}>Sửa</button>
           </div>
-          <div className="col-md-6">
-            <button className ='btn pull-right' onClick={()=>this.props.close()}>Đóng</button>
+          <div className="col-md-6 flex-right">
+            <button className ='btn btn-warning' onClick={::this.props.edit(item.id)}>Sửa</button>&nbsp;&nbsp;&nbsp;&nbsp;
+            <button className ='btn btn-default' onClick={()=>this.props.close()}>Đóng</button>
           </div>
         </div>
       </div>);

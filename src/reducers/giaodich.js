@@ -11,6 +11,10 @@ import {
   GD_LISTLV_SUCCESS,
   GD_LISTLV_FAIL,
 
+  GD_LISTK,
+  GD_LISTK_SUCCESS,
+  GD_LISTK_FAIL,
+
   GD_DEL_CTDH,
   GD_DEL_CTDH_SUCCESS,
   GD_DEL_CTDH_FAIL,
@@ -90,6 +94,26 @@ export default function loaivai(state = initialState, action = {}){
         listLV: [],
         pagingLV: {},
         errorLoadLV: action.result
+      };
+    case GD_LISTK:
+      return {
+        ...state,
+        loadK: true
+      };
+    case GD_LISTK_SUCCESS:
+      return {
+        ...state,
+        loadK: true,
+        listK: action.result.items,
+        pagingK: action.result.paging
+      };
+    case GD_LISTK_FAIL:
+      return {
+        ...state,
+        loadK: true,
+        listK: [],
+        pagingK: {},
+        errorLoadK: action.result
       };
     case GD_DEL_CTDH:
       return {

@@ -67,7 +67,6 @@ export default class EditPDH extends Component {
         submiting: false
       });
     }else if(nextProps.gdItem){
-      console.log("set item");
       this.setState({
         giaodichid: nextProps.gdItem.id,
         ctdh: nextProps.gdItem.chitietdonhang ||[],
@@ -115,7 +114,6 @@ export default class EditPDH extends Component {
     }
   }
   xulytruoc(ctdh){
-    console.log("xulytruoc");
     let ctdhPP = [];
     for (var i = 0; i < ctdh.length; i++) {
       let dh = preprocessPost(ctdh[i], this.props.meta.ctdh);
@@ -148,7 +146,6 @@ export default class EditPDH extends Component {
       let ctdh = this.state.ctdh || [];
       const init = this.state.ctdh_init || [];
       let befor_ctdh = ctdh.splice(0, index + 1);
-      console.log(befor_ctdh, ctdh);
       befor_ctdh= [...befor_ctdh, {...init}];
       ctdh = [...befor_ctdh,...ctdh];
       this.setState({ctdh : ctdh});
@@ -179,7 +176,6 @@ export default class EditPDH extends Component {
     const {gdItem, edited, submited, showFullField, giaodichid, ctdh, editedDH} = this.state;
     const metaGD = meta && preprocess(meta.giaodich) || {};
     const metaCTDH = meta && preprocess(meta.ctdh) || {};
-    console.log(this.props.gdItem, gdItem)
     return (
       <div>
         <div className="row">
@@ -224,7 +220,7 @@ export default class EditPDH extends Component {
             <strong>Chi tiết đơn hàng:</strong>
             <table id="example" className="table display nowrap dataTable" role="grid" aria-describedby="example_info" >
               <thead>
-                <THead meta={metaCTDH} add={::this.addCTDH(0)}></THead>
+                <THead meta={metaCTDH} add={::this.addCTDH(-1)}></THead>
               </thead>
               <tbody>
                 {ctdh && ctdh.map((dh, index)=>{
@@ -253,7 +249,7 @@ export default class EditPDH extends Component {
           {"Cập Nhật"}
           </button>: <button className='btn btn-success' onClick={::this.onSubmit} disabled={(edited||editedDH? '':'disabled')}>
           {"Tạo mới"}</button>}&nbsp;&nbsp;&nbsp;&nbsp;
-            <button className ='btn' onClick={::this.onClose}>Đóng</button>
+            <button className ='btn btn-default' onClick={::this.onClose}>Đóng</button>
           </div>
         </div>
       </div>

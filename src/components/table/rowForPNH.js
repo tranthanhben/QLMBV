@@ -108,14 +108,14 @@ export class TBody extends Component {
         <td key='chatlieu' >
           <input type="text" data-addr='chatlieu'className="form-control" readOnly  value={loaivai.chatlieu || ''} />
         </td>
-        <td key='soluong' className=' dt-body-right' >
-          <input type="number" step='10' min='0' data-addr='soluong'className="form-control" value={item.soluong || ''} onChange={edit} />
+        <td key='soluong' >
+          <input type="number" step='10' min='0' data-addr='soluong'className="form-control dt-body-right" value={item.soluong || ''} onChange={edit} />
         </td>
-        <td key='gia' className=' dt-body-right'>
-          <input type="number" step='10' min='0' data-addr='gia'className="form-control" value={item.gia || ''} onChange={edit}/>
+        <td key='gia' >
+          <input type="number" step='10' min='0' data-addr='gia'className="form-control dt-body-right" value={item.gia || ''} onChange={edit}/>
         </td>
-        <td key='thanhtien' className=' dt-body-right'>
-          <input type="number" step='10' min='0' data-addr='thanhtien' readOnly className="form-control" value={item.gia*item.soluong} />
+        <td key='thanhtien' >
+          <input type="number" step='10' min='0' data-addr='thanhtien' readOnly className="form-control dt-body-right" value={item.gia*item.soluong} />
         </td>
 
         <td key='control' className="group-edit">

@@ -8,7 +8,7 @@ export function ATO(array){
   };
   return obj;
 }
-export function ATO(obj){
+export function OTA(obj){
   if(!obj instanceof Object){
     return [];
   }
@@ -17,4 +17,15 @@ export function ATO(obj){
     a.push(obj[key]);
   };
   return array;
+}
+export function ATOLV(array){
+  if(!array instanceof Array){
+    return {};
+  }
+  let obj = {};
+  console.log("lenght", array.length);
+  for (let i = 0; i < array.length; i++) {
+    obj[array[i].id] = array[i];
+  };
+  return obj;
 }

@@ -9,7 +9,7 @@ export {default as initObject} from './initObject';
 export {default as renderField} from './renderField';
 export {default as renderInfo} from './renderInfo';
 export {preprocess, preprocessPost} from './preprocess';
-export {ATO, OTA} from './AO';
+export {ATO, OTA, ATOLV} from './AO';
 export {default as checkRequire} from './checkRequire';
 export {default as makeQuery} from './makeQuery';
 export let defaultimg = '../images/defautl.jpg';

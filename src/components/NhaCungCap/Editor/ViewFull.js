@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {renderInfo, formatDate, numeral} from '../../../meta';
-
+import {THeadViewFull, TBodyViewFull} from '../../table/rowForPDH';
 export class ViewNCC extends Component {
   static propTypes = {
     meta: PropTypes.object,
@@ -36,7 +36,7 @@ export class ViewNCC extends Component {
     }
     return (
       <div className="info">
-        <h3 className="info-header">Thông Tin Nha Cung Cap</h3>
+        <h3 className="info-header">Thông Tin Nhà Cung Cấp</h3>
         <hr/>
         <div className="row">
           <div className="col-md-12">
@@ -46,10 +46,10 @@ export class ViewNCC extends Component {
             <hr/>
         <div className="row">
           <div className="col-md-6">
-          <button className ='btn btn-warning' onClick={::this.props.edit(item.id)}>Sửa</button>
           </div>
-          <div className="col-md-6">
-            <button className ='btn  pull-right' onClick={()=>this.props.close()}>Đóng</button>
+          <div className="col-md-6 flex-right">
+            <button className ='btn btn-warning' onClick={::this.props.edit(item.id)}>Sửa</button>&nbsp;&nbsp;&nbsp;&nbsp;
+            <button className ='btn btn-default' onClick={()=>this.props.close()}>Đóng</button>
           </div>
         </div>
       </div>);
@@ -65,23 +65,87 @@ export class ViewPDH extends Component {
   }
   render(){
     const {meta, item, close} = this.props;
-    let info = renderInfo(item, meta) || [];
+    const metaGD = meta && meta.giaodich || {};
+    const metaCTDH = meta && meta.ctdh || {};
     return (
       <div className="info">
-        <h3 className="info-header">Thông Tin Phieu Mua Hang</h3>
+        <h3 className="info-header">Thông Tin Phiếu Đặt Hàng</h3>
         <hr/>
         <div className="row">
+          <div className="col-md-6">
+            <div className="info-group" key='giaodichid'>
+              <div className="row">
+                <div className="col-md-6 align-right">
+                  <span>{metaGD["id"].label + ": "}</span>
+                </div>
+                <div className="col-md-6">
+                  <p className={metaGD["id"].up? 'uppercase':''}>{item["id"]}</p>
+                </div>
+              </div>
+            </div>
+            <div className="info-group" key='doitacid'>
+              <div className="row">
+                <div className="col-md-6 align-right">
+                  <span>{metaGD["doitacid"].label + ": "}</span>
+                </div>
+                <div className="col-md-6">
+                  <p className={metaGD["doitacid"].up? 'uppercase':''}>{item["doitacid"]}</p>
+                </div>
+              </div>
+            </div>
+            <div className="info-group" key='nhanvienid'>
+              <div className="row">
+                <div className="col-md-6 align-right">
+                  <span>{metaGD["nhanvienid"].label + ": "}</span>
+                </div>
+                <div className="col-md-6">
+                  <p className={metaGD["nhanvienid"].up? 'uppercase':''}>{item["nhanvienid"]}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col-md-6">
+            <div className="info-group" key='tongtiendutinh'>
+              <div className="row">
+                <div className="col-md-6 align-right">
+                  <span>{metaGD["tongtiendutinh"].label + ": "}</span>
+                </div>
+                <div className="col-md-6">
+                  <p className={metaGD["tongtiendutinh"].up? 'uppercase':''}>{item["tongtiendutinh"]}</p>
+                </div>
+              </div>
+            </div>
+            <div className="info-group" key='tinhtrangdonhang'>
+              <div className="row">
+                <div className="col-md-6 align-right">
+                  <span>{metaGD["tinhtrangdonhang"].label + ": "}</span>
+                </div>
+                <div className="col-md-6">
+                  <p className={metaGD["tinhtrangdonhang"].up? 'uppercase':''}>{item["tinhtrangdonhang"]}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="row">
           <div className="col-md-12">
-           {info}
+          <table id="example" className="table display preline dataTable" cellSpacing="0" width="100%" role="grid" aria-describedby="example_info" style={{"width": "100%"}}>
+            <thead>
+              <THeadViewFull meta={metaCTDH} ></THeadViewFull>
+            </thead>
+            <tbody>
+
+            </tbody>
+          </table>
           </div>
         </div>
             <hr/>
         <div className="row">
           <div className="col-md-6">
-          <button className ='btn btn-warning' onClick={()=>this.props.edit(item.id)}>Edit</button>
           </div>
-          <div className="col-md-6">
-            <button className ='btn  pull-right' onClick={()=>this.props.close()}>Close</button>
+          <div className="col-md-6 flex-right">
+            <button className ='btn btn-warning' onClick={::this.props.edit(item.id)}>Sửa</button>&nbsp;&nbsp;&nbsp;&nbsp;
+            <button className ='btn btn-default' onClick={()=>this.props.close()}>Đóng</button>
           </div>
         </div>
       </div>);
@@ -110,10 +174,10 @@ export class ViewPNH extends Component {
             <hr/>
         <div className="row">
           <div className="col-md-6">
-          <button className ='btn btn-warning' onClick={()=>this.props.edit(item.id)}>Edit</button>
           </div>
-          <div className="col-md-6">
-            <button className ='btn  pull-right' onClick={()=>this.props.close()}>Close</button>
+          <div className="col-md-6 flex-right">
+            <button className ='btn btn-warning' onClick={::this.props.edit(item.id)}>Sửa</button>&nbsp;&nbsp;&nbsp;&nbsp;
+            <button className ='btn btn-default' onClick={()=>this.props.close()}>Đóng</button>
           </div>
         </div>
       </div>);

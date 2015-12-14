@@ -20,9 +20,9 @@ import {
   PNH_DELETE_SUCCESS,
   PNH_DELETE_FAIL,
 
-  PNH_CTDH,
-  PNH_CTDH_SUCCESS,
-  PNH_CTDH_FAIL,
+  PNH_CTK,
+  PNH_CTK_SUCCESS,
+  PNH_CTK_FAIL,
 
   PNH_GET,
   PNH_GET_SUCCESS,
@@ -41,7 +41,7 @@ export function loadItem(id){
 export function getItem(id){
   return {
     types: [PNH_GET, PNH_GET_SUCCESS, PNH_GET_FAIL],
-    promise: (client) => client.get('/giaodich/phieu_nhap_hang/'+id)
+    promise: (client) => client.get('/giaodich/phieu_nhap_hang/'+ id)
   };
 }
 
@@ -81,11 +81,10 @@ export function postItem(data){
     })
   };
 }
-export function postCTDH(data){
-  console.log("data", data);
+export function postCTK(data){
   return {
-    types: [PNH_CTDH, PNH_CTDH_SUCCESS, PNH_CTDH_FAIL],
-    promise: (client) => client.post('/chi_tiet_don_hang', {
+    types: [PNH_CTK, PNH_CTK_SUCCESS, PNH_CTK_FAIL],
+    promise: (client) => client.post('/chi_tiet_kho', {
       data: JSON.stringify(data)
     })
   };

@@ -21,6 +21,13 @@ export class ViewLV extends Component {
       if(field.type === "number"){
         value = numeral(item[key]).format('0,0')+(field.unit|| '');
       }
+      if(field.type === "gia"){
+        if(item[key] === -1){
+          value = 'Chưa cập nhật';
+        }else{
+          value = numeral(item[key]).format('0,0')+(field.unit|| '');
+        }
+      }
       info.push(
         <div className="info-group" key={key}>
           <div className="row">
@@ -46,10 +53,10 @@ export class ViewLV extends Component {
             <hr/>
         <div className="row">
           <div className="col-md-6">
-          <button className ='btn btn-warning' onClick={::this.props.edit(item.id)}>Sửa</button>
           </div>
-          <div className="col-md-6">
-            <button className ='btn  pull-right' onClick={()=>this.props.close()}>Đóng</button>
+          <div className="col-md-6 flex-right">
+            <button className ='btn btn-warning' onClick={::this.props.edit(item.id)}>Sửa</button>&nbsp;&nbsp;&nbsp;&nbsp;
+            <button className ='btn btn-default' onClick={()=>this.props.close()}>Đóng</button>
           </div>
         </div>
       </div>);
