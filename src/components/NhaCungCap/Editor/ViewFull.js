@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {renderInfo, formatDate, numeral} from '../../../meta';
-import {THeadViewFull, TBodyViewFull} from '../../table/rowForPDH';
+import {THeadCTDH, TBodyCTDH} from '../../table/rowForPDH';
 export class ViewNCC extends Component {
   static propTypes = {
     meta: PropTypes.object,
@@ -60,11 +60,12 @@ export class ViewPDH extends Component {
   static propTypes = {
     meta: PropTypes.object,
     item: PropTypes.object,
+    listLV: PropTypes.array,
     close: PropTypes.func.isRequired,
     edit: PropTypes.func.isRequired
   }
   render(){
-    const {meta, item, close} = this.props;
+    const {meta, item, close, listLV} = this.props;
     const metaGD = meta && meta.giaodich || {};
     const metaCTDH = meta && meta.ctdh || {};
     return (
@@ -111,7 +112,7 @@ export class ViewPDH extends Component {
                   <span>{metaGD["tongtiendutinh"].label + ": "}</span>
                 </div>
                 <div className="col-md-6">
-                  <p className={metaGD["tongtiendutinh"].up? 'uppercase':''}>{item["tongtiendutinh"]}</p>
+                  <p className={metaGD["tongtiendutinh"].up? 'uppercase':''}>{numeral(item["tongtiendutinh"]).format('0,0')+' VND'}</p>
                 </div>
               </div>
             </div>
@@ -129,14 +130,18 @@ export class ViewPDH extends Component {
         </div>
         <div className="row">
           <div className="col-md-12">
-          <table id="example" className="table display preline dataTable" cellSpacing="0" width="100%" role="grid" aria-describedby="example_info" style={{"width": "100%"}}>
-            <thead>
-              <THeadViewFull meta={metaCTDH} ></THeadViewFull>
-            </thead>
-            <tbody>
-
-            </tbody>
-          </table>
+            <br/>
+            <strong>Chi tiết đơn hàng:</strong>
+            <table id="example" className="table display preline dataTable" cellSpacing="0" width="100%" role="grid" aria-describedby="example_info" style={{"width": "100%"}}>
+              <thead>
+                <THeadCTDH meta={metaCTDH} ></THeadCTDH>
+              </thead>
+              <tbody>
+                {item && item.chitietdonhang.map((item, index)=>{
+                  return <TBodyCTDH meta={metaCTDH} listLV={listLV} index={index} item={item}></TBodyCTDH>;
+                })}
+              </tbody>
+            </table>
           </div>
         </div>
             <hr/>

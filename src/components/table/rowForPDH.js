@@ -31,7 +31,7 @@ export class THead extends Component {
     )
   }
 }
-export class THeadViewFull extends Component {
+export class THeadCTDH extends Component {
   static propTypes = {
     meta: PropTypes.object
   }
@@ -130,44 +130,49 @@ export class TBody extends Component {
     )
   }
 }
-export class TBodyViewFull extends Component {
+export class TBodyCTDH extends Component {
   static propTypes = {
     meta: PropTypes.object,
     item: PropTypes.object,
     listLV: PropTypes.array
   }
+  state = {
+    object: {},
+    loaivai: {}
+  }
+  componentWillMount(){
+    this.state.object = ATOLV(this.props.listLV || []);
+    this.state.loaivai = this.state.object[this.props.item.loaivaiid]|| {};
+  }
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.listLV){
+      this.setState({object: ATOLV(nextProps.listLV || [])});
+    }
+  }
   render(){
-    const {meta, item} = this.props;
+    const {meta, item, index} = this.props;
+    const {loaivai, object} = this.state;
+    console.log("loaivai", loaivai);
     return (
       <tr role="row" className={index%2===1 ? "even":"odd"} key={index}>
         <td>{index+1}</td>
         <td key={'loaivai'+ index}>
-          <select className='form-control' data-addr='loaivaiid'
-            onChange={edit}
-            value={item.loaivaiid || ''}>
-            <option key={index + 'default'}>-- Loai Vai --</option>
-            {listLV && listLV.map(b => {
-              return (
-                <option key={index + ' ' +b.id} value={b.id}>
-                  {b.ten}
-                </option>
-              );
-            })}
-          </select>
+          {loaivai.ten}
+        </td>
+        <td key='mausac' >
+          {loaivai.mausac}
+        </td>
+        <td key='chatlieu' >
+          {loaivai.chatlieu}
         </td>
         <td key='soluong' >
-          <input type="number" step='10' min='0' data-addr='soluong'className="form-control" value={item.soluong || ''} onChange={edit} />
+          {numeral(item.soluong).format('0,0') + ' Cây'}
         </td>
         <td key='gia' >
-          <input type="number" step='10' min='0' data-addr='gia'className="form-control" value={item.gia || ''} onChange={edit}/>
+          {numeral(item.gia).format('0,0') + ' VND'}
         </td>
-        <td key='control' className="group-edit">
-          <button className="btn btn-danger btn-table btn-in-th btn-in-del" title="Del" onClick={del} key="del">
-            <i className='fa fa-close'/>
-          </button>
-          <button className="btn btn-success btn-table btn-in-th btn-in-add" title="Add" onClick={add} key="add">
-            <i className="fa fa-plus"/>
-          </button>
+        <td key='thanhtien' >
+          {numeral(item.gia*item.soluong).format('0,0') + ' VND'}
         </td>
       </tr>
     )

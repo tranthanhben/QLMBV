@@ -30,8 +30,7 @@ export default class EditPDH extends Component {
     gdItem: {
       nhanvienid: this.props.user.nhanvienid || 'admin',
       tinhtrangdonhang: 'chuaxuly',
-      doitacid: '',
-      ngayhoanthanh: changeDTI(datetime(new Date()))
+      doitacid: ''
     },
     giaodichid: this.props.giaodichid,
     ctdh:this.props.gdItem && this.props.gdItem.chitietdonhang || [],
@@ -64,7 +63,8 @@ export default class EditPDH extends Component {
         giaodichid: nextProps.gdItem.id,
         gdItem: nextProps.gdItem,
         newGD: false,
-        submiting: false
+        submiting: false,
+        edited: false
       });
     }else if(nextProps.gdItem){
       this.setState({
@@ -73,13 +73,15 @@ export default class EditPDH extends Component {
         gdItem: nextProps.gdItem,
         newGD: false,
         edited: false,
+        editedDH: false,
         submiting: false
       });
     }
     if(nextProps.ctdh){
       this.setState({
         ctdh: nextProps.ctdh || [],
-        editedDH: false
+        editedDH: false,
+        edited: false
       });
     }
   }
@@ -111,6 +113,11 @@ export default class EditPDH extends Component {
       //kiem tra va parse kieu so va ngya
       this.setState({submiting: true});
       this.props.postItem(preprocessPost(this.state.gdItem, this.props.meta.giaodich));
+      if(this.state.edited){
+        this.props.postItem(preprocessPost(this.state.gdItem, this.props.meta.giaodich));
+      }else{
+        this.props.postCTDH(this.xulytruoc(this.state.ctdh));
+      }
     }
   }
   xulytruoc(ctdh){
@@ -245,7 +252,7 @@ export default class EditPDH extends Component {
           {submited ? <p className='help-block required'>
               {::this.checkRq()}
             </p>:null}&nbsp;&nbsp;
-          {giaodichid? <button className='btn btn-warning' onClick={::this.onSubmit} disabled={(edited? '':'disabled')}>
+          {giaodichid? <button className='btn btn-warning' onClick={::this.onSubmit} disabled={(edited||editedDH? '':'disabled')}>
           {"Cập Nhật"}
           </button>: <button className='btn btn-success' onClick={::this.onSubmit} disabled={(edited||editedDH? '':'disabled')}>
           {"Tạo mới"}</button>}&nbsp;&nbsp;&nbsp;&nbsp;

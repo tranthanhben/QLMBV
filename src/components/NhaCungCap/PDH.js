@@ -5,6 +5,7 @@ import {THead, TBody, TFoot} from '../table/row';
 import {Pagination, PageShow} from '../table/pagination';
 import {isLoaded, loadList as loadPDH} from '../../actions/nhacungcap/pdhActions';
 import * as layoutActions from '../../actions/layoutActions';
+import * as giaodichActions from '../../actions/giaodichActions';
 import Modal from '../layout/Modal';
 import EditPDH from './Editor/EditPDH';
 import {Style} from '../Style';
@@ -17,14 +18,16 @@ import {ViewPDH} from './Editor/ViewFull';
     error: state.phieudathang.error,
     loading: state.phieudathang.loading,
     reload: state.phieudathang.reloadList,
-    meta: state.meta.phieudathang
+    meta: state.meta.phieudathang,
+    listLV: state.giaodich.listLV
   }),
-  {...pdhActions,...layoutActions})
+  {...pdhActions,...layoutActions,...giaodichActions})
 
 export default
 class PDH extends Component{
   static propTypes = {
     listPDH: PropTypes.array,
+    listLV: PropTypes.array,
     error: PropTypes.object,
     paging: PropTypes.object,
     meta: PropTypes.object,
@@ -37,6 +40,9 @@ class PDH extends Component{
     if(!isLoaded(store.getState)){
       return store.dispatch(loadPDH());
     }
+  }
+  componentWillMount(){
+    this.props.loadLV();
   }
   componentWillReceiveProps(nextProps) {
     if(nextProps.reload === true){
@@ -117,7 +123,7 @@ class PDH extends Component{
     this.setState({openEdit: !this.state.openEdit, openView: false})
   }
   render(){
-    const {listPDH, paging, meta} = this.props;
+    const {listPDH, paging, meta, listLV} = this.props;
     const {options, itemView, openView, openEdit, idEdit} = this.state;
     let metagd = meta && meta.giaodich || {};
 
@@ -162,7 +168,7 @@ class PDH extends Component{
                   overlayClassName='modaldumb modalOverlay modalOverlay--after-open '
                   modalClassName='dumb modalContent modalContent--after-open '
                   >
-                    <ViewPDH meta={meta} item={itemView} close={::this.viewModal} edit={::this.editItem}></ViewPDH>
+                    <ViewPDH meta={meta} item={itemView} listLV={listLV} close={::this.viewModal} edit={::this.editItem}></ViewPDH>
                   </Modal> : null}
                   {openEdit?
                   <Modal  modalStyle={Style.content_80}

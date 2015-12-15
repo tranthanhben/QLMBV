@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {initObject, ATO, OTA, preprocess, datetime, changeDTI, renderLabel, setValue, checkRequire, preprocessPost} from '../../../meta';
 import {THead, TBody} from '../../table/rowForPNH';
+import {THeadCTDH, TBodyCTDH} from '../../table/rowForPDH';
 import * as pnhActions from '../../../actions/nhacungcap/pnhActions';
 import * as giaodichActions from '../../../actions/giaodichActions';
 
@@ -52,7 +53,7 @@ export default class EditPNH extends Component {
       soluong:'',
       gia:'',
       khoid:'',
-      loaigiaodich:"pnh"
+      loaigiaodich:"pdh"
     },
     newGD: true
   }
@@ -75,7 +76,8 @@ export default class EditPNH extends Component {
         giaodichid: nextProps.gdItem.id,
         gdItem: nextProps.gdItem,
         newGD: false,
-        submiting: false
+        submiting: false,
+        edited: false
       });
     }else if(nextProps.gdItem){
       this.setState({
@@ -84,6 +86,7 @@ export default class EditPNH extends Component {
         gdItem: nextProps.gdItem,
         newGD: false,
         edited: false,
+        editedCTK: false,
         submiting: false,
         ctk_init: {
           giaodichid: nextProps.gdItem.id || '',
@@ -91,14 +94,15 @@ export default class EditPNH extends Component {
           soluong:'',
           gia:'',
           khoid:'',
-          loaigiaodich:"pnh"
+          loaigiaodich:"pdh"
         }
       });
     }
     if(nextProps.ctk){
       this.setState({
         ctk: nextProps.ctk || [],
-        editedCTK: false
+        editedCTK: false,
+        edited: false
       });
     }
   }
@@ -137,7 +141,11 @@ export default class EditPNH extends Component {
     }else{
       //kiem tra va parse kieu so va ngya
       this.setState({submiting: true});
-      this.props.postItem(preprocessPost(this.state.gdItem, this.props.meta.giaodich));
+      if(this.state.edited){
+        this.props.postItem(preprocessPost(this.state.gdItem, this.props.meta.giaodich));
+      }else{
+        this.props.postCTK(this.xulytruoc(this.state.ctk));
+      }
     }
   }
   xulytruoc(ctk){
@@ -204,7 +212,7 @@ export default class EditPNH extends Component {
     const {gdItem, edited, submited, showFullField, giaodichid, ctk, editedCTK} = this.state;
     const metaGD = meta && preprocess(meta.giaodich) || {};
     const metaCTK = meta && preprocess(meta.ctk) || {};
-    console.log("ctk", ctk);
+    const metaCTDH = meta && preprocess(meta.ctdh) || {};
     return (
       <div>
         <div className="row">
@@ -222,7 +230,7 @@ export default class EditPNH extends Component {
                 <div className='form-group' key="giaodichid">
                   {renderLabel(metaGD.id)}
                   &nbsp;
-                  <select className='form-control' data-addr='id'
+                  <select className='form-control   uppercase' data-addr='id'
                   onChange={::this.changeGDID}
                   value={giaodichid || ''}>
                   <option key='id'>-- Giao Dich ID --</option>
@@ -260,9 +268,23 @@ export default class EditPNH extends Component {
               </div>
             </div>
           </div>,
-          <div className="col-md-12" key="ctk">
+          <div className="col-md-12" key="view ctdh">
             <br/>
             <strong>Chi tiết đơn hàng:</strong>
+            <table id="example" className="table display preline dataTable" cellSpacing="0" width="100%" role="grid" aria-describedby="example_info" style={{"width": "100%"}}>
+              <thead>
+                <THeadCTDH meta={metaCTDH} ></THeadCTDH>
+              </thead>
+              <tbody>
+                {gdItem.chitietdonhang && gdItem.chitietdonhang.map((item, index)=>{
+                  return <TBodyCTDH meta={metaCTDH} listLV={listLV} index={index} item={item}></TBodyCTDH>;
+                })}
+              </tbody>
+            </table>
+          </div>,
+          <div className="col-md-12" key="ctk">
+            <br/>
+            <strong>Chi tiết nhập hàng:</strong>
             <table id="example" className="table display nowrap dataTable" role="grid" aria-describedby="example_info" >
               <thead>
                 <THead meta={metaCTK} add={::this.addCTK(0)}></THead>
@@ -289,7 +311,7 @@ export default class EditPNH extends Component {
                 <div className='form-group' key="giaodichid">
                   {renderLabel(metaGD.id)}
                   &nbsp;
-                  <select className='form-control' data-addr='id'
+                  <select className='form-control  uppercase' data-addr='id'
                   onChange={::this.changeGDID}
                   value={giaodichid || ''}>
                   <option key='id'>-- Giao Dich ID --</option>

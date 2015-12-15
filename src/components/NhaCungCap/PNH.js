@@ -171,7 +171,7 @@ class PDH extends Component{
                   overlayClassName='modaldumb modalOverlay modalOverlay--after-open '
                   modalClassName='dumb modalContent modalContent--after-open '
                   >
-                    <EditPDH giaodichid={idEdit} close={::this.editModal} ></EditPDH>
+                    <EditPNH giaodichid={idEdit} close={::this.editModal} ></EditPNH>
                   </Modal> : null}
                 <PageShow paging={paging} length={listPNH.length}></PageShow>
                 <Pagination load={::this.paginationLoad} paging={paging}></Pagination>

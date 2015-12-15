@@ -261,7 +261,7 @@ export function preprocessPost(object, meta){
       object[i] = parseFloat(object[i]) || 0;
     }
     if (field.type ==="date"){
-      object[i] = parseDate(object[i]);
+      object[i] = new Date(object[i]);
     }
   }
   return object;

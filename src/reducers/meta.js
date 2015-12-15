@@ -443,6 +443,7 @@ const initialState = {
         up: false,
         type: "number",
         field: true,
+        unit: ' VND',
         view: true
       },
       "tongtien": {
@@ -452,6 +453,7 @@ const initialState = {
         up: false,
         type: "number",
         field: false,
+        unit: ' VND',
         view: false
       },
       "tinhtrangdonhang": {
@@ -558,8 +560,8 @@ const initialState = {
         field: true,
         view: true
       },
-      giadutinh: {
-        name: "giadutinh",
+      gia: {
+        name: "gia",
         label: "Giá Dự Tính",
         sort: false,
         up: false,
@@ -766,6 +768,62 @@ const initialState = {
         field: false,
         view:true
       }
+    },
+    ctdh: {
+      loaivaiid: {
+        name: "loaivaiid",
+        label: "Loại Vải",
+        sort: false,
+        up: false,
+        type: "special",
+        field: false,
+        view: true
+      },
+      mausac: {
+        name: "mausac",
+        label: "Màu Sắc",
+        sort: false,
+        up: false,
+        type: "special",
+        field: false,
+        view: true
+      },
+      chatlieu: {
+        name: "chatlieu",
+        label: "Chất Liệu",
+        sort: false,
+        up: false,
+        type: "special",
+        field: false,
+        view: true
+      },
+      soluong: {
+        name: "soluong",
+        label: "Số lượng",
+        sort: false,
+        up: false,
+        type: "number",
+        field: true,
+        view: true
+      },
+      gia: {
+        name: "gia",
+        label: "Giá Dự Tính",
+        sort: false,
+        up: false,
+        type: "number",
+        field: true,
+        view: true
+      },
+      thanhtien: {
+        name: "thanhtien",
+        label: "Thành Tiền",
+        sort: false,
+        up: false,
+        type: "number",
+        field: false,
+        view: true
+      }
     }
   },
   phieumuahang:{
@@ -805,6 +863,7 @@ const initialState = {
         up: false,
         type: "number",
         field: true,
+        unit: ' VND',
         view: true
       },
       "tongtien": {
@@ -814,6 +873,7 @@ const initialState = {
         up: false,
         type: "number",
         field: false,
+        unit: ' VND',
         view: false
       },
       "tinhtrangdonhang": {
@@ -920,8 +980,8 @@ const initialState = {
         field: true,
         view: true
       },
-      giadutinh: {
-        name: "giadutinh",
+      gia: {
+        name: "gia",
         label: "Giá Bán(dt)",
         sort: false,
         up: false,
