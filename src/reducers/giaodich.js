@@ -15,9 +15,21 @@ import {
   GD_LISTK_SUCCESS,
   GD_LISTK_FAIL,
 
+  GD_LISTPDH,
+  GD_LISTPDH_SUCCESS,
+  GD_LISTPDH_FAIL,
+
   GD_DEL_CTDH,
   GD_DEL_CTDH_SUCCESS,
   GD_DEL_CTDH_FAIL,
+
+  GD_DEL_CTK,
+  GD_DEL_CTK_SUCCESS,
+  GD_DEL_CTK_FAIL,
+
+  GD_DEL_CTTT,
+  GD_DEL_CTTT_SUCCESS,
+  GD_DEL_CTTT_FAIL,
 
   GD_POST,
   GD_POST_SUCCESS,
@@ -115,6 +127,26 @@ export default function loaivai(state = initialState, action = {}){
         pagingK: {},
         errorLoadK: action.result
       };
+    case GD_LISTPDH:
+      return {
+        ...state,
+        loadPDH: true
+      };
+    case GD_LISTPDH_SUCCESS:
+      return {
+        ...state,
+        loadPDH: true,
+        listPDH: action.result.items,
+        pagingPDH: action.result.paging
+      };
+    case GD_LISTPDH_FAIL:
+      return {
+        ...state,
+        loadPDH: true,
+        listPDH: [],
+        pagingPDH: {},
+        errorLoadPDH: action.result
+      };
     case GD_DEL_CTDH:
       return {
         ...state,
@@ -131,6 +163,39 @@ export default function loaivai(state = initialState, action = {}){
         delCTDH: false,
         errorDel: action.result
       };
+    case GD_DEL_CTK:
+      return {
+        ...state,
+        deletingCTK: true
+      };
+    case GD_DEL_CTK_SUCCESS:
+      return {
+        ...state,
+        delCTK: true
+      };
+    case GD_DEL_CTK_FAIL:
+      return {
+        ...state,
+        delCTK: false,
+        errorDel: action.result
+      };
+    case GD_DEL_CTTT:
+      return {
+        ...state,
+        deletingCTTT: true
+      };
+    case GD_DEL_CTTT_SUCCESS:
+      return {
+        ...state,
+        delCTTT: true
+      };
+    case GD_DEL_CTTT_FAIL:
+      return {
+        ...state,
+        delCTTT: false,
+        errorDel: action.result
+      };
+
     case GD_PUT:
       return{
         ...state,

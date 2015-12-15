@@ -23,7 +23,6 @@ export function ATOLV(array){
     return {};
   }
   let obj = {};
-  console.log("lenght", array.length);
   for (let i = 0; i < array.length; i++) {
     obj[array[i].id] = array[i];
   };

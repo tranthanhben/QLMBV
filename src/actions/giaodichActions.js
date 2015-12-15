@@ -16,9 +16,21 @@ import {
   GD_LISTK_SUCCESS,
   GD_LISTK_FAIL,
 
+  GD_LISTPDH,
+  GD_LISTPDH_SUCCESS,
+  GD_LISTPDH_FAIL,
+
   GD_DEL_CTDH,
   GD_DEL_CTDH_SUCCESS,
   GD_DEL_CTDH_FAIL,
+
+  GD_DEL_CTK,
+  GD_DEL_CTK_SUCCESS,
+  GD_DEL_CTK_FAIL,
+
+  GD_DEL_CTTT,
+  GD_DEL_CTTT_SUCCESS,
+  GD_DEL_CTTT_FAIL,
 
   GD_POST,
   GD_POST_SUCCESS,
@@ -82,6 +94,18 @@ export function loadK(){
     })
   };
 }
+export function loadPDH(){
+  return {
+    types: [GD_LISTPDH, GD_LISTPDH_SUCCESS, GD_LISTPDH_FAIL],
+    promise: (client) => client.get('/giaodich/phieu_dat_hang',{
+      params: makeQuery({
+        page: 0,
+        page_size : 100,
+        name: ''
+      })
+    })
+  };
+}
 export function postGD(data, kind){
   if(data.id){
     return {
@@ -105,6 +129,21 @@ export function delCTDH(id){
     promise: (client) => client.del('/chi_tiet_don_hang/'+ id)
   };
 }
+
+export function delCTK(id){
+  return {
+    types: [GD_DEL_CTK, GD_DEL_CTK_SUCCESS, GD_DEL_CTK_FAIL],
+    promise: (client) => client.del('/chi_tiet_kho/'+ id)
+  };
+}
+
+export function delCTTT(id){
+  return {
+    types: [GD_DEL_CTTT, GD_DEL_CTTT_SUCCESS, GD_DEL_CTTT_FAIL],
+    promise: (client) => client.del('/chi_tiet_thanh_toan/'+ id)
+  };
+}
+
 export function isLoaded(globalState) {
   return globalState.giaodich && globalState.giaodich.loaded;
 }

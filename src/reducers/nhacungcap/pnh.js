@@ -89,7 +89,7 @@ export default function phieudathang(state = initialState, action = {}){
         ...state,
         getding: false,
         editItem: action.result,
-        ctk: action.result.chitietdonhang
+        ctk: action.result.chitietkho
       };
     case PNH_GET_FAIL:
       return {

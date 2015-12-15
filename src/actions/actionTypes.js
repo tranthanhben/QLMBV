@@ -451,6 +451,18 @@ export const GD_LISTK = "GD_LISTK";
 export const GD_LISTK_SUCCESS = "GD_LISTK_SUCCESS";
 export const GD_LISTK_FAIL = "GD_LISTK_FAIL";
 
+export const GD_LISTPDH = "GD_LISTPDH";
+export const GD_LISTPDH_SUCCESS = "GD_LISTPDH_SUCCESS";
+export const GD_LISTPDH_FAIL = "GD_LISTPDH_FAIL";
+
 export const GD_DEL_CTDH = "GD_DEL_CTDH";
 export const GD_DEL_CTDH_SUCCESS = "GD_DEL_CTDH_SUCCESS";
 export const GD_DEL_CTDH_FAIL = "GD_DEL_CTDH_FAIL";
+
+export const GD_DEL_CTK = "GD_DEL_CTK";
+export const GD_DEL_CTK_SUCCESS = "GD_DEL_CTK_SUCCESS";
+export const GD_DEL_CTK_FAIL = "GD_DEL_CTK_FAIL";
+
+export const GD_DEL_CTTT = "GD_DEL_CTTT";
+export const GD_DEL_CTTT_SUCCESS = "GD_DEL_CTTT_SUCCESS";
+export const GD_DEL_CTTT_FAIL = "GD_DEL_CTTT_FAIL";

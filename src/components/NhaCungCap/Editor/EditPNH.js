@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {initObject, ATO, OTA, preprocess, datetime, changeDTI, renderLabel, setValue, checkRequire, preprocessPost} from '../../../meta';
-import {THead, TBody} from '../../table/rowForPDH';
+import {THead, TBody} from '../../table/rowForPNH';
 import * as pnhActions from '../../../actions/nhacungcap/pnhActions';
 import * as giaodichActions from '../../../actions/giaodichActions';
 
@@ -11,7 +11,7 @@ import * as giaodichActions from '../../../actions/giaodichActions';
   listNCC: state.giaodich.listNCC,
   listLV: state.giaodich.listLV,
   listK: state.giaodich.listK,
-  listPDH: state.phieudathang.list,
+  listPDH: state.giaodich.listPDH,
   user: state.user.user,
   ctk: state.phieunhaphang.ctk
 }),{...pnhActions, ...giaodichActions})
@@ -25,6 +25,7 @@ export default class EditPNH extends Component {
     gdItem: PropTypes.object,
     meta: PropTypes.object,
     user: PropTypes.object,
+    ctk: PropTypes.array,
     postItem: PropTypes.func.isRequired,
     postCTK: PropTypes.func.isRequired,
     getItem: PropTypes.func.isRequired,
@@ -43,7 +44,7 @@ export default class EditPNH extends Component {
     giaodichid: this.props.giaodichid,
     ctk:this.props.gdItem && this.props.gdItem.chitietkho || [],
     edited: false,
-    editedDH: false,
+    editedCTK: false,
     submiting: false,
     ctk_init: {
       giaodichid: this.props.giaodichid || '',
@@ -63,6 +64,7 @@ export default class EditPNH extends Component {
     this.props.loadNCC();
     this.props.loadLV();
     this.props.loadK();
+    this.props.loadPDH();
   }
   componentWillReceiveProps(nextProps) {
     if(nextProps.gdItem && this.state.submiting){
@@ -76,20 +78,27 @@ export default class EditPNH extends Component {
         submiting: false
       });
     }else if(nextProps.gdItem){
-      console.log("set item");
       this.setState({
         giaodichid: nextProps.gdItem.id,
         ctk: nextProps.gdItem.chitietkho ||[],
         gdItem: nextProps.gdItem,
         newGD: false,
         edited: false,
-        submiting: false
+        submiting: false,
+        ctk_init: {
+          giaodichid: nextProps.gdItem.id || '',
+          loaivaiid:'',
+          soluong:'',
+          gia:'',
+          khoid:'',
+          loaigiaodich:"pnh"
+        }
       });
     }
     if(nextProps.ctk){
       this.setState({
         ctk: nextProps.ctk || [],
-        editedDH: false
+        editedCTK: false
       });
     }
   }
@@ -101,6 +110,14 @@ export default class EditPNH extends Component {
       edited: true,
       gdItem: setValue(obj, addr, value)
     })
+  }
+  changeGDID(){
+    let value = event.target.value;
+    this.setState({
+      edited: false,
+      giaodichid: value
+    });
+    this.props.getItem(value);
   }
   checkRq(){
     let mes = '';
@@ -124,7 +141,6 @@ export default class EditPNH extends Component {
     }
   }
   xulytruoc(ctk){
-    console.log("xulytruoc");
     let ctkPP = [];
     for (var i = 0; i < ctk.length; i++) {
       let dh = preprocessPost(ctk[i], this.props.meta.ctk);
@@ -180,14 +196,15 @@ export default class EditPNH extends Component {
       let addr = event.target.dataset.addr;
       let value = event.target.value;
       ctk[index][addr] = value;
-      this.setState({ctk: ctk, editedDH: true});
+      this.setState({ctk: ctk, editedCTK: true});
     }
   }
   render() {
-    const {meta, error, message, listNCC, listLV, listK} = this.props;
-    const {gdItem, edited, submited, showFullField, giaodichid, ctk, editedDH} = this.state;
+    const {meta, error, message, listNCC, listLV, listK, listPDH} = this.props;
+    const {gdItem, edited, submited, showFullField, giaodichid, ctk, editedCTK} = this.state;
     const metaGD = meta && preprocess(meta.giaodich) || {};
     const metaCTK = meta && preprocess(meta.ctk) || {};
+    console.log("ctk", ctk);
     return (
       <div>
         <div className="row">
@@ -199,14 +216,30 @@ export default class EditPNH extends Component {
         </div>
         <hr/>
         <div className="row">
-          <div className="col-md-12" key="gdfield">
+          { giaodichid? [<div className="col-md-12" key="gdfield">
             <div className="row">
               <div className="col-md-8 boder-right">
+                <div className='form-group' key="giaodichid">
+                  {renderLabel(metaGD.id)}
+                  &nbsp;
+                  <select className='form-control' data-addr='id'
+                  onChange={::this.changeGDID}
+                  value={giaodichid || ''}>
+                  <option key='id'>-- Giao Dich ID --</option>
+                  {listPDH && listPDH.map(b => {
+                    return (
+                      <option key={b.id} value={b.id}>
+                        {b.id}
+                      </option>
+                    );
+                  })}
+                  </select>
+                </div>
                 <div className='form-group' key="khachhang">
                   {renderLabel(metaGD.doitacid)}
                   &nbsp;
                   <select className='form-control' data-addr='doitacid'
-                  onChange={::this.handleChange}
+                  readOnly
                   value={gdItem.doitacid || ''}>
                   <option key='doitacid'>-- Nha Cung Cap --</option>
                   {listNCC && listNCC.map(b => {
@@ -226,7 +259,7 @@ export default class EditPNH extends Component {
               <div className="col-md-4">
               </div>
             </div>
-          </div>
+          </div>,
           <div className="col-md-12" key="ctk">
             <br/>
             <strong>Chi tiết đơn hàng:</strong>
@@ -242,6 +275,7 @@ export default class EditPNH extends Component {
                     item = {dh}
                     index = {index}
                     listLV = {listLV}
+                    listK = {listK}
                     edit ={::this.handleChangeCTK(index)}
                     add = {::this.addCTK(index)}
                     del = {::this.delCTK(index)}/>
@@ -249,6 +283,29 @@ export default class EditPNH extends Component {
               </tbody>
             </table>
           </div>
+          ]: <div className="col-md-12">
+            <div className="row">
+              <div className="col-md-8 boder-right">
+                <div className='form-group' key="giaodichid">
+                  {renderLabel(metaGD.id)}
+                  &nbsp;
+                  <select className='form-control' data-addr='id'
+                  onChange={::this.changeGDID}
+                  value={giaodichid || ''}>
+                  <option key='id'>-- Giao Dich ID --</option>
+                  {listPDH && listPDH.map(b => {
+                    return (
+                      <option key={b.id} value={b.id}>
+                        {b.id}
+                      </option>
+                    );
+                  })}
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>}
+
         </div>
         <br/>
         <hr/>
@@ -257,9 +314,9 @@ export default class EditPNH extends Component {
           {submited ? <p className='help-block required'>
               {::this.checkRq()}
             </p>:null}&nbsp;&nbsp;
-          {giaodichid? <button className='btn btn-warning' onClick={::this.onSubmit} disabled={(edited? '':'disabled')}>
+          {giaodichid? <button className='btn btn-warning' onClick={::this.onSubmit} disabled={(edited||editedCTK? '':'disabled')}>
           {"Cập Nhật"}
-          </button>: <button className='btn btn-success' onClick={::this.onSubmit} disabled={(edited||editedDH? '':'disabled')}>
+          </button>: <button className='btn btn-success' onClick={::this.onSubmit} disabled={(edited||editedCTK? '':'disabled')}>
           {"Tạo mới"}</button>}&nbsp;&nbsp;&nbsp;&nbsp;
             <button className ='btn btn-default' onClick={::this.onClose}>Đóng</button>
           </div>
