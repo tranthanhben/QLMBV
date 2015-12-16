@@ -186,52 +186,6 @@ export const LH_DELETE_FAIL = "LH_DELETE_FAIL";
 
 export const LH_RESET = "LH_RESET";
 
-// PHIEU MUA HANG CHO KHACH HANG
-export const PMH_LIST_LOAD = "PMH_LIST_LOAD";
-export const PMH_LIST_LOAD_SUCCESS = "PMH_LIST_LOAD_SUCCESS";
-export const PMH_LIST_LOAD_FAIL = "PMH_LIST_LOAD_FAIL";
-
-export const PMH_ONE_LOAD = "PMH_ONE_LOAD";
-export const PMH_ONE_LOAD_SUCCESS = "PMH_ONE_LOAD_SUCCESS";
-export const PMH_ONE_LOAD_FAIL = "PMH_ONE_LOAD_FAIL";
-
-export const PMH_POST = "PMH_POST";
-export const PMH_POST_SUCCESS = "PMH_POST_SUCCESS";
-export const PMH_POST_FAIL = "PMH_POST_FAIL";
-
-export const PMH_PUT = "PMH_PUT";
-export const PMH_PUT_SUCCESS = "PMH_PUT_SUCCESS";
-export const PMH_PUT_FAIL = "PMH_PUT_FAIL";
-
-export const PMH_DELETE = "PMH_DELETE";
-export const PMH_DELETE_SUCCESS = "PMH_DELETE_SUCCESS";
-export const PMH_DELETE_FAIL = "PMH_DELETE_FAIL";
-
-export const PMH_RESET = "PMH_RESET";
-
-// PHIEU XUAT HANG CHO KHACH HANG
-export const PXH_LIST_LOAD = "PXH_LIST_LOAD";
-export const PXH_LIST_LOAD_SUCCESS = "PXH_LIST_LOAD_SUCCESS";
-export const PXH_LIST_LOAD_FAIL = "PXH_LIST_LOAD_FAIL";
-
-export const PXH_ONE_LOAD = "PXH_ONE_LOAD";
-export const PXH_ONE_LOAD_SUCCESS = "PXH_ONE_LOAD_SUCCESS";
-export const PXH_ONE_LOAD_FAIL = "PXH_ONE_LOAD_FAIL";
-
-export const PXH_POST = "PXH_POST";
-export const PXH_POST_SUCCESS = "PXH_POST_SUCCESS";
-export const PXH_POST_FAIL = "PXH_POST_FAIL";
-
-export const PXH_PUT = "PXH_PUT";
-export const PXH_PUT_SUCCESS = "PXH_PUT_SUCCESS";
-export const PXH_PUT_FAIL = "PXH_PUT_FAIL";
-
-export const PXH_DELETE = "PXH_DELETE";
-export const PXH_DELETE_SUCCESS = "PXH_DELETE_SUCCESS";
-export const PXH_DELETE_FAIL = "PXH_DELETE_FAIL";
-
-export const PXH_RESET = "PXH_RESET";
-
 // PHIEU DAT HANG CHO NHA CUNG CAP
 export const PDH_LIST_LOAD = "PDH_LIST_LOAD";
 export const PDH_LIST_LOAD_SUCCESS = "PDH_LIST_LOAD_SUCCESS";
@@ -293,6 +247,68 @@ export const PNH_GET_SUCCESS = "PNH_GET_SUCCESS";
 export const PNH_GET_FAIL = "PNH_GET_FAIL";
 
 export const PNH_RESET = "PNH_RESET";
+
+// PHIEU MUA HANG CHO KHACH HANG
+export const PMH_LIST_LOAD = "PMH_LIST_LOAD";
+export const PMH_LIST_LOAD_SUCCESS = "PMH_LIST_LOAD_SUCCESS";
+export const PMH_LIST_LOAD_FAIL = "PMH_LIST_LOAD_FAIL";
+
+export const PMH_ONE_LOAD = "PMH_ONE_LOAD";
+export const PMH_ONE_LOAD_SUCCESS = "PMH_ONE_LOAD_SUCCESS";
+export const PMH_ONE_LOAD_FAIL = "PMH_ONE_LOAD_FAIL";
+
+export const PMH_POST = "PMH_POST";
+export const PMH_POST_SUCCESS = "PMH_POST_SUCCESS";
+export const PMH_POST_FAIL = "PMH_POST_FAIL";
+
+export const PMH_PUT = "PMH_PUT";
+export const PMH_PUT_SUCCESS = "PMH_PUT_SUCCESS";
+export const PMH_PUT_FAIL = "PMH_PUT_FAIL";
+
+export const PMH_DELETE = "PMH_DELETE";
+export const PMH_DELETE_SUCCESS = "PMH_DELETE_SUCCESS";
+export const PMH_DELETE_FAIL = "PMH_DELETE_FAIL";
+
+export const PMH_CTDH = "PMH_CTDH";
+export const PMH_CTDH_SUCCESS = "PMH_CTDH_SUCCESS";
+export const PMH_CTDH_FAIL = "PMH_CTDH_FAIL";
+
+export const PMH_GET = "PMH_GET";
+export const PMH_GET_SUCCESS = "PMH_GET_SUCCESS";
+export const PMH_GET_FAIL = "PMH_GET_FAIL";
+
+export const PMH_RESET = "PMH_RESET";
+
+// PHIEU XUAT HANG CHO KHACH HANG
+export const PXH_LIST_LOAD = "PXH_LIST_LOAD";
+export const PXH_LIST_LOAD_SUCCESS = "PXH_LIST_LOAD_SUCCESS";
+export const PXH_LIST_LOAD_FAIL = "PXH_LIST_LOAD_FAIL";
+
+export const PXH_ONE_LOAD = "PXH_ONE_LOAD";
+export const PXH_ONE_LOAD_SUCCESS = "PXH_ONE_LOAD_SUCCESS";
+export const PXH_ONE_LOAD_FAIL = "PXH_ONE_LOAD_FAIL";
+
+export const PXH_POST = "PXH_POST";
+export const PXH_POST_SUCCESS = "PXH_POST_SUCCESS";
+export const PXH_POST_FAIL = "PXH_POST_FAIL";
+
+export const PXH_PUT = "PXH_PUT";
+export const PXH_PUT_SUCCESS = "PXH_PUT_SUCCESS";
+export const PXH_PUT_FAIL = "PXH_PUT_FAIL";
+
+export const PXH_DELETE = "PXH_DELETE";
+export const PXH_DELETE_SUCCESS = "PXH_DELETE_SUCCESS";
+export const PXH_DELETE_FAIL = "PXH_DELETE_FAIL";
+
+export const PXH_CTK = "PXH_CTK";
+export const PXH_CTK_SUCCESS = "PXH_CTK_SUCCESS";
+export const PXH_CTK_FAIL = "PXH_CTK_FAIL";
+
+export const PXH_GET = "PXH_GET";
+export const PXH_GET_SUCCESS = "PXH_GET_SUCCESS";
+export const PXH_GET_FAIL = "PXH_GET_FAIL";
+
+export const PXH_RESET = "PXH_RESET";
 
 // HOA DON KHACH HANG
 export const HDKH_LIST_LOAD = "HDKH_LIST_LOAD";
@@ -454,6 +470,10 @@ export const GD_LISTK_FAIL = "GD_LISTK_FAIL";
 export const GD_LISTPDH = "GD_LISTPDH";
 export const GD_LISTPDH_SUCCESS = "GD_LISTPDH_SUCCESS";
 export const GD_LISTPDH_FAIL = "GD_LISTPDH_FAIL";
+
+export const GD_LISTPMH = "GD_LISTPMH";
+export const GD_LISTPMH_SUCCESS = "GD_LISTPMH_SUCCESS";
+export const GD_LISTPMH_FAIL = "GD_LISTPMH_FAIL";
 
 export const GD_DEL_CTDH = "GD_DEL_CTDH";
 export const GD_DEL_CTDH_SUCCESS = "GD_DEL_CTDH_SUCCESS";

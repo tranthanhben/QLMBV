@@ -137,16 +137,18 @@ export class TBodyCTDH extends Component {
     listLV: PropTypes.array
   }
   state = {
-    object: {},
+    object: ATOLV(this.props.listLV || [])|| {},
     loaivai: {}
   }
   componentWillMount(){
-    this.state.object = ATOLV(this.props.listLV || []);
+    this.state.object = ATOLV(this.props.listLV || []) ||{};
     this.state.loaivai = this.state.object[this.props.item.loaivaiid]|| {};
   }
   componentWillReceiveProps(nextProps) {
     if(nextProps.listLV){
-      this.setState({object: ATOLV(nextProps.listLV || [])});
+      let obj = ATOLV(nextProps.listLV || [])|| {};
+      let lv = obj[this.props.item.loaivaiid] || {};
+      this.setState({object: obj, loaivai: lv});
     }
   }
   render(){

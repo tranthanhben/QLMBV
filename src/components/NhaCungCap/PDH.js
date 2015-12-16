@@ -162,7 +162,7 @@ class PDH extends Component{
                   </tbody>
                 </table>
                 {openView?
-                  <Modal  modalStyle={Style.content_60}
+                  <Modal  modalStyle={Style.content_80}
                   overlayStyle= {Style.overlay}
                   close={::this.viewModal}
                   overlayClassName='modaldumb modalOverlay modalOverlay--after-open '

@@ -367,6 +367,14 @@ const initialState = {
       required: false,
       field: true
     },
+    "mausac": {
+      name: "mausac",
+      label: "Màu Sắc",
+      sort: false,
+      type: "single",
+      required: false,
+      field: true
+    },
     "chatlieu": {
       name: "chatlieu",
       label: "Chất Liệu",
@@ -458,7 +466,7 @@ const initialState = {
       },
       "tinhtrangdonhang": {
         name: "tinhtrangdonhang",
-        label: "Tình Trạng",
+        label: "Tình Trạng Đặt",
         sort: false,
         up: false,
         type: "select",
@@ -478,9 +486,9 @@ const initialState = {
         field: true,
         view: true
       },
-      "tinhtrangnhaphang": {
-        name: "tinhtrangnhaphang",
-        label: "Tình Trạng",
+      "tinhtrangkho": {
+        name: "tinhtrangkho",
+        label: "Tình Trạng Nhập",
         sort: false,
         up: false,
         type: "select",
@@ -502,7 +510,7 @@ const initialState = {
       },
       "tinhtranthanhtoan": {
         name: "tinhtrangthanhtoan",
-        label: "Tình Trạng",
+        label: "Tình Trạng Thanh Toán",
         sort: false,
         up: false,
         type: "select",
@@ -650,9 +658,9 @@ const initialState = {
         field: false,
         view: false
       },
-      "tinhtrangnhaphang": {
-        name: "tinhtrangnhaphang",
-        label: "Tình Trạng",
+      "tinhtrangkho": {
+        name: "tinhtrangkho",
+        label: "Tình Trạng Nhập",
         sort: false,
         up: false,
         type: "select",
@@ -674,7 +682,7 @@ const initialState = {
       },
       "tinhtranthanhtoan": {
         name: "tinhtrangthanhtoan",
-        label: "Tình Trạng",
+        label: "Tình Trạng Thanh Toán",
         sort: false,
         up: false,
         type: "select",
@@ -878,7 +886,7 @@ const initialState = {
       },
       "tinhtrangdonhang": {
         name: "tinhtrangdonhang",
-        label: "Tình Trạng",
+        label: "Tình Trạng Mua",
         sort: false,
         up: false,
         type: "select",
@@ -900,7 +908,7 @@ const initialState = {
       },
       "tinhtrangkho": {
         name: "tinhtrangkho",
-        label: "Tình Trạng",
+        label: "Tình Trạng Xuất",
         sort: false,
         up: false,
         type: "select",
@@ -922,7 +930,7 @@ const initialState = {
       },
       "tinhtranthanhtoan": {
         name: "tinhtrangthanhtoan",
-        label: "Tình Trạng",
+        label: "Tình Trạng Thanh Toán",
         sort: false,
         up: false,
         type: "select",
@@ -1050,7 +1058,7 @@ const initialState = {
       },
       "tinhtrangdonhang": {
         name: "tinhtrangdonhang",
-        label: "Tình Trạng",
+        label: "Tình Trạng Mua",
         sort: false,
         up: false,
         type: "select",
@@ -1072,7 +1080,7 @@ const initialState = {
       },
       "tinhtrangkho": {
         name: "tinhtrangkho",
-        label: "Tình Trạng",
+        label: "Tình Trạng Xuất",
         sort: false,
         up: false,
         type: "select",
@@ -1094,7 +1102,7 @@ const initialState = {
       },
       "tinhtranthanhtoan": {
         name: "tinhtrangthanhtoan",
-        label: "Tình Trạng",
+        label: "Tình Trạng Thanh Toán",
         sort: false,
         up: false,
         type: "select",
@@ -1197,6 +1205,62 @@ const initialState = {
         type: "number",
         field: false,
         view:true
+      }
+    },
+    ctdh: {
+      loaivaiid: {
+        name: "loaivaiid",
+        label: "Loại Vải",
+        sort: false,
+        up: false,
+        type: "special",
+        field: false,
+        view: true
+      },
+      mausac: {
+        name: "mausac",
+        label: "Màu Sắc",
+        sort: false,
+        up: false,
+        type: "special",
+        field: false,
+        view: true
+      },
+      chatlieu: {
+        name: "chatlieu",
+        label: "Chất Liệu",
+        sort: false,
+        up: false,
+        type: "special",
+        field: false,
+        view: true
+      },
+      soluong: {
+        name: "soluong",
+        label: "Số lượng",
+        sort: false,
+        up: false,
+        type: "number",
+        field: true,
+        view: true
+      },
+      gia: {
+        name: "gia",
+        label: "Giá Bán(dt)",
+        sort: false,
+        up: false,
+        type: "number",
+        field: true,
+        view: true
+      },
+      thanhtien: {
+        name: "thanhtien",
+        label: "Thành Tiền",
+        sort: false,
+        up: false,
+        type: "number",
+        field: false,
+        view: true
       }
     }
   },

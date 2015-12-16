@@ -1,28 +1,18 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import * as pnhActions from '../../actions/nhacungcap/pnhActions';
+import * as pxhActions from '../../actions/khachhang/pxhActions';
 import {THead, TBody, TFoot} from '../table/row';
 import {Pagination, PageShow} from '../table/pagination';
 import {isLoaded, loadList as loadPXH} from '../../actions/khachhang/pxhActions';
-import * as layoutActions from '../../actions/layoutActions';
-import * as giaodichActions from '../../actions/giaodichActions';
-import Modal from '../layout/Modal';
-import EditPXH from './Editor/EditPXH';
-import {Style} from '../Style';
-import {ViewPXH} from './Editor/ViewFull';
 
 @connect(
   state =>({
     listPXH: state.phieuxuathang.list,
     paging: state.phieuxuathang.paging,
     error: state.phieuxuathang.error,
-    loading: state.phieuxuathang.loading,
-    reload: state.phieuxuathang.reloadList,
-    meta: state.meta.phieuxuathang,
-    listLV: state.giaodich.listLV,
-    listK: state.giaodich.listK,
+    loading: state.phieuxuathang.loading
   }),
-  {...pnhActions,...layoutActions, ...giaodichActions})
+  {...pxhActions})
 
 export default
 class PXH extends Component{
@@ -30,10 +20,8 @@ class PXH extends Component{
     listPXH: PropTypes.array,
     error: PropTypes.object,
     paging: PropTypes.object,
-    meta: PropTypes.object,
     loading: PropTypes.bool,
-    loadList:PropTypes.func.isRequired,
-    openModal: PropTypes.func.isRequired
+    loadList:PropTypes.func.isRequired
   }
 
   static fetchData(store){
@@ -41,25 +29,61 @@ class PXH extends Component{
       return store.dispatch(loadPXH());
     }
   }
-  componentWillMount(){
-    this.props.loadLV();
-    this.props.loadK();
-  }
-  componentWillReceiveProps(nextProps) {
-    if(nextProps.reload === true){
-      this.props.loadList(this.state.options);
-    }
-  }
+
   state = {
     options :{
       page_size: 10,
       name: '',
       sort: ''
     },
-    openView: false,
-    openEdit: false,
-    itemView: {},
-    idEdit: ''
+    meta:{
+      "pxhid":{
+        name: "id",
+        label: "PXHID",
+        sort: true
+      },
+      "pmhid":{
+        name: "pmhid",
+        label: "PMHID",
+        sort: true
+      },
+      "nvid":{
+        name: "nvid",
+        label: "NVID",
+        sort: false
+      },
+      "ngaytao":{
+        name: "ngaytao",
+        label: "Ngày Tạo",
+        type: "date",
+        sort: true
+      },
+      "soluong":{
+        name: "soluong",
+        label: "Số Lượng",
+        sort: false,
+        type: "number",
+        unit: ' Cây'
+      },
+      "tongtien":{
+        name: "tongtien",
+        label: "Tổng Tiền",
+        sort: true,
+        type: "number",
+        unit: ' VND'
+      },
+      "tinhtrang":{
+        name: "tinhtrang",
+        label: "Tình Trạng",
+        sort: true
+      },
+      "ghichu":{
+        name: "ghichu",
+        label: "Ghi Chú",
+        sort: false,
+        type:"content"
+      }
+    }
   }
   changePageSize(){
     let value = event.target.value;
@@ -103,31 +127,9 @@ class PXH extends Component{
       this.setState({options: opt});
     }
   }
-  viewItemFull(item){
-    return ()=>{
-      this.props.openModal(true);
-      this.setState({itemView: item, openView: true});
-    }
-  }
-  viewModal() {
-    this.props.openModal(!this.state.openView);
-    this.setState({openView: !this.state.openView})
-  }
-  editItem(id){
-    return ()=>{
-      this.props.openModal(true);
-      this.setState({idEdit: id, openEdit: true});
-    }
-  }
-  editModal() {
-    this.props.openModal(!this.state.openEdit);
-    this.setState({openEdit: !this.state.openEdit, openView: false})
-  }
   render(){
-    const {listPXH, paging, meta, listLV, listK} = this.props;
-    const {options, itemView, openView, openEdit, idEdit} = this.state;
-    let metagd = meta && meta.giaodich || {};
-
+    const {listPXH, paging} = this.props;
+    const {options, meta} = this.state;
     return (
         <div className="mbv-grid container-fluid" style={{"zIndex": "9999983"}}>
           <div className="row">
@@ -149,38 +151,21 @@ class PXH extends Component{
                 </div>
                 <table id="example" className="table display preline dataTable" cellSpacing="0" width="100%" role="grid" aria-describedby="example_info" style={{"width": "100%"}}>
                   <thead>
-                    <THead meta={metagd} sort={options.sort} sortFunc={::this.sortField} ></THead>
+                    <THead meta={meta} sort={options.sort} sortFunc={::this.sortField} ></THead>
                   </thead>
                   <tfoot>
-                    <TFoot meta={metagd} ></TFoot>
+                    <TFoot meta={meta} ></TFoot>
                   </tfoot>
                   <tbody>
                     {listPXH && listPXH.map((item, index) =>{
                       return(
-                        <TBody item={item} index={index} sort={options.sort} meta={metagd} paging={paging} key={index} view={::this.viewItemFull} edit={::this.editItem} />
-                      );
+                        <TBody item={item} index={index} sort={options.sort} meta={meta} paging={paging} key={index}></TBody>
+                      )
                     })}
+
                   </tbody>
                 </table>
-                {openView?
-                  <Modal  modalStyle={Style.content_80}
-                  overlayStyle= {Style.overlay}
-                  close={::this.viewModal}
-                  overlayClassName='modaldumb modalOverlay modalOverlay--after-open '
-                  modalClassName='dumb modalContent modalContent--after-open '
-                  >
-                    <ViewPXH meta={meta} item={itemView} listLV={listLV} listK={listK} close={::this.viewModal} edit={::this.editItem}></ViewPXH>
-                  </Modal> : null}
-                  {openEdit?
-                  <Modal  modalStyle={Style.content_80}
-                  overlayStyle= {Style.overlay}
-                  close={::this.editModal}
-                  overlayClassName='modaldumb modalOverlay modalOverlay--after-open '
-                  modalClassName='dumb modalContent modalContent--after-open '
-                  >
-                    <EditPXH giaodichid={idEdit} close={::this.editModal} ></EditPXH>
-                  </Modal> : null}
-                <PageShow paging={paging} length={listPXH.length}></PageShow>
+                <PageShow paging={paging} length={listPXH.length}/>
                 <Pagination load={::this.paginationLoad} paging={paging}></Pagination>
               </div>
             </div>

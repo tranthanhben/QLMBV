@@ -20,6 +20,10 @@ import {
   GD_LISTPDH_SUCCESS,
   GD_LISTPDH_FAIL,
 
+  GD_LISTPMH,
+  GD_LISTPMH_SUCCESS,
+  GD_LISTPMH_FAIL,
+
   GD_DEL_CTDH,
   GD_DEL_CTDH_SUCCESS,
   GD_DEL_CTDH_FAIL,
@@ -98,6 +102,18 @@ export function loadPDH(){
   return {
     types: [GD_LISTPDH, GD_LISTPDH_SUCCESS, GD_LISTPDH_FAIL],
     promise: (client) => client.get('/giaodich/phieu_dat_hang',{
+      params: makeQuery({
+        page: 0,
+        page_size : 100,
+        name: ''
+      })
+    })
+  };
+}
+export function loadPMH(){
+  return {
+    types: [GD_LISTPMH, GD_LISTPMH_SUCCESS, GD_LISTPMH_FAIL],
+    promise: (client) => client.get('/giaodich/phieu_mua_hang',{
       params: makeQuery({
         page: 0,
         page_size : 100,

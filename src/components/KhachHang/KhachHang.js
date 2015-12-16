@@ -2,6 +2,8 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import Modal from '../layout/Modal';
 import EditKH from './Editor/EditKH';
+import EditPMH from './Editor/EditPMH';
+import EditPXH from './Editor/EditPXH';
 import * as layoutActions from '../../actions/layoutActions';
 import {Style} from '../Style';
 
@@ -17,11 +19,21 @@ export default class KhachHang extends Component{
     openModal: PropTypes.func.isRequired
   }
   state = {
-    isOpenEdit: false
+    isOpenEdit: false,
+    isEditPMH: false,
+    isEditPXH: false
   }
   toggleModal() {
     this.props.openModal(!this.state.isOpenEdit);
     this.setState({isOpenEdit: !this.state.isOpenEdit})
+  }
+  openPMH(){
+    this.props.openModal(!this.state.isEditPMH);
+    this.setState({isEditPMH: !this.state.isEditPMH});
+  }
+  openPXH(){
+    this.props.openModal(!this.state.isEditPXH);
+    this.setState({isEditPXH: !this.state.isEditPXH});
   }
   render() {
     const {menuparse, openmodal} = this.props;
@@ -35,14 +47,14 @@ export default class KhachHang extends Component{
               </div>
               <div className="view-tabs col-xs-3 col-sm-8">
                 <ul className="nav-main pull-right">
-                  <li >
-                    <a ><span key="icoen" className={'fa fa-truck'}></span>{" Tao PXH"}</a>
+                  <li onClick={::this.openPXH}>
+                    <a ><span key="icoen" className={'fa fa-truck'}></span>{" Tạo PXH"}</a>
                   </li>
-                  <li >
-                    <a ><span key="icoen" className={'fa fa-shopping-cart '}></span>{" Tao PMH"}</a>
+                  <li onClick={::this.openPMH}>
+                    <a ><span key="icoen" className={'fa fa-shopping-cart '}></span>{" Tạo PMH"}</a>
                   </li>
                   <li onClick={::this.toggleModal}>
-                    <a ><span key="icoen" className={'fa fa-user'}></span>{" KH Moi"}</a>
+                    <a ><span key="icoen" className={'fa fa-user'}></span>{" Tạo KH"}</a>
                   </li>
                 </ul>
               </div>
@@ -64,6 +76,28 @@ export default class KhachHang extends Component{
                   >
                     <EditKH close={::this.toggleModal}></EditKH>
                   </Modal> : null}
+                  {
+                  this.state.isEditPMH?
+                  <Modal  modalStyle={Style.content_80}
+                  overlayStyle= {Style.overlay}
+                  close = {::this.openPMH}
+                  overlayClassName='modaldumb modalOverlay modalOverlay--after-open '
+                  modalClassName='dumb modalContent modalContent--after-open '
+                  >
+                    <EditPMH close={::this.openPMH}></EditPMH>
+                  </Modal> : null
+                }
+                {
+                  this.state.isEditPXH?
+                  <Modal  modalStyle={Style.content_80}
+                  overlayStyle= {Style.overlay}
+                  close = {::this.openPXH}
+                  overlayClassName='modaldumb modalOverlay modalOverlay--after-open '
+                  modalClassName='dumb modalContent modalContent--after-open '
+                  >
+                    <EditPXH close={::this.openPXH}></EditPXH>
+                  </Modal> : null
+                }
                   {this.props.children}
                 </div>
               </div>

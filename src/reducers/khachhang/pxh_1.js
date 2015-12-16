@@ -19,14 +19,6 @@ import {
   PXH_DELETE_SUCCESS,
   PXH_DELETE_FAIL,
 
-  PXH_CTK,
-  PXH_CTK_SUCCESS,
-  PXH_CTK_FAIL,
-
-  PXH_GET,
-  PXH_GET_SUCCESS,
-  PXH_GET_FAIL,
-
   PXH_RESET
 } from 'actions/actionTypes';
 
@@ -46,7 +38,6 @@ export default function phieuxuathang(state = initialState, action = {}){
         ...state,
         loadding: false,
         loaded: true,
-        reloadList: false,
         list: action.result.items,
         paging: action.result.paging
       };
@@ -56,7 +47,7 @@ export default function phieuxuathang(state = initialState, action = {}){
         loading: false,
         loaded: false,
         list: [],
-        paging: {},
+        paging: null,
         error: action.error
       };
 
@@ -75,28 +66,8 @@ export default function phieuxuathang(state = initialState, action = {}){
       return {
         ...state,
         loadingOne: false,
-        item: {},
+        item: null,
         error: action.error
-      };
-
-    case PXH_GET:
-      return {
-        ...state,
-        getding: true
-      };
-    case PXH_GET_SUCCESS:
-      return {
-        ...state,
-        getding: false,
-        editItem: action.result,
-        ctk: action.result.chitietkho
-      };
-    case PXH_GET_FAIL:
-      return {
-        ...state,
-        getding: false,
-        editItem: null,
-        error: action.result
       };
 
     case PXH_POST:
@@ -163,30 +134,12 @@ export default function phieuxuathang(state = initialState, action = {}){
         item: null,
         errorDel: action.error
       };
-    case PXH_CTK:
-      return {
-        ...state,
-        postingCTK: true
-      };
-    case PXH_CTK_SUCCESS:
-      return {
-        ...state,
-        postingCTK: false,
-        ctk: action.result,
-      };
-    case PXH_CTK_FAIL:
-      return {
-        ...state,
-        postingCTK: false,
-        ctk: null,
-        errorPost: action.result
-      };
+
     case PXH_RESET:
       return {
         ...state,
         loaded: false,
         editItem: null,
-        reloadList: true,
         message: false,
         errorPost:null
       };

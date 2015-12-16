@@ -1,27 +1,27 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {initObject, ATO, OTA, preprocess, datetime, changeDTI, renderLabel, setValue, checkRequire, preprocessPost} from '../../../meta';
-import {THead, TBody} from '../../table/rowForPNH';
-import {THeadCTDH, TBodyCTDH} from '../../table/rowForPDH';
-import * as pnhActions from '../../../actions/nhacungcap/pnhActions';
+import {THead, TBody} from '../../table/rowForPXH';
+import {THeadCTDH, TBodyCTDH} from '../../table/rowForPMH';
+import * as pxhActions from '../../../actions/khachhang/pxhActions';
 import * as giaodichActions from '../../../actions/giaodichActions';
 
 @connect(state =>({
-  gdItem: state.phieunhaphang.editItem,
-  meta: state.meta.phieunhaphang,
-  listNCC: state.giaodich.listNCC,
+  gdItem: state.phieuxuathang.editItem,
+  meta: state.meta.phieuxuathang,
+  listKH: state.giaodich.listKH,
   listLV: state.giaodich.listLV,
   listK: state.giaodich.listK,
   listPDH: state.giaodich.listPDH,
   user: state.user.user,
-  ctk: state.phieunhaphang.ctk
-}),{...pnhActions, ...giaodichActions})
-export default class EditPNH extends Component {
+  ctk: state.phieuxuathang.ctk
+}),{...pxhActions, ...giaodichActions})
+export default class EditPXH extends Component {
   static propTypes = {
     giaodichid: PropTypes.string,
     listK: PropTypes.array,
     listLV: PropTypes.array,
-    listNCC: PropTypes.array,
+    listKH: PropTypes.array,
     listPDH: PropTypes.array,
     gdItem: PropTypes.object,
     meta: PropTypes.object,
@@ -39,8 +39,7 @@ export default class EditPNH extends Component {
     gdItem: {
       nhanvienid: this.props.user.nhanvienid || 'admin',
       tinhtrangkho: 'chuaxuly',
-      doitacid: '',
-      ngayhoanthanh: changeDTI(datetime(new Date()))
+      doitacid: ''
     },
     giaodichid: this.props.giaodichid,
     ctk:this.props.gdItem && this.props.gdItem.chitietkho || [],
@@ -62,10 +61,10 @@ export default class EditPNH extends Component {
       this.props.getItem(this.props.giaodichid);
       this.state.newGD = false;
     }
-    this.props.loadNCC();
+    this.props.loadKH();
     this.props.loadLV();
     this.props.loadK();
-    this.props.loadPDH();
+    this.props.loadPMH();
   }
   componentWillReceiveProps(nextProps) {
     if(nextProps.gdItem && this.state.submiting){
@@ -208,7 +207,7 @@ export default class EditPNH extends Component {
     }
   }
   render() {
-    const {meta, error, message, listNCC, listLV, listK, listPDH} = this.props;
+    const {meta, error, message, listKH, listLV, listK, listPDH} = this.props;
     const {gdItem, edited, submited, showFullField, giaodichid, ctk, editedCTK} = this.state;
     const metaGD = meta && preprocess(meta.giaodich) || {};
     const metaCTK = meta && preprocess(meta.ctk) || {};
@@ -217,7 +216,7 @@ export default class EditPNH extends Component {
       <div>
         <div className="row">
           <div className="col-md-4">
-            <h4>Phiếu Nhap Hàng</h4>
+            <h4>Phiếu Xuat Hàng</h4>
           </div>
           <div className="col-md-8 flex-right">
           </div>
@@ -250,7 +249,7 @@ export default class EditPNH extends Component {
                   readOnly
                   value={gdItem.doitacid || ''}>
                   <option key='doitacid'>-- Nha Cung Cap --</option>
-                  {listNCC && listNCC.map(b => {
+                  {listKH && listKH.map(b => {
                     return (
                       <option key={b.id} value={b.id}>
                         {b.ten}

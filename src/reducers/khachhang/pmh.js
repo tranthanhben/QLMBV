@@ -19,6 +19,14 @@ import {
   PMH_DELETE_SUCCESS,
   PMH_DELETE_FAIL,
 
+  PMH_CTDH,
+  PMH_CTDH_SUCCESS,
+  PMH_CTDH_FAIL,
+
+  PMH_GET,
+  PMH_GET_SUCCESS,
+  PMH_GET_FAIL,
+
   PMH_RESET
 } from 'actions/actionTypes';
 
@@ -38,6 +46,7 @@ export default function phieumuahang(state = initialState, action = {}){
         ...state,
         loadding: false,
         loaded: true,
+        reloadList: false,
         list: action.result.items,
         paging: action.result.paging
       };
@@ -47,7 +56,7 @@ export default function phieumuahang(state = initialState, action = {}){
         loading: false,
         loaded: false,
         list: [],
-        paging: null,
+        paging: {},
         error: action.error
       };
 
@@ -66,8 +75,28 @@ export default function phieumuahang(state = initialState, action = {}){
       return {
         ...state,
         loadingOne: false,
-        item: null,
+        item: {},
         error: action.error
+      };
+
+    case PMH_GET:
+      return {
+        ...state,
+        getding: true
+      };
+    case PMH_GET_SUCCESS:
+      return {
+        ...state,
+        getding: false,
+        editItem: action.result,
+        ctdh: action.result.chitietdonhang
+      };
+    case PMH_GET_FAIL:
+      return {
+        ...state,
+        getding: false,
+        editItem: null,
+        error: action.result
       };
 
     case PMH_POST:
@@ -134,12 +163,30 @@ export default function phieumuahang(state = initialState, action = {}){
         item: null,
         errorDel: action.error
       };
-
+    case PMH_CTDH:
+      return {
+        ...state,
+        postingCTDH: true
+      };
+    case PMH_CTDH_SUCCESS:
+      return {
+        ...state,
+        postingCTDH: false,
+        ctdh: action.result,
+      };
+    case PMH_CTDH_FAIL:
+      return {
+        ...state,
+        postingCTDH: false,
+        ctdh: null,
+        errorPost: action.result
+      };
     case PMH_RESET:
       return {
         ...state,
         loaded: false,
         editItem: null,
+        reloadList: true,
         message: false,
         errorPost:null
       };

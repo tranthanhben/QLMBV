@@ -1,6 +1,8 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {renderInfo, formatDate, numeral} from '../../../meta';
+import {THeadCTDH, TBodyCTDH} from '../../table/rowForPMH';
+import {THeadCTK, TBodyCTK} from '../../table/rowForPXH';
 
 export class ViewKH extends Component {
   static propTypes = {
@@ -60,19 +62,88 @@ export class ViewPMH extends Component {
   static propTypes = {
     meta: PropTypes.object,
     item: PropTypes.object,
+    listLV: PropTypes.array,
     close: PropTypes.func.isRequired,
     edit: PropTypes.func.isRequired
   }
   render(){
-    const {meta, item, close} = this.props;
-    let info = renderInfo(item, meta) || [];
+    const {meta, item, close, listLV} = this.props;
+    const metaGD = meta && meta.giaodich || {};
+    const metaCTDH = meta && meta.ctdh || {};
     return (
       <div className="info">
         <h3 className="info-header">Thông Tin Phiếu Mua Hàng</h3>
         <hr/>
         <div className="row">
+          <div className="col-md-6">
+            <div className="info-group" key='giaodichid'>
+              <div className="row">
+                <div className="col-md-6 align-right">
+                  <span>{metaGD["id"].label + ": "}</span>
+                </div>
+                <div className="col-md-6">
+                  <p className={metaGD["id"].up? 'uppercase':''}>{item["id"]}</p>
+                </div>
+              </div>
+            </div>
+            <div className="info-group" key='doitacid'>
+              <div className="row">
+                <div className="col-md-6 align-right">
+                  <span>{metaGD["doitacid"].label + ": "}</span>
+                </div>
+                <div className="col-md-6">
+                  <p className={metaGD["doitacid"].up? 'uppercase':''}>{item["doitacid"]}</p>
+                </div>
+              </div>
+            </div>
+            <div className="info-group" key='nhanvienid'>
+              <div className="row">
+                <div className="col-md-6 align-right">
+                  <span>{metaGD["nhanvienid"].label + ": "}</span>
+                </div>
+                <div className="col-md-6">
+                  <p className={metaGD["nhanvienid"].up? 'uppercase':''}>{item["nhanvienid"]}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col-md-6">
+            <div className="info-group" key='tongtiendutinh'>
+              <div className="row">
+                <div className="col-md-6 align-right">
+                  <span>{metaGD["tongtiendutinh"].label + ": "}</span>
+                </div>
+                <div className="col-md-6">
+                  <p className={metaGD["tongtiendutinh"].up? 'uppercase':''}>{numeral(item["tongtiendutinh"]).format('0,0')+' VND'}</p>
+                </div>
+              </div>
+            </div>
+            <div className="info-group" key='tinhtrangdonhang'>
+              <div className="row">
+                <div className="col-md-6 align-right">
+                  <span>{metaGD["tinhtrangdonhang"].label + ": "}</span>
+                </div>
+                <div className="col-md-6">
+                  <p className={metaGD["tinhtrangdonhang"].up? 'uppercase':''}>{item["tinhtrangdonhang"]}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="row">
           <div className="col-md-12">
-           {info}
+            <br/>
+            <strong>Chi tiết đơn hàng:</strong>
+            <table id="example" className="table display preline dataTable" cellSpacing="0" width="100%" role="grid" aria-describedby="example_info" style={{"width": "100%"}}>
+              <thead>
+                <THeadCTDH meta={metaCTDH} ></THeadCTDH>
+              </thead>
+              <tbody>
+                {item.chitietdonhang && item.chitietdonhang.map((item, index)=>{
+                  return <TBodyCTDH meta={metaCTDH} listLV={listLV} index={index} item={item}></TBodyCTDH>;
+                })}
+              </tbody>
+            </table>
           </div>
         </div>
             <hr/>
@@ -92,22 +163,108 @@ export class ViewPXH extends Component {
   static propTypes = {
     meta: PropTypes.object,
     item: PropTypes.object,
+    listLV: PropTypes.array,
     close: PropTypes.func.isRequired,
     edit: PropTypes.func.isRequired
   }
   render(){
-    const {meta, item, close} = this.props;
-    let info = renderInfo(item, meta) || [];
+    const {meta, item, close, listLV} = this.props;
+    const metaGD = meta && meta.giaodich || {};
+    const metaCTDH = meta && meta.ctdh || {};
+    const metaCTK = meta && meta.ctk || {};
     return (
       <div className="info">
-        <h3 className="info-header">Thông Tin Phieu Xuat Hang </h3>
+        <h3 className="info-header">Thông Tin Phiếu Xuat Hàng</h3>
         <hr/>
         <div className="row">
-          <div className="col-md-12">
-           {info}
+          <div className="col-md-6">
+            <div className="info-group" key='giaodichid'>
+              <div className="row">
+                <div className="col-md-6 align-right">
+                  <span>{metaGD["id"].label + ": "}</span>
+                </div>
+                <div className="col-md-6">
+                  <p className={metaGD["id"].up? 'uppercase':''}>{item["id"]}</p>
+                </div>
+              </div>
+            </div>
+            <div className="info-group" key='doitacid'>
+              <div className="row">
+                <div className="col-md-6 align-right">
+                  <span>{metaGD["doitacid"].label + ": "}</span>
+                </div>
+                <div className="col-md-6">
+                  <p className={metaGD["doitacid"].up? 'uppercase':''}>{item["doitacid"]}</p>
+                </div>
+              </div>
+            </div>
+            <div className="info-group" key='nhanvienid'>
+              <div className="row">
+                <div className="col-md-6 align-right">
+                  <span>{metaGD["nhanvienid"].label + ": "}</span>
+                </div>
+                <div className="col-md-6">
+                  <p className={metaGD["nhanvienid"].up? 'uppercase':''}>{item["nhanvienid"]}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col-md-6">
+            <div className="info-group" key='tongtiendutinh'>
+              <div className="row">
+                <div className="col-md-6 align-right">
+                  <span>{metaGD["tongtiendutinh"].label + ": "}</span>
+                </div>
+                <div className="col-md-6">
+                  <p className={metaGD["tongtiendutinh"].up? 'uppercase':''}>{numeral(item["tongtiendutinh"]).format('0,0')+' VND'}</p>
+                </div>
+              </div>
+            </div>
+            <div className="info-group" key='tinhtrangdonhang'>
+              <div className="row">
+                <div className="col-md-6 align-right">
+                  <span>{metaGD["tinhtrangdonhang"].label + ": "}</span>
+                </div>
+                <div className="col-md-6">
+                  <p className={metaGD["tinhtrangdonhang"].up? 'uppercase':''}>{item["tinhtrangdonhang"]}</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-            <hr/>
+        <div className="row">
+          <div className="col-md-12">
+            <br/>
+            <strong>Chi tiết đơn hàng:</strong>
+            <table id="example" className="table display preline dataTable" cellSpacing="0" width="100%" role="grid" aria-describedby="example_info" style={{"width": "100%"}}>
+              <thead>
+                <THeadCTDH meta={metaCTDH} ></THeadCTDH>
+              </thead>
+              <tbody>
+                {item.chitietdonhang && item.chitietdonhang.map((item, index)=>{
+                  return <TBodyCTDH meta={metaCTDH} listLV={listLV} index={index} item={item}></TBodyCTDH>;
+                })}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-md-12" key="ctk">
+            <br/>
+            <strong>Chi tiết nhập hàng:</strong>
+            <table id="example" className="table display nowrap dataTable" role="grid" aria-describedby="example_info" >
+              <thead>
+                <THeadCTK meta={metaCTK} ></THeadCTK>
+              </thead>
+              <tbody>
+                {item.chitietkho && item.chitietkho.map((item, index)=>{
+                  return <TBodyCTK meta={metaCTK} listLV={listLV} index={index} item={item}></TBodyCTK>;
+                })}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <hr/>
         <div className="row">
           <div className="col-md-6">
           </div>
@@ -120,24 +277,4 @@ export class ViewPXH extends Component {
   }
 }
 
-export default
-class View extends Component {
-  static propTypes = {
-    meta: PropTypes.object,
-    item: PropTypes.object,
-    type: PropTypes.string,
-    close: PropTypes.func.isRequired,
-    edit: PropTypes.func.isRequired
-  }
-  render() {
 
-    switch(type){
-      case "khachhang":
-        return <ViewKH {...this.props}></ViewKH>;
-      case "pmh":
-        return <ViewPMH {...this.props}></ViewPMH>;
-      default:
-        return (<div></div>);
-    }
-  }
-}

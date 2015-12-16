@@ -1,110 +1,81 @@
 import {
-  PXH_LIST_LOAD,
-  PXH_LIST_LOAD_SUCCESS,
-  PXH_LIST_LOAD_FAIL,
+  PMH_LIST_LOAD,
+  PMH_LIST_LOAD_SUCCESS,
+  PMH_LIST_LOAD_FAIL,
 
-  PXH_ONE_LOAD,
-  PXH_ONE_LOAD_SUCCESS,
-  PXH_ONE_LOAD_FAIL,
+  PMH_ONE_LOAD,
+  PMH_ONE_LOAD_SUCCESS,
+  PMH_ONE_LOAD_FAIL,
 
-  PXH_POST,
-  PXH_POST_SUCCESS,
-  PXH_POST_FAIL,
+  PMH_POST,
+  PMH_POST_SUCCESS,
+  PMH_POST_FAIL,
 
-  PXH_PUT,
-  PXH_PUT_SUCCESS,
-  PXH_PUT_FAIL,
+  PMH_PUT,
+  PMH_PUT_SUCCESS,
+  PMH_PUT_FAIL,
 
-  PXH_DELETE,
-  PXH_DELETE_SUCCESS,
-  PXH_DELETE_FAIL,
+  PMH_DELETE,
+  PMH_DELETE_SUCCESS,
+  PMH_DELETE_FAIL,
 
-  PXH_CTK,
-  PXH_CTK_SUCCESS,
-  PXH_CTK_FAIL,
-
-  PXH_GET,
-  PXH_GET_SUCCESS,
-  PXH_GET_FAIL,
-
-  PXH_RESET
+  PMH_RESET
 } from 'actions/actionTypes';
 
 const initialState = {
   loaded: false
 }
 
-export default function phieuxuathang(state = initialState, action = {}){
+export default function phieumuahang(state = initialState, action = {}){
   switch (action.type){
-    case PXH_LIST_LOAD:
+    case PMH_LIST_LOAD:
       return {
         ...state,
         loading: true
       };
-    case PXH_LIST_LOAD_SUCCESS:
+    case PMH_LIST_LOAD_SUCCESS:
       return {
         ...state,
         loadding: false,
         loaded: true,
-        reloadList: false,
         list: action.result.items,
         paging: action.result.paging
       };
-    case PXH_LIST_LOAD_FAIL:
+    case PMH_LIST_LOAD_FAIL:
       return {
         ...state,
         loading: false,
         loaded: false,
         list: [],
-        paging: {},
+        paging: null,
         error: action.error
       };
 
-    case PXH_ONE_LOAD:
+    case PMH_ONE_LOAD:
       return {
         ...state,
         loadingOne: true
       };
-    case PXH_ONE_LOAD_SUCCESS:
+    case PMH_ONE_LOAD_SUCCESS:
       return {
         ...state,
         loadingOne: false,
         item: action.result
       };
-    case PXH_ONE_LOAD_FAIL:
+    case PMH_ONE_LOAD_FAIL:
       return {
         ...state,
         loadingOne: false,
-        item: {},
+        item: null,
         error: action.error
       };
 
-    case PXH_GET:
-      return {
-        ...state,
-        getding: true
-      };
-    case PXH_GET_SUCCESS:
-      return {
-        ...state,
-        getding: false,
-        editItem: action.result,
-        ctk: action.result.chitietkho
-      };
-    case PXH_GET_FAIL:
-      return {
-        ...state,
-        getding: false,
-        editItem: null,
-        error: action.result
-      };
-
-    case PXH_POST:
+    case PMH_POST:
       return {
         ...state,
         posting: true
       };
-    case PXH_POST_SUCCESS:
+    case PMH_POST_SUCCESS:
       return {
         ...state,
         reset: true,
@@ -113,7 +84,7 @@ export default function phieuxuathang(state = initialState, action = {}){
         message: true,
         posting: false,
       };
-    case PXH_POST_FAIL:
+    case PMH_POST_FAIL:
       return {
         ...state,
         editItem: null,
@@ -122,12 +93,12 @@ export default function phieuxuathang(state = initialState, action = {}){
         errorPost: action.error
       };
 
-    case PXH_PUT:
+    case PMH_PUT:
       return {
         ...state,
         posting: true
       };
-    case PXH_PUT_SUCCESS:
+    case PMH_PUT_SUCCESS:
       return {
         ...state,
         reset: true,
@@ -135,7 +106,7 @@ export default function phieuxuathang(state = initialState, action = {}){
         message: true,
         posting: false,
       };
-    case PXH_PUT_FAIL:
+    case PMH_PUT_FAIL:
       return {
         ...state,
         editItem: null,
@@ -144,49 +115,31 @@ export default function phieuxuathang(state = initialState, action = {}){
         errorPost: action.error
       };
 
-    case PXH_DELETE:
+    case PMH_DELETE:
       return {
         ...state,
         deleting: true
       };
-    case PXH_DELETE_SUCCESS:
+    case PMH_DELETE_SUCCESS:
       return {
         ...state,
         reset: true,
         deleting: false,
         item: null
       };
-    case PXH_DELETE_FAIL:
+    case PMH_DELETE_FAIL:
       return {
         ...state,
         deleting: false,
         item: null,
         errorDel: action.error
       };
-    case PXH_CTK:
-      return {
-        ...state,
-        postingCTK: true
-      };
-    case PXH_CTK_SUCCESS:
-      return {
-        ...state,
-        postingCTK: false,
-        ctk: action.result,
-      };
-    case PXH_CTK_FAIL:
-      return {
-        ...state,
-        postingCTK: false,
-        ctk: null,
-        errorPost: action.result
-      };
-    case PXH_RESET:
+
+    case PMH_RESET:
       return {
         ...state,
         loaded: false,
         editItem: null,
-        reloadList: true,
         message: false,
         errorPost:null
       };

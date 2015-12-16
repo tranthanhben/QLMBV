@@ -3,12 +3,13 @@ import {connect} from 'react-redux';
 import * as pnhActions from '../../actions/nhacungcap/pnhActions';
 import {THead, TBody, TFoot} from '../table/row';
 import {Pagination, PageShow} from '../table/pagination';
-import {isLoaded, loadList as loadPDH} from '../../actions/nhacungcap/pnhActions';
+import {isLoaded, loadList as loadPNH} from '../../actions/nhacungcap/pnhActions';
 import * as layoutActions from '../../actions/layoutActions';
+import * as giaodichActions from '../../actions/giaodichActions';
 import Modal from '../layout/Modal';
 import EditPNH from './Editor/EditPNH';
 import {Style} from '../Style';
-import {ViewNH} from './Editor/ViewFull';
+import {ViewPNH} from './Editor/ViewFull';
 
 @connect(
   state =>({
@@ -17,12 +18,14 @@ import {ViewNH} from './Editor/ViewFull';
     error: state.phieunhaphang.error,
     loading: state.phieunhaphang.loading,
     reload: state.phieunhaphang.reloadList,
-    meta: state.meta.phieunhaphang
+    meta: state.meta.phieunhaphang,
+    listLV: state.giaodich.listLV,
+    listK: state.giaodich.listK,
   }),
-  {...pnhActions,...layoutActions})
+  {...pnhActions,...layoutActions, ...giaodichActions})
 
 export default
-class PDH extends Component{
+class PNH extends Component{
   static propTypes = {
     listPNH: PropTypes.array,
     error: PropTypes.object,
@@ -35,8 +38,12 @@ class PDH extends Component{
 
   static fetchData(store){
     if(!isLoaded(store.getState)){
-      return store.dispatch(loadPDH());
+      return store.dispatch(loadPNH());
     }
+  }
+  componentWillMount(){
+    this.props.loadLV();
+    this.props.loadK();
   }
   componentWillReceiveProps(nextProps) {
     if(nextProps.reload === true){
@@ -117,7 +124,7 @@ class PDH extends Component{
     this.setState({openEdit: !this.state.openEdit, openView: false})
   }
   render(){
-    const {listPNH, paging, meta} = this.props;
+    const {listPNH, paging, meta, listLV, listK} = this.props;
     const {options, itemView, openView, openEdit, idEdit} = this.state;
     let metagd = meta && meta.giaodich || {};
 
@@ -156,13 +163,13 @@ class PDH extends Component{
                   </tbody>
                 </table>
                 {openView?
-                  <Modal  modalStyle={Style.content_60}
+                  <Modal  modalStyle={Style.content_80}
                   overlayStyle= {Style.overlay}
                   close={::this.viewModal}
                   overlayClassName='modaldumb modalOverlay modalOverlay--after-open '
                   modalClassName='dumb modalContent modalContent--after-open '
                   >
-                    <ViewPDH meta={metagd} item={itemView} close={::this.viewModal} edit={::this.editItem}></ViewPDH>
+                    <ViewPNH meta={meta} item={itemView} listLV={listLV} listK={listK} close={::this.viewModal} edit={::this.editItem}></ViewPNH>
                   </Modal> : null}
                   {openEdit?
                   <Modal  modalStyle={Style.content_80}

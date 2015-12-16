@@ -4,36 +4,24 @@ import * as pmhActions from '../../actions/khachhang/pmhActions';
 import {THead, TBody, TFoot} from '../table/row';
 import {Pagination, PageShow} from '../table/pagination';
 import {isLoaded, loadList as loadPMH} from '../../actions/khachhang/pmhActions';
-import * as layoutActions from '../../actions/layoutActions';
-import * as giaodichActions from '../../actions/giaodichActions';
-import Modal from '../layout/Modal';
-import EditPMH from './Editor/EditPMH';
-import {Style} from '../Style';
-import {ViewPMH} from './Editor/ViewFull';
 
 @connect(
   state =>({
     listPMH: state.phieumuahang.list,
     paging: state.phieumuahang.paging,
     error: state.phieumuahang.error,
-    loading: state.phieumuahang.loading,
-    reload: state.phieumuahang.reloadList,
-    meta: state.meta.phieumuahang,
-    listLV: state.giaodich.listLV
+    loading: state.phieumuahang.loading
   }),
-  {...pmhActions,...layoutActions,...giaodichActions})
+  {...pmhActions})
 
 export default
 class PMH extends Component{
   static propTypes = {
     listPMH: PropTypes.array,
-    listLV: PropTypes.array,
     error: PropTypes.object,
     paging: PropTypes.object,
-    meta: PropTypes.object,
     loading: PropTypes.bool,
-    loadList:PropTypes.func.isRequired,
-    openModal: PropTypes.func.isRequired
+    loadList:PropTypes.func.isRequired
   }
 
   static fetchData(store){
@@ -41,24 +29,60 @@ class PMH extends Component{
       return store.dispatch(loadPMH());
     }
   }
-  componentWillMount(){
-    this.props.loadLV();
-  }
-  componentWillReceiveProps(nextProps) {
-    if(nextProps.reload === true){
-      this.props.loadList(this.state.options);
-    }
-  }
+
   state = {
     options :{
       page_size: 10,
       name: '',
       sort: ''
     },
-    openView: false,
-    openEdit: false,
-    itemView: {},
-    idEdit: ''
+    meta:{
+      "pmhid":{
+        name: "id",
+        label: "PMHID",
+        sort: true
+      },
+      "lhid":{
+        name: "lhid",
+        label: "LHID",
+        sort: false
+      },
+      "nvid":{
+        name: "nvid",
+        label: "NVID",
+        sort: false
+      },
+      "khid":{
+        name: "khid",
+        label: "KHID",
+        sort: false
+      },
+      "ngaytao":{
+        name: "ngaytao",
+        label: "Ngày Tạo",
+        type: "date",
+        sort: true
+      },
+      "soluong":{
+        name: "soluong",
+        label: "Số Lượng",
+        sort: false,
+        type: "number",
+        unit: ' Cây'
+      },
+      "tongtien":{
+        name: "tongtien",
+        label: "Tổng Tiền",
+        sort: true,
+        type: "number",
+        unit: ' VND'
+      },
+      "tinhtrang":{
+        name: "tinhtrang",
+        label: "Tình Trạng",
+        sort: true
+      }
+    }
   }
   changePageSize(){
     let value = event.target.value;
@@ -102,31 +126,9 @@ class PMH extends Component{
       this.setState({options: opt});
     }
   }
-  viewItemFull(item){
-    return ()=>{
-      this.props.openModal(true);
-      this.setState({itemView: item, openView: true});
-    }
-  }
-  viewModal() {
-    this.props.openModal(!this.state.openView);
-    this.setState({openView: !this.state.openView})
-  }
-  editItem(id){
-    return ()=>{
-      this.props.openModal(true);
-      this.setState({idEdit: id, openEdit: true});
-    }
-  }
-  editModal() {
-    this.props.openModal(!this.state.openEdit);
-    this.setState({openEdit: !this.state.openEdit, openView: false})
-  }
   render(){
-    const {listPMH, paging, meta, listLV} = this.props;
-    const {options, itemView, openView, openEdit, idEdit} = this.state;
-    let metagd = meta && meta.giaodich || {};
-
+    const {listPMH, paging} = this.props;
+    const {options, meta} = this.state;
     return (
         <div className="mbv-grid container-fluid" style={{"zIndex": "9999983"}}>
           <div className="row">
@@ -148,38 +150,21 @@ class PMH extends Component{
                 </div>
                 <table id="example" className="table display preline dataTable" cellSpacing="0" width="100%" role="grid" aria-describedby="example_info" style={{"width": "100%"}}>
                   <thead>
-                    <THead meta={metagd} sort={options.sort} sortFunc={::this.sortField} ></THead>
+                    <THead meta={meta} sort={options.sort} sortFunc={::this.sortField} ></THead>
                   </thead>
                   <tfoot>
-                    <TFoot meta={metagd} ></TFoot>
+                    <TFoot meta={meta} ></TFoot>
                   </tfoot>
                   <tbody>
                     {listPMH && listPMH.map((item, index) =>{
                       return(
-                        <TBody item={item} index={index} sort={options.sort} meta={metagd} paging={paging} key={index} view={::this.viewItemFull} edit={::this.editItem} />
-                      );
+                        <TBody item={item} index={index} sort={options.sort} meta={meta} paging={paging} key={index}></TBody>
+                      )
                     })}
+
                   </tbody>
                 </table>
-                {openView?
-                  <Modal  modalStyle={Style.content_80}
-                  overlayStyle= {Style.overlay}
-                  close={::this.viewModal}
-                  overlayClassName='modaldumb modalOverlay modalOverlay--after-open '
-                  modalClassName='dumb modalContent modalContent--after-open '
-                  >
-                    <ViewPMH meta={meta} item={itemView} listLV={listLV} close={::this.viewModal} edit={::this.editItem}></ViewPMH>
-                  </Modal> : null}
-                  {openEdit?
-                  <Modal  modalStyle={Style.content_80}
-                  overlayStyle= {Style.overlay}
-                  close={::this.editModal}
-                  overlayClassName='modaldumb modalOverlay modalOverlay--after-open '
-                  modalClassName='dumb modalContent modalContent--after-open '
-                  >
-                    <EditPMH giaodichid={idEdit} close={::this.editModal} ></EditPMH>
-                  </Modal> : null}
-                <PageShow paging={paging} length={listPMH.length}></PageShow>
+                <PageShow paging={paging} length={listPMH.length}/>
                 <Pagination load={::this.paginationLoad} paging={paging}></Pagination>
               </div>
             </div>
