@@ -19,13 +19,13 @@ export default function image(state = initialState, action = {}) {
     case UPLOAD_IMAGE_SUCCESS:
       return {
         ...state,
-        image_url : action.result.url,
+        image_url : action.result,
         reloadList: true
       };
     case UPLOAD_IMAGE_FAIL:
       return {
         ...state,
-        image_upload_error : action.error
+        image_upload_error : action.result
       };
     case LIST_IMAGE:
       return {
@@ -46,7 +46,7 @@ export default function image(state = initialState, action = {}) {
         loadingList: false,
         list:[],
         paging:null,
-        error: action.error
+        error: action.result
       };
     default:
       return state;

@@ -53,7 +53,7 @@ export default function loaivai(state = initialState, action = {}){
         loaded: false,
         list: [],
         paging: null,
-        error: action.error
+        error: action.result
       };
 
     case LV_ONE_LOAD:
@@ -72,7 +72,7 @@ export default function loaivai(state = initialState, action = {}){
         ...state,
         loadingOne: false,
         item: null,
-        error: action.error
+        error: action.result
       };
     case LV_GET:
       return {
@@ -90,7 +90,7 @@ export default function loaivai(state = initialState, action = {}){
         ...state,
         getding: false,
         editItem: {},
-        error: action.error
+        error: action.result
       };
     case LV_POST:
       return {
@@ -110,7 +110,7 @@ export default function loaivai(state = initialState, action = {}){
         editItem: null,
         message: false,
         posting: false,
-        errorPost: action.error
+        errorPost: action.result
       };
 
     case LV_PUT:
@@ -132,7 +132,7 @@ export default function loaivai(state = initialState, action = {}){
         editItem: null,
         message: false,
         posting: false,
-        errorPost: action.error
+        errorPost: action.result
       };
 
     case LV_DELETE:
@@ -152,7 +152,7 @@ export default function loaivai(state = initialState, action = {}){
         ...state,
         deleting: false,
         item: null,
-        errorDel: action.error
+        errorDel: action.result
       };
 
     case LV_RESET:

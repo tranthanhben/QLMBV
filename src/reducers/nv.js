@@ -19,6 +19,10 @@ import {
   NV_DELETE_SUCCESS,
   NV_DELETE_FAIL,
 
+  NV_GET,
+  NV_GET_SUCCESS,
+  NV_GET_FAIL,
+
   NV_RESET
 } from 'actions/actionTypes';
 
@@ -48,7 +52,7 @@ export default function nhanvien(state = initialState, action = {}){
         loaded: false,
         list: [],
         paging: null,
-        error: action.error
+        error: action.result
       };
 
     case NV_ONE_LOAD:
@@ -67,9 +71,26 @@ export default function nhanvien(state = initialState, action = {}){
         ...state,
         loadingOne: false,
         item: null,
-        error: action.error
+        error: action.result
       };
-
+    case NV_GET:
+      return {
+        ...state,
+        getding: true
+      };
+    case NV_GET_SUCCESS:
+      return {
+        ...state,
+        getding: false,
+        editItem: action.result
+      };
+    case NV_GET_FAIL:
+      return {
+        ...state,
+        getding: false,
+        editItem: {},
+        error: action.result
+      };
     case NV_POST:
       return {
         ...state,
@@ -90,7 +111,7 @@ export default function nhanvien(state = initialState, action = {}){
         editItem: null,
         message: false,
         posting: false,
-        errorPost: action.error
+        errorPost: action.result
       };
 
     case NV_PUT:
@@ -112,7 +133,7 @@ export default function nhanvien(state = initialState, action = {}){
         editItem: null,
         message: false,
         posting: false,
-        errorPost: action.error
+        errorPost: action.result
       };
 
     case NV_DELETE:
@@ -132,7 +153,7 @@ export default function nhanvien(state = initialState, action = {}){
         ...state,
         deleting: false,
         item: null,
-        errorDel: action.error
+        errorDel: action.result
       };
 
     case NV_RESET:

@@ -84,7 +84,7 @@ export default class EditNV extends Component {
       <div>
         <div className="row">
           <div className="col-md-4">
-            <h4>Nhan Vien</h4>
+            <h4>Nhân Viên</h4>
           </div>
           <div className="col-md-8 flex-right">
           {submited ? <p className='help-block required'>

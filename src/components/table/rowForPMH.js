@@ -78,13 +78,14 @@ export class TBody extends Component {
     }
   }
   selectLoaivai(){
-    this.props.edit(event);
     let value = event.target.value;
     this.setState({loaivai: this.state.object[value]});
+    this.props.edit(event);
   }
   render(){
     const {meta, item, add, del, edit, index, listLV} = this.props;
     const {loaivai, object} = this.state;
+    console.log(item);
     return (
       <tr role="row" className={index%2===1 ? "even":"odd"} key={index}>
         <td>{index+1}</td>
@@ -107,6 +108,10 @@ export class TBody extends Component {
         </td>
         <td key='chatlieu' >
           <input type="text" data-addr='chatlieu'className="form-control" readOnly  value={loaivai.chatlieu || ''} />
+        </td>
+
+        <td key='soluongcon' className=' dt-body-right' >
+          <input type="number" data-addr='conlai'className="form-control" value={loaivai.conlai || ''} readOnly />
         </td>
         <td key='soluong' className=' dt-body-right' >
           <input type="number" step='10' min='0' data-addr='soluong'className="form-control" value={item.soluong || ''} onChange={edit} />

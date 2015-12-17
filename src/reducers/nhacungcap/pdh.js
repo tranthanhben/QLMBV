@@ -57,7 +57,7 @@ export default function phieudathang(state = initialState, action = {}){
         loaded: false,
         list: [],
         paging: {},
-        error: action.error
+        error: action.result
       };
 
     case PDH_ONE_LOAD:
@@ -76,7 +76,7 @@ export default function phieudathang(state = initialState, action = {}){
         ...state,
         loadingOne: false,
         item: {},
-        error: action.error
+        error: action.result
       };
 
     case PDH_GET:
@@ -119,7 +119,7 @@ export default function phieudathang(state = initialState, action = {}){
         editItem: null,
         message: false,
         posting: false,
-        errorPost: action.error
+        errorPost: action.result
       };
 
     case PDH_PUT:
@@ -141,7 +141,7 @@ export default function phieudathang(state = initialState, action = {}){
         editItem: null,
         message: false,
         posting: false,
-        errorPost: action.error
+        errorPost: action.result
       };
 
     case PDH_DELETE:
@@ -161,7 +161,7 @@ export default function phieudathang(state = initialState, action = {}){
         ...state,
         deleting: false,
         item: null,
-        errorDel: action.error
+        errorDel: action.result
       };
     case PDH_CTDH:
       return {

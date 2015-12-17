@@ -1,39 +1,39 @@
 import {
-  PXH_LIST_LOAD,
-  PXH_LIST_LOAD_SUCCESS,
-  PXH_LIST_LOAD_FAIL,
+  PNH_LIST_LOAD,
+  PNH_LIST_LOAD_SUCCESS,
+  PNH_LIST_LOAD_FAIL,
 
-  PXH_ONE_LOAD,
-  PXH_ONE_LOAD_SUCCESS,
-  PXH_ONE_LOAD_FAIL,
+  PNH_ONE_LOAD,
+  PNH_ONE_LOAD_SUCCESS,
+  PNH_ONE_LOAD_FAIL,
 
-  PXH_POST,
-  PXH_POST_SUCCESS,
-  PXH_POST_FAIL,
+  PNH_POST,
+  PNH_POST_SUCCESS,
+  PNH_POST_FAIL,
 
-  PXH_PUT,
-  PXH_PUT_SUCCESS,
-  PXH_PUT_FAIL,
+  PNH_PUT,
+  PNH_PUT_SUCCESS,
+  PNH_PUT_FAIL,
 
-  PXH_DELETE,
-  PXH_DELETE_SUCCESS,
-  PXH_DELETE_FAIL,
+  PNH_DELETE,
+  PNH_DELETE_SUCCESS,
+  PNH_DELETE_FAIL,
 
-  PXH_RESET
+  PNH_RESET
 } from 'actions/actionTypes';
 
 const initialState = {
   loaded: false
 }
 
-export default function phieuxuathang(state = initialState, action = {}){
+export default function phieunhaphang(state = initialState, action = {}){
   switch (action.type){
-    case PXH_LIST_LOAD:
+    case PNH_LIST_LOAD:
       return {
         ...state,
         loading: true
       };
-    case PXH_LIST_LOAD_SUCCESS:
+    case PNH_LIST_LOAD_SUCCESS:
       return {
         ...state,
         loadding: false,
@@ -41,41 +41,41 @@ export default function phieuxuathang(state = initialState, action = {}){
         list: action.result.items,
         paging: action.result.paging
       };
-    case PXH_LIST_LOAD_FAIL:
+    case PNH_LIST_LOAD_FAIL:
       return {
         ...state,
         loading: false,
         loaded: false,
         list: [],
-        paging: null,
-        error: action.error
+        paging: {},
+        error: action.result
       };
 
-    case PXH_ONE_LOAD:
+    case PNH_ONE_LOAD:
       return {
         ...state,
         loadingOne: true
       };
-    case PXH_ONE_LOAD_SUCCESS:
+    case PNH_ONE_LOAD_SUCCESS:
       return {
         ...state,
         loadingOne: false,
         item: action.result
       };
-    case PXH_ONE_LOAD_FAIL:
+    case PNH_ONE_LOAD_FAIL:
       return {
         ...state,
         loadingOne: false,
-        item: null,
-        error: action.error
+        item: {},
+        error: action.result
       };
 
-    case PXH_POST:
+    case PNH_POST:
       return {
         ...state,
         posting: true
       };
-    case PXH_POST_SUCCESS:
+    case PNH_POST_SUCCESS:
       return {
         ...state,
         reset: true,
@@ -84,21 +84,21 @@ export default function phieuxuathang(state = initialState, action = {}){
         message: true,
         posting: false,
       };
-    case PXH_POST_FAIL:
+    case PNH_POST_FAIL:
       return {
         ...state,
         editItem: null,
         message: false,
         posting: false,
-        errorPost: action.error
+        errorPost: action.result
       };
 
-    case PXH_PUT:
+    case PNH_PUT:
       return {
         ...state,
         posting: true
       };
-    case PXH_PUT_SUCCESS:
+    case PNH_PUT_SUCCESS:
       return {
         ...state,
         reset: true,
@@ -106,36 +106,36 @@ export default function phieuxuathang(state = initialState, action = {}){
         message: true,
         posting: false,
       };
-    case PXH_PUT_FAIL:
+    case PNH_PUT_FAIL:
       return {
         ...state,
         editItem: null,
         message: false,
         posting: false,
-        errorPost: action.error
+        errorPost: action.result
       };
 
-    case PXH_DELETE:
+    case PNH_DELETE:
       return {
         ...state,
         deleting: true
       };
-    case PXH_DELETE_SUCCESS:
+    case PNH_DELETE_SUCCESS:
       return {
         ...state,
         reset: true,
         deleting: false,
         item: null
       };
-    case PXH_DELETE_FAIL:
+    case PNH_DELETE_FAIL:
       return {
         ...state,
         deleting: false,
         item: null,
-        errorDel: action.error
+        errorDel: action.result
       };
 
-    case PXH_RESET:
+    case PNH_RESET:
       return {
         ...state,
         loaded: false,

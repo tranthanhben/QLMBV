@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {renderInfo, formatDate, numeral} from '../../../meta';
 
-export class ViewK extends Component {
+export class ViewNV extends Component {
   static propTypes = {
     meta: PropTypes.object,
     item: PropTypes.object,
@@ -36,7 +36,7 @@ export class ViewK extends Component {
     }
     return (
       <div className="info">
-        <h3 className="info-header">Thông Tin Kho</h3>
+        <h3 className="info-header">Thông Tin Nhân Viên</h3>
         <hr/>
         <div className="row">
           <div className="col-md-12">

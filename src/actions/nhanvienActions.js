@@ -62,10 +62,10 @@ export function loadList(options = {}){
 }
 
 export function postItem(data){
-  if(data.nvid){
+  if(data.id){
     return {
       types: [NV_PUT, NV_PUT_SUCCESS, NV_PUT_FAIL],
-      promise: (client) => client.put(`/nhan_vien/${data.nvid}`, {
+      promise: (client) => client.put(`/nhan_vien/${data.id}`, {
         data: JSON.stringify(data)
       })
     };

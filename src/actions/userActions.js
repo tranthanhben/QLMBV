@@ -16,6 +16,10 @@ import {
   REGISTER_LOAD_SUCCESS,
   REGISTER_LOAD_FAIL,
 
+  CHANGE_PASS_LOAD,
+  CHANGE_PASS_LOAD_SUCCESS,
+  CHANGE_PASS_LOAD_FAIL,
+
   UPDATE_USER,
   UPDATE_USER_SUCCESS,
   UPDATE_USER_FAIL
@@ -51,10 +55,20 @@ export function register(){
     promise: (client) => client.post('/register')
   }
 }
+export function changePass(data, id){
+  return {
+    types: [CHANGE_PASS_LOAD, CHANGE_PASS_LOAD_SUCCESS, CHANGE_PASS_LOAD_FAIL],
+    promise: (client) => client.put(`/account/change_password/${id}`,{
+        data: JSON.stringify(data)
+      })
+  }
+}
 
-export function updateUser(){
+export function updateUser(data){
   return {
     types: [UPDATE_USER, UPDATE_USER_SUCCESS, UPDATE_USER_FAIL],
-    promise: (client) => client.post('/register')
+    promise: (client) => client.put(`/account/change_info/${data.id}`, {
+        data: JSON.stringify(data)
+      })
   }
 }

@@ -48,7 +48,7 @@ export default function thanhtoanKH(state = initialState, action = {}){
         loaded: false,
         list: [],
         paging: null,
-        error: action.error
+        error: action.result
       };
 
     case TTKH_ONE_LOAD:
@@ -67,7 +67,7 @@ export default function thanhtoanKH(state = initialState, action = {}){
         ...state,
         loadingOne: false,
         item: null,
-        error: action.error
+        error: action.result
       };
 
     case TTKH_POST:
@@ -90,7 +90,7 @@ export default function thanhtoanKH(state = initialState, action = {}){
         editItem: null,
         message: false,
         posting: false,
-        errorPost: action.error
+        errorPost: action.result
       };
 
     case TTKH_PUT:
@@ -112,7 +112,7 @@ export default function thanhtoanKH(state = initialState, action = {}){
         editItem: null,
         message: false,
         posting: false,
-        errorPost: action.error
+        errorPost: action.result
       };
 
     case TTKH_DELETE:
@@ -132,7 +132,7 @@ export default function thanhtoanKH(state = initialState, action = {}){
         ...state,
         deleting: false,
         item: null,
-        errorDel: action.error
+        errorDel: action.result
       };
 
     case TTKH_RESET:

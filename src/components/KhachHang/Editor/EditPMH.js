@@ -29,7 +29,7 @@ export default class EditPMH extends Component {
   state = {
     gdItem: {
       nhanvienid: this.props.user.nhanvienid || 'admin',
-      tinhtrangdonhang: 'chuaxuly',
+      tinhtrangdonhang: 'dangxuly',
       doitacid: ''
     },
     giaodichid: this.props.giaodichid,
@@ -111,11 +111,11 @@ export default class EditPMH extends Component {
       });
     }else{
       //kiem tra va parse kieu so va ngya
-      this.setState({submiting: true});
-      this.props.postItem(preprocessPost(this.state.gdItem, this.props.meta.giaodich));
       if(this.state.edited){
+        this.setState({submiting: true});
         this.props.postItem(preprocessPost(this.state.gdItem, this.props.meta.giaodich));
       }else{
+        this.setState({submiting: false});
         this.props.postCTDH(this.xulytruoc(this.state.ctdh));
       }
     }

@@ -45,10 +45,10 @@ class LeftNav extends Component {
       <div id="avatar" >
         <div className="mbv-grid container-fluid" style={{"zIndex":"9999998" }}>
           <div className="row fg-white" onClick={::this.toggleModal}>
-            <div className="col-xs-4 col-xs-collapse-right" ><img src={"/images/avatar0.png"} width="40" height="40" /></div>
+            <div className="col-xs-4 col-xs-collapse-right" ><img src={user && user.avatar? user.avatar:"/images/avatar0.png"} width="40" height="40" /></div>
             <div id="avatar-col" className="col-xs-8 col-xs-collapse-left" >
-              <div style={{"textAlign":"center","fontSize":"16px","position":"relative"}} >{user.nhanvien? user.nhanvien.name: 'Admin'}</div>
-              <div style={{"textAlign":"center","fontSize":"11px","position":"relative"}} >{user.nhanvienid? 'Nhân Viên':'Admin'}</div>
+              <div style={{"textAlign":"center","fontSize":"16px","position":"relative"}} >{user.name? user.name:(user.role === 'admin'? 'Admin':'Nhân Viên') }</div>
+              <div style={{"textAlign":"center","fontSize":"11px","position":"relative"}} >{user.role=== 'nhanvien'? 'Nhân Viên':'Admin'}</div>
             </div>
           </div>
           {

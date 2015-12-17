@@ -85,5 +85,18 @@ export const Style = {
     borderRadius: '4px',
     outline: 'none',
     padding: '10px 20px'
+  },
+  content_30: {
+    position: 'absolute',
+    width: '30%',
+    top: '10px',
+    left: '35%',
+    border: '1px solid #ccc',
+    background: '#fff',
+    overflow: 'auto',
+    WebkitOverflowScrolling: 'touch',
+    borderRadius: '4px',
+    outline: 'none',
+    padding: '10px 20px'
   }
 }

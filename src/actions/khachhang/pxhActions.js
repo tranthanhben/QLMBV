@@ -59,7 +59,8 @@ export function loadList(options = {}){
       params: makeQuery({
         page: options.page || 0,
         page_size : options.page_size || 10,
-        sort: options.sort || ''
+        sort: options.sort || '',
+        tinhtrangdonhang: 'hoanthanh'
       })
     })
   };

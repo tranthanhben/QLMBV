@@ -131,7 +131,7 @@ class List extends Component{
                 <div id="example_filter" className="dataTables_filter" style={{"display": "inline-flex", "float":"right"}}>
                   <label className="line-height" style={{"display": "flex"}}>
                   <span style={{"display": "inline-table"}}>{"Tìm kiếm "}</span>
-                    <input type="search" className="form-control " placeholder="Theo Tên" onChange={::this.searchField} aria-controls="example" />
+                    <input type="search" className="form-control " placeholder="Search Name" onChange={::this.searchField} aria-controls="example" value={options.name || ''}/>
                   </label>
                 </div>
                 <table id="example" className="table display preline dataTable" cellSpacing="0" width="100%" role="grid" aria-describedby="example_info" style={{"width": "100%"}}>

@@ -40,7 +40,8 @@
 
 #avatar img {
   top: 5px;
-  position: relative
+  position: relative;
+  border-radius: 50%;
 }
 
 #avatar-col {
@@ -595,4 +596,78 @@ label .unit {
   position: absolute;
   right: 15px;
   margin-top: -15px;
+}
+.navbar .nav.navbar-nav.nav-profile {
+    padding: 0;
+}
+
+.navbar .nav.navbar-nav.nav-profile > li > a {
+    text-transform: uppercase;
+    color: #414141;
+    font: 400 13px / 27px Roboto;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding-bottom: 7px;
+    position: relative;
+}
+
+.navbar .nav.navbar-nav.nav-profile > .active > a {
+    background-color: transparent;
+}
+
+.navbar .nav.navbar-nav.nav-profile >li > a:hover {
+    background-color: transparent;
+    color: #eb232a;
+}
+
+.navbar .nav.navbar-nav.nav-profile > .active > a::after,
+.navbar .nav.navbar-nav.nav-profile > .active > a::before,
+.navbar .nav.navbar-nav.nav-profile > li > a:hover::after,
+.navbar .nav.navbar-nav.nav-profile > li > a:focus::after,
+.navbar .nav.navbar-nav.nav-profile > li > a:hover::before,
+.navbar .nav.navbar-nav.nav-profile > li > a:focus::before {
+    display: block;
+    position: absolute;
+    content: " ";
+    width: 100%;
+    height: 0;
+    background-color: #414141;
+}
+
+.navbar .nav.navbar-nav.nav-profile > .active > a,
+.navbar .nav.navbar-nav.nav-profile > .active > a:hover,
+.navbar .nav.navbar-nav.nav-profile > li > a:hover {
+    border: none;
+    border-bottom: 3px solid #eb232a;
+}
+.nav-signup {
+  font: 700 14px / 36px Roboto;
+  color: rgba(0, 0, 0, 0.4);
+  width:100%;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  margin-bottom: 25px;
+}
+ul.nav.navbar-nav.nav-profile.nav-signup > li {
+  width: 50%;
+  margin: 0;
+  text-align: center;
+  cursor: pointer;
+}
+ul.nav.navbar-nav.nav-profile.nav-signup > li.active > a,
+ul.nav.navbar-nav.nav-profile.nav-signup > li > a:hover{
+  background-color: inherit;
+  border-bottom: 3px solid #eb232a;
+  color: #414141;
+}
+ul.nav.navbar-nav.nav-profile.nav-signup > li> a{
+  color: inherit;
+}
+
+ul.nav.navbar-nav.nav-profile.nav-signup > li > a {
+    text-transform: uppercase;
+    color: rgba(0, 0, 0, 0.4);
+    font: 700 14px / 36px Roboto;
+    margin: 0 2px;
+    padding: 0;
+    position: relative;
 }

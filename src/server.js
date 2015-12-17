@@ -33,6 +33,7 @@ app.use('/v1', (req, res) => {
 });
 
 app.use('/v1/upload', (req, res) => {
+  console.log("route");
   httpProxy.createProxyServer({
     target: 'http://localhost:' + config.apiPort + '/v1/upload'
   }).web(req, res);

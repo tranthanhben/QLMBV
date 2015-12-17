@@ -48,7 +48,7 @@ export default function lohang(state = initialState, action = {}){
         loaded: false,
         list: [],
         paging: {},
-        error: action.error
+        error: action.result
       };
 
     case LH_ONE_LOAD:
@@ -67,7 +67,7 @@ export default function lohang(state = initialState, action = {}){
         ...state,
         loadingOne: false,
         item: {},
-        error: action.error
+        error: action.result
       };
 
     case LH_POST:
@@ -90,7 +90,7 @@ export default function lohang(state = initialState, action = {}){
         editItem: null,
         message: false,
         posting: false,
-        errorPost: action.error
+        errorPost: action.result
       };
 
     case LH_PUT:
@@ -112,7 +112,7 @@ export default function lohang(state = initialState, action = {}){
         editItem: null,
         message: false,
         posting: false,
-        errorPost: action.error
+        errorPost: action.result
       };
 
     case LH_DELETE:
@@ -132,7 +132,7 @@ export default function lohang(state = initialState, action = {}){
         ...state,
         deleting: false,
         item: null,
-        errorDel: action.error
+        errorDel: action.result
       };
 
     case LH_RESET:

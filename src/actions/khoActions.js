@@ -61,10 +61,10 @@ export function loadList(options = {}){
 }
 
 export function postItem(data){
-  if(data.kid){
+  if(data.id){
     return {
       types: [KHO_PUT, KHO_PUT_SUCCESS, KHO_PUT_FAIL],
-      promise: (client) => client.put(`/kho/${data.kid}`, {
+      promise: (client) => client.put(`/kho/${data.id}`, {
         data: JSON.stringify(data)
       })
     };

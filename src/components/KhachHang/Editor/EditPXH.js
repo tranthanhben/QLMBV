@@ -12,7 +12,7 @@ import * as giaodichActions from '../../../actions/giaodichActions';
   listKH: state.giaodich.listKH,
   listLV: state.giaodich.listLV,
   listK: state.giaodich.listK,
-  listPDH: state.giaodich.listPDH,
+  listPMH: state.giaodich.listPMH,
   user: state.user.user,
   ctk: state.phieuxuathang.ctk
 }),{...pxhActions, ...giaodichActions})
@@ -22,7 +22,7 @@ export default class EditPXH extends Component {
     listK: PropTypes.array,
     listLV: PropTypes.array,
     listKH: PropTypes.array,
-    listPDH: PropTypes.array,
+    listPMH: PropTypes.array,
     gdItem: PropTypes.object,
     meta: PropTypes.object,
     user: PropTypes.object,
@@ -207,7 +207,7 @@ export default class EditPXH extends Component {
     }
   }
   render() {
-    const {meta, error, message, listKH, listLV, listK, listPDH} = this.props;
+    const {meta, error, message, listKH, listLV, listK, listPMH} = this.props;
     const {gdItem, edited, submited, showFullField, giaodichid, ctk, editedCTK} = this.state;
     const metaGD = meta && preprocess(meta.giaodich) || {};
     const metaCTK = meta && preprocess(meta.ctk) || {};
@@ -233,7 +233,7 @@ export default class EditPXH extends Component {
                   onChange={::this.changeGDID}
                   value={giaodichid || ''}>
                   <option key='id'>-- Giao Dich ID --</option>
-                  {listPDH && listPDH.map(b => {
+                  {listPMH && listPMH.map(b => {
                     return (
                       <option key={b.id} value={b.id}>
                         {b.id}
@@ -314,7 +314,7 @@ export default class EditPXH extends Component {
                   onChange={::this.changeGDID}
                   value={giaodichid || ''}>
                   <option key='id'>-- Giao Dich ID --</option>
-                  {listPDH && listPDH.map(b => {
+                  {listPMH && listPMH.map(b => {
                     return (
                       <option key={b.id} value={b.id}>
                         {b.id}

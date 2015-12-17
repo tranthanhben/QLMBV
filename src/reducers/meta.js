@@ -255,19 +255,28 @@ const initialState = {
       type: "single",
       required: false,
       field: true
+    }
+  },
+  user: {
+    "id": {
+      name: "id",
+      label: "NVID",
+      sort: true,
+      up: true,
+      type: "single",
+      field: false
     },
-    "username": {
-      name: "username",
-      label: "User Name",
-      sort: false,
+    "ten": {
+      name: "ten",
+      label: "Tên",
+      sort: true,
       type: "single",
       required: false,
-      field: true,
-      view: false
+      field: true
     },
-    "password": {
-      name: "password",
-      label: "PassWord",
+    "avatar": {
+      name: "avatar",
+      label: "Avatarlin",
       sort: false,
       type: "single",
       required: false,
@@ -331,7 +340,7 @@ const initialState = {
       label: "Sức Chứa",
       sort: true,
       type: "number",
-      required: true,
+      unit: ' Chỗ',
       field: true
     },
     "trong": {
@@ -339,6 +348,7 @@ const initialState = {
       label: "Còn Trống",
       sort: true,
       type: "number",
+      unit: ' Chỗ',
       field: false
     }
   },
@@ -365,7 +375,8 @@ const initialState = {
       sort: false,
       type: "single",
       required: false,
-      field: true
+      field: true,
+      view: false
     },
     "mausac": {
       name: "mausac",
@@ -391,7 +402,7 @@ const initialState = {
       required: false,
       disabled: true,
       field: false,
-      view: true
+      view: false
     },
     "giaban": {
       name: "giaban",
@@ -412,7 +423,40 @@ const initialState = {
       disabled: true,
       required: false,
       field: false
-    }
+    },
+    "tongnhap": {
+      name: "tongnhap",
+      label: "Đã Nhập",
+      sort: false,
+      type: "number",
+      required: false,
+      disabled: true,
+      field: false,
+      view: true,
+      unit: ' Cây'
+    },
+    "tongxuat": {
+      name: "tongxuat",
+      label: "Đã Xuất",
+      sort: false,
+      type: "number",
+      required: false,
+      disabled: true,
+      field: false,
+      view: true,
+      unit: ' Cây'
+    },
+    "con": {
+      name: "con",
+      label: "Còn",
+      sort: false,
+      type: "number",
+      required: false,
+      disabled: true,
+      field: false,
+      view: true,
+      unit: ' Cây'
+    },
   },
   phieudathang:{
     giaodich:{
@@ -979,9 +1023,18 @@ const initialState = {
         field: false,
         view: true
       },
+      slc: {
+        name: "slc",
+        label: "Số Lượng Con",
+        sort: false,
+        up: false,
+        type: "number",
+        field: false,
+        view: true
+      },
       soluong: {
         name: "soluong",
-        label: "Số lượng",
+        label: "Số lượng mua",
         sort: false,
         up: false,
         type: "number",

@@ -33,13 +33,14 @@ class List extends Component{
     openModal: PropTypes.func.isRequired
   }
 
-  static fetchData(store){
-    if(!isLoaded(store.getState)){
-      return store.dispatch(loadKH());
-    }
-  }
+  // static fetchData(store){
+  //   if(!isLoaded(store.getState)){
+  //     return store.dispatch(loadKH());
+  //   }
+  // }
   componentWillReceiveProps(nextProps) {
     if(nextProps.reload === true){
+      console.log("reload");
       this.props.loadList(this.state.options);
     }
   }
@@ -79,13 +80,14 @@ class List extends Component{
     }
   }
   searchField(){
+    event.preventDefault();
     let value = event.target.value;
     let opt = this.state.options;
     if(value !== opt.name){
       opt.name = value;
       opt.page = 0;
-      this.props.loadList(opt);
       this.setState({options: opt});
+      this.props.loadList(opt);
     }
   }
   paginationLoad(page){
@@ -136,7 +138,7 @@ class List extends Component{
                 </div>
                 <div id="example_filter" className="dataTables_filter" style={{"display": "inline-flex", "float":"right"}}>
                   <label className="line-height" style={{"display": "flex"}}>Search:
-                    <input type="search" className="form-control " placeholder="Search Name" onChange={::this.searchField} aria-controls="example" />
+                    <input type="search" className="form-control " placeholder="Search Name" onChange={::this.searchField} aria-controls="example" value={options.name || ''}/>
                   </label>
                 </div>
                 <table id="example" className="table display nowrap dataTable" role="grid" aria-describedby="example_info" >

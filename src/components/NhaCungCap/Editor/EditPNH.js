@@ -140,10 +140,11 @@ export default class EditPNH extends Component {
       });
     }else{
       //kiem tra va parse kieu so va ngya
-      this.setState({submiting: true});
       if(this.state.edited){
+        this.setState({submiting: true});
         this.props.postItem(preprocessPost(this.state.gdItem, this.props.meta.giaodich));
       }else{
+        this.setState({submiting: false});
         this.props.postCTK(this.xulytruoc(this.state.ctk));
       }
     }
