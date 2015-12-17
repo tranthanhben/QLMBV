@@ -110,7 +110,8 @@ class PMH extends Component{
   }
   viewModal() {
     this.props.openModal(!this.state.openView);
-    this.setState({openView: !this.state.openView})
+    this.setState({openView: !this.state.openView});
+
   }
   editItem(id){
     return ()=>{
@@ -120,7 +121,10 @@ class PMH extends Component{
   }
   editModal() {
     this.props.openModal(!this.state.openEdit);
-    this.setState({openEdit: !this.state.openEdit, openView: false})
+    if(this.state.openEdit){
+      this.props.reset();
+    }
+    this.setState({openEdit: !this.state.openEdit, openView: false});
   }
   render(){
     const {listPMH, paging, meta, listLV} = this.props;

@@ -60,7 +60,6 @@ export class TBody extends Component {
     meta: PropTypes.object,
     item: PropTypes.object,
     listLV: PropTypes.array,
-    listK: PropTypes.array,
     add: PropTypes.func.isRequired,
     del: PropTypes.func.isRequired,
     edit: PropTypes.func.isRequired
@@ -69,27 +68,28 @@ export class TBody extends Component {
     objectLV: {},
     loaivai: {},
     objectK: {},
-    kho: {}
+    kho: ''
   }
   componentWillMount(){
     this.state.objectLV = ATOLV(this.props.listLV || []);
     this.state.loaivai = this.state.objectLV[this.props.item.loaivaiid]|| {};
-    this.state.objectK = ATOLV(this.props.listLV || []);
-    this.state.kho = this.state.objectK[this.props.item.khoid]|| {};
+    this.state.objectK = this.state.loaivai && this.state.loaivai["chitietkho"] || {};
+    this.state.kho = this.state.objectK[this.props.item.khoid]|| '';
   }
   componentWillReceiveProps(nextProps) {
     if(nextProps.listLV){
       this.setState({objectLV: ATOLV(nextProps.listLV || [])});
-    }
-    if(nextProps.listK){
-      this.setState({objectK: ATOLV(nextProps.listK || [])});
     }
   }
   selectLoaivai(){
     this.props.edit(event);
     let value = event.target.value;
     if(value){
-      this.setState({loaivai: this.state.objectLV[value]});
+      this.setState({
+        loaivai: this.state.objectLV[value],
+        objectK: this.state.objectLV[value].chitietkho,
+        kho: this.state.objectLV[value].chitietkho[this.props.item.khoid]
+      });
     }
   }
   selectKho(){
@@ -102,7 +102,16 @@ export class TBody extends Component {
   render(){
     const {meta, item, add, del, edit, index, listLV, listK} = this.props;
     const {loaivai, objectLV, kho, objectK} = this.state;
-    console.log("objectK", objectK, kho);
+    const optionK = [];
+    for(let key in objectK){
+      optionK.push(
+        <option key={key} value={key}>
+          {key}
+        </option>
+        );
+    }
+    let soluong = item.soluong * -1;
+    console.log(item.soluong);
     return (
       <tr role="row" className={index%2===1 ? "even":"odd"} key={index}>
         <td>{index+1}</td>
@@ -120,38 +129,29 @@ export class TBody extends Component {
             })}
           </select>
         </td>
-        <td key='mausac' >
-          <input type="text" data-addr='mausac'className="form-control" readOnly nvalue={loaivai.mausac || ''} />
-        </td>
-        <td key='chatlieu' >
-          <input type="text" data-addr='chatlieu'className="form-control" readOnly  value={loaivai.chatlieu || ''} />
+        <td key='conlai' >
+          <input type="text" data-addr='conlai' className="form-control" readOnly  value={loaivai.conlai || '0'} />
         </td>
         <td key={'kho'+ index}>
           <select className='form-control' data-addr='khoid'
             onChange={::this.selectKho}
             value={item.khoid || ''}>
             <option key={index + 'default'}>-- Kho --</option>
-            {listK && listK.map(b => {
-              return (
-                <option key={index + ' ' +b.id} value={b.id}>
-                  {b.ten}
-                </option>
-              );
-            })}
+            {optionK}
           </select>
         </td>
         <td key='trong' className=' dt-body-right' >
-          <input type="number" data-addr='trong' className="form-control" readOnly  value={kho.trong || ''} />
+          <input type="number" data-addr='trong' className="form-control" readOnly  value={kho || '0'} />
         </td>
 
         <td key='soluong' className=' dt-body-right' >
-          <input type="number" step='10' min='0' data-addr='soluong'className="form-control dt-body-right" value={item.soluong || ''} onChange={edit} />
+          <input type="number" step='10' min='0' data-addr='soluong'className="form-control dt-body-right" value={soluong || ''} onChange={edit} />
         </td>
         <td key='gia' className=' dt-body-right' >
           <input type="number" step='10' min='0' data-addr='gia'className="form-control dt-body-right" value={item.gia || ''} onChange={edit}/>
         </td>
         <td key='thanhtien' className=' dt-body-right' >
-          <input type="number" step='10' min='0' data-addr='thanhtien' readOnly className="form-control dt-body-right" value={item.gia*item.soluong} />
+          <input type="number" step='10' min='0' data-addr='thanhtien' readOnly className="form-control dt-body-right" value={item.gia*soluong || '0'} />
         </td>
 
         <td key='control' className="group-edit">

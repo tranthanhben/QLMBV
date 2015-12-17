@@ -131,6 +131,7 @@ export default function phieuxuathang(state = initialState, action = {}){
       return {
         ...state,
         reset: true,
+        reloadList: true,
         editItem: action.result,
         message: true,
         posting: false,
@@ -153,6 +154,7 @@ export default function phieuxuathang(state = initialState, action = {}){
       return {
         ...state,
         reset: true,
+        reloadList: true,
         deleting: false,
         item: null
       };
@@ -172,6 +174,7 @@ export default function phieuxuathang(state = initialState, action = {}){
       return {
         ...state,
         postingCTK: false,
+        reloadList: true,
         ctk: action.result,
       };
     case PXH_CTK_FAIL:

@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import * as pnhActions from '../../actions/nhacungcap/pnhActions';
+import * as pxhActions from '../../actions/khachhang/pxhActions';
 import {THead, TBody, TFoot} from '../table/row';
 import {Pagination, PageShow} from '../table/pagination';
 import {isLoaded, loadList as loadPXH} from '../../actions/khachhang/pxhActions';
@@ -22,7 +22,7 @@ import {ViewPXH} from './Editor/ViewFull';
     listLV: state.giaodich.listLV,
     listK: state.giaodich.listK,
   }),
-  {...pnhActions,...layoutActions, ...giaodichActions})
+  {...pxhActions,...layoutActions, ...giaodichActions})
 
 export default
 class PXH extends Component{
@@ -121,7 +121,10 @@ class PXH extends Component{
   }
   editModal() {
     this.props.openModal(!this.state.openEdit);
-    this.setState({openEdit: !this.state.openEdit, openView: false})
+    if(this.state.openEdit){
+      this.props.reset();
+    }
+    this.setState({openEdit: !this.state.openEdit, openView: false});
   }
   render(){
     const {listPXH, paging, meta, listLV, listK} = this.props;

@@ -85,7 +85,6 @@ export class TBody extends Component {
   render(){
     const {meta, item, add, del, edit, index, listLV} = this.props;
     const {loaivai, object} = this.state;
-    console.log(item);
     return (
       <tr role="row" className={index%2===1 ? "even":"odd"} key={index}>
         <td>{index+1}</td>
@@ -104,14 +103,14 @@ export class TBody extends Component {
           </select>
         </td>
         <td key='mausac' >
-          <input type="text" data-addr='mausac'className="form-control" readOnly nvalue={loaivai.mausac || ''} />
+          <input type="text" data-addr='mausac'className="form-control" readOnly value={loaivai.mausac || ''} />
         </td>
         <td key='chatlieu' >
           <input type="text" data-addr='chatlieu'className="form-control" readOnly  value={loaivai.chatlieu || ''} />
         </td>
 
         <td key='soluongcon' className=' dt-body-right' >
-          <input type="number" data-addr='conlai'className="form-control" value={loaivai.conlai || ''} readOnly />
+          <input type="number" data-addr='conlai'className="form-control" value={loaivai.conlai || '0'} readOnly />
         </td>
         <td key='soluong' className=' dt-body-right' >
           <input type="number" step='10' min='0' data-addr='soluong'className="form-control" value={item.soluong || ''} onChange={edit} />
@@ -157,7 +156,6 @@ export class TBodyCTDH extends Component {
   render(){
     const {meta, item, index} = this.props;
     const {loaivai, object} = this.state;
-    console.log("loaivai", loaivai);
     return (
       <tr role="row" className={index%2===1 ? "even":"odd"} key={index}>
         <td>{index+1}</td>
@@ -169,6 +167,9 @@ export class TBodyCTDH extends Component {
         </td>
         <td key='chatlieu' >
           {loaivai.chatlieu}
+        </td>
+        <td key='conlai' >
+          {loaivai.conlai}
         </td>
         <td key='soluong' >
           {numeral(item.soluong).format('0,0') + ' Cây'}

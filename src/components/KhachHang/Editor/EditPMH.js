@@ -42,7 +42,7 @@ export default class EditPMH extends Component {
       loaivaiid:'',
       soluong:'',
       gia:'',
-      loaigiaodich:"pdh"
+      loaigiaodich:"pmh"
     },
     newGD: true
   }

@@ -131,6 +131,7 @@ export default function phieudathang(state = initialState, action = {}){
       return {
         ...state,
         reset: true,
+        reloadList: true,
         editItem: action.result,
         message: true,
         posting: false,
@@ -153,6 +154,7 @@ export default function phieudathang(state = initialState, action = {}){
       return {
         ...state,
         reset: true,
+        reloadList: true,
         deleting: false,
         item: null
       };
@@ -172,6 +174,7 @@ export default function phieudathang(state = initialState, action = {}){
       return {
         ...state,
         postingCTDH: false,
+        reloadList: true,
         ctdh: action.result,
       };
     case PDH_CTDH_FAIL:

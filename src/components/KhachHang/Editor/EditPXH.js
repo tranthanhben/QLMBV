@@ -52,7 +52,7 @@ export default class EditPXH extends Component {
       soluong:'',
       gia:'',
       khoid:'',
-      loaigiaodich:"pdh"
+      loaigiaodich:"pmh"
     },
     newGD: true
   }
@@ -93,7 +93,7 @@ export default class EditPXH extends Component {
           soluong:'',
           gia:'',
           khoid:'',
-          loaigiaodich:"pdh"
+          loaigiaodich:"pmh"
         }
       });
     }
@@ -139,10 +139,11 @@ export default class EditPXH extends Component {
       });
     }else{
       //kiem tra va parse kieu so va ngya
-      this.setState({submiting: true});
       if(this.state.edited){
+        this.setState({submiting: true});
         this.props.postItem(preprocessPost(this.state.gdItem, this.props.meta.giaodich));
       }else{
+        this.setState({submiting: false});
         this.props.postCTK(this.xulytruoc(this.state.ctk));
       }
     }
@@ -202,6 +203,9 @@ export default class EditPXH extends Component {
       let ctk = this.state.ctk;
       let addr = event.target.dataset.addr;
       let value = event.target.value;
+      if(addr === 'soluong'){
+        value = parseFloat(value)*-1 || 0;
+      }
       ctk[index][addr] = value;
       this.setState({ctk: ctk, editedCTK: true});
     }
@@ -276,7 +280,7 @@ export default class EditPXH extends Component {
               </thead>
               <tbody>
                 {gdItem.chitietdonhang && gdItem.chitietdonhang.map((item, index)=>{
-                  return <TBodyCTDH meta={metaCTDH} listLV={listLV} index={index} item={item}></TBodyCTDH>;
+                  return <TBodyCTDH key={index} meta={metaCTDH} listLV={listLV} index={index} item={item}></TBodyCTDH>;
                 })}
               </tbody>
             </table>

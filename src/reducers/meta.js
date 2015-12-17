@@ -777,7 +777,7 @@ const initialState = {
       },
       khoid: {
         name: "khoid",
-        label: "Kho",
+        label: "Kho Con Trong",
         sort: false,
         up: false,
         type: "special",
@@ -1025,7 +1025,7 @@ const initialState = {
       },
       slc: {
         name: "slc",
-        label: "Số Lượng Con",
+        label: "SL Còn",
         sort: false,
         up: false,
         type: "number",
@@ -1186,27 +1186,18 @@ const initialState = {
         field: false,
         view:true
       },
-      mausac: {
-        name: "mausac",
-        label: "Màu Sắc",
+      slc: {
+        name: "slc",
+        label: "SL Còn",
         sort: false,
         up: false,
-        type: "special",
+        type: "number",
         field: false,
-        view:true
-      },
-      chatlieu: {
-        name: "chatlieu",
-        label: "Chất Liệu",
-        sort: false,
-        up: false,
-        type: "special",
-        field: false,
-        view:true
+        view: true
       },
       khoid: {
         name: "khoid",
-        label: "Kho",
+        label: "Kho Con Hang",
         sort: false,
         up: false,
         type: "special",
@@ -1215,7 +1206,7 @@ const initialState = {
       },
       htk: {
         name: "htk",
-        label: "Còn",
+        label: "Còn TK",
         sort: false,
         up: false,
         type: "special",
@@ -1225,21 +1216,12 @@ const initialState = {
       },
       soluong: {
         name: "soluong",
-        label: "Số lượng",
+        label: "Số lượng Xuất",
         sort: false,
         up: false,
         type: "number",
         field: true,
         view:true
-      },
-      giatk: {
-        name: "giatk",
-        label: "Giá Mua(tk)",
-        sort: false,
-        up: false,
-        type: "number",
-        field: false,
-        view: true
       },
       gia: {
         name: "gia",
@@ -1288,9 +1270,18 @@ const initialState = {
         field: false,
         view: true
       },
+      slc: {
+        name: "slc",
+        label: "SL Còn",
+        sort: false,
+        up: false,
+        type: "number",
+        field: false,
+        view: true
+      },
       soluong: {
         name: "soluong",
-        label: "Số lượng",
+        label: "Số lượng mua",
         sort: false,
         up: false,
         type: "number",

@@ -124,7 +124,7 @@ export class TBody extends Component {
           </select>
         </td>
         <td key='mausac' >
-          <input type="text" data-addr='mausac'className="form-control" readOnly nvalue={loaivai.mausac || ''} />
+          <input type="text" data-addr='mausac'className="form-control" readOnly value={loaivai.mausac || ''} />
         </td>
         <td key='chatlieu' >
           <input type="text" data-addr='chatlieu'className="form-control" readOnly  value={loaivai.chatlieu || ''} />
