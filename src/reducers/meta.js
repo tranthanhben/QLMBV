@@ -446,8 +446,8 @@ const initialState = {
       view: true,
       unit: ' Cây'
     },
-    "con": {
-      name: "con",
+    "conlai": {
+      name: "conlai",
       label: "Còn",
       sort: false,
       type: "number",
@@ -1534,6 +1534,168 @@ const initialState = {
       },
       "doitacid": {
         name: "doitacid",
+        label: "Nha Cung Cap",
+        sort: true,
+        up: true,
+        type: "single",
+        required: true,
+        field: false,
+        view: true
+      },
+      "tongtiendutinh": {
+        name: "tongtiendutinh",
+        label: "Tổng tiền dự tính",
+        sort: false,
+        up: false,
+        type: "number",
+        field: true,
+        unit: ' VND',
+        view: false
+      },
+      "tongtien": {
+        name: "tongtien",
+        label: "Tổng tiền hoa don",
+        sort: false,
+        up: false,
+        type: "number",
+        field: false,
+        unit: ' VND',
+        view: true
+      },
+      "thanhtoan": {
+        name: "thanhtoan",
+        label: "Tổng tiền Thanh Toan",
+        sort: false,
+        up: false,
+        type: "number",
+        field: false,
+        unit: ' VND',
+        view: true
+      },
+      "tinhtrangdonhang": {
+        name: "tinhtrangdonhang",
+        label: "Tình Trạng Mua",
+        sort: false,
+        up: false,
+        type: "select",
+        options: [{
+          value: "chuaxuly",
+          label: "Chưa Xử Lý"
+        },{
+          value: "dangxuly",
+          label: "Đang xử lý"
+        },{
+          value: "hoanthanh",
+          label: "Hoàn Thành"
+        },{
+          value: "huy",
+          label: "Hủy"
+        }],
+        field: false,
+        view: false
+      },
+      "tinhtrangkho": {
+        name: "tinhtrangkho",
+        label: "Tình Trạng Xuất",
+        sort: false,
+        up: false,
+        type: "select",
+        options: [{
+          value: "chuaxuly",
+          label: "Chưa Xử Lý"
+        },{
+          value: "dangxuly",
+          label: "Đang xử lý"
+        },{
+          value: "hoanthanh",
+          label: "Hoàn Thành"
+        },{
+          value: "huy",
+          label: "Hủy"
+        }],
+        field: false,
+        view: false
+      },
+      "tinhtrangthanhtoan": {
+        name: "tinhtrangthanhtoan",
+        label: "Tình Trạng Thanh Toán",
+        sort: false,
+        up: false,
+        type: "select",
+        options: [{
+          value: "chuaxuly",
+          label: "Chưa Xử Lý"
+        },{
+          value: "dangxuly",
+          label: "Đang xử lý"
+        },{
+          value: "hoanthanh",
+          label: "Hoàn Thành"
+        },{
+          value: "huy",
+          label: "Hủy"
+        }],
+        field: true,
+        view: true
+      }
+    },
+    cttt:{
+      thanhtoan: {
+        name: "thanhtoan",
+        label: "ST Thanh Toan",
+        sort: false,
+        up: false,
+        type: "number",
+        field: true,
+        view: true
+      },
+      phuongthuc: {
+        name: "phuongthuc",
+        label: "Phuong Thuc Thanh Toan",
+        sort: false,
+        up: false,
+        type: "select",
+        options:[{
+          value: "tienmat",
+          label: "Tien Mat"
+        },{
+          value: "chuyenkhoan",
+          label: "Chuyen Khoan"
+        }],
+        field: true,
+        view: true
+      },
+      ngaythanhtoan:{
+        name: 'ngaythanhtoan',
+        label: 'Ngay Thanh Toan',
+        type: 'date',
+        field: true,
+        view: true
+      }
+    }
+  },
+  thanhtoanKH:{
+    giaodich:{
+      "id": {
+        name: "id",
+        label: "GDID",
+        sort: true,
+        up: true,
+        type: "single",
+        field: false,
+        view: true
+      },
+      "nhanvienid": {
+        name: "nhanvienid",
+        label: "Nhân Viên",
+        sort: true,
+        up: true,
+        type: "single",
+        field: false,
+        view: true
+      },
+      "doitacid": {
+        name: "doitacid",
         label: "Khách Hàng",
         sort: true,
         up: true,
@@ -1555,6 +1717,16 @@ const initialState = {
       "tongtien": {
         name: "tongtien",
         label: "Tổng tiền hoa don",
+        sort: false,
+        up: false,
+        type: "number",
+        field: false,
+        unit: ' VND',
+        view: true
+      },
+      "thanhtoan": {
+        name: "thanhtoan",
+        label: "Tổng tiền Thanh Toan",
         sort: false,
         up: false,
         type: "number",

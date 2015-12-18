@@ -4,7 +4,8 @@ export image from './image';
 export {
   khachhang,
   phieumuahang,
-  phieuxuathang
+  phieuxuathang,
+  thanhtoanKH
 } from './khachhang';
 export {
   nhacungcap,

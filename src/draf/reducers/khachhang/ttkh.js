@@ -19,15 +19,6 @@ import {
   TTKH_DELETE_SUCCESS,
   TTKH_DELETE_FAIL,
 
-  TTKH_CTTT,
-  TTKH_CTTT_SUCCESS,
-  TTKH_CTTT_FAIL,
-
-  TTKH_GET,
-  TTKH_GET_SUCCESS,
-  TTKH_GET_FAIL,
-
-  GD_DEL_CTTT_SUCCESS,
   TTKH_RESET
 } from 'actions/actionTypes';
 
@@ -47,7 +38,6 @@ export default function thanhtoanKH(state = initialState, action = {}){
         ...state,
         loadding: false,
         loaded: true,
-        reloadList: false,
         list: action.result.items,
         paging: action.result.paging
       };
@@ -57,7 +47,7 @@ export default function thanhtoanKH(state = initialState, action = {}){
         loading: false,
         loaded: false,
         list: [],
-        paging: {},
+        paging: null,
         error: action.result
       };
 
@@ -76,27 +66,7 @@ export default function thanhtoanKH(state = initialState, action = {}){
       return {
         ...state,
         loadingOne: false,
-        item: {},
-        error: action.result
-      };
-
-    case TTKH_GET:
-      return {
-        ...state,
-        getding: true
-      };
-    case TTKH_GET_SUCCESS:
-      return {
-        ...state,
-        getding: false,
-        editItem: action.result,
-        cttt: action.result.chitietthanhtoan
-      };
-    case TTKH_GET_FAIL:
-      return {
-        ...state,
-        getding: false,
-        editItem: null,
+        item: null,
         error: action.result
       };
 
@@ -132,7 +102,6 @@ export default function thanhtoanKH(state = initialState, action = {}){
       return {
         ...state,
         reset: true,
-        reloadList: true,
         editItem: action.result,
         message: true,
         posting: false,
@@ -155,7 +124,6 @@ export default function thanhtoanKH(state = initialState, action = {}){
       return {
         ...state,
         reset: true,
-        reloadList: true,
         deleting: false,
         item: null
       };
@@ -166,38 +134,14 @@ export default function thanhtoanKH(state = initialState, action = {}){
         item: null,
         errorDel: action.result
       };
-    case TTKH_CTTT:
-      return {
-        ...state,
-        postingCTTT: true
-      };
-    case TTKH_CTTT_SUCCESS:
-      return {
-        ...state,
-        postingCTTT: false,
-        reloadList: true,
-        cttt: action.result,
-      };
-    case TTKH_CTTT_FAIL:
-      return {
-        ...state,
-        postingCTTT: false,
-        cttt: null,
-        errorPost: action.result
-      };
+
     case TTKH_RESET:
       return {
         ...state,
         loaded: false,
         editItem: null,
-        reloadList: true,
         message: false,
         errorPost:null
-      };
-    case GD_DEL_CTTT_SUCCESS:
-      return {
-        ...state,
-        reloadList: true
       };
     default:
       return state;

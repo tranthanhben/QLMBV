@@ -65,12 +65,11 @@ export class TBody extends Component {
   }
   render(){
     const {meta, item, add, del, edit, index} = this.props;
-    let thanhtoan = item.thanhtoan *-1;
     return (
       <tr role="row" className={index%2===1 ? "even":"odd"} key={index}>
         <td>{index+1}</td>
         <td key='thanhtoan'>
-          <input type="number" step='10' min='0' data-addr='thanhtoan'className="form-control dt-body-right" value={thanhtoan || ''} placeholder='So tien Thanh toan' onChange={edit} />
+          <input type="number" step='10' min='0' data-addr='thanhtoan'className="form-control dt-body-right" value={item.thanhtoan || ''} placeholder='So tien Thanh toan' onChange={edit} />
         </td>
         <td key='phuongthuc'>
           <select className='form-control' data-addr='phuongthuc'
@@ -114,12 +113,11 @@ export class TBodyCTTT extends Component {
   }
   render(){
     const {meta, item, index} = this.props;
-    let thanhtoan = item.thanhtoan *-1;
     return (
       <tr role="row" className={index%2===1 ? "even":"odd"} key={index}>
         <td>{index+1}</td>
         <td key='thanhtoan'>
-          {numeral(thanhtoan).format('0,0')+ ' VND'}
+          {numeral(item.thanhtoan).format('0,0')+ ' VND'}
         </td>
         <td key='phuongthuc'>
           {item.phuongthuc}

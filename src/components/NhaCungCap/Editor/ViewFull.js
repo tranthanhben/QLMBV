@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {renderInfo, formatDate, numeral} from '../../../meta';
 import {THeadCTDH, TBodyCTDH} from '../../table/rowForPDH';
 import {THeadCTK, TBodyCTK} from '../../table/rowForPNH';
+import {THeadCTTT, TBodyCTTT} from '../../table/rowForTTNCC';
 export class ViewNCC extends Component {
   static propTypes = {
     meta: PropTypes.object,
@@ -292,9 +293,10 @@ export class ViewTTNCC extends Component {
     const metaGD = meta && meta.giaodich || {};
     const metaCTDH = meta && meta.ctdh || {};
     const metaCTK = meta && meta.ctk || {};
+    const metaCTTT = meta && meta.cttt || {};
     return (
       <div className="info">
-        <h3 className="info-header">Thông Tin Phiếu Đặt Hàng</h3>
+        <h3 className="info-header">Thông Tin Hoa Don</h3>
         <hr/>
         <div className="row">
           <div className="col-md-6">
@@ -330,23 +332,23 @@ export class ViewTTNCC extends Component {
             </div>
           </div>
           <div className="col-md-6">
-            <div className="info-group" key='tongtiendutinh'>
+            <div className="info-group" key='thanhtoan'>
               <div className="row">
                 <div className="col-md-6 align-right">
-                  <span>{metaGD["tongtiendutinh"].label + ": "}</span>
+                  <span>{metaGD["thanhtoan"].label + ": "}</span>
                 </div>
                 <div className="col-md-6">
-                  <p className={metaGD["tongtiendutinh"].up? 'uppercase':''}>{numeral(item["tongtiendutinh"]).format('0,0')+' VND'}</p>
+                  <p className={metaGD["thanhtoan"].up? 'uppercase':''}>{numeral(item["thanhtoan"]).format('0,0')+' VND'}</p>
                 </div>
               </div>
             </div>
-            <div className="info-group" key='tinhtrangdonhang'>
+            <div className="info-group" key='tinhtrangthanhtoan'>
               <div className="row">
                 <div className="col-md-6 align-right">
-                  <span>{metaGD["tinhtrangdonhang"].label + ": "}</span>
+                  <span>{metaGD["tinhtrangthanhtoan"].label + ": "}</span>
                 </div>
                 <div className="col-md-6">
-                  <p className={metaGD["tinhtrangdonhang"].up? 'uppercase':''}>{item["tinhtrangdonhang"]}</p>
+                  <p className={metaGD["tinhtrangthanhtoan"].up? 'uppercase':''}>{item["tinhtrangthanhtoan"]}</p>
                 </div>
               </div>
             </div>
@@ -355,30 +357,14 @@ export class ViewTTNCC extends Component {
         <div className="row">
           <div className="col-md-12">
             <br/>
-            <strong>Chi tiết đơn hàng:</strong>
+            <strong>Chi tiết thanh toan:</strong>
             <table id="example" className="table display preline dataTable" cellSpacing="0" width="100%" role="grid" aria-describedby="example_info" style={{"width": "100%"}}>
               <thead>
-                <THeadCTDH meta={metaCTDH} ></THeadCTDH>
+                <THeadCTTT meta={metaCTTT} ></THeadCTTT>
               </thead>
               <tbody>
-                {item.chitietdonhang && item.chitietdonhang.map((item, index)=>{
-                  return <TBodyCTDH key={index} meta={metaCTDH} listLV={listLV} index={index} item={item}></TBodyCTDH>;
-                })}
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-md-12" key="ctk">
-            <br/>
-            <strong>Chi tiết nhập hàng:</strong>
-            <table id="example" className="table display nowrap dataTable" role="grid" aria-describedby="example_info" >
-              <thead>
-                <THeadCTK meta={metaCTK} ></THeadCTK>
-              </thead>
-              <tbody>
-                {item.chitietkho && item.chitietkho.map((item, index)=>{
-                  return <TBodyCTK key={index} meta={metaCTK} listLV={listLV} listK={listK} index={index} item={item}></TBodyCTK>;
+                {item.chitietthanhtoan && item.chitietthanhtoan.map((item, index)=>{
+                  return <TBodyCTTT key={index} meta={metaCTTT} index={index} item={item}></TBodyCTTT>;
                 })}
               </tbody>
             </table>

@@ -181,7 +181,6 @@ export default class EditPXH extends Component {
       let ctk = this.state.ctk || [];
       const init = this.state.ctk_init || [];
       let befor_ctk = ctk.splice(0, index + 1);
-      console.log(befor_ctk, ctk);
       befor_ctk= [...befor_ctk, {...init}];
       ctk = [...befor_ctk,...ctk];
       this.setState({ctk : ctk});

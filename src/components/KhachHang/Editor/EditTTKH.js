@@ -1,26 +1,26 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {initObject, ATO, OTA, preprocess, datetime, changeDTI, renderLabel, setValue, checkRequire, preprocessPost} from '../../../meta';
-import {THead, TBody} from '../../table/rowForTTNCC';
-import * as ttnccActions from '../../../actions/nhacungcap/ttnccActions';
+import {THead, TBody} from '../../table/rowForTTKH';
+import * as ttkhActions from '../../../actions/khachhang/ttkhActions';
 import * as giaodichActions from '../../../actions/giaodichActions';
 
 @connect(state =>({
-  gdItem: state.thanhtoanNCC.editItem,
-  meta: state.meta.thanhtoanNCC,
-  listNCC: state.giaodich.listNCC,
+  gdItem: state.thanhtoanKH.editItem,
+  meta: state.meta.thanhtoanKH,
+  listKH: state.giaodich.listKH,
   listLV: state.giaodich.listLV,
   listK: state.giaodich.listK,
   listPNH: state.giaodich.listPNH,
   user: state.user.user,
-  cttt: state.thanhtoanNCC.cttt
-}),{...ttnccActions, ...giaodichActions})
+  cttt: state.thanhtoanKH.cttt
+}),{...ttkhActions, ...giaodichActions})
 export default class EditPNH extends Component {
   static propTypes = {
     giaodichid: PropTypes.string,
     listK: PropTypes.array,
     listLV: PropTypes.array,
-    listNCC: PropTypes.array,
+    listKH: PropTypes.array,
     listPNH: PropTypes.array,
     gdItem: PropTypes.object,
     meta: PropTypes.object,
@@ -30,7 +30,7 @@ export default class EditPNH extends Component {
     postCTTT: PropTypes.func.isRequired,
     getItem: PropTypes.func.isRequired,
     close: PropTypes.func.isRequired,
-    loadNCC: PropTypes.func.isRequired,
+    loadKH: PropTypes.func.isRequired,
     loadLV: PropTypes.func.isRequired,
     loadK: PropTypes.func.isRequired
   }
@@ -60,7 +60,7 @@ export default class EditPNH extends Component {
       this.props.getItem(this.props.giaodichid);
       this.state.newGD = false;
     }
-    this.props.loadNCC();
+    this.props.loadKH();
     this.props.loadLV();
     this.props.loadK();
     this.props.loadPNH();
@@ -177,6 +177,7 @@ export default class EditPNH extends Component {
       let cttt = this.state.cttt || [];
       const init = this.state.cttt_init || [];
       let befor_cttt = cttt.splice(0, index + 1);
+      console.log(befor_cttt, cttt);
       befor_cttt= [...befor_cttt, {...init}];
       cttt = [...befor_cttt,...cttt];
       this.setState({cttt : cttt});
@@ -198,15 +199,12 @@ export default class EditPNH extends Component {
       let cttt = this.state.cttt;
       let addr = event.target.dataset.addr;
       let value = event.target.value;
-      if(addr === 'thanhtoan'){
-        value = parseFloat(value)*-1 || 0;
-      }
       cttt[index][addr] = value;
       this.setState({cttt: cttt, editedCTTT: true});
     }
   }
   render() {
-    const {meta, error, message, listNCC, listLV, listK, listPNH} = this.props;
+    const {meta, error, message, listKH, listLV, listK, listPNH} = this.props;
     const {gdItem, edited, submited, showFullField, giaodichid, cttt, editedCTTT} = this.state;
     const metaGD = meta && preprocess(meta.giaodich) || {};
     const metaCTTT = meta && preprocess(meta.cttt) || {};
@@ -248,7 +246,7 @@ export default class EditPNH extends Component {
                   readOnly
                   value={gdItem.doitacid || ''}>
                   <option key='doitacid'>-- Nha Cung Cap --</option>
-                  {listNCC && listNCC.map(b => {
+                  {listKH && listKH.map(b => {
                     return (
                       <option key={b.id} value={b.id}>
                         {b.ten}
