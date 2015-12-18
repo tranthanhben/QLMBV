@@ -4,6 +4,7 @@ import Modal from '../layout/Modal';
 import EditNCC from './Editor/EditNCC';
 import EditPDH from './Editor/EditPDH';
 import EditPNH from './Editor/EditPNH';
+import EditTT from './Editor/EditTTNCC'
 import * as layoutActions from '../../actions/layoutActions';
 import {Style} from '../Style';
 
@@ -21,7 +22,8 @@ export default class NhaCungCap extends Component {
   state = {
     isOpenEdit: false,
     isEditPDH: false,
-    isEditPNH: false
+    isEditPNH: false,
+    isEditTT: false
   }
   toggleModal() {
     this.props.openModal(!this.state.isOpenEdit);
@@ -34,6 +36,10 @@ export default class NhaCungCap extends Component {
   openPNH(){
     this.props.openModal(!this.state.isEditPNH);
     this.setState({isEditPNH: !this.state.isEditPNH});
+  }
+  openTT(){
+    this.props.openModal(!this.state.isEditTT);
+    this.setState({isEditTT: !this.state.isEditTT});
   }
   render(){
     const {menuparse, openmodal} = this.props;
@@ -48,6 +54,9 @@ export default class NhaCungCap extends Component {
               <div className="view-tabs col-xs-3 col-sm-8">
                 <div className="navbar-content pull-right">
                 <ul className="nav-main pull-right">
+                  <li onClick={::this.openTT}>
+                    <a ><span key="icoen" className={'fa fa-money'}></span>{" Tạo Hoa Don"}</a>
+                  </li>
                   <li onClick={::this.openPNH}>
                     <a ><span key="icoen" className={'fa fa-truck fa-flip-horizontal'}></span>{" Tạo PNH"}</a>
                   </li>
@@ -100,6 +109,17 @@ export default class NhaCungCap extends Component {
                   modalClassName='dumb modalContent modalContent--after-open '
                   >
                     <EditPNH close={::this.openPNH}></EditPNH>
+                  </Modal> : null
+                }
+                {
+                  this.state.isEditTT?
+                  <Modal  modalStyle={Style.content_80}
+                  overlayStyle= {Style.overlay}
+                  close = {::this.openTT}
+                  overlayClassName='modaldumb modalOverlay modalOverlay--after-open '
+                  modalClassName='dumb modalContent modalContent--after-open '
+                  >
+                    <EditTT close={::this.openTT}></EditTT>
                   </Modal> : null
                 }
                 {this.props.children}

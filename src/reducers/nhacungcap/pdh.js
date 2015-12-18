@@ -27,6 +27,7 @@ import {
   PDH_GET_SUCCESS,
   PDH_GET_FAIL,
 
+  GD_DEL_CTDH_SUCCESS,
   PDH_RESET
 } from 'actions/actionTypes';
 
@@ -192,6 +193,11 @@ export default function phieudathang(state = initialState, action = {}){
         reloadList: true,
         message: false,
         errorPost:null
+      };
+    case GD_DEL_CTDH_SUCCESS:
+      return {
+        ...state,
+        reloadList: true
       };
     default:
       return state;

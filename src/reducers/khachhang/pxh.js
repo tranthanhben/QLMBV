@@ -27,6 +27,7 @@ import {
   PXH_GET_SUCCESS,
   PXH_GET_FAIL,
 
+  GD_DEL_CTK_SUCCESS,
   PXH_RESET
 } from 'actions/actionTypes';
 
@@ -192,6 +193,11 @@ export default function phieuxuathang(state = initialState, action = {}){
         reloadList: true,
         message: false,
         errorPost:null
+      };
+    case GD_DEL_CTK_SUCCESS:
+      return {
+        ...state,
+        reloadList: true
       };
     default:
       return state;

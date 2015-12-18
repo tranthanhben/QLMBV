@@ -156,7 +156,7 @@ export default class InfoUser extends Component {
                     <div className="col-md-8">
                       <div className="info_profile_group">
                         <div className="name_profile">{userEdit.name? userEdit.name:(userEdit.role === 'admin'? 'Admin':'Nhân Viên') }</div>
-                        <div className="job_profile">{userEdit.role=== 'nhanvien'? 'Nhân Viên':'Admin'}</div>
+                        <div className="job_profile">{userEdit.role=== 'user'? 'Nhân Viên':'Admin'}</div>
                       </div>
                     </div>
                 </div>

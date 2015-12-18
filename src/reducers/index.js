@@ -9,11 +9,11 @@ export {
 export {
   nhacungcap,
   phieunhaphang,
-  phieudathang
+  phieudathang,
+  thanhtoanNCC
 } from './nhacungcap';
 export kho from './kho';
 export loaivai from './lv';
-// export lohang from './lh';
 export nhanvien from './nv';
 export meta from './meta';
 export giaodich from './giaodich';

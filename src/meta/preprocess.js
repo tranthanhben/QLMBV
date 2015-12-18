@@ -257,7 +257,6 @@ export function preprocessPost(object, meta){
     if (!!field.children && field.type === "object")
       object[i] = parseNumber(object[i], field.children);
     if (field.type === "number"){
-      console.log("here number");
       object[i] = parseFloat(object[i]) || 0;
     }
     if (field.type ==="date"){

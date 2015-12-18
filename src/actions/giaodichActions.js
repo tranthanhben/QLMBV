@@ -20,9 +20,17 @@ import {
   GD_LISTPDH_SUCCESS,
   GD_LISTPDH_FAIL,
 
+  GD_LISTPNH,
+  GD_LISTPNH_SUCCESS,
+  GD_LISTPNH_FAIL,
+
   GD_LISTPMH,
   GD_LISTPMH_SUCCESS,
   GD_LISTPMH_FAIL,
+
+  GD_LISTPXH,
+  GD_LISTPXH_SUCCESS,
+  GD_LISTPXH_FAIL,
 
   GD_DEL_CTDH,
   GD_DEL_CTDH_SUCCESS,
@@ -110,9 +118,33 @@ export function loadPDH(){
     })
   };
 }
+export function loadPNH(){
+  return {
+    types: [GD_LISTPNH, GD_LISTPNH_SUCCESS, GD_LISTPNH_FAIL],
+    promise: (client) => client.get('/giaodich/phieu_dat_hang',{
+      params: makeQuery({
+        page: 0,
+        page_size : 100,
+        name: ''
+      })
+    })
+  };
+}
 export function loadPMH(){
   return {
     types: [GD_LISTPMH, GD_LISTPMH_SUCCESS, GD_LISTPMH_FAIL],
+    promise: (client) => client.get('/giaodich/phieu_mua_hang',{
+      params: makeQuery({
+        page: 0,
+        page_size : 100,
+        name: ''
+      })
+    })
+  };
+}
+export function loadPXH(){
+  return {
+    types: [GD_LISTPXH, GD_LISTPXH_SUCCESS, GD_LISTPXH_FAIL],
     promise: (client) => client.get('/giaodich/phieu_mua_hang',{
       params: makeQuery({
         page: 0,

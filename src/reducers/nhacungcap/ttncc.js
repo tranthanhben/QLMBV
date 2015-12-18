@@ -19,6 +19,15 @@ import {
   TTNCC_DELETE_SUCCESS,
   TTNCC_DELETE_FAIL,
 
+  TTNCC_CTTT,
+  TTNCC_CTTT_SUCCESS,
+  TTNCC_CTTT_FAIL,
+
+  TTNCC_GET,
+  TTNCC_GET_SUCCESS,
+  TTNCC_GET_FAIL,
+
+  GD_DEL_CTTT_SUCCESS,
   TTNCC_RESET
 } from 'actions/actionTypes';
 
@@ -38,6 +47,7 @@ export default function thanhtoanNCC(state = initialState, action = {}){
         ...state,
         loadding: false,
         loaded: true,
+        reloadList: false,
         list: action.result.items,
         paging: action.result.paging
       };
@@ -47,7 +57,7 @@ export default function thanhtoanNCC(state = initialState, action = {}){
         loading: false,
         loaded: false,
         list: [],
-        paging: null,
+        paging: {},
         error: action.result
       };
 
@@ -66,7 +76,27 @@ export default function thanhtoanNCC(state = initialState, action = {}){
       return {
         ...state,
         loadingOne: false,
-        item: null,
+        item: {},
+        error: action.result
+      };
+
+    case TTNCC_GET:
+      return {
+        ...state,
+        getding: true
+      };
+    case TTNCC_GET_SUCCESS:
+      return {
+        ...state,
+        getding: false,
+        editItem: action.result,
+        cttt: action.result.chitietthanhtoan
+      };
+    case TTNCC_GET_FAIL:
+      return {
+        ...state,
+        getding: false,
+        editItem: null,
         error: action.result
       };
 
@@ -102,6 +132,7 @@ export default function thanhtoanNCC(state = initialState, action = {}){
       return {
         ...state,
         reset: true,
+        reloadList: true,
         editItem: action.result,
         message: true,
         posting: false,
@@ -124,6 +155,7 @@ export default function thanhtoanNCC(state = initialState, action = {}){
       return {
         ...state,
         reset: true,
+        reloadList: true,
         deleting: false,
         item: null
       };
@@ -134,14 +166,38 @@ export default function thanhtoanNCC(state = initialState, action = {}){
         item: null,
         errorDel: action.result
       };
-
+    case TTNCC_CTTT:
+      return {
+        ...state,
+        postingCTTT: true
+      };
+    case TTNCC_CTTT_SUCCESS:
+      return {
+        ...state,
+        postingCTTT: false,
+        reloadList: true,
+        cttt: action.result,
+      };
+    case TTNCC_CTTT_FAIL:
+      return {
+        ...state,
+        postingCTTT: false,
+        cttt: null,
+        errorPost: action.result
+      };
     case TTNCC_RESET:
       return {
         ...state,
         loaded: false,
         editItem: null,
+        reloadList: true,
         message: false,
         errorPost:null
+      };
+    case GD_DEL_CTTT_SUCCESS:
+      return {
+        ...state,
+        reloadList: true
       };
     default:
       return state;

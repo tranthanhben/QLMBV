@@ -71,7 +71,8 @@ const initialState = {
     [{
       label: 'Nhân Viên',
       href: '/nhanvien',
-      icon: 'user'
+      icon: 'user',
+      role: true
     }, {
       label: 'Đăng xuất',
       href: '/logout',

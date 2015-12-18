@@ -1,112 +1,81 @@
 import {
-  PMH_LIST_LOAD,
-  PMH_LIST_LOAD_SUCCESS,
-  PMH_LIST_LOAD_FAIL,
+  TTNCC_LIST_LOAD,
+  TTNCC_LIST_LOAD_SUCCESS,
+  TTNCC_LIST_LOAD_FAIL,
 
-  PMH_ONE_LOAD,
-  PMH_ONE_LOAD_SUCCESS,
-  PMH_ONE_LOAD_FAIL,
+  TTNCC_ONE_LOAD,
+  TTNCC_ONE_LOAD_SUCCESS,
+  TTNCC_ONE_LOAD_FAIL,
 
-  PMH_POST,
-  PMH_POST_SUCCESS,
-  PMH_POST_FAIL,
+  TTNCC_POST,
+  TTNCC_POST_SUCCESS,
+  TTNCC_POST_FAIL,
 
-  PMH_PUT,
-  PMH_PUT_SUCCESS,
-  PMH_PUT_FAIL,
+  TTNCC_PUT,
+  TTNCC_PUT_SUCCESS,
+  TTNCC_PUT_FAIL,
 
-  PMH_DELETE,
-  PMH_DELETE_SUCCESS,
-  PMH_DELETE_FAIL,
+  TTNCC_DELETE,
+  TTNCC_DELETE_SUCCESS,
+  TTNCC_DELETE_FAIL,
 
-  PMH_CTDH,
-  PMH_CTDH_SUCCESS,
-  PMH_CTDH_FAIL,
-
-  PMH_GET,
-  PMH_GET_SUCCESS,
-  PMH_GET_FAIL,
-
-  GD_DEL_CTDH_SUCCESS,
-
-  PMH_RESET
+  TTNCC_RESET
 } from 'actions/actionTypes';
 
 const initialState = {
   loaded: false
 }
 
-export default function phieumuahang(state = initialState, action = {}){
+export default function thanhtoanNCC(state = initialState, action = {}){
   switch (action.type){
-    case PMH_LIST_LOAD:
+    case TTNCC_LIST_LOAD:
       return {
         ...state,
         loading: true
       };
-    case PMH_LIST_LOAD_SUCCESS:
+    case TTNCC_LIST_LOAD_SUCCESS:
       return {
         ...state,
         loadding: false,
         loaded: true,
-        reloadList: false,
         list: action.result.items,
         paging: action.result.paging
       };
-    case PMH_LIST_LOAD_FAIL:
+    case TTNCC_LIST_LOAD_FAIL:
       return {
         ...state,
         loading: false,
         loaded: false,
         list: [],
-        paging: {},
+        paging: null,
         error: action.result
       };
 
-    case PMH_ONE_LOAD:
+    case TTNCC_ONE_LOAD:
       return {
         ...state,
         loadingOne: true
       };
-    case PMH_ONE_LOAD_SUCCESS:
+    case TTNCC_ONE_LOAD_SUCCESS:
       return {
         ...state,
         loadingOne: false,
         item: action.result
       };
-    case PMH_ONE_LOAD_FAIL:
+    case TTNCC_ONE_LOAD_FAIL:
       return {
         ...state,
         loadingOne: false,
-        item: {},
+        item: null,
         error: action.result
       };
 
-    case PMH_GET:
-      return {
-        ...state,
-        getding: true
-      };
-    case PMH_GET_SUCCESS:
-      return {
-        ...state,
-        getding: false,
-        editItem: action.result,
-        ctdh: action.result.chitietdonhang
-      };
-    case PMH_GET_FAIL:
-      return {
-        ...state,
-        getding: false,
-        editItem: null,
-        error: action.result
-      };
-
-    case PMH_POST:
+    case TTNCC_POST:
       return {
         ...state,
         posting: true
       };
-    case PMH_POST_SUCCESS:
+    case TTNCC_POST_SUCCESS:
       return {
         ...state,
         reset: true,
@@ -115,7 +84,7 @@ export default function phieumuahang(state = initialState, action = {}){
         message: true,
         posting: false,
       };
-    case PMH_POST_FAIL:
+    case TTNCC_POST_FAIL:
       return {
         ...state,
         editItem: null,
@@ -124,21 +93,20 @@ export default function phieumuahang(state = initialState, action = {}){
         errorPost: action.result
       };
 
-    case PMH_PUT:
+    case TTNCC_PUT:
       return {
         ...state,
         posting: true
       };
-    case PMH_PUT_SUCCESS:
+    case TTNCC_PUT_SUCCESS:
       return {
         ...state,
         reset: true,
-        reloadList: true,
         editItem: action.result,
         message: true,
         posting: false,
       };
-    case PMH_PUT_FAIL:
+    case TTNCC_PUT_FAIL:
       return {
         ...state,
         editItem: null,
@@ -147,58 +115,33 @@ export default function phieumuahang(state = initialState, action = {}){
         errorPost: action.result
       };
 
-    case PMH_DELETE:
+    case TTNCC_DELETE:
       return {
         ...state,
         deleting: true
       };
-    case PMH_DELETE_SUCCESS:
+    case TTNCC_DELETE_SUCCESS:
       return {
         ...state,
         reset: true,
-        reloadList: true,
         deleting: false,
         item: null
       };
-    case PMH_DELETE_FAIL:
+    case TTNCC_DELETE_FAIL:
       return {
         ...state,
         deleting: false,
         item: null,
         errorDel: action.result
       };
-    case PMH_CTDH:
-      return {
-        ...state,
-        postingCTDH: true
-      };
-    case PMH_CTDH_SUCCESS:
-      return {
-        ...state,
-        postingCTDH: false,
-        reloadList: true,
-        ctdh: action.result,
-      };
-    case PMH_CTDH_FAIL:
-      return {
-        ...state,
-        postingCTDH: false,
-        ctdh: null,
-        errorPost: action.result
-      };
-    case PMH_RESET:
+
+    case TTNCC_RESET:
       return {
         ...state,
         loaded: false,
         editItem: null,
-        reloadList: true,
         message: false,
         errorPost:null
-      };
-    case GD_DEL_CTDH_SUCCESS:
-      return {
-        ...state,
-        reloadList: true
       };
     default:
       return state;

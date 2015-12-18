@@ -31,7 +31,7 @@ export class THead extends Component {
     )
   }
 }
-export class THeadCTK extends Component {
+export class THeadCTTT extends Component {
   static propTypes = {
     meta: PropTypes.object
   }
@@ -59,100 +59,41 @@ export class TBody extends Component {
   static propTypes = {
     meta: PropTypes.object,
     item: PropTypes.object,
-    listLV: PropTypes.array,
     add: PropTypes.func.isRequired,
     del: PropTypes.func.isRequired,
     edit: PropTypes.func.isRequired
   }
-  state = {
-    objectLV: {},
-    loaivai: {},
-    objectK: {},
-    kho: ''
-  }
-  componentWillMount(){
-    this.state.objectLV = ATOLV(this.props.listLV || []);
-    this.state.loaivai = this.state.objectLV[this.props.item.loaivaiid]|| {};
-    this.state.objectK = this.state.loaivai && this.state.loaivai["chitietkho"] || {};
-    this.state.kho = this.state.objectK[this.props.item.khoid]|| '';
-  }
-  componentWillReceiveProps(nextProps) {
-    if(nextProps.listLV){
-      this.setState({objectLV: ATOLV(nextProps.listLV || [])});
-    }
-  }
-  selectLoaivai(){
-    this.props.edit(event);
-    let value = event.target.value;
-    if(value){
-      this.setState({
-        loaivai: this.state.objectLV[value],
-        objectK: this.state.objectLV[value].chitietkho,
-        kho: this.state.objectLV[value].chitietkho[this.props.item.khoid]
-      });
-    }
-  }
-  selectKho(){
-    this.props.edit(event);
-    let value = event.target.value;
-    if(value){
-      this.setState({kho: this.state.objectK[value]});
-    }
-  }
   render(){
-    const {meta, item, add, del, edit, index, listLV, listK} = this.props;
-    const {loaivai, objectLV, kho, objectK} = this.state;
-    const optionK = [];
-    for(let key in objectK){
-      optionK.push(
-        <option key={key} value={key}>
-          {key}
-        </option>
-        );
-    }
-    let soluong = item.soluong * -1;
+    const {meta, item, add, del, edit, index} = this.props;
     return (
       <tr role="row" className={index%2===1 ? "even":"odd"} key={index}>
         <td>{index+1}</td>
-        <td key={'loaivai'+ index}>
-          <select className='form-control' data-addr='loaivaiid'
-            onChange={::this.selectLoaivai}
-            value={item.loaivaiid || ''}>
-            <option key={index + 'default'}>-- Loai Vai --</option>
-            {listLV && listLV.map(b => {
+        <td key='thanhtoan'>
+          <input type="number" step='10' min='0' data-addr='thanhtoan'className="form-control dt-body-right" value={item.thanhtoan || ''} placeholder='So tien Thanh toan' onChange={edit} />
+        </td>
+        <td key='phuongthuc'>
+          <select className='form-control' data-addr='phuongthuc'
+            onChange={edit}
+            value={item.phuongthuc || ''}>
+            <option key={index + 'default'}>-- Phuong thuc thanh toan--</option>
+            {[{
+                value: "tienmat",
+                label: "Tien Mat"
+              },{
+                value: "chuyenkhoan",
+                label: "Chuyen Khoan"
+              }].map(b => {
               return (
-                <option key={index + ' ' +b.id} value={b.id}>
-                  {b.ten}
+                <option key={index + ' ' +b.value} value={b.value}>
+                  {b.label}
                 </option>
               );
             })}
           </select>
         </td>
-        <td key='conlai' >
-          <input type="text" data-addr='conlai' className="form-control" readOnly  value={loaivai.conlai || '0'} />
+        <td key='ngaythanhtoan'>
+          <input type="date" data-addr='ngaythanhtoan' className="form-control"  onChange={edit} value={item.ngaythanhtoan || ''} />
         </td>
-        <td key={'kho'+ index}>
-          <select className='form-control' data-addr='khoid'
-            onChange={::this.selectKho}
-            value={item.khoid || ''}>
-            <option key={index + 'default'}>-- Kho --</option>
-            {optionK}
-          </select>
-        </td>
-        <td key='trong' className=' dt-body-right' >
-          <input type="number" data-addr='trong' className="form-control" readOnly  value={kho || '0'} />
-        </td>
-
-        <td key='soluong' className=' dt-body-right' >
-          <input type="number" step='10' min='0' data-addr='soluong'className="form-control dt-body-right" value={soluong || ''} onChange={edit} />
-        </td>
-        <td key='gia' className=' dt-body-right' >
-          <input type="number" step='10' min='0' data-addr='gia'className="form-control dt-body-right" value={item.gia || ''} onChange={edit}/>
-        </td>
-        <td key='thanhtien' className=' dt-body-right' >
-          <input type="number" step='10' min='0' data-addr='thanhtien' readOnly className="form-control dt-body-right" value={item.gia*soluong || '0'} />
-        </td>
-
         <td key='control' className="group-edit">
           <button className="btn btn-danger btn-table btn-in-th btn-in-del" title="Del" onClick={del} key="del">
             <i className='fa fa-close'/>
@@ -165,40 +106,39 @@ export class TBody extends Component {
     )
   }
 }
-export class TBodyCTK extends Component {
+export class TBodyCTTT extends Component {
   static propTypes = {
     meta: PropTypes.object,
     item: PropTypes.object,
-    listLV: PropTypes.array
+    listLV: PropTypes.array,
+    listK: PropTypes.array
   }
   state = {
-    objectLV: {},
+    objectLV: ATOLV(this.props.listLV || [])|| {},
     loaivai: {},
-    objectK: {},
-    kho: ''
+    objectK: ATOLV(this.props.listK || [])||{},
+    kho: {}
   }
   componentWillMount(){
     this.state.objectLV = ATOLV(this.props.listLV || []);
     this.state.loaivai = this.state.objectLV[this.props.item.loaivaiid]|| {};
-    this.state.objectK = this.state.loaivai && this.state.loaivai["chitietkho"] || {};
-    this.state.kho = this.state.objectK[this.props.item.khoid]|| '';
+    this.state.objectK = ATOLV(this.props.listK || []);
+    this.state.kho = this.state.objectK[this.props.item.khoid]|| {};
   }
   componentWillReceiveProps(nextProps) {
     if(nextProps.listLV){
       let obj = ATOLV(nextProps.listLV || [])|| {};
       let lv = obj[this.props.item.loaivaiid] || {};
-      let objK = lv.chitietkho || {};
-      let k = objK[this.props.item.khoid];
-      this.setState({
-        objectLV: obj,
-        loaivai: lv,
-        objectK: objK,
-        kho: k
-      });
+      this.setState({objectLV: obj, loaivai: lv});
+    }
+    if(nextProps.listK){
+      let obj = ATOLV(nextProps.listK || [])|| {};
+      let kho = obj[this.props.item.khoid] || {};
+      this.setState({objectK: obj, kho: kho});
     }
   }
   render(){
-    const {meta, item, index} = this.props;
+    const {meta, item, add, del, edit, index, listLV, listK} = this.props;
     const {loaivai, objectLV, kho, objectK} = this.state;
     return (
       <tr role="row" className={index%2===1 ? "even":"odd"} key={index}>
@@ -206,23 +146,26 @@ export class TBodyCTK extends Component {
         <td key={'loaivai'+ index}>
           {loaivai.ten}
         </td>
-        <td key='conlai' >
-          {loaivai.conlai}
+        <td key='mausac' >
+          {loaivai.mausac}
+        </td>
+        <td key='chatlieu' >
+          {loaivai.chatlieu}
         </td>
         <td key={'kho'+ index}>
-          {item.khoid}
+          {kho.ten}
         </td>
-        <td key='trong'  >
-          {objectK[item.khoid]}
+        <td key='trong' >
+          {kho.trong}
         </td>
-        <td key='soluong'  >
-          {numeral(item.soluong*-1).format('0,0') + ' Cây'}
+        <td key='soluong' >
+          {numeral(item.soluong).format('0,0') + ' Cây'}
         </td>
         <td key='gia' >
           {numeral(item.gia).format('0,0') + ' VND'}
         </td>
         <td key='thanhtien' >
-          {numeral(item.gia*item.soluong*-1).format('0,0') + ' VND'}
+          {numeral(item.gia*item.soluong).format('0,0') + ' VND'}
         </td>
       </tr>
     )

@@ -210,23 +210,23 @@ export class ViewPXH extends Component {
             </div>
           </div>
           <div className="col-md-6">
-            <div className="info-group" key='tongtiendutinh'>
+            <div className="info-group" key='tongtien'>
               <div className="row">
                 <div className="col-md-6 align-right">
-                  <span>{metaGD["tongtiendutinh"].label + ": "}</span>
+                  <span>{metaGD["tongtien"].label + ": "}</span>
                 </div>
                 <div className="col-md-6">
-                  <p className={metaGD["tongtiendutinh"].up? 'uppercase':''}>{numeral(item["tongtiendutinh"]).format('0,0')+' VND'}</p>
+                  <p className={metaGD["tongtien"].up? 'uppercase':''}>{numeral(item["tongtien"]*-1).format('0,0')+' VND'}</p>
                 </div>
               </div>
             </div>
-            <div className="info-group" key='tinhtrangdonhang'>
+            <div className="info-group" key='tinhtrangkho'>
               <div className="row">
                 <div className="col-md-6 align-right">
-                  <span>{metaGD["tinhtrangdonhang"].label + ": "}</span>
+                  <span>{metaGD["tinhtrangkho"].label + ": "}</span>
                 </div>
                 <div className="col-md-6">
-                  <p className={metaGD["tinhtrangdonhang"].up? 'uppercase':''}>{item["tinhtrangdonhang"]}</p>
+                  <p className={metaGD["tinhtrangkho"].up? 'uppercase':''}>{item["tinhtrangkho"]}</p>
                 </div>
               </div>
             </div>
@@ -241,8 +241,8 @@ export class ViewPXH extends Component {
                 <THeadCTDH meta={metaCTDH} ></THeadCTDH>
               </thead>
               <tbody>
-                {item.chitietdonhang && item.chitietdonhang.map((item, index)=>{
-                  return <TBodyCTDH meta={metaCTDH} listLV={listLV} index={index} item={item}></TBodyCTDH>;
+                {item && item.chitietdonhang && item.chitietdonhang.map((item, index)=>{
+                  return <TBodyCTDH key={index} meta={metaCTDH} listLV={listLV} index={index} item={item}></TBodyCTDH>;
                 })}
               </tbody>
             </table>
@@ -257,8 +257,8 @@ export class ViewPXH extends Component {
                 <THeadCTK meta={metaCTK} ></THeadCTK>
               </thead>
               <tbody>
-                {item.chitietkho && item.chitietkho.map((item, index)=>{
-                  return <TBodyCTK meta={metaCTK} listLV={listLV} index={index} item={item}></TBodyCTK>;
+                {item && item.chitietkho && item.chitietkho.map((item, index)=>{
+                  return <TBodyCTK key={index} meta={metaCTK} listLV={listLV} index={index} item={item}></TBodyCTK>;
                 })}
               </tbody>
             </table>

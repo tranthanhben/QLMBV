@@ -552,7 +552,7 @@ const initialState = {
         field: false,
         view: false
       },
-      "tinhtranthanhtoan": {
+      "tinhtrangthanhtoan": {
         name: "tinhtrangthanhtoan",
         label: "Tình Trạng Thanh Toán",
         sort: false,
@@ -724,7 +724,7 @@ const initialState = {
         field: true,
         view: true
       },
-      "tinhtranthanhtoan": {
+      "tinhtrangthanhtoan": {
         name: "tinhtrangthanhtoan",
         label: "Tình Trạng Thanh Toán",
         sort: false,
@@ -972,7 +972,7 @@ const initialState = {
         field: false,
         view: false
       },
-      "tinhtranthanhtoan": {
+      "tinhtrangthanhtoan": {
         name: "tinhtrangthanhtoan",
         label: "Tình Trạng Thanh Toán",
         sort: false,
@@ -1153,7 +1153,7 @@ const initialState = {
         field: true,
         view: true
       },
-      "tinhtranthanhtoan": {
+      "tinhtrangthanhtoan": {
         name: "tinhtrangthanhtoan",
         label: "Tình Trạng Thanh Toán",
         sort: false,
@@ -1310,207 +1310,359 @@ const initialState = {
   },
   congno:{
     khachhang: {
-    "id": {
-      name: "id",
-      label: "ID",
-      sort: true,
-      up: true,
-      type: "special",
-      disabled: true,
-      field: false
+      "id": {
+        name: "id",
+        label: "ID",
+        sort: true,
+        up: true,
+        type: "special",
+        disabled: true,
+        field: false
+      },
+      "ten": {
+        name: "ten",
+        label: "Tên Khách Hàng",
+        sort: true,
+        type: "single",
+        required: true,
+        field: true
+      },
+      "sdt": {
+        name: "sdt",
+        label: "Điện Thoại",
+        sort: false,
+        type: "single",
+        required: false,
+        field: true,
+        view: false
+      },
+      "email": {
+        name: "email",
+        label: "Email",
+        sort: false,
+        type: "single",
+        required: false,
+        field: true,
+        view: false
+      },
+      "diachi": {
+        name: "diachi",
+        label: "Địa Chỉ",
+        sort: false,
+        type: "single",
+        required: false,
+        field: true,
+        view: false
+      },
+      "sotk": {
+        name: "sotk",
+        label: "Số TK",
+        sort: false,
+        type: "single",
+        required: false,
+        field: true,
+        view: false
+      },
+      "tennh": {
+        name: "tennh",
+        label: "Tên Ngân Hàng",
+        sort: false,
+        type: "single",
+        required: false,
+        field: true,
+        view: false
+      },
+      "ngaytao": {
+        name: "ngaytao",
+        label: "Ngày Tạo",
+        sort: true,
+        type: "date",
+        required: false,
+        disabled: true,
+        field: false,
+        view: false
+      },
+      "tongtien": {
+        name: "tongtien",
+        label: "Tổng Giao Dịch",
+        sort: false,
+        type: "number",
+        required: false,
+        disabled: true,
+        field: false,
+        view: true,
+        unit: ' VND'
+      },
+      "thanhtoan": {
+        name: "thanhtoan",
+        label: "Đã Thanh Toán",
+        sort: false,
+        type: "number",
+        required: false,
+        disabled: true,
+        field: false,
+        view: true,
+        unit: ' VND'
+      },
+      "congno": {
+        name: "congno",
+        label: "Còn Nợ",
+        sort: false,
+        type: "number",
+        required: false,
+        disabled: true,
+        field: false,
+        view: true,
+        unit: ' VND'
+      }
     },
-    "ten": {
-      name: "ten",
-      label: "Tên Khách Hàng",
-      sort: true,
-      type: "single",
-      required: true,
-      field: true
-    },
-    "sdt": {
-      name: "sdt",
-      label: "Điện Thoại",
-      sort: false,
-      type: "single",
-      required: false,
-      field: true,
-      view: false
-    },
-    "email": {
-      name: "email",
-      label: "Email",
-      sort: false,
-      type: "single",
-      required: false,
-      field: true,
-      view: false
-    },
-    "diachi": {
-      name: "diachi",
-      label: "Địa Chỉ",
-      sort: false,
-      type: "single",
-      required: false,
-      field: true,
-      view: false
-    },
-    "sotk": {
-      name: "sotk",
-      label: "Số TK",
-      sort: false,
-      type: "single",
-      required: false,
-      field: true,
-      view: false
-    },
-    "tennh": {
-      name: "tennh",
-      label: "Tên Ngân Hàng",
-      sort: false,
-      type: "single",
-      required: false,
-      field: true,
-      view: false
-    },
-    "ngaytao": {
-      name: "ngaytao",
-      label: "Ngày Tạo",
-      sort: true,
-      type: "date",
-      required: false,
-      disabled: true,
-      field: false,
-      view: false
-    },
-    "tongtien": {
-      name: "tongtien",
-      label: "Tổng Giao Dịch",
-      sort: false,
-      type: "number",
-      required: false,
-      disabled: true,
-      field: false,
-      view: true,
-      unit: ' VND'
-    },
-    "thanhtoan": {
-      name: "thanhtoan",
-      label: "Đã Thanh Toán",
-      sort: false,
-      type: "number",
-      required: false,
-      disabled: true,
-      field: false,
-      view: true,
-      unit: ' VND'
-    },
-    "congno": {
-      name: "congno",
-      label: "Còn Nợ",
-      sort: false,
-      type: "number",
-      required: false,
-      disabled: true,
-      field: false,
-      view: true,
-      unit: ' VND'
+    nhacungcap: {
+      "id": {
+        name: "id",
+        label: "ID",
+        sort: true,
+        up: true,
+        type: "special"
+      },
+      "ten": {
+        name: "ten",
+        label: "Tên Nhà Cung Cấp",
+        sort: true,
+        type: "single",
+        required: true,
+        field: true
+      },
+      "sdt": {
+        name: "sdt",
+        label: "Điện Thoại",
+        sort: false,
+        type: "single",
+        required: false,
+        field: true,
+        view: false
+      },
+      "email": {
+        name: "email",
+        label: "Email",
+        sort: false,
+        type: "single",
+        required: false,
+        field: true,
+        view: false
+      },
+      "diachi": {
+        name: "diachi",
+        label: "Địa Chỉ",
+        sort: false,
+        type: "single",
+        required: false,
+        field: true,
+        view: false
+      },
+      "sotk": {
+        name: "sotk",
+        label: "Số TK",
+        sort: false,
+        type: "single",
+        required: false,
+        field: true,
+        view: false
+      },
+      "tennh": {
+        name: "tennh",
+        label: "Tên Ngân Hàng",
+        sort: false,
+        type: "single",
+        required: false,
+        field: true,
+        view: false
+      },
+      "tongtien": {
+        name: "tongtien",
+        label: "Tổng Giao Dịch",
+        sort: false,
+        type: "number",
+        required: false,
+        disabled: true,
+        field: false,
+        view: true,
+        unit: ' VND'
+      },
+      "thanhtoan": {
+        name: "thanhtoan",
+        label: "Đã Thanh Toán",
+        sort: false,
+        type: "number",
+        required: false,
+        disabled: true,
+        field: false,
+        view: true,
+        unit: ' VND'
+      },
+      "congno": {
+        name: "congno",
+        label: "Còn Nợ",
+        sort: false,
+        type: "number",
+        required: false,
+        disabled: true,
+        field: false,
+        view: true,
+        unit: ' VND'
+      }
     }
   },
-  nhacungcap: {
-    "id": {
-      name: "id",
-      label: "ID",
-      sort: true,
-      up: true,
-      type: "special"
+  thanhtoanNCC:{
+    giaodich:{
+      "id": {
+        name: "id",
+        label: "GDID",
+        sort: true,
+        up: true,
+        type: "single",
+        field: false,
+        view: true
+      },
+      "nhanvienid": {
+        name: "nhanvienid",
+        label: "Nhân Viên",
+        sort: true,
+        up: true,
+        type: "single",
+        field: false,
+        view: true
+      },
+      "doitacid": {
+        name: "doitacid",
+        label: "Khách Hàng",
+        sort: true,
+        up: true,
+        type: "single",
+        required: true,
+        field: false,
+        view: true
+      },
+      "tongtiendutinh": {
+        name: "tongtiendutinh",
+        label: "Tổng tiền dự tính",
+        sort: false,
+        up: false,
+        type: "number",
+        field: true,
+        unit: ' VND',
+        view: false
+      },
+      "tongtien": {
+        name: "tongtien",
+        label: "Tổng tiền hoa don",
+        sort: false,
+        up: false,
+        type: "number",
+        field: false,
+        unit: ' VND',
+        view: true
+      },
+      "tinhtrangdonhang": {
+        name: "tinhtrangdonhang",
+        label: "Tình Trạng Mua",
+        sort: false,
+        up: false,
+        type: "select",
+        options: [{
+          value: "chuaxuly",
+          label: "Chưa Xử Lý"
+        },{
+          value: "dangxuly",
+          label: "Đang xử lý"
+        },{
+          value: "hoanthanh",
+          label: "Hoàn Thành"
+        },{
+          value: "huy",
+          label: "Hủy"
+        }],
+        field: false,
+        view: false
+      },
+      "tinhtrangkho": {
+        name: "tinhtrangkho",
+        label: "Tình Trạng Xuất",
+        sort: false,
+        up: false,
+        type: "select",
+        options: [{
+          value: "chuaxuly",
+          label: "Chưa Xử Lý"
+        },{
+          value: "dangxuly",
+          label: "Đang xử lý"
+        },{
+          value: "hoanthanh",
+          label: "Hoàn Thành"
+        },{
+          value: "huy",
+          label: "Hủy"
+        }],
+        field: false,
+        view: false
+      },
+      "tinhtrangthanhtoan": {
+        name: "tinhtrangthanhtoan",
+        label: "Tình Trạng Thanh Toán",
+        sort: false,
+        up: false,
+        type: "select",
+        options: [{
+          value: "chuaxuly",
+          label: "Chưa Xử Lý"
+        },{
+          value: "dangxuly",
+          label: "Đang xử lý"
+        },{
+          value: "hoanthanh",
+          label: "Hoàn Thành"
+        },{
+          value: "huy",
+          label: "Hủy"
+        }],
+        field: true,
+        view: true
+      }
     },
-    "ten": {
-      name: "ten",
-      label: "Tên Nhà Cung Cấp",
-      sort: true,
-      type: "single",
-      required: true,
-      field: true
-    },
-    "sdt": {
-      name: "sdt",
-      label: "Điện Thoại",
-      sort: false,
-      type: "single",
-      required: false,
-      field: true,
-      view: false
-    },
-    "email": {
-      name: "email",
-      label: "Email",
-      sort: false,
-      type: "single",
-      required: false,
-      field: true,
-      view: false
-    },
-    "diachi": {
-      name: "diachi",
-      label: "Địa Chỉ",
-      sort: false,
-      type: "single",
-      required: false,
-      field: true,
-      view: false
-    },
-    "sotk": {
-      name: "sotk",
-      label: "Số TK",
-      sort: false,
-      type: "single",
-      required: false,
-      field: true,
-      view: false
-    },
-    "tennh": {
-      name: "tennh",
-      label: "Tên Ngân Hàng",
-      sort: false,
-      type: "single",
-      required: false,
-      field: true,
-      view: false
-    },
-    "tongtien": {
-      name: "tongtien",
-      label: "Tổng Giao Dịch",
-      sort: false,
-      type: "number",
-      required: false,
-      disabled: true,
-      field: false,
-      view: true,
-      unit: ' VND'
-    },
-    "thanhtoan": {
-      name: "thanhtoan",
-      label: "Đã Thanh Toán",
-      sort: false,
-      type: "number",
-      required: false,
-      disabled: true,
-      field: false,
-      view: true,
-      unit: ' VND'
-    },
-    "congno": {
-      name: "congno",
-      label: "Còn Nợ",
-      sort: false,
-      type: "number",
-      required: false,
-      disabled: true,
-      field: false,
-      view: true,
-      unit: ' VND'
+    cttt:{
+      thanhtoan: {
+        name: "thanhtoan",
+        label: "ST Thanh Toan",
+        sort: false,
+        up: false,
+        type: "number",
+        field: true,
+        view: true
+      },
+      phuongthuc: {
+        name: "phuongthuc",
+        label: "Phuong Thuc Thanh Toan",
+        sort: false,
+        up: false,
+        type: "select",
+        options:[{
+          value: "tienmat",
+          label: "Tien Mat"
+        },{
+          value: "chuyenkhoan",
+          label: "Chuyen Khoan"
+        }],
+        field: true,
+        view: true
+      },
+      ngaythanhtoan:{
+        name: 'ngaythanhtoan',
+        label: 'Ngay Thanh Toan',
+        type: 'date',
+        field: true,
+        view: true
+      }
     }
-  }
   }
 }
 

@@ -48,7 +48,7 @@ class LeftNav extends Component {
             <div className="col-xs-4 col-xs-collapse-right" ><img src={user && user.avatar? user.avatar:"/images/avatar0.png"} width="40" height="40" /></div>
             <div id="avatar-col" className="col-xs-8 col-xs-collapse-left" >
               <div style={{"textAlign":"center","fontSize":"16px","position":"relative"}} >{user.name? user.name:(user.role === 'admin'? 'Admin':'Nhân Viên') }</div>
-              <div style={{"textAlign":"center","fontSize":"11px","position":"relative"}} >{user.role=== 'nhanvien'? 'Nhân Viên':'Admin'}</div>
+              <div style={{"textAlign":"center","fontSize":"11px","position":"relative"}} >{user.role=== 'admin'? 'Admin':'Nhân Viên'}</div>
             </div>
           </div>
           {
@@ -69,6 +69,9 @@ class LeftNav extends Component {
             index > 0 ? <div className='space'/> : null,
             <ul style={{"marginBottom":"0"}} key={index} className="items sidebar-nav">
                 {items.map((item) => {
+                  if(item.role && user.role !=='adim'){
+                    return null;
+                  }
                   if(item.sub){
                     let liClass = openTabs && openTabs[item.name]? "open":"";
                     let regex = new RegExp(item.href);

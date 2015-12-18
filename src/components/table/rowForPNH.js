@@ -179,13 +179,13 @@ export class TBodyCTK extends Component {
   state = {
     objectLV: ATOLV(this.props.listLV || [])|| {},
     loaivai: {},
-    objectK: ATOLV(this.props.listLV || [])||{},
+    objectK: ATOLV(this.props.listK || [])||{},
     kho: {}
   }
   componentWillMount(){
     this.state.objectLV = ATOLV(this.props.listLV || []);
     this.state.loaivai = this.state.objectLV[this.props.item.loaivaiid]|| {};
-    this.state.objectK = ATOLV(this.props.listLV || []);
+    this.state.objectK = ATOLV(this.props.listK || []);
     this.state.kho = this.state.objectK[this.props.item.khoid]|| {};
   }
   componentWillReceiveProps(nextProps) {
