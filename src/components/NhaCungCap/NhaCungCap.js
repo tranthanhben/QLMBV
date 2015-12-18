@@ -55,7 +55,7 @@ export default class NhaCungCap extends Component {
                 <div className="navbar-content pull-right">
                 <ul className="nav-main pull-right">
                   <li onClick={::this.openTT}>
-                    <a ><span key="icoen" className={'fa fa-money'}></span>{" Tạo Hoa Don"}</a>
+                    <a ><span key="icoen" className={'fa fa-money'}></span>{" Tạo Hóa Đơn"}</a>
                   </li>
                   <li onClick={::this.openPNH}>
                     <a ><span key="icoen" className={'fa fa-truck fa-flip-horizontal'}></span>{" Tạo PNH"}</a>

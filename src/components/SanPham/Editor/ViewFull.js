@@ -43,7 +43,7 @@ export class ViewLV extends Component {
     }
     return (
       <div className="info">
-        <h3 className="info-header">Thông Tin Loai Vai</h3>
+        <h3 className="info-header">Thông Tin Loại Vải</h3>
         <hr/>
         <div className="row">
           <div className="col-md-12">

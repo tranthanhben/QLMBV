@@ -218,7 +218,7 @@ export default class EditPNH extends Component {
       <div>
         <div className="row">
           <div className="col-md-4">
-            <h4>Phiếu Nhap Hàng</h4>
+            <h4>Phiếu Nhập Hàng</h4>
           </div>
           <div className="col-md-8 flex-right">
           </div>

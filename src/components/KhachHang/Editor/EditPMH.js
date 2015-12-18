@@ -203,7 +203,7 @@ export default class EditPMH extends Component {
                   <select className='form-control' data-addr='doitacid'
                   onChange={::this.handleChange}
                   value={gdItem.doitacid || ''}>
-                  <option key='doitacid'>-- Khach Hang --</option>
+                  <option key='doitacid'>-- Khách Hàng --</option>
                   {listKH && listKH.map(b => {
                     return (
                       <option key={b.id} value={b.id}>

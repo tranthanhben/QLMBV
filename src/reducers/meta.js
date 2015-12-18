@@ -268,7 +268,7 @@ const initialState = {
     },
     "ten": {
       name: "ten",
-      label: "Tên",
+      label: "Tên Hiển Thị",
       sort: true,
       type: "single",
       required: false,
@@ -276,7 +276,7 @@ const initialState = {
     },
     "avatar": {
       name: "avatar",
-      label: "Avatarlin",
+      label: "Avatar",
       sort: false,
       type: "single",
       required: false,
@@ -682,7 +682,7 @@ const initialState = {
       },
       "tinhtrangdonhang": {
         name: "tinhtrangdonhang",
-        label: "Tình Trạng",
+        label: "Tình Trạng Đặt Hàng",
         sort: false,
         up: false,
         type: "select",
@@ -777,7 +777,7 @@ const initialState = {
       },
       khoid: {
         name: "khoid",
-        label: "Kho Con Trong",
+        label: "Kho Còn Trống",
         sort: false,
         up: false,
         type: "special",
@@ -1197,7 +1197,7 @@ const initialState = {
       },
       khoid: {
         name: "khoid",
-        label: "Kho Con Hang",
+        label: "Kho Còn Hàng",
         sort: false,
         up: false,
         type: "special",
@@ -1534,7 +1534,7 @@ const initialState = {
       },
       "doitacid": {
         name: "doitacid",
-        label: "Nha Cung Cap",
+        label: "Nhà Cung Cấp",
         sort: true,
         up: true,
         type: "single",
@@ -1554,7 +1554,7 @@ const initialState = {
       },
       "tongtien": {
         name: "tongtien",
-        label: "Tổng tiền hoa don",
+        label: "Tổng tiền hóa đơn",
         sort: false,
         up: false,
         type: "number",
@@ -1564,7 +1564,7 @@ const initialState = {
       },
       "thanhtoan": {
         name: "thanhtoan",
-        label: "Tổng tiền Thanh Toan",
+        label: "Tổng tiền Thanh Toán",
         sort: false,
         up: false,
         type: "number",
@@ -1642,7 +1642,7 @@ const initialState = {
     cttt:{
       thanhtoan: {
         name: "thanhtoan",
-        label: "ST Thanh Toan",
+        label: "ST Thanh Toán",
         sort: false,
         up: false,
         type: "number",
@@ -1651,23 +1651,23 @@ const initialState = {
       },
       phuongthuc: {
         name: "phuongthuc",
-        label: "Phuong Thuc Thanh Toan",
+        label: "Phương Thức Thanh Toán",
         sort: false,
         up: false,
         type: "select",
         options:[{
           value: "tienmat",
-          label: "Tien Mat"
+          label: "Tiền Mặt"
         },{
           value: "chuyenkhoan",
-          label: "Chuyen Khoan"
+          label: "Chuyển Khoản"
         }],
         field: true,
         view: true
       },
       ngaythanhtoan:{
         name: 'ngaythanhtoan',
-        label: 'Ngay Thanh Toan',
+        label: 'Ngày Thanh Toán',
         type: 'date',
         field: true,
         view: true
@@ -1716,7 +1716,7 @@ const initialState = {
       },
       "tongtien": {
         name: "tongtien",
-        label: "Tổng tiền hoa don",
+        label: "Tổng tiền hóa đơn",
         sort: false,
         up: false,
         type: "number",
@@ -1726,7 +1726,7 @@ const initialState = {
       },
       "thanhtoan": {
         name: "thanhtoan",
-        label: "Tổng tiền Thanh Toan",
+        label: "Tổng tiền Thanh Toán",
         sort: false,
         up: false,
         type: "number",
@@ -1804,7 +1804,7 @@ const initialState = {
     cttt:{
       thanhtoan: {
         name: "thanhtoan",
-        label: "ST Thanh Toan",
+        label: "ST Thanh Toán",
         sort: false,
         up: false,
         type: "number",
@@ -1813,23 +1813,23 @@ const initialState = {
       },
       phuongthuc: {
         name: "phuongthuc",
-        label: "Phuong Thuc Thanh Toan",
+        label: "Phương Thức Thanh Toán",
         sort: false,
         up: false,
         type: "select",
         options:[{
           value: "tienmat",
-          label: "Tien Mat"
+          label: "Tiền Mặt"
         },{
           value: "chuyenkhoan",
-          label: "Chuyen Khoan"
+          label: "Chuyển Khoản"
         }],
         field: true,
         view: true
       },
       ngaythanhtoan:{
         name: 'ngaythanhtoan',
-        label: 'Ngay Thanh Toan',
+        label: 'Ngày Thanh Toán',
         type: 'date',
         field: true,
         view: true

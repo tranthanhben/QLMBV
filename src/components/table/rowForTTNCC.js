@@ -70,13 +70,13 @@ export class TBody extends Component {
       <tr role="row" className={index%2===1 ? "even":"odd"} key={index}>
         <td>{index+1}</td>
         <td key='thanhtoan'>
-          <input type="number" step='10' min='0' data-addr='thanhtoan'className="form-control dt-body-right" value={thanhtoan || ''} placeholder='So tien Thanh toan' onChange={edit} />
+          <input type="number" step='10' min='0' data-addr='thanhtoan'className="form-control dt-body-right" value={thanhtoan || ''} placeholder='So tien thanh toán' onChange={edit} />
         </td>
         <td key='phuongthuc'>
           <select className='form-control' data-addr='phuongthuc'
             onChange={edit}
             value={item.phuongthuc || ''}>
-            <option key={index + 'default'}>-- Phuong thuc thanh toan--</option>
+            <option key={index + 'default'}>-- Phuong thuc thanh toán--</option>
             {[{
                 value: "tienmat",
                 label: "Tien Mat"

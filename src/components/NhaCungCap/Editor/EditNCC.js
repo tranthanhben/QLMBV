@@ -86,7 +86,7 @@ export default class EditNCC extends Component {
       <div>
         <div className="row">
           <div className="col-md-4">
-            <h4>Nha Cung Cap</h4>
+            <h4>Nhà Cung Cấp</h4>
           </div>
           <div className="col-md-8 flex-right">
           {submited ? <p className='help-block required'>

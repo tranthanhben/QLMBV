@@ -210,12 +210,11 @@ export default class EditPNH extends Component {
     const {gdItem, edited, submited, showFullField, giaodichid, cttt, editedCTTT} = this.state;
     const metaGD = meta && preprocess(meta.giaodich) || {};
     const metaCTTT = meta && preprocess(meta.cttt) || {};
-    console.log(cttt, this.props.gdItem);
     return (
       <div>
         <div className="row">
           <div className="col-md-4">
-            <h4>Hoa Don Nha Cung Cap</h4>
+            <h4>Hóa Đơn Nhà Cung Cấp</h4>
           </div>
           <div className="col-md-8 flex-right">
           </div>
@@ -272,7 +271,7 @@ export default class EditPNH extends Component {
           </div>,
           <div className="col-md-12" key="cttt">
             <br/>
-            <strong>Chi tiết thanh toan:</strong>
+            <strong>Chi tiết thanh toán:</strong>
             <table id="example" className="table display nowrap dataTable" role="grid" aria-describedby="example_info" >
               <thead>
                 <THead meta={metaCTTT} add={::this.addCTTT(0)}></THead>

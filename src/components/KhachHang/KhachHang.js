@@ -54,7 +54,7 @@ export default class KhachHang extends Component{
               <div className="view-tabs col-xs-3 col-sm-8">
                 <ul className="nav-main pull-right">
                   <li onClick={::this.openTT}>
-                    <a ><span key="icoen" className={'fa fa-money'}></span>{" Tạo Hoa Don"}</a>
+                    <a ><span key="icoen" className={'fa fa-money'}></span>{" Tạo Hóa Đơn"}</a>
                   </li>
                   <li onClick={::this.openPXH}>
                     <a ><span key="icoen" className={'fa fa-truck'}></span>{" Tạo PXH"}</a>

@@ -219,7 +219,7 @@ export default class EditPXH extends Component {
       <div>
         <div className="row">
           <div className="col-md-4">
-            <h4>Phiếu Xuat Hàng</h4>
+            <h4>Phiếu Xuất Hàng</h4>
           </div>
           <div className="col-md-8 flex-right">
           </div>

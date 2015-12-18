@@ -175,7 +175,7 @@ export class ViewPXH extends Component {
     const metaCTK = meta && meta.ctk || {};
     return (
       <div className="info">
-        <h3 className="info-header">Thông Tin Phiếu Xuat Hàng</h3>
+        <h3 className="info-header">Thông Tin Phiếu Xuất Hàng</h3>
         <hr/>
         <div className="row">
           <div className="col-md-6">
@@ -294,7 +294,7 @@ export class ViewTTKH extends Component {
     const metaCTTT = meta && meta.cttt || {};
     return (
       <div className="info">
-        <h3 className="info-header">Thông Tin Hoa Don Khac Hang</h3>
+        <h3 className="info-header">Thông Tin Hóa Đơn Khách Hàng</h3>
         <hr/>
         <div className="row">
           <div className="col-md-6">
@@ -355,7 +355,7 @@ export class ViewTTKH extends Component {
         <div className="row">
           <div className="col-md-12">
             <br/>
-            <strong>Chi tiết thanh toan:</strong>
+            <strong>Chi tiết thanh toán:</strong>
             <table id="example" className="table display preline dataTable" cellSpacing="0" width="100%" role="grid" aria-describedby="example_info" style={{"width": "100%"}}>
               <thead>
                 <THeadCTTT meta={metaCTTT} ></THeadCTTT>
