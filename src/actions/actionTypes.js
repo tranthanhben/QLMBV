@@ -2,6 +2,10 @@ export const ME_LOAD = "ME_LOAD";
 export const ME_LOAD_SUCCESS = "ME_LOAD_SUCCESS";
 export const ME_LOAD_FAIL = "ME_LOAD_FAIL";
 
+export const GET_ACCOUNT = "GET_ACCOUNT";
+export const GET_ACCOUNT_SUCCESS = "GET_ACCOUNT_SUCCESS";
+export const GET_ACCOUNT_FAIL = "GET_ACCOUNT_FAIL";
+
 export const LOGIN_LOAD = "LOGIN_LOAD";
 export const LOGIN_LOAD_SUCCESS = "LOGIN_LOAD_SUCCESS";
 export const LOGIN_LOAD_FAIL = "LOGIN_LOAD_FAIL";
@@ -421,3 +425,7 @@ export const GD_DEL_CTK_FAIL = "GD_DEL_CTK_FAIL";
 export const GD_DEL_CTTT = "GD_DEL_CTTT";
 export const GD_DEL_CTTT_SUCCESS = "GD_DEL_CTTT_SUCCESS";
 export const GD_DEL_CTTT_FAIL = "GD_DEL_CTTT_FAIL";
+
+export const TK_NX_LOAD = "TK_NX_LOAD";
+export const TK_NX_LOAD_SUCCESS = "TK_NX_LOAD_SUCCESS";
+export const TK_NX_LOAD_FAIL = "TK_NX_LOAD_FAIL";

@@ -51,6 +51,7 @@ export default class EditPNH extends Component {
       thanhtoan:0,
       phuongthuc: 'tienmat',
       ngaythanhtoan: changeDTI(datetime(new Date())),
+      ngaytao: new Date(),
       loaigiaodich:"pdh"
     },
     newGD: true
@@ -91,6 +92,7 @@ export default class EditPNH extends Component {
           thanhtoan: 0,
           phuongthuc: 'tienmat',
           ngaythanhtoan: changeDTI(datetime(new Date())),
+          ngaytao: new Date(changeDTI(datetime(new Date()))),
           loaigiaodich:"pdh"
         }
       });

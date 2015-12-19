@@ -45,7 +45,13 @@ export function changeDTI(time) {
   return time;
 
 }
-
+export function reveserChangeDTI(time){
+  if(/-/.test(time)){
+    var r = time.split("-");
+    return r[1] + "-" + r[2] + "-" + r[0];
+  }
+  return time
+}
 export function formatDate(n) {
   var r = datetime(n).split("/");
   r = addZero(r);

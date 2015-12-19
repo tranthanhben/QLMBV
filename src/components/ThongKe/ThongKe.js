@@ -1,57 +1,70 @@
 import React, {Component, PropTypes} from 'react';
-import {Line} from 'react-chartjs';
-import {PanelView} from 'components/layout';
+import {connect} from 'react-redux';
+import {Line, Pie} from 'react-chartjs';
+import {DataBar,DataPie} from '../Style';
+import {isLoaded, loadNX} from '../../actions/thongkeActions';
+import {makeQuery,changeDTI, datetime, reveserChangeDTI} from '../../meta';
+import {NXDate} from './NhapXuat';
 
+@connect(state =>({
+  menuparse: state.layout.menuparse,
+  listNX: state.thongke.listNX
+}))
 export default class ThongKe extends Component {
-  state = {
-    chartData: {
-    labels: ["January", "February", "March", "April", "May", "June", "July"],
-    datasets: [{
-      label: "My First dataset",
-      fillColor: "rgba(220,220,220,0.2)",
-      strokeColor: "rgba(220,220,220,1)",
-      pointColor: "rgba(220,220,220,1)",
-      pointStrokeColor: "#fff",
-      pointHighlightFill: "#fff",
-      pointHighlightStroke: "rgba(220,220,220,1)",
-      data: [65, 59, 80, 81, 56, 55, 40]
-    }, {
-      label: "My Second dataset",
-      fillColor: "rgba(151,187,205,0.2)",
-      strokeColor: "rgba(151,187,205,1)",
-      pointColor: "rgba(151,187,205,1)",
-      pointStrokeColor: "#fff",
-      pointHighlightFill: "#fff",
-      pointHighlightStroke: "rgba(151,187,205,1)",
-      data: [28, 48, 40, 19, 86, 27, 90]
-    }]
-  },
-  chartOptions: {
-    scaleShowGridLines: true,
-    scaleGridLineColor: "rgba(0,0,0,.05)",
-    scaleGridLineWidth: 1,
-    scaleShowHorizontalLines: true,
-    scaleShowVerticalLines: true,
-    bezierCurve: true,
-    bezierCurveTension: 0.4,
-    pointDot: true,
-    pointDotRadius: 4,
-    pointDotStrokeWidth: 1,
-    pointHitDetectionRadius: 20,
-    datasetStroke: true,
-    datasetStrokeWidth: 2,
-    datasetFill: true,
-    legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].strokeColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
+  static propTypes ={
+    menuparse: PropTypes.object,
+    listNX: PropTypes.array
   }
-}
+  static fetchData(store){
+    if(!isLoaded(store.getState)){
+      return store.dispatch(loadNX());
+    }
+  }
+  state = {
+    options:{
+      start: changeDTI(datetime(new Date())),
+      end: changeDTI(datetime(new Date())),
+      period: 'day'
+    }
+  }
   render(){
-    const {chartData, chartOptions} = this.state;
     return (
-      <PanelView>
-      <div className="thongke">
-        <Line data={chartData} options={chartOptions} width="1000" height="450" ></Line>
+      <div className='inner '>
+        <nav id="nav-header" className="navbar navbar-default navbar-fixed-top" >
+          <div className="container-fluid mbv-nav">
+            <div className="row">
+              <div className="col-xs-3 visible-xs" ></div>
+              <div className="col-xs-9 col-sm-8">
+                <div className="row">
+                  <div className="col-md-6">
+                  <h4 style={{"lineHeight": "30px"}}>Thống Kê</h4>
+                  </div>
+                  <div className="col-md-6">
+                  <label style={{"lineHeight": "30px","display": "flex", "marginTop":"8"}} ></label>
+                  </div>
+                </div>
+              </div>
+              <div className="view-tabs col-xs-3 col-sm-4">
+                <ul className="nav-main pull-right">
+                </ul>
+              </div>
+            </div>
+          </div>
+        </nav>
+        <div id="body" className="">
+          <div className="mbv-grid container-fluid" >
+            <div className="row">
+              <div className="col-xs-12">
+                <div className="mbv-panel">
+                  <div className="mbv-panel-body">
+                    <NXDate listNX={this.props.listNX}></NXDate>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      </PanelView>
     )
   }
 }

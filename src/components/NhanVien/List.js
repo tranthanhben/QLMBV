@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import * as nhanvienActions from '../../actions/nhanvienActions';
 import * as layoutActions from '../../actions/layoutActions';
-import {THead, TBody, TFoot} from '../table/row';
+import {THead, TBody, TFoot} from '../table/rowNV';
 import {Pagination, PageShow} from '../table/pagination';
 import EditNV from './Editor/Edit';
 import {ViewNV} from './Editor/ViewFull';
@@ -144,7 +144,7 @@ class List extends Component{
                   <tbody>
                     {listNV && listNV.map((item, index) =>{
                       return(
-                        <TBody item={item} index={index} sort={options.sort} meta={meta} paging={paging} key={index} view={::this.viewItemFull} edit={::this.editItem}></TBody>
+                        <TBody key={index} item={item} index={index} sort={options.sort} meta={meta} paging={paging} view={::this.viewItemFull} edit={::this.editItem}></TBody>
                       )
                     })}
                   </tbody>

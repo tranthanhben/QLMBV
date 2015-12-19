@@ -19,6 +19,9 @@ export default class Redirect extends Component {
     if(!this.props.user){
       location.assign("/login");
     }else{
+      if(this.props.user && this.props.user.role === 'user' && this.props.location.pathname === "/nhanvien"){
+        location.assign("/sanpham");
+      }
       if(this.props.location.pathname === "/" ){
        location.assign("/sanpham");
       }

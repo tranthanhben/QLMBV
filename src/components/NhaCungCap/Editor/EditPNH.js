@@ -53,6 +53,7 @@ export default class EditPNH extends Component {
       soluong:'',
       gia:'',
       khoid:'',
+      ngaytao: new Date(changeDTI(datetime(new Date()))),
       loaigiaodich:"pdh"
     },
     newGD: true
@@ -94,6 +95,7 @@ export default class EditPNH extends Component {
           soluong:'',
           gia:'',
           khoid:'',
+          ngaytao: new Date(changeDTI(datetime(new Date()))),
           loaigiaodich:"pdh"
         }
       });

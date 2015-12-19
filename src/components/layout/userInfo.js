@@ -203,7 +203,7 @@ export default class InfoUser extends Component {
                   {submitedPW ? <p className='help-block required'>
                     {chgPwdErr(dataCh)}
                   </p>:null}
-                  <button className="btn btn-block profile-btn" onClick={::this.onSubmitPW} disabled={(editedPW? '':'disabled')}>CẬP NHẬT MAT KHAU</button>
+                  <button className="btn btn-block profile-btn" onClick={::this.onSubmitPW} disabled={(editedPW? '':'disabled')}>CẬP NHẬT MẬT KHẨU</button>
 
                 </div>
                 ]}

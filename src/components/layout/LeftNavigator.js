@@ -69,7 +69,7 @@ class LeftNav extends Component {
             index > 0 ? <div className='space'/> : null,
             <ul style={{"marginBottom":"0"}} key={index} className="items sidebar-nav">
                 {items.map((item) => {
-                  if(item.role && user.role !=='adim'){
+                  if(item.role && user.role !=='admin'){
                     return null;
                   }
                   if(item.sub){

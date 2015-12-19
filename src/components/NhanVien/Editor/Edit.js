@@ -2,17 +2,20 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import{initObject, renderField, preprocess, setValue, checkRequire, preprocessPost} from '../../../meta';
 import * as nhanvienActions from '../../../actions/nhanvienActions';
+import * as userActions from '../../../actions/userActions';
 
 @connect(state =>({
   error: state.nhanvien.postError,
   message: state.nhanvien.message,
   item: state.nhanvien.editItem,
+  account: state.user.account,
   meta: state.meta.nhanvien
-}), {...nhanvienActions})
+}), {...nhanvienActions, ...userActions})
 export default class EditNV extends Component {
   static propTypes = {
     id: PropTypes.string,
     item: PropTypes.object,
+    account: PropTypes.object,
     meta: PropTypes.object,
     error: PropTypes.object,
     message: PropTypes.bool,
@@ -25,7 +28,13 @@ export default class EditNV extends Component {
     item: initObject(this.props.meta) || {},
     edited: false,
     showFullField: false,
-    id: this.props.id
+    id: this.props.id,
+    account_init:{
+      nhanvienid: this.props.id || '',
+      username: '',
+      password: '123456'
+    },
+    createAcc: false
   }
   componentWillMount() {
     if(this.props.id){
@@ -34,11 +43,24 @@ export default class EditNV extends Component {
   }
   componentWillReceiveProps(nextProps) {
     if(nextProps.item){
+      if(nextProps.item.haveaccount && !this.props.account){
+        this.props.getAccount(nextProps.item.id);
+      }
       this.setState({
         item: nextProps.item,
         id: nextProps.item.id,
-        edited: false
+        edited: false,
+        account_init:{
+          nhanvienid: nextProps.item.id,
+          username: '',
+          password: '123456'
+        }
       });
+    }
+    if(nextProps.account && this.props.item.haveaccount===false){
+      let item = this.props.item;
+      item.haveaccount = true;
+      this.props.postItem(item);
     }
   }
   handleChange(){
@@ -51,8 +73,22 @@ export default class EditNV extends Component {
       submited: false
     })
   }
+  changeUsername(){
+    let value = event.target.value;
+    let obj = this.state.account_init;
+    obj.username = value;
+    this.setState({
+      account_init: obj
+    })
+  }
+  createAcc(){
+    this.setState({createAcc: true})
+  }
   showFull(){
     this.setState({showFullField: !this.state.showFullField});
+  }
+  resetPassWord(){
+    this.props.changePass({new_password: '123456'},this.props.account.id);
   }
   onSubmit(){
     if(checkRequire(this.props.meta, this.state.item)){
@@ -61,6 +97,16 @@ export default class EditNV extends Component {
       })
     }else {
       this.props.postItem(preprocessPost(this.state.item, this.props.meta));
+    }
+  }
+  onSubmitAcc(){
+    let obj = this.state.account_init;
+    if(obj.username.length >= 6){
+      this.props.register(obj);
+      this.setState({messNewacc : ''});
+    }else{
+      let messNewacc = 'Tên đăng nhập phải lớn hơn 6 kí tự';
+      this.setState({messNewacc : messNewacc});
     }
   }
   onClose(){
@@ -76,8 +122,8 @@ export default class EditNV extends Component {
     }
   }
   render() {
-    const {meta, error, message} = this.props;
-    const {item, edited, submited, showFullField, id} = this.state;
+    const {meta, error, message, account} = this.props;
+    const {item, edited, submited, showFullField, id, createAcc, messNewacc, account_init} = this.state;
     const metaPP = preprocess(meta);
     const fieldRender = showFullField && id? renderField(item, metaPP, this, true):renderField(item, metaPP, this);
     return (
@@ -90,10 +136,6 @@ export default class EditNV extends Component {
           {submited ? <p className='help-block required'>
               {checkRequire(metaPP, item)}&nbsp;&nbsp;
             </p>:null}
-          {id? <button className='btn btn-warning' onClick={::this.onSubmit} disabled={(edited? '':'disabled')}>
-          {"Cập Nhật"}
-          </button>: <button className='btn btn-success' onClick={::this.onSubmit} disabled={(edited? '':'disabled')}>
-          {"Tạo mới"}</button>}
           </div>
         </div>
         <hr/>
@@ -102,6 +144,18 @@ export default class EditNV extends Component {
             <div className="row">
               <div className="col-md-6 boder-right">
                 {fieldRender}
+                {item.haveaccount && account? <div className='form-group' key='username'>
+                  <label>
+                    <span>
+                      {"Tên đăng nhập"}
+                    </span>
+                    &nbsp;
+                     <span className='required'>*</span>
+                    <br/>
+                  </label>
+                  &nbsp;
+                  <input className='form-control' type="text"value={account.username} readOnly />
+                </div>:null}
               </div>
               <div className="col-md-6">
               <div className="row">
@@ -112,6 +166,7 @@ export default class EditNV extends Component {
                       <label htmlFor="showfullfield" className="checkboxs"></label>
                     </div>
                   </div>: null}
+                  <br />
                   <div className="col-md-12">
                     {(message && !edited)? (message === true?
                       <p className='help-block success'>
@@ -121,7 +176,37 @@ export default class EditNV extends Component {
                       <span className="fa fa-close"></span>{" Cập nhật thất bại!"}
                       </p>
                       ):null}
+
                   </div>
+                  <br />
+                  {item.haveaccount ? <div className="col-md-12">
+                    Reset lại password
+                    <button className='btn btn-warning pull-right' onClick={::this.resetPassWord} >Reset Password </button>
+                    </div>: !createAcc && item.id ? <div className="col-md-12">
+                    Tạo tài khoản cho nhân viên
+                    <button className='btn btn-success pull-right' onClick={::this.createAcc} >Tạo</button> </div>:null}
+                  {item.id && createAcc?
+                    <div className="col-md-12">
+                      {"Password sẽ được mặc định là: \'123456\'"}
+                      <br />
+
+                      <div className='form-group' key='username'>
+                        <label>
+                          <span>
+                            {"Tên đăng nhập"}
+                          </span>
+                          &nbsp;
+                           <span className='required'>*</span>
+                          <br/>
+                        </label>
+                        &nbsp;
+                        <input className='form-control' type="text" onChange={::this.changeUsername} placeholder="Tên đăng nhập" />
+                      </div>
+                      {messNewacc? <p className='help-block required'>
+                        {messNewacc}
+                      </p>:null}
+                      <button className='btn btn-success  pull-right' onClick={::this.onSubmitAcc} disabled={(account_init.username? '':'disabled')}>{"Tạo mới"}</button>
+                    </div>:null}
                 </div>
               </div>
             </div>
@@ -133,7 +218,15 @@ export default class EditNV extends Component {
           <div className="col-md-12 flex-right">
           {submited ? <p className='help-block required'>
               {checkRequire(metaPP, item)}
-            </p>:null}&nbsp;&nbsp;
+            </p>:null}
+            {(message && !edited)? (message === true?
+              <p className='help-block success'>
+              <span className="fa fa-check"></span>{' Cập nhật thành công!!'}
+              </p>:
+              <p className='help-block required'>
+              <span className="fa fa-close"></span>{" Cập nhật thất bại!"}
+              </p>
+              ):null}&nbsp;&nbsp;
           {id? <button className='btn btn-warning' onClick={::this.onSubmit} disabled={(edited? '':'disabled')}>
           {"Cập Nhật"}
           </button>: <button className='btn btn-success' onClick={::this.onSubmit} disabled={(edited? '':'disabled')}>

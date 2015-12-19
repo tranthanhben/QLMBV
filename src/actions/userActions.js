@@ -22,7 +22,11 @@ import {
 
   UPDATE_USER,
   UPDATE_USER_SUCCESS,
-  UPDATE_USER_FAIL
+  UPDATE_USER_FAIL,
+
+  GET_ACCOUNT,
+  GET_ACCOUNT_SUCCESS,
+  GET_ACCOUNT_FAIL
 
 } from './actionTypes';
 
@@ -49,10 +53,12 @@ export function logout(){
   };
 }
 
-export function register(){
+export function register(account){
   return {
     types: [REGISTER_LOAD, REGISTER_LOAD_SUCCESS, REGISTER_LOAD_FAIL],
-    promise: (client) => client.post('/register')
+    promise: (client) => client.post('/register',{
+      data: JSON.stringify(account)
+    })
   }
 }
 export function changePass(data, id){
@@ -71,4 +77,14 @@ export function updateUser(data){
         data: JSON.stringify(data)
       })
   }
+}
+export function getAccount(id){
+  return  {
+  types: [GET_ACCOUNT, GET_ACCOUNT_SUCCESS, GET_ACCOUNT_FAIL],
+    promise: (client) => client.get('/account',{
+      params: makeQuery({
+        nhanvienid: id || ''
+      })
+    })
+  };
 }

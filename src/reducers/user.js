@@ -2,6 +2,11 @@ import {
   ME_LOAD,
   ME_LOAD_SUCCESS,
   ME_LOAD_FAIL,
+
+  GET_ACCOUNT,
+  GET_ACCOUNT_SUCCESS,
+  GET_ACCOUNT_FAIL,
+
   LOGIN_LOAD,
   LOGIN_LOAD_SUCCESS,
   LOGIN_LOAD_FAIL,
@@ -47,6 +52,42 @@ export default function user(state = initialState, action = {}) {
           loaded: true,
           user: null,
           errorUser: action.result
+        }
+      case GET_ACCOUNT:
+        return {
+          ...state,
+          getingAccount: true
+        };
+      case GET_ACCOUNT_SUCCESS:
+        return {
+          ...state,
+          getingAccount: false,
+          account: action.result.items[0] || null
+        };
+      case GET_ACCOUNT_FAIL:
+        return {
+          ...state,
+          getingAccount: false,
+          account: null,
+          errorGetAccount: action.result
+        }
+      case REGISTER_LOAD:
+        return {
+          ...state,
+          registing: true
+        };
+      case REGISTER_LOAD_SUCCESS:
+        return {
+          ...state,
+          registing: false,
+          account: action.result
+        };
+      case REGISTER_LOAD_FAIL:
+        return {
+          ...state,
+          registing: false,
+          account: null,
+          registerError: action.result
         }
       case CHANGE_PASS_LOAD:
         return {

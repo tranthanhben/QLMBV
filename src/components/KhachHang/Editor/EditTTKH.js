@@ -50,6 +50,7 @@ export default class EditPNH extends Component {
       giaodichid: this.props.giaodichid || '',
       thanhtoan:0,
       phuongthuc: 'tienmat',
+      ngaytao: new Date(changeDTI(datetime(new Date()))),
       ngaythanhtoan: changeDTI(datetime(new Date())),
       loaigiaodich:"pdh"
     },
@@ -90,6 +91,7 @@ export default class EditPNH extends Component {
           giaodichid: nextProps.gdItem.id || '',
           thanhtoan: 0,
           phuongthuc: 'tienmat',
+          ngaytao: new Date(changeDTI(datetime(new Date()))),
           ngaythanhtoan: changeDTI(datetime(new Date())),
           loaigiaodich:"pdh"
         }

@@ -18,3 +18,4 @@ export loaivai from './lv';
 export nhanvien from './nv';
 export meta from './meta';
 export giaodich from './giaodich';
+export thongke from './thongke';
