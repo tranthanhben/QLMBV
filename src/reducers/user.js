@@ -117,7 +117,7 @@ export default function user(state = initialState, action = {}) {
           ...state,
           updating: false,
           messageUU: true,
-          account: action.result
+          user: action.result
         }
       case UPDATE_USER_FAIL:
         return {

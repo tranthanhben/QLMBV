@@ -1,7 +1,7 @@
 export {default as endPage} from './endPage';
 export {default as datetime} from './datetime';
 export {default as parseError} from './parseError';
-export {changeITD, parseDate, changeDTI, formatDate, reveserChangeDTI} from './changeTime';
+export {changeITD, parseDate, changeDTI, formatDate, reveserChangeDTI, startMonth, endMonth, getMonth, getYear} from './changeTime';
 export {validateEmail} from './validate';
 export {renderLabel} from './renderLabel';
 export {setValue, setValueLogin, setObjValue} from './setValue';

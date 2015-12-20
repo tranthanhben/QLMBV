@@ -50,10 +50,38 @@ export function reveserChangeDTI(time){
     var r = time.split("-");
     return r[1] + "-" + r[2] + "-" + r[0];
   }
-  return time
+  return time;
 }
 export function formatDate(n) {
   var r = datetime(n).split("/");
   r = addZero(r);
   return r[1] + "/" + r[0] + "/" + r[2];
+}
+export function getMonth(time) {
+  if(/-/.test(time)){
+    var r = time.split("-");
+    return r[0] + "-" + r[1];
+  }
+  return time;
+}
+export function getYear(time){
+  if(/-/.test(time)){
+    var r = time.split("-");
+    return r[0];
+  }
+  return time;
+}
+export function endMonth(time) {
+  if(/-/.test(time)){
+    var r = time.split("-");
+    return new Date(r[0],r[1],0);
+  }
+  return time;
+}
+export function startMonth(time){
+  if(/-/.test(time)){
+    var r = time.split("-");
+    return new Date(r[0] + "-" + r[1] + "-" + '01');
+  }
+  return time;
 }

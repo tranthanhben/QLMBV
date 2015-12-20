@@ -43,7 +43,7 @@ export default class EditNV extends Component {
   }
   componentWillReceiveProps(nextProps) {
     if(nextProps.item){
-      if(nextProps.item.haveaccount && !this.props.account){
+      if(nextProps.item && nextProps.item.haveaccount && !this.props.account){
         this.props.getAccount(nextProps.item.id);
       }
       this.setState({
@@ -57,11 +57,15 @@ export default class EditNV extends Component {
         }
       });
     }
-    if(nextProps.account && this.props.item.haveaccount===false){
+    if(nextProps.account && this.props.item && this.props.item.haveaccount===false){
       let item = this.props.item;
       item.haveaccount = true;
       this.props.postItem(item);
     }
+    if(nextProps.account && this.props.item && this.props.item.haveaccount===true){
+      this.setState({createAcc: false})
+    }
+
   }
   handleChange(){
     let obj = this.state.item;
@@ -136,15 +140,31 @@ export default class EditNV extends Component {
           {submited ? <p className='help-block required'>
               {checkRequire(metaPP, item)}&nbsp;&nbsp;
             </p>:null}
+            {(message && !edited)? (message === true?
+              <p className='help-block success'>
+              <span className="fa fa-check"></span>{' Cập nhật thành công!!'}
+              </p>:
+              <p className='help-block required'>
+              <span className="fa fa-close"></span>{" Cập nhật thất bại!"}
+              </p>
+              ):null}
+
           </div>
         </div>
         <hr/>
         <div className="row">
           <div className="col-md-12">
             <div className="row">
-              <div className="col-md-6 boder-right">
+              <div className="col-md-7 boder-right">
+              {id? <div className="row"><div className="col-md-12" style={{"lineHeight":"30px"}}>
+                    Hiển thị đầy đủ thuộc tính
+                    <div className="switch">
+                      <input type="checkbox" id="showfullfield" name="showfullfield" className="control" checked={showFullField === true ? 'checked' : ''} onChange={::this.showFull}/>
+                      <label htmlFor="showfullfield" className="checkboxs"></label>
+                    </div>
+                  </div></div>: null}
                 {fieldRender}
-                {item.haveaccount && account? <div className='form-group' key='username'>
+                {item && item.haveaccount && account? <div className='form-group' key='username'>
                   <label>
                     <span>
                       {"Tên đăng nhập"}
@@ -157,39 +177,16 @@ export default class EditNV extends Component {
                   <input className='form-control' type="text"value={account.username} readOnly />
                 </div>:null}
               </div>
-              <div className="col-md-6">
+              <div className="col-md-5">
               <div className="row">
-                {id? <div className="col-md-12" style={{"lineHeight":"30px"}}>
-                    Hiển thị đầy đủ các thuộc tính
-                    <div className="switch">
-                      <input type="checkbox" id="showfullfield" name="showfullfield" className="control" checked={showFullField === true ? 'checked' : ''} onChange={::this.showFull}/>
-                      <label htmlFor="showfullfield" className="checkboxs"></label>
-                    </div>
-                  </div>: null}
-                  <br />
-                  <div className="col-md-12">
-                    {(message && !edited)? (message === true?
-                      <p className='help-block success'>
-                      <span className="fa fa-check"></span>{' Cập nhật thành công!!'}
-                      </p>:
-                      <p className='help-block required'>
-                      <span className="fa fa-close"></span>{" Cập nhật thất bại!"}
-                      </p>
-                      ):null}
-
-                  </div>
-                  <br />
-                  {item.haveaccount ? <div className="col-md-12">
-                    Reset lại password
+                  {item && item.haveaccount ? <div className="col-md-12">
                     <button className='btn btn-warning pull-right' onClick={::this.resetPassWord} >Reset Password </button>
                     </div>: !createAcc && item.id ? <div className="col-md-12">
-                    Tạo tài khoản cho nhân viên
-                    <button className='btn btn-success pull-right' onClick={::this.createAcc} >Tạo</button> </div>:null}
+                    <button className='btn btn-success pull-right' onClick={::this.createAcc} >Tạo tài khoản</button> </div>:null}
                   {item.id && createAcc?
                     <div className="col-md-12">
-                      {"Password sẽ được mặc định là: \'123456\'"}
+                      {"Password sẽ mặc định là: \'123456\'"}
                       <br />
-
                       <div className='form-group' key='username'>
                         <label>
                           <span>
