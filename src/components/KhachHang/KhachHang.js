@@ -77,7 +77,7 @@ export default class KhachHang extends Component{
               <div className="mbv-panel">
                 <div className="mbv-panel-body">
                 {this.state.isOpenEdit?
-                  <Modal  modalStyle={Style.content_60}
+                  <Modal  modalStyle={Style.content_40}
                   overlayStyle= {Style.overlay}
                   close={::this.toggleModal}
                   overlayClassName='modaldumb modalOverlay modalOverlay--after-open '

@@ -58,7 +58,7 @@ export default function phieudathang(state = initialState, action = {}){
         loaded: false,
         list: [],
         paging: {},
-        error: action.result
+        error: action.error
       };
 
     case PDH_ONE_LOAD:
@@ -77,7 +77,7 @@ export default function phieudathang(state = initialState, action = {}){
         ...state,
         loadingOne: false,
         item: {},
-        error: action.result
+        error: action.error
       };
 
     case PDH_GET:
@@ -89,15 +89,14 @@ export default function phieudathang(state = initialState, action = {}){
       return {
         ...state,
         getding: false,
-        editItem: action.result,
-        ctdh: action.result.chitietdonhang
+        editItem: action.result
       };
     case PDH_GET_FAIL:
       return {
         ...state,
         getding: false,
         editItem: null,
-        error: action.result
+        error: action.error
       };
 
     case PDH_POST:
@@ -110,7 +109,6 @@ export default function phieudathang(state = initialState, action = {}){
         ...state,
         reset: true,
         editItem: action.result,
-        reloadList: true,
         message: true,
         posting: false,
       };
@@ -120,7 +118,7 @@ export default function phieudathang(state = initialState, action = {}){
         editItem: null,
         message: false,
         posting: false,
-        errorPost: action.result
+        errorPost: action.error
       };
 
     case PDH_PUT:
@@ -132,7 +130,6 @@ export default function phieudathang(state = initialState, action = {}){
       return {
         ...state,
         reset: true,
-        reloadList: true,
         editItem: action.result,
         message: true,
         posting: false,
@@ -143,7 +140,7 @@ export default function phieudathang(state = initialState, action = {}){
         editItem: null,
         message: false,
         posting: false,
-        errorPost: action.result
+        errorPost: action.error
       };
 
     case PDH_DELETE:
@@ -164,7 +161,7 @@ export default function phieudathang(state = initialState, action = {}){
         ...state,
         deleting: false,
         item: null,
-        errorDel: action.result
+        errorDel: action.error
       };
     case PDH_CTDH:
       return {
@@ -183,7 +180,7 @@ export default function phieudathang(state = initialState, action = {}){
         ...state,
         postingCTDH: false,
         ctdh: null,
-        errorPost: action.result
+        errorPost: action.error
       };
     case PDH_RESET:
       return {
@@ -192,7 +189,8 @@ export default function phieudathang(state = initialState, action = {}){
         editItem: null,
         reloadList: true,
         message: false,
-        errorPost:null
+        errorPost:null,
+        ctdh: null
       };
     case GD_DEL_CTDH_SUCCESS:
       return {

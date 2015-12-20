@@ -80,7 +80,6 @@ export default class EditLV extends Component {
     const {item, edited, submited, showFullField, id} = this.state;
     const metaPP = preprocess(meta);
     const fieldRender = showFullField && id? renderField(item, metaPP, this, true):renderField(item, metaPP, this);
-    console.log(message, edited, message && !edited);
     return (
       <div>
         <div className="row">
@@ -91,39 +90,30 @@ export default class EditLV extends Component {
           {submited ? <p className='help-block required'>
               {checkRequire(metaPP, item)}&nbsp;&nbsp;
             </p>:null}
-          {id? <button className='btn btn-warning' onClick={::this.onSubmit} disabled={(edited? '':'disabled')}>
-          {"Cập Nhật"}
-          </button>: <button className='btn btn-success' onClick={::this.onSubmit} disabled={(edited? '':'disabled')}>
-          {"Tạo mới"}</button>}
+
+            {(message && !edited)? (message === true?
+                <p className='help-block success'>
+                <span className="fa fa-check"></span>{' Cập nhật thành công!!'}
+                </p>:
+                <p className='help-block required'>
+                <span className="fa fa-close"></span>{" Cập nhật thất bại!"}
+                </p>
+                ):null}
           </div>
         </div>
         <hr/>
         <div className="row">
           <div className="col-md-12">
             <div className="row">
-              <div className="col-md-6 boder-right">
-                {fieldRender}
+            {id? <div className="col-md-12" style={{"lineHeight":"30px"}}>
+              Hiển thị đầy đủ
+              <div className="switch">
+                <input type="checkbox" id="showfullfield" name="showfullfield" className="control" checked={showFullField === true ? 'checked' : ''} onChange={::this.showFull}/>
+                <label htmlFor="showfullfield" className="checkboxs"></label>
               </div>
-              <div className="col-md-6">
-              <div className="row">
-                {id? <div className="col-md-12" style={{"lineHeight":"30px"}}>
-                    Hiển thị đầy đủ các thuộc tính
-                    <div className="switch">
-                      <input type="checkbox" id="showfullfield" name="showfullfield" className="control" checked={showFullField === true ? 'checked' : ''} onChange={::this.showFull}/>
-                      <label htmlFor="showfullfield" className="checkboxs"></label>
-                    </div>
-                  </div>: null}
-                  <div className="col-md-12">
-                    {(message && !edited)? (message === true?
-                      <p className='help-block success'>
-                      <span className="fa fa-check"></span>{' Cập nhật thành công!!'}
-                      </p>:
-                      <p className='help-block required'>
-                      <span className="fa fa-close"></span>{" Cập nhật thất bại!"}
-                      </p>
-                      ):null}
-                  </div>
-                </div>
+            </div>: null}
+              <div className="col-md-12">
+                {fieldRender}
               </div>
             </div>
           </div>
@@ -134,7 +124,16 @@ export default class EditLV extends Component {
           <div className="col-md-12 flex-right">
           {submited ? <p className='help-block required'>
               {checkRequire(metaPP, item)}
-            </p>:null}&nbsp;&nbsp;
+            </p>:null}
+          {(message && !edited)? (message === true?
+              <p className='help-block success'>
+              <span className="fa fa-check"></span>{' Cập nhật thành công!!'}
+              </p>:
+              <p className='help-block required'>
+              <span className="fa fa-close"></span>{" Cập nhật thất bại!"}
+              </p>
+              ):null}
+            &nbsp;&nbsp;
           {id? <button className='btn btn-warning' onClick={::this.onSubmit} disabled={(edited? '':'disabled')}>
           {"Cập Nhật"}
           </button>: <button className='btn btn-success' onClick={::this.onSubmit} disabled={(edited? '':'disabled')}>

@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {initObject, ATO, OTA, preprocess, datetime, changeDTI, renderLabel, setValue, checkRequire, preprocessPost} from '../../../meta';
+import {initObject, ATO, OTA, preprocess, datetime, changeDTI, renderLabel, setValue, checkRequire, preprocessPost, numeral} from '../../../meta';
 import {THead, TBody} from '../../table/rowForPXH';
 import {THeadCTDH, TBodyCTDH} from '../../table/rowForPMH';
 import * as pxhActions from '../../../actions/khachhang/pxhActions';
@@ -230,7 +230,7 @@ export default class EditPXH extends Component {
         <div className="row">
           { giaodichid? [<div className="col-md-12" key="gdfield">
             <div className="row">
-              <div className="col-md-8 boder-right">
+              <div className="col-md-7 boder-right">
                 <div className='form-group' key="giaodichid">
                   {renderLabel(metaGD.id)}
                   &nbsp;
@@ -267,8 +267,12 @@ export default class EditPXH extends Component {
                   {renderLabel(metaGD.tinhtrangkho)}
                   {metaGD && metaGD["tinhtrangkho"].$input(gdItem,this)}
                 </div>
+                <div className='form-group' key="tongtien">
+                  {renderLabel(metaGD.tongtien)}
+                  <input type="text" data-addr='tongtien'className="form-control" readOnly value={numeral(gdItem.tongtien).format('0,0') || '0'} />
+                </div>
               </div>
-              <div className="col-md-4">
+              <div className="col-md-5">
               </div>
             </div>
           </div>,

@@ -90,39 +90,29 @@ export default class EditKH extends Component {
           {submited ? <p className='help-block required'>
               {checkRequire(metaPP, item)}&nbsp;&nbsp;
             </p>:null}
-          {id? <button className='btn btn-warning' onClick={::this.onSubmit} disabled={(edited? '':'disabled')}>
-          {"Cập Nhật"}
-          </button>: <button className='btn btn-success' onClick={::this.onSubmit} disabled={(edited? '':'disabled')}>
-          {"Tạo mới"}</button>}
+            {(message && !edited)? (message === true?
+                <p className='help-block success'>
+                <span className="fa fa-check"></span>{id? ' Cập nhật thành công!!':' Tạo mới thành công!!' }
+                </p>:
+                <p className='help-block required'>
+                <span className="fa fa-close"></span>{id? ' Cập nhật thất bại!':' Tạo mới thất bại!' }
+                </p>
+                ):null}
           </div>
         </div>
         <hr/>
         <div className="row">
           <div className="col-md-12">
             <div className="row">
-              <div className="col-md-6 boder-right">
-                {fieldRender}
-              </div>
-              <div className="col-md-6">
-              <div className="row">
-                {id? <div className="col-md-12" style={{"lineHeight":"30px"}}>
-                    Hiển thị đầy đủ các thuộc tính
-                    <div className="switch">
-                      <input type="checkbox" id="showfullfield" name="showfullfield" className="control" checked={showFullField === true ? 'checked' : ''} onChange={::this.showFull}/>
-                      <label htmlFor="showfullfield" className="checkboxs"></label>
-                    </div>
-                  </div>: null}
-                  <div className="col-md-12">
-                    {(message && !edited)? (message === true?
-                      <p className='help-block success'>
-                      <span className="fa fa-check"></span>{id? ' Cập nhật thành công!!':' Tạo mới thành công!!' }
-                      </p>:
-                      <p className='help-block required'>
-                      <span className="fa fa-close"></span>{id? ' Cập nhật thất bại!':' Tạo mới thất bại!' }
-                      </p>
-                      ):null}
-                  </div>
+            {id? <div className="col-md-12" style={{"lineHeight":"30px"}}>
+                Hiển thị đầy đủ các thuộc tính
+                <div className="switch">
+                  <input type="checkbox" id="showfullfield" name="showfullfield" className="control" checked={showFullField === true ? 'checked' : ''} onChange={::this.showFull}/>
+                  <label htmlFor="showfullfield" className="checkboxs"></label>
                 </div>
+              </div>: null}
+              <div className="col-md-12">
+                {fieldRender}
               </div>
             </div>
           </div>
@@ -133,7 +123,16 @@ export default class EditKH extends Component {
           <div className="col-md-12 flex-right">
           {submited ? <p className='help-block required'>
               {checkRequire(metaPP, item)}
-            </p>:null}&nbsp;&nbsp;
+            </p>:null}
+          {(message && !edited)? (message === true?
+              <p className='help-block success'>
+              <span className="fa fa-check"></span>{id? ' Cập nhật thành công!!':' Tạo mới thành công!!' }
+              </p>:
+              <p className='help-block required'>
+              <span className="fa fa-close"></span>{id? ' Cập nhật thất bại!':' Tạo mới thất bại!' }
+              </p>
+              ):null}
+            &nbsp;&nbsp;
           {id? <button className='btn btn-warning' onClick={::this.onSubmit} disabled={(edited? '':'disabled')}>
           {"Cập Nhật"}
           </button>: <button className='btn btn-success' onClick={::this.onSubmit} disabled={(edited? '':'disabled')}>

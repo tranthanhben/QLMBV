@@ -53,7 +53,7 @@ export default function khachhang(state = initialState, action = {}){
         loaded: false,
         list: [],
         paging: null,
-        error: action.result
+        error: action.error
       };
 
     case KH_ONE_LOAD:
@@ -72,7 +72,7 @@ export default function khachhang(state = initialState, action = {}){
         ...state,
         loadingOne: false,
         item: null,
-        error: action.result
+        error: action.error
       };
     case KH_GET:
       return {
@@ -90,7 +90,7 @@ export default function khachhang(state = initialState, action = {}){
         ...state,
         getding: false,
         editItem: {},
-        error: action.result
+        error: action.error
       };
 
     case KH_POST:
@@ -113,7 +113,7 @@ export default function khachhang(state = initialState, action = {}){
         editItem: null,
         message: false,
         posting: false,
-        errorPost: action.result
+        errorPost: action.error
       };
 
     case KH_PUT:
@@ -135,7 +135,7 @@ export default function khachhang(state = initialState, action = {}){
         editItem: null,
         message: false,
         posting: false,
-        errorPost: action.result
+        errorPost: action.error
       };
 
     case KH_DELETE:
@@ -155,7 +155,7 @@ export default function khachhang(state = initialState, action = {}){
         ...state,
         deleting: false,
         item: null,
-        errorDel: action.result
+        errorDel: action.error
       };
 
     case KH_RESET:

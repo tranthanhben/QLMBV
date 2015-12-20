@@ -1,9 +1,11 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {initObject, ATO, OTA, preprocess, datetime, changeDTI, renderLabel, setValue, checkRequire, preprocessPost} from '../../../meta';
+import {initObject, ATO, OTA, preprocess, datetime, changeDTI, renderLabel, setValue, checkRequire, preprocessPost, numeral} from '../../../meta';
 import {THead, TBody} from '../../table/rowForPMH';
 import * as pmhActions from '../../../actions/khachhang/pmhActions';
 import * as giaodichActions from '../../../actions/giaodichActions';
+import {markdown} from 'markdown';
+import {NotePMH} from '../../markdownNote';
 
 @connect(state =>({
   gdItem: state.phieumuahang.editItem,
@@ -56,6 +58,7 @@ export default class EditPMH extends Component {
   }
   componentWillReceiveProps(nextProps) {
     if(nextProps.gdItem && this.state.submiting){
+      console.log("tiep");
       let ctdh = this.state.ctdh;
       ctdh = this.setgiaodichid(ctdh,nextProps.gdItem.id);
       this.props.postCTDH(this.xulytruoc(ctdh));
@@ -74,12 +77,19 @@ export default class EditPMH extends Component {
         newGD: false,
         edited: false,
         editedDH: false,
-        submiting: false
+        submiting: false,
+        ctdh_init: {
+          giaodichid: nextProps.gdItem.id || '',
+          loaivaiid:'',
+          soluong:'',
+          gia:'',
+          loaigiaodich:"pmh"
+        }
       });
     }
     if(nextProps.ctdh){
       this.setState({
-        ctdh: nextProps.ctdh || [],
+        ctdh: nextProps.ctdh,
         editedDH: false,
         edited: false
       });
@@ -113,6 +123,7 @@ export default class EditPMH extends Component {
       //kiem tra va parse kieu so va ngya
       if(this.state.edited){
         this.setState({submiting: true});
+        console.log("ctdh truoc khi submit", this.state.ctdh);
         this.props.postItem(preprocessPost(this.state.gdItem, this.props.meta.giaodich));
       }else{
         this.setState({submiting: false});
@@ -128,6 +139,7 @@ export default class EditPMH extends Component {
         ctdhPP.push(dh);
       }
     };
+    console.log("sausuly", ctdhPP);
     return ctdhPP;
   }
   setgiaodichid(ctdh, giaodichid){
@@ -196,7 +208,7 @@ export default class EditPMH extends Component {
         <div className="row">
           <div className="col-md-12" key="gdfield">
             <div className="row">
-              <div className="col-md-8 boder-right">
+              <div className="col-md-7 boder-right">
                 <div className='form-group' key="khachhang">
                   {renderLabel(metaGD.doitacid)}
                   &nbsp;
@@ -217,8 +229,13 @@ export default class EditPMH extends Component {
                   {renderLabel(metaGD.tinhtrangdonhang)}
                   {metaGD && metaGD["tinhtrangdonhang"].$input(gdItem,this)}
                 </div>
+                <div className='form-group' key="tongtiendutinh">
+                  {renderLabel(metaGD.tongtiendutinh)}
+                  <input type="text" data-addr='mausac'className="form-control" readOnly value={numeral(gdItem.tongtiendutinh).format('0,0') || '0'} />
+                </div>
               </div>
-              <div className="col-md-4">
+              <div className="col-md-5">
+                <p dangerouslySetInnerHTML={{ __html: markdown.toHTML(NotePMH || '') }}></p>
               </div>
             </div>
           </div>

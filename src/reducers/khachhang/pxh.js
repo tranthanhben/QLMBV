@@ -58,7 +58,7 @@ export default function phieuxuathang(state = initialState, action = {}){
         loaded: false,
         list: [],
         paging: {},
-        error: action.result
+        error: action.error
       };
 
     case PXH_ONE_LOAD:
@@ -77,7 +77,7 @@ export default function phieuxuathang(state = initialState, action = {}){
         ...state,
         loadingOne: false,
         item: {},
-        error: action.result
+        error: action.error
       };
 
     case PXH_GET:
@@ -97,7 +97,7 @@ export default function phieuxuathang(state = initialState, action = {}){
         ...state,
         getding: false,
         editItem: null,
-        error: action.result
+        error: action.error
       };
 
     case PXH_POST:
@@ -120,7 +120,7 @@ export default function phieuxuathang(state = initialState, action = {}){
         editItem: null,
         message: false,
         posting: false,
-        errorPost: action.result
+        errorPost: action.error
       };
 
     case PXH_PUT:
@@ -143,7 +143,7 @@ export default function phieuxuathang(state = initialState, action = {}){
         editItem: null,
         message: false,
         posting: false,
-        errorPost: action.result
+        errorPost: action.error
       };
 
     case PXH_DELETE:
@@ -164,7 +164,7 @@ export default function phieuxuathang(state = initialState, action = {}){
         ...state,
         deleting: false,
         item: null,
-        errorDel: action.result
+        errorDel: action.error
       };
     case PXH_CTK:
       return {
@@ -183,7 +183,7 @@ export default function phieuxuathang(state = initialState, action = {}){
         ...state,
         postingCTK: false,
         ctk: null,
-        errorPost: action.result
+        errorPost: action.error
       };
     case PXH_RESET:
       return {
@@ -192,6 +192,7 @@ export default function phieuxuathang(state = initialState, action = {}){
         editItem: null,
         reloadList: true,
         message: false,
+        ctk: null,
         errorPost:null
       };
     case GD_DEL_CTK_SUCCESS:

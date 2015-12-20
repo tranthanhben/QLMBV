@@ -7,7 +7,7 @@ import {DataBar,DataPie} from '../Style';
 function xulydulieudate(data){
   let nhap = 0;
   let xuat = 0;
-  let db = data[0].reduction;
+  let db =data[0] && data[0].reduction || [];
   db.map(d=>{
     if(d.soluong > 0){
       nhap += d.soluong;

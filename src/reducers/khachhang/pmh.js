@@ -59,7 +59,7 @@ export default function phieumuahang(state = initialState, action = {}){
         loaded: false,
         list: [],
         paging: {},
-        error: action.result
+        error: action.error
       };
 
     case PMH_ONE_LOAD:
@@ -78,7 +78,7 @@ export default function phieumuahang(state = initialState, action = {}){
         ...state,
         loadingOne: false,
         item: {},
-        error: action.result
+        error: action.error
       };
 
     case PMH_GET:
@@ -90,15 +90,14 @@ export default function phieumuahang(state = initialState, action = {}){
       return {
         ...state,
         getding: false,
-        editItem: action.result,
-        ctdh: action.result.chitietdonhang
+        editItem: action.result
       };
     case PMH_GET_FAIL:
       return {
         ...state,
         getding: false,
         editItem: null,
-        error: action.result
+        error: action.error
       };
 
     case PMH_POST:
@@ -121,7 +120,7 @@ export default function phieumuahang(state = initialState, action = {}){
         editItem: null,
         message: false,
         posting: false,
-        errorPost: action.result
+        errorPost: action.error
       };
 
     case PMH_PUT:
@@ -144,7 +143,7 @@ export default function phieumuahang(state = initialState, action = {}){
         editItem: null,
         message: false,
         posting: false,
-        errorPost: action.result
+        errorPost: action.error
       };
 
     case PMH_DELETE:
@@ -165,7 +164,7 @@ export default function phieumuahang(state = initialState, action = {}){
         ...state,
         deleting: false,
         item: null,
-        errorDel: action.result
+        errorDel: action.error
       };
     case PMH_CTDH:
       return {
@@ -184,7 +183,7 @@ export default function phieumuahang(state = initialState, action = {}){
         ...state,
         postingCTDH: false,
         ctdh: null,
-        errorPost: action.result
+        errorPost: action.error
       };
     case PMH_RESET:
       return {
@@ -193,7 +192,8 @@ export default function phieumuahang(state = initialState, action = {}){
         editItem: null,
         reloadList: true,
         message: false,
-        errorPost:null
+        errorPost:null,
+        ctdh: null
       };
     case GD_DEL_CTDH_SUCCESS:
       return {

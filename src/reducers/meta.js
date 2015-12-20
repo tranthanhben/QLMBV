@@ -669,7 +669,8 @@ const initialState = {
         up: false,
         type: "number",
         field: false,
-        view: false
+        view: false,
+        unit: ' VND'
       },
       "tongtien": {
         name: "tongtien",
@@ -678,7 +679,8 @@ const initialState = {
         up: false,
         type: "number",
         field: true,
-        view: true
+        view: true,
+        unit: ' VND'
       },
       "tinhtrangdonhang": {
         name: "tinhtrangdonhang",
@@ -1098,7 +1100,8 @@ const initialState = {
         up: false,
         type: "number",
         field: false,
-        view: false
+        view: false,
+        unit: ' VND'
       },
       "tongtien": {
         name: "tongtien",
@@ -1107,7 +1110,8 @@ const initialState = {
         up: false,
         type: "number",
         field: true,
-        view: true
+        view: true,
+        unit: ' VND'
       },
       "tinhtrangdonhang": {
         name: "tinhtrangdonhang",

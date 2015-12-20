@@ -11,17 +11,17 @@ import * as giaodichActions from '../../../actions/giaodichActions';
   listKH: state.giaodich.listKH,
   listLV: state.giaodich.listLV,
   listK: state.giaodich.listK,
-  listPNH: state.giaodich.listPNH,
+  listPXH: state.giaodich.listPXH,
   user: state.user.user,
   cttt: state.thanhtoanKH.cttt
 }),{...ttkhActions, ...giaodichActions})
-export default class EditPNH extends Component {
+export default class EditPXH extends Component {
   static propTypes = {
     giaodichid: PropTypes.string,
     listK: PropTypes.array,
     listLV: PropTypes.array,
     listKH: PropTypes.array,
-    listPNH: PropTypes.array,
+    listPXH: PropTypes.array,
     gdItem: PropTypes.object,
     meta: PropTypes.object,
     user: PropTypes.object,
@@ -64,7 +64,7 @@ export default class EditPNH extends Component {
     this.props.loadKH();
     this.props.loadLV();
     this.props.loadK();
-    this.props.loadPNH();
+    this.props.loadPXH();
   }
   componentWillReceiveProps(nextProps) {
     if(nextProps.gdItem && this.state.submiting){
@@ -79,6 +79,10 @@ export default class EditPNH extends Component {
         edited: false
       });
     }else if(nextProps.gdItem){
+      let items = nextProps.gdItem.chitietthanhtoan;
+      items.map(item =>{
+        item.ngaythanhtoan = changeDTI(datetime(new Date(item.ngaythanhtoan)))
+      });
       this.setState({
         giaodichid: nextProps.gdItem.id,
         cttt: nextProps.gdItem.chitietthanhtoan ||[],
@@ -98,6 +102,10 @@ export default class EditPNH extends Component {
       });
     }
     if(nextProps.cttt){
+      let items = nextProps.cttt;
+      items.map(item =>{
+        item.ngaythanhtoan = changeDTI(datetime(new Date(item.ngaythanhtoan)))
+      });
       this.setState({
         cttt: nextProps.cttt || [],
         editedCTTT: false,
@@ -206,11 +214,10 @@ export default class EditPNH extends Component {
     }
   }
   render() {
-    const {meta, error, message, listKH, listLV, listK, listPNH} = this.props;
+    const {meta, error, message, listKH, listLV, listK, listPXH} = this.props;
     const {gdItem, edited, submited, showFullField, giaodichid, cttt, editedCTTT} = this.state;
     const metaGD = meta && preprocess(meta.giaodich) || {};
     const metaCTTT = meta && preprocess(meta.cttt) || {};
-    console.log(cttt, this.props.gdItem);
     return (
       <div>
         <div className="row">
@@ -229,10 +236,10 @@ export default class EditPNH extends Component {
                   {renderLabel(metaGD.id)}
                   &nbsp;
                   <select className='form-control   uppercase' data-addr='id'
-                  onChange={::this.changeGDID}
+                  readOnly
                   value={giaodichid || ''}>
                   <option key='id'>-- Giao Dich ID --</option>
-                  {listPNH && listPNH.map(b => {
+                  {listPXH && listPXH.map(b => {
                     return (
                       <option key={b.id} value={b.id}>
                         {b.id}
@@ -247,7 +254,7 @@ export default class EditPNH extends Component {
                   <select className='form-control' data-addr='doitacid'
                   readOnly
                   value={gdItem.doitacid || ''}>
-                  <option key='doitacid'>-- Nha Cung Cap --</option>
+                  <option key='doitacid'>-- Khach Hang --</option>
                   {listKH && listKH.map(b => {
                     return (
                       <option key={b.id} value={b.id}>
@@ -301,7 +308,7 @@ export default class EditPNH extends Component {
                   onChange={::this.changeGDID}
                   value={giaodichid || ''}>
                   <option key='id'>-- Giao Dich ID --</option>
-                  {listPNH && listPNH.map(b => {
+                  {listPXH && listPXH.map(b => {
                     return (
                       <option key={b.id} value={b.id}>
                         {b.id}

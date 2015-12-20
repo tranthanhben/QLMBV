@@ -58,7 +58,7 @@ export default function phieudathang(state = initialState, action = {}){
         loaded: false,
         list: [],
         paging: {},
-        error: action.result
+        error: action.error
       };
 
     case PNH_ONE_LOAD:
@@ -77,7 +77,7 @@ export default function phieudathang(state = initialState, action = {}){
         ...state,
         loadingOne: false,
         item: {},
-        error: action.result
+        error: action.error
       };
 
     case PNH_GET:
@@ -97,7 +97,7 @@ export default function phieudathang(state = initialState, action = {}){
         ...state,
         getding: false,
         editItem: null,
-        error: action.result
+        error: action.error
       };
 
     case PNH_POST:
@@ -120,7 +120,7 @@ export default function phieudathang(state = initialState, action = {}){
         editItem: null,
         message: false,
         posting: false,
-        errorPost: action.result
+        errorPost: action.error
       };
 
     case PNH_PUT:
@@ -143,7 +143,7 @@ export default function phieudathang(state = initialState, action = {}){
         editItem: null,
         message: false,
         posting: false,
-        errorPost: action.result
+        errorPost: action.error
       };
 
     case PNH_DELETE:
@@ -164,7 +164,7 @@ export default function phieudathang(state = initialState, action = {}){
         ...state,
         deleting: false,
         item: null,
-        errorDel: action.result
+        errorDel: action.error
       };
     case PNH_CTK:
       return {
@@ -183,7 +183,7 @@ export default function phieudathang(state = initialState, action = {}){
         ...state,
         postingCTK: false,
         ctk: null,
-        errorPost: action.result
+        errorPost: action.error
       };
     case PNH_RESET:
       return {
@@ -192,7 +192,8 @@ export default function phieudathang(state = initialState, action = {}){
         editItem: null,
         reloadList: true,
         message: false,
-        errorPost:null
+        errorPost:null,
+        ctk: null
       };
     case GD_DEL_CTK_SUCCESS:
       return {

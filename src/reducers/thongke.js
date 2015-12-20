@@ -31,7 +31,7 @@ export default function thongke(state = initialState, action = {}){
         loaded: false,
         listNX: [],
         paging: null,
-        error: action.result
+        error: action.error
       };
     default:
       return state;

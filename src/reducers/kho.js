@@ -54,7 +54,7 @@ export default function kho(state = initialState, action = {}){
         list: [],
         reloadList: false,
         paging: null,
-        error: action.result
+        error: action.error
       };
 
     case KHO_ONE_LOAD:
@@ -73,7 +73,7 @@ export default function kho(state = initialState, action = {}){
         ...state,
         loadingOne: false,
         item: null,
-        error: action.result
+        error: action.error
       };
     case KHO_GET:
       return {
@@ -91,7 +91,7 @@ export default function kho(state = initialState, action = {}){
         ...state,
         getding: false,
         editItem: {},
-        error: action.result
+        error: action.error
       };
     case KHO_POST:
       return {
@@ -113,7 +113,7 @@ export default function kho(state = initialState, action = {}){
         editItem: null,
         message: false,
         posting: false,
-        errorPost: action.result
+        errorPost: action.error
       };
 
     case KHO_PUT:
@@ -135,7 +135,7 @@ export default function kho(state = initialState, action = {}){
         editItem: null,
         message: false,
         posting: false,
-        errorPost: action.result
+        errorPost: action.error
       };
 
     case KHO_DELETE:
@@ -155,7 +155,7 @@ export default function kho(state = initialState, action = {}){
         ...state,
         deleting: false,
         item: null,
-        errorDel: action.result
+        errorDel: action.error
       };
 
     case KHO_RESET:

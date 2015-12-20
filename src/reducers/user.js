@@ -51,7 +51,7 @@ export default function user(state = initialState, action = {}) {
           loadingUser: false,
           loaded: true,
           user: null,
-          errorUser: action.result
+          errorUser: action.error
         }
       case GET_ACCOUNT:
         return {
@@ -69,7 +69,7 @@ export default function user(state = initialState, action = {}) {
           ...state,
           getingAccount: false,
           account: null,
-          errorGetAccount: action.result
+          errorGetAccount: action.error
         }
       case REGISTER_LOAD:
         return {
@@ -105,7 +105,7 @@ export default function user(state = initialState, action = {}) {
           ...state,
           changing: false,
           messageCP: false,
-          errorCP: action.result
+          errorCP: action.error
         }
       case LOGIN_LOAD:
         return {
@@ -119,7 +119,7 @@ export default function user(state = initialState, action = {}) {
       case LOGIN_LOAD_FAIL:
         return {
           ...state,
-          errorLogin: action.result
+          errorLogin: action.error
         }
       case LOGOUT_LOAD:
         return {
@@ -134,7 +134,7 @@ export default function user(state = initialState, action = {}) {
       case LOGOUT_LOAD_FAIL:
         return {
           ...state,
-          errorLogout: action.result
+          errorLogout: action.error
         }
       default:
         return state;

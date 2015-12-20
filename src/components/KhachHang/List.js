@@ -166,7 +166,7 @@ class List extends Component{
                     <ViewKH meta={meta} item={itemView} close={::this.viewModal} edit={::this.editItem}></ViewKH>
                   </Modal> : null}
                   {openEdit?
-                  <Modal  modalStyle={Style.content_50}
+                  <Modal  modalStyle={Style.content_40}
                   overlayStyle= {Style.overlay}
                   close={::this.editModal}
                   overlayClassName='modaldumb modalOverlay modalOverlay--after-open '

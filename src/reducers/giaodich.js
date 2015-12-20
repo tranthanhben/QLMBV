@@ -77,7 +77,7 @@ export default function loaivai(state = initialState, action = {}){
         loadKH: true,
         listKH: [],
         pagingKH: {},
-        errorLoadKH: action.result
+        errorLoadKH: action.error
       };
     case GD_LISTNCC:
       return {
@@ -97,7 +97,7 @@ export default function loaivai(state = initialState, action = {}){
         loadNCC: true,
         listNCC: [],
         pagingNCC: {},
-        errorLoadNCC: action.result
+        errorLoadNCC: action.error
       };
     case GD_LISTLV:
       return {
@@ -117,7 +117,7 @@ export default function loaivai(state = initialState, action = {}){
         loadLV: true,
         listLV: [],
         pagingLV: {},
-        errorLoadLV: action.result
+        errorLoadLV: action.error
       };
     case GD_LISTK:
       return {
@@ -137,7 +137,7 @@ export default function loaivai(state = initialState, action = {}){
         loadK: true,
         listK: [],
         pagingK: {},
-        errorLoadK: action.result
+        errorLoadK: action.error
       };
     case GD_LISTPDH:
       return {
@@ -157,7 +157,7 @@ export default function loaivai(state = initialState, action = {}){
         loadPDH: true,
         listPDH: [],
         pagingPDH: {},
-        errorLoadPDH: action.result
+        errorLoadPDH: action.error
       };
     case GD_LISTPMH:
       return {
@@ -177,7 +177,7 @@ export default function loaivai(state = initialState, action = {}){
         loadPMH: true,
         listPMH: [],
         pagingPMH: {},
-        errorLoadPMH: action.result
+        errorLoadPMH: action.error
       };
       case GD_LISTPNH:
       return {
@@ -197,7 +197,7 @@ export default function loaivai(state = initialState, action = {}){
         loadPNH: true,
         listPNH: [],
         pagingPNH: {},
-        errorLoadPNH: action.result
+        errorLoadPNH: action.error
       };
     case GD_LISTPXH:
       return {
@@ -217,7 +217,7 @@ export default function loaivai(state = initialState, action = {}){
         loadPXH: true,
         listPXH: [],
         pagingPXH: {},
-        errorLoadPXH: action.result
+        errorLoadPXH: action.error
       };
     case GD_DEL_CTDH:
       return {
@@ -233,7 +233,7 @@ export default function loaivai(state = initialState, action = {}){
       return {
         ...state,
         delCTDH: false,
-        errorDel: action.result
+        errorDel: action.error
       };
     case GD_DEL_CTK:
       return {
@@ -249,7 +249,7 @@ export default function loaivai(state = initialState, action = {}){
       return {
         ...state,
         delCTK: false,
-        errorDel: action.result
+        errorDel: action.error
       };
     case GD_DEL_CTTT:
       return {
@@ -265,7 +265,7 @@ export default function loaivai(state = initialState, action = {}){
       return {
         ...state,
         delCTTT: false,
-        errorDel: action.result
+        errorDel: action.error
       };
 
     case GD_PUT:
@@ -284,7 +284,7 @@ export default function loaivai(state = initialState, action = {}){
         ...state,
         posting: false,
         gdItem: null,
-        errorPost: action.result
+        errorPost: action.error
       };
     case GD_POST:
       return{
@@ -302,7 +302,7 @@ export default function loaivai(state = initialState, action = {}){
         ...state,
         posting: false,
         gdItem: null,
-        errorPost: action.result
+        errorPost: action.error
       };
 
     default:

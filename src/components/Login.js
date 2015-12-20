@@ -15,9 +15,12 @@ function checkRequire(user){
   }
   return '';
 }
-class LoginPage extends Component {
+@connect (state =>({
+  errorLogin: state.user.errorLogin
+}),{...userActions})
+export default class LoginPage extends Component {
   static propTypes = {
-    error: PropTypes.object,
+    errorLogin: PropTypes.object,
     login: PropTypes.func.isRequired
   }
 
@@ -31,10 +34,11 @@ class LoginPage extends Component {
     submited: false
   }
   componentWillReceiveProps(nextProps) {
-    if(nextProps.error){
+    if(nextProps.errorLogin){
       this.setState({
         submiting: false,
-        message: parseError(nextProps.error.code)
+        submited: true,
+        message: parseError(nextProps.errorLogin.code)
       });
     }
   }
@@ -96,19 +100,5 @@ class LoginPage extends Component {
         </form>
       </div>
     )
-  }
-}
-@connect (state =>({
-  error: state.user.errorLogin
-}))
-export default class LoginPageContainer {
-  static propTypes = {
-    error: PropTypes.object,
-    dispatch: PropTypes.func.isRequired
-  }
-
-  render(){
-    const {error, dispatch} = this.props;
-    return <LoginPage error={error} {...bindActionCreators(userActions, dispatch)}></LoginPage>
   }
 }
