@@ -2,6 +2,9 @@ import {
   TK_NX_LOAD,
   TK_NX_LOAD_SUCCESS,
   TK_NX_LOAD_FAIL,
+  TK_TC_LOAD,
+  TK_TC_LOAD_SUCCESS,
+  TK_TC_LOAD_FAIL,
 
 } from 'actions/actionTypes';
 
@@ -30,6 +33,28 @@ export default function thongke(state = initialState, action = {}){
         loading: false,
         loaded: false,
         listNX: [],
+        paging: null,
+        error: action.error
+      };
+    case TK_TC_LOAD:
+      return {
+        ...state,
+        loading: true
+      };
+    case TK_TC_LOAD_SUCCESS:
+      return {
+        ...state,
+        loadding: false,
+        reloadList: false,
+        loaded: true,
+        listTC: action.result
+      };
+    case TK_TC_LOAD_FAIL:
+      return {
+        ...state,
+        loading: false,
+        loaded: false,
+        listTC: [],
         paging: null,
         error: action.error
       };

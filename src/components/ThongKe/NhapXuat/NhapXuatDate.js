@@ -1,37 +1,46 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {Line, Pie, Bar} from 'react-chartjs';
-import {changeDTI, datetime, reveserChangeDTI, setValue, getMonth, startMonth, endMonth} from '../../meta';
-import {DataBar,DataPie} from '../Style';
-import * as thongkeActions from '../../actions/thongkeActions';
-
-function xulydulieumonth (datas=[]) {
+import {Line, Pie} from 'react-chartjs';
+import {changeDTI, datetime, reveserChangeDTI, setValue} from '../../../meta';
+import {DataBar,DataPie} from '../../Style';
+import * as thongkeActions from '../../../actions/thongkeActions'
+function xulydulieudate(datas=[]){
   let nhap = 0;
   let xuat = 0;
+  datas.map((data, index) =>{
+    let db = data.reduction || [];
+    db.map(d=>{
+      if(d.soluong > 0){
+        nhap += d.soluong;
+      }else{
+        xuat += d.soluong;
+      }
+    })
+  })
   return {nhap, xuat};
 }
 @connect(state =>({
   listNX: state.thongke.listNX
 }),{...thongkeActions})
-export class NXMonth extends Component {
+export default class NXDate extends Component {
   static propTyeps ={
     listNX: PropTypes.array,
     loadNX: PropTypes.func.isRequired
   }
   state={
-    nhap: xulydulieumonth(this.props.listNX).nhap || 0,
-    xuat: xulydulieumonth(this.props.listNX).xuat || 0,
-
+    nhap: xulydulieudate(this.props.listNX).nhap || 0,
+    xuat: xulydulieudate(this.props.listNX).xuat || 0
   }
   componentWillMount(){
-    this.props.loadNX(this.state.options || {loai: 'month',period:'day'});
+    this.props.loadNX();
   }
   componentWillReceiveProps(nextProps) {
     if(nextProps.listNX){
-      let {nhap, xuat} = xulydulieumonth(nextProps.listNX);
+      let {nhap, xuat} = xulydulieudate(nextProps.listNX);
       this.setState({nhap:nhap, xuat:xuat});
     }
   }
+
   render(){
     let {nhap, xuat, options} = this.state;
     return (
@@ -39,14 +48,7 @@ export class NXMonth extends Component {
         <div className="row">
           <div className="col-xs-12">
             <div id="example_wrapper" className="dataTables_wrapper">
-              <div className="dataTables_length" id="example_length" style={{"display": "inline-flex"}}>
-
-              </div>
-              <div id="example_filter" className="dataTables_filter" style={{"display": "inline-flex", "float":"right"}}>
-
-              </div>
-              <TKNXPie nhap={300} xuat={-500*(-1)}></TKNXPie>
-
+              <TKNXPie nhap={nhap} xuat={xuat*(-1)}></TKNXPie>
             </div>
           </div>
         </div>
@@ -61,28 +63,30 @@ export class TKNXPie extends Component{
     xuat: PropTypes.number,
   }
   state = {
-    dataNX: {
-      labels: ["January", "February", "March", "April", "May", "June", "July", '','','','',''],
-      datasets: [{
-        label: "My First dataset",
-        fillColor: "rgba(247,70,74,0.5)",
-        strokeColor: "rgba(247,70,74,0.8)",
-        highlightFill: "rgba(247,70,74,0.75)",
-        highlightStroke: "rgba(247,70,74,1)",
-        data: [65, 59, 80, 81, 56, 55, 40]
-      }, {
-        label: "My Second dataset",
-        fillColor: "rgba(70,191,189,0.5)",
-        strokeColor: "rgba(70,191,189,0.8)",
-        highlightFill: "rgba(70,191,189,0.75)",
-        highlightStroke: "rgba(70,191,189,1)",
-        data: [28, 48, 40, 19, 86, 27, 90]
-      }]
-    }
-  }
+    dataNX : [{
+    value: this.props.nhap,
+    color: "#F7464A",
+    highlight: "#FF5A5E",
+    label: "Số Lượng Nhập"
+  }, {
+    value: this.props.xuat,
+    color: "#46BFBD",
+    highlight: "#5AD3D1",
+    label: "Số Lượng Xuất"
+  }]}
   componentWillReceiveProps(nextProps){
     this.setState({
-
+      dataNX : [{
+        value: nextProps.nhap,
+        color: "#F7464A",
+        highlight: "#FF5A5E",
+        label: "Số Lượng Nhập"
+      }, {
+        value: nextProps.xuat,
+        color: "#46BFBD",
+        highlight: "#5AD3D1",
+        label: "Số Lượng Xuất"
+      }]
     })
   }
   render(){
@@ -98,7 +102,7 @@ export class TKNXPie extends Component{
               <strong>{"Thống kê nhập xuất theo ngày"}</strong>
               </div>
               <br/>
-              <Bar  data={dataNX} options={DataBar.chartOptions} width="1000" height="450" ></Bar>
+              <Pie  data={dataNX} options={DataPie.chartOptions} width="1000" height="400" ></Pie>
               <br/>
               <br/>
               <div className="chuthich_mau" >

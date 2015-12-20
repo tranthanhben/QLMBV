@@ -429,3 +429,7 @@ export const GD_DEL_CTTT_FAIL = "GD_DEL_CTTT_FAIL";
 export const TK_NX_LOAD = "TK_NX_LOAD";
 export const TK_NX_LOAD_SUCCESS = "TK_NX_LOAD_SUCCESS";
 export const TK_NX_LOAD_FAIL = "TK_NX_LOAD_FAIL";
+
+export const TK_TC_LOAD = "TK_TC_LOAD";
+export const TK_TC_LOAD_SUCCESS = "TK_TC_LOAD_SUCCESS";
+export const TK_TC_LOAD_FAIL = "TK_TC_LOAD_FAIL";
