@@ -107,6 +107,25 @@ export default function user(state = initialState, action = {}) {
           messageCP: false,
           errorCP: action.error
         }
+      case UPDATE_USER:
+        return {
+          ...state,
+          updating: true
+        }
+      case UPDATE_USER_SUCCESS:
+        return {
+          ...state,
+          updating: false,
+          messageUU: true,
+          account: action.result
+        }
+      case UPDATE_USER_FAIL:
+        return {
+          ...state,
+          updating: false,
+          messageUU: false,
+          errorUU: action.error
+        }
       case LOGIN_LOAD:
         return {
           ...state

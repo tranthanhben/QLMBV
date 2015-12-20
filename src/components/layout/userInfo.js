@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import * as userActions from '../../actions/userActions';
 import * as imageActions from '../../actions/imageActions';
-import {setValue, checkRequire} from '../../meta';
+import {setValue, checkRequire, preprocess} from '../../meta';
 function chgPwdErr(dataCh) {
   if (!dataCh.old_password)
     return 'Vui long nhap Mat Khau Cu';
@@ -16,12 +16,16 @@ function chgPwdErr(dataCh) {
   user: state.user.user,
   loading: state.user.loading,
   meta: state.meta.user,
+  messageCP: state.user.messageCP,
+  messageUU: state.user.messageUU,
   image_url: state.image.image_url
 }),{...userActions, ...imageActions})
 export default class InfoUser extends Component {
   static propTypes = {
     user: PropTypes.object,
     meta: PropTypes.object,
+    messageCP: PropTypes.bool,
+    messageUU: PropTypes.bool,
     image_url: PropTypes.string,
     postFile: PropTypes.func.isRequired,
     updateUser: PropTypes.func.isRequired,
@@ -33,6 +37,8 @@ export default class InfoUser extends Component {
     edited: false,
     updatePW: false,
     editedPW: false,
+    messageCP: false,
+    messageUU: false,
     userEdit: this.props.user || {},
     activeTab: 'info',
     dataCh:{
@@ -112,6 +118,26 @@ export default class InfoUser extends Component {
         submited: false
       });
     }
+    if(nextProps.messageCP){
+      this.setState({
+        dataCh:{
+          old_password:'',
+          new_password:'',
+          cfm_password:''
+        },
+        submitedPW:false,
+        editedPW: false,
+        messageCP: messageCP,
+      })
+    }
+    if(nextProps.messageUU){
+      this.setState({
+        messageUU: messageUU,
+        edited: false,
+        submited: false
+      })
+    }
+
     if(nextProps.image_url){
       let userEdit = this.state.userEdit;
       if(userEdit.avatar !== nextProps.image_url){
@@ -137,9 +163,9 @@ export default class InfoUser extends Component {
     input.click();
   }
   render() {
-    const {} = this.props;
-    const {userEdit, submited, edited, submitedPW, editedPW, activeTab, dataCh} = this.state;
-    console.log("user", userEdit, dataCh);
+    const {meta} = this.props;
+    const metaPP = preprocess(meta);
+    const {userEdit, submited, edited, submitedPW, editedPW, activeTab, dataCh, messageCP, messageUU} = this.state;
     return (
       <div id="main" className="content-profile">
         <div className="container">
@@ -183,6 +209,14 @@ export default class InfoUser extends Component {
                   {submited ? <p className='help-block required'>
                     {checkRequire(metaPP, userEdit)}
                   </p>:null}
+                  {(messageUU && !edited)? (messageUU === true?
+                      <p className='help-block success'>
+                      <span className="fa fa-check"></span>{' Cập nhật thành công!!'}
+                      </p>:
+                      <p className='help-block required'>
+                      <span className="fa fa-close"></span>{' Tạo mới thất bại!'}
+                      </p>
+                      ):null}
                   <button className="btn btn-block profile-btn" onClick={::this.onSubmit} disabled={(edited? '':'disabled')}>CẬP NHẬT THÔNG TIN</button>
 
                 </div>
@@ -203,6 +237,14 @@ export default class InfoUser extends Component {
                   {submitedPW ? <p className='help-block required'>
                     {chgPwdErr(dataCh)}
                   </p>:null}
+                  {(messageCP && !editedPW)? (messageCP === true?
+                      <p className='help-block success'>
+                      <span className="fa fa-check"></span>{' Thay đổi mật khẩu thành công!!'}
+                      </p>:
+                      <p className='help-block required'>
+                      <span className="fa fa-close"></span>{" Thay đổi mật khẩu thất bại!!"}
+                      </p>
+                      ):null}
                   <button className="btn btn-block profile-btn" onClick={::this.onSubmitPW} disabled={(editedPW? '':'disabled')}>CẬP NHẬT MẬT KHẨU</button>
 
                 </div>
