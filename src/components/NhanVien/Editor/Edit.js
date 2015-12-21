@@ -5,6 +5,7 @@ import * as nhanvienActions from '../../../actions/nhanvienActions';
 import * as userActions from '../../../actions/userActions';
 
 @connect(state =>({
+  user: state.user.user,
   error: state.nhanvien.postError,
   message: state.nhanvien.message,
   item: state.nhanvien.editItem,
@@ -18,8 +19,10 @@ export default class EditNV extends Component {
     account: PropTypes.object,
     meta: PropTypes.object,
     error: PropTypes.object,
+    user: PropTypes.object,
     message: PropTypes.bool,
     postItem: PropTypes.func.isRequired,
+    updateAccount: PropTypes.func.isRequired,
     getItem: PropTypes.func.isRequired,
     close: PropTypes.func.isRequired,
     reset: PropTypes.func.isRequired
@@ -125,8 +128,18 @@ export default class EditNV extends Component {
       this.props.close();
     }
   }
+  lock(){
+    let item = this.state.item;
+    item.lock = !item.lock;
+    this.props.postItem(preprocessPost(item, this.props.meta));
+  }
+  lockAcc(){
+    let account = this.props.account;
+    account.lock = !account.lock;
+    this.props.updateAccount(account);
+  }
   render() {
-    const {meta, error, message, account} = this.props;
+    const {meta, error, message, account, user} = this.props;
     const {item, edited, submited, showFullField, id, createAcc, messNewacc, account_init} = this.state;
     const metaPP = preprocess(meta);
     const fieldRender = showFullField && id? renderField(item, metaPP, this, true):renderField(item, metaPP, this);
@@ -140,15 +153,6 @@ export default class EditNV extends Component {
           {submited ? <p className='help-block required'>
               {checkRequire(metaPP, item)}&nbsp;&nbsp;
             </p>:null}
-            {(message && !edited)? (message === true?
-              <p className='help-block success'>
-              <span className="fa fa-check"></span>{' Cập nhật thành công!!'}
-              </p>:
-              <p className='help-block required'>
-              <span className="fa fa-close"></span>{" Cập nhật thất bại!"}
-              </p>
-              ):null}
-
           </div>
         </div>
         <hr/>
@@ -204,6 +208,7 @@ export default class EditNV extends Component {
                       </p>:null}
                       <button className='btn btn-success  pull-right' onClick={::this.onSubmitAcc} disabled={(account_init.username? '':'disabled')}>{"Tạo mới"}</button>
                     </div>:null}
+
                 </div>
               </div>
             </div>
@@ -212,18 +217,36 @@ export default class EditNV extends Component {
         <br/>
         <hr/>
         <div className="row">
-          <div className="col-md-12 flex-right">
+          <div className="col-md-5"></div>
+          <div className="col-md-7  flex-right">
           {submited ? <p className='help-block required'>
               {checkRequire(metaPP, item)}
             </p>:null}
             {(message && !edited)? (message === true?
-              <p className='help-block success'>
-              <span className="fa fa-check"></span>{' Cập nhật thành công!!'}
-              </p>:
-              <p className='help-block required'>
-              <span className="fa fa-close"></span>{" Cập nhật thất bại!"}
-              </p>
-              ):null}&nbsp;&nbsp;
+                    <p className='help-block success'>
+                    <span className="fa fa-check"></span>{' Cập nhật thành công!!'}
+                    </p>:
+                    <p className='help-block required'>
+                    <span className="fa fa-close"></span>{" Cập nhật thất bại!"}
+                    </p>
+                    ):null}
+          </div>
+        </div>
+        <div className="row">
+        <div className="col-md-5">
+            {user && user.role === 'admin'? (item.lock === false ? <button className='btn btn-danger' onClick={::this.lock} >
+                      {"Lock"}
+                      </button>:<button className='btn btn-danger' onClick={::this.lock} >
+                      {"Unlock"}
+                      </button>):null}&nbsp;&nbsp;&nbsp;&nbsp;
+            {user && user.role === 'admin' && item.haveaccount? (account && account.lock === false ? <button className='btn btn-danger' onClick={::this.lockAcc} >
+                      {"Lock Account"}
+                      </button>:<button className='btn btn-danger' onClick={::this.lockAcc} >
+                      {"Unlock Account"}
+                      </button>):null}
+          </div>
+          <div className="col-md-7 flex-right">
+
           {id? <button className='btn btn-warning' onClick={::this.onSubmit} disabled={(edited? '':'disabled')}>
           {"Cập Nhật"}
           </button>: <button className='btn btn-success' onClick={::this.onSubmit} disabled={(edited? '':'disabled')}>

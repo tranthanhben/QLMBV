@@ -49,7 +49,7 @@ export default class ThongKe extends Component {
   changeMonth(){
     let value = event.target.value;
     this.state.month = value;
-    if(this.state.type === 'nhapxuat'){
+    if(this.state.thongke === 'nhapxuat'){
       this.props.loadNX({
         start: value,
         end: value,
@@ -69,7 +69,7 @@ export default class ThongKe extends Component {
   changeYear(){
     let value = event.target.value;
     this.state.year = value;
-    if(this.state.type === 'nhapxuat'){
+    if(this.state.thongke === 'nhapxuat'){
       this.props.loadNX({
         start: value,
         end: value,
@@ -91,7 +91,7 @@ export default class ThongKe extends Component {
     let addr = event.target.dataset.addr;
     let value = event.target.value;
     obj = setValue(obj, addr, value);
-    if(this.state.type === 'nhapxuat'){
+    if(this.state.thongke === 'nhapxuat'){
       this.props.loadNX(obj);
     }else{
       this.props.loadTC(obj);

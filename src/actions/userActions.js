@@ -24,6 +24,10 @@ import {
   UPDATE_USER_SUCCESS,
   UPDATE_USER_FAIL,
 
+  UPDATE_ACCOUNT,
+  UPDATE_ACCOUNT_SUCCESS,
+  UPDATE_ACCOUNT_FAIL,
+
   GET_ACCOUNT,
   GET_ACCOUNT_SUCCESS,
   GET_ACCOUNT_FAIL
@@ -73,6 +77,14 @@ export function changePass(data, id){
 export function updateUser(data){
   return {
     types: [UPDATE_USER, UPDATE_USER_SUCCESS, UPDATE_USER_FAIL],
+    promise: (client) => client.put(`/account/change_info/${data.id}`, {
+        data: JSON.stringify(data)
+      })
+  }
+}
+export function updateAccount(data){
+  return {
+    types: [UPDATE_ACCOUNT, UPDATE_ACCOUNT_SUCCESS, UPDATE_ACCOUNT_FAIL],
     promise: (client) => client.put(`/account/change_info/${data.id}`, {
         data: JSON.stringify(data)
       })

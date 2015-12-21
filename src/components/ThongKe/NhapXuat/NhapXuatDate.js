@@ -7,7 +7,7 @@ import * as thongkeActions from '../../../actions/thongkeActions'
 function xulydulieudate(datas=[]){
   let nhap = 0;
   let xuat = 0;
-  datas.map((data, index) =>{
+  datas.map(data =>{
     let db = data.reduction || [];
     db.map(d=>{
       if(d.soluong > 0){

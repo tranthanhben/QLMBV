@@ -4,6 +4,7 @@ import{initObject, renderField, preprocess, setValue, checkRequire, preprocessPo
 import * as nhacungcapActions from '../../../actions/nhacungcap/nhacungcapActions';
 
 @connect(state =>({
+  user: state.user.user,
   error: state.nhacungcap.postError,
   message: state.nhacungcap.message,
   item: state.nhacungcap.editItem,
@@ -15,6 +16,7 @@ export default class EditNCC extends Component {
     item: PropTypes.object,
     meta: PropTypes.object,
     error: PropTypes.object,
+    user: PropTypes.object,
     message: PropTypes.bool,
     postItem: PropTypes.func.isRequired,
     getItem: PropTypes.func.isRequired,
@@ -76,12 +78,16 @@ export default class EditNCC extends Component {
       this.props.close();
     }
   }
+  lock(){
+    let item = this.state;
+    item.lock = !item.lock;
+    this.props.postItem(preprocessPost(item, this.props.meta));
+  }
   render() {
-    const {meta, error, message} = this.props;
+    const {meta, error, message, user} = this.props;
     const {item, edited, submited, showFullField, id} = this.state;
     const metaPP = preprocess(meta);
     const fieldRender = showFullField && id? renderField(item, metaPP, this, true):renderField(item, metaPP, this);
-    console.log(message, edited, message && !edited);
     return (
       <div>
         <div className="row">
@@ -132,7 +138,14 @@ export default class EditNCC extends Component {
         <br/>
         <hr/>
         <div className="row">
-          <div className="col-md-12 flex-right">
+          <div className="col-md-2">
+            {user && user.role === 'admin'? (item.lock === false ? <button className='btn btn-danger' onClick={::this.lock} >
+                      {"Lock"}
+                      </button>:<button className='btn btn-danger' onClick={::this.lock} >
+                      {"Unlock"}
+                      </button>):null}
+          </div>
+          <div className="col-md-10 flex-right">
           {submited ? <p className='help-block required'>
               {checkRequire(metaPP, item)}
             </p>:null}&nbsp;&nbsp;

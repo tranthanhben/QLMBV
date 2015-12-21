@@ -10,6 +10,7 @@ import {
   LOGIN_LOAD,
   LOGIN_LOAD_SUCCESS,
   LOGIN_LOAD_FAIL,
+
   LOGOUT_LOAD,
   LOGOUT_LOAD_SUCCESS,
   LOGOUT_LOAD_FAIL,
@@ -24,7 +25,11 @@ import {
 
   UPDATE_USER,
   UPDATE_USER_SUCCESS,
-  UPDATE_USER_FAIL
+  UPDATE_USER_FAIL,
+
+  UPDATE_ACCOUNT,
+  UPDATE_ACCOUNT_SUCCESS,
+  UPDATE_ACCOUNT_FAIL,
 
 } from '../actions/actionTypes';
 
@@ -125,6 +130,25 @@ export default function user(state = initialState, action = {}) {
           updating: false,
           messageUU: false,
           errorUU: action.error
+        }
+      case UPDATE_ACCOUNT:
+        return {
+          ...state,
+          updating: true
+        }
+      case UPDATE_ACCOUNT_SUCCESS:
+        return {
+          ...state,
+          updating: false,
+          messageAC: true,
+          account: action.result
+        }
+      case UPDATE_ACCOUNT_FAIL:
+        return {
+          ...state,
+          updating: false,
+          messageAC: false,
+          errorAC: action.error
         }
       case LOGIN_LOAD:
         return {
