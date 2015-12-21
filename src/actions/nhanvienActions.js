@@ -4,6 +4,10 @@ import {
   NV_LIST_LOAD_SUCCESS,
   NV_LIST_LOAD_FAIL,
 
+  NV_LIST_PB,
+  NV_LIST_PB_SUCCESS,
+  NV_LIST_PB_FAIL,
+
   NV_ONE_LOAD,
   NV_ONE_LOAD_SUCCESS,
   NV_ONE_LOAD_FAIL,
@@ -60,6 +64,19 @@ export function loadList(options = {}){
     })
   };
 }
+export function loadPB(options = {}){
+  return {
+    types: [NV_LIST_PB, NV_LIST_PB_SUCCESS, NV_LIST_PB_FAIL],
+    promise: (client) => client.get('/phong_ban',{
+      params: makeQuery({
+        page: options.page || 0,
+        page_size : options.page_size || 100,
+        name: options.name || '',
+        sort: options.sort || ''
+      })
+    })
+  };
+}
 
 export function postItem(data){
   if(data.id){
@@ -84,5 +101,5 @@ export function reset(){
   }
 }
 export function isLoaded(globalState) {
-  return globalState.nhanvien && globalState.nhanvien.loaded;
+  return globalState.nhanvien && globalState.nhanvien.loaded && globalState.nhanvien.loadPB;
 }

@@ -1,19 +1,27 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {renderInfo, formatDate, numeral} from '../../../meta';
-
+import {renderInfo, formatDate, numeral, ATOLV} from '../../../meta';
+@connect(
+  state =>({
+    listPB: state.nhanvien.listPB,
+  }))
 export class ViewNV extends Component {
   static propTypes = {
     meta: PropTypes.object,
     item: PropTypes.object,
+    listPB: PropTypes.array,
     close: PropTypes.func.isRequired,
     edit: PropTypes.func.isRequired
   }
   render(){
-    const {meta, item, close} = this.props;
+    const {meta, item, close, listPB} = this.props;
+    const PB = ATOLV(listPB);
     let info = [];
     for(const key in meta){
       const field = meta[key];
+      if(field.field === false && field.type === "special"){
+        continue;
+      }
       let value = item[key] || '';
       if(field.type === "date"){
         value =formatDate(item[key]);
@@ -34,13 +42,24 @@ export class ViewNV extends Component {
         </div>
       );
     }
+    console.log("phongban", item);
     return (
       <div className="info">
         <h3 className="info-header">Thông Tin Nhân Viên</h3>
         <hr/>
         <div className="row">
           <div className="col-md-12">
-           {info}
+            {info}
+            <div className="info-group" key="phongban">
+              <div className="row">
+                <div className="col-md-4 align-right">
+                  <span>{"Phòng Ban" + ": "}</span>
+                </div>
+                <div className="col-md-8">
+                  <p >{PB[item["phongbanid"]].ten ||''}</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <hr/>

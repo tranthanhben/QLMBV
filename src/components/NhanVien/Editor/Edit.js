@@ -1,10 +1,11 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import{initObject, renderField, preprocess, setValue, checkRequire, preprocessPost} from '../../../meta';
+import{initObject, renderField, preprocess, setValue, checkRequire, preprocessPost, renderLabel} from '../../../meta';
 import * as nhanvienActions from '../../../actions/nhanvienActions';
 import * as userActions from '../../../actions/userActions';
 
 @connect(state =>({
+  listPB: state.nhanvien.listPB,
   user: state.user.user,
   error: state.nhanvien.postError,
   message: state.nhanvien.message,
@@ -21,6 +22,7 @@ export default class EditNV extends Component {
     error: PropTypes.object,
     user: PropTypes.object,
     message: PropTypes.bool,
+    listPB: PropTypes.array,
     postItem: PropTypes.func.isRequired,
     updateAccount: PropTypes.func.isRequired,
     getItem: PropTypes.func.isRequired,
@@ -139,7 +141,7 @@ export default class EditNV extends Component {
     this.props.updateAccount(account);
   }
   render() {
-    const {meta, error, message, account, user} = this.props;
+    const {meta, error, message, account, user, listPB} = this.props;
     const {item, edited, submited, showFullField, id, createAcc, messNewacc, account_init} = this.state;
     const metaPP = preprocess(meta);
     const fieldRender = showFullField && id? renderField(item, metaPP, this, true):renderField(item, metaPP, this);
@@ -168,6 +170,22 @@ export default class EditNV extends Component {
                     </div>
                   </div></div>: null}
                 {fieldRender}
+                <div className='form-group' key="phongbanid">
+                  {renderLabel(metaPP.phongbanid)}
+                  &nbsp;
+                  <select className='form-control' data-addr='phongbanid'
+                  onChange={::this.handleChange}
+                  value={item.phongbanid || ''}>
+                  <option key='phongbanid'>-- Phong ban --</option>
+                  {listPB && listPB.map(b => {
+                    return (
+                      <option key={b.id} value={b.id}>
+                        {b.ten}
+                      </option>
+                    );
+                  })}
+                  </select>
+                </div>
                 {item && item.haveaccount && account? <div className='form-group' key='username'>
                   <label>
                     <span>

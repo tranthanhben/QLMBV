@@ -3,6 +3,10 @@ import {
   NV_LIST_LOAD_SUCCESS,
   NV_LIST_LOAD_FAIL,
 
+  NV_LIST_PB,
+  NV_LIST_PB_SUCCESS,
+  NV_LIST_PB_FAIL,
+
   NV_ONE_LOAD,
   NV_ONE_LOAD_SUCCESS,
   NV_ONE_LOAD_FAIL,
@@ -40,7 +44,7 @@ export default function nhanvien(state = initialState, action = {}){
     case NV_LIST_LOAD_SUCCESS:
       return {
         ...state,
-        loadding: false,
+        loading: false,
         loaded: true,
         list: action.result.items,
         paging: action.result.paging
@@ -53,6 +57,26 @@ export default function nhanvien(state = initialState, action = {}){
         list: [],
         paging: null,
         error: action.error
+      };
+    case NV_LIST_PB:
+      return {
+        ...state,
+        loadingPB: true
+      };
+    case NV_LIST_PB_SUCCESS:
+      return {
+        ...state,
+        loadingPB: false,
+        loaded: true,
+        listPB: action.result.items,
+      };
+    case NV_LIST_PB_FAIL:
+      return {
+        ...state,
+        loadingPB: false,
+        loaded: false,
+        listPB: [],
+        errorPB: action.error
       };
 
     case NV_ONE_LOAD:

@@ -12,6 +12,7 @@ import Modal from '../layout/Modal';
 @connect(
   state =>({
     listNV: state.nhanvien.list,
+    listPB: state.nhanvien.listPB,
     paging: state.nhanvien.paging,
     error: state.nhanvien.error,
     loading: state.nhanvien.loading,
@@ -24,6 +25,7 @@ export default
 class List extends Component{
   static propTypes = {
     listNV: PropTypes.array,
+    listPB: PropTypes.array,
     error: PropTypes.object,
     paging: PropTypes.object,
     meta: PropTypes.object,
@@ -111,7 +113,7 @@ class List extends Component{
     this.setState({openEdit: !this.state.openEdit})
   }
   render(){
-    const {listNV, paging, meta} = this.props;
+    const {listNV, listPB, paging, meta} = this.props;
     const {options, itemView, openView, openEdit, idEdit} = this.state;
     return (
         <div className="mbv-grid container-fluid" style={{"zIndex": "9999983"}}>

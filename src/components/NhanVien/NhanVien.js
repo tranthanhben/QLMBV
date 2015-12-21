@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {isLoaded, loadList as loadNV} from '../../actions/nhanvienActions';
+import {isLoaded, loadList as loadNV, loadPB} from '../../actions/nhanvienActions';
 import ListNV from './List';
 import Modal from '../layout/Modal';
 import * as layoutActions from '../../actions/layoutActions';
@@ -21,9 +21,12 @@ export default class SanPham extends Component{
     isOpenEdit: false
   }
   static fetchData(store){
+    const promises = [];
     if(!isLoaded(store.getState)){
-      return store.dispatch(loadNV());
+     promises.push(store.dispatch(loadNV()));
+     promises.push(store.dispatch(loadPB()));
     }
+    return Promise.all(promises);
   }
   toggleModal() {
     this.props.openModal(!this.state.isOpenEdit);

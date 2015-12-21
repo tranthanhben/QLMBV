@@ -239,13 +239,13 @@ const initialState = {
       field: true,
       view: false
     },
-    "phongban": {
-      name: "phongban",
+    "phongbanif": {
+      name: "phongbanif",
       label: "Phòng Ban",
       sort: false,
-      type: "single",
+      type: "special",
       required: false,
-      field: true,
+      field: false,
       view: false
     },
     "chucvu": {

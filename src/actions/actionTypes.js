@@ -99,6 +99,10 @@ export const NV_LIST_LOAD = "NV_LIST_LOAD";
 export const NV_LIST_LOAD_SUCCESS = "NV_LIST_LOAD_SUCCESS";
 export const NV_LIST_LOAD_FAIL = "NV_LIST_LOAD_FAIL";
 
+export const NV_LIST_PB = "NV_LIST_PB";
+export const NV_LIST_PB_SUCCESS = "NV_LIST_PB_SUCCESS";
+export const NV_LIST_PB_FAIL = "NV_LIST_PB_FAIL";
+
 export const NV_ONE_LOAD = "NV_ONE_LOAD";
 export const NV_ONE_LOAD_SUCCESS = "NV_ONE_LOAD_SUCCESS";
 export const NV_ONE_LOAD_FAIL = "NV_ONE_LOAD_FAIL";
