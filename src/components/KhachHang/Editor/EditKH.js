@@ -78,7 +78,7 @@ export default class EditKH extends Component {
     }
   }
   lock(){
-    let item = this.state;
+    let item = this.state.item;
     item.lock = !item.lock;
     this.props.postItem(preprocessPost(item, this.props.meta));
   }
