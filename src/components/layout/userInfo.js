@@ -127,12 +127,12 @@ export default class InfoUser extends Component {
         },
         submitedPW:false,
         editedPW: false,
-        messageCP: messageCP,
+        messageCP: nextProps.messageCP,
       })
     }
     if(nextProps.messageUU){
       this.setState({
-        messageUU: messageUU,
+        messageUU: nextProps.messageUU,
         edited: false,
         submited: false
       })
