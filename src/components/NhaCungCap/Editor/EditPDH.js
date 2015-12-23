@@ -1,9 +1,10 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {initObject, ATO, OTA, preprocess, datetime, changeDTI, renderLabel, setValue, checkRequire, preprocessPost} from '../../../meta';
+import {initObject, ATO, OTA, preprocess, datetime, changeDTI, renderLabel, setValue, checkRequire, preprocessPost, parseOptSelect} from '../../../meta';
 import {THead, TBody} from '../../table/rowForPDH';
 import * as pdhActions from '../../../actions/nhacungcap/pdhActions';
 import * as giaodichActions from '../../../actions/giaodichActions';
+import Select from 'react-select';
 
 @connect(state =>({
   gdItem: state.phieudathang.editItem,
@@ -104,6 +105,13 @@ export default class EditPDH extends Component {
     }
     return '';
   }
+  changeSelect(val) {
+    let gdItem = this.state.gdItem;
+    if(val && val !== gdItem.doitacid){
+      gdItem.doitacid = val;
+      this.setState({gdItem:gdItem});
+    }
+  }
   onSubmit(){
     if(this.checkRq()){
       this.setState({
@@ -179,10 +187,11 @@ export default class EditPDH extends Component {
     }
   }
   render() {
-    const {meta, error, message, listNCC, listLV} = this.props;
+    const {meta, error, message, listLV} = this.props;
     const {gdItem, edited, submited, showFullField, giaodichid, ctdh, editedDH} = this.state;
     const metaGD = meta && preprocess(meta.giaodich) || {};
     const metaCTDH = meta && preprocess(meta.ctdh) || {};
+    const listNCC = parseOptSelect(this.props.listNCC||[]);
     return (
       <div>
         <div className="row">
@@ -200,18 +209,14 @@ export default class EditPDH extends Component {
                 <div className='form-group' key="khachhang">
                   {renderLabel(metaGD.doitacid)}
                   &nbsp;
-                  <select className='form-control' data-addr='doitacid'
-                  onChange={::this.handleChange}
-                  value={gdItem.doitacid || ''}>
-                  <option key='doitacid'>-- Nha Cung Cap --</option>
-                  {listNCC && listNCC.map(b => {
-                    return (
-                      <option key={b.id} value={b.id}>
-                        {b.ten}
-                      </option>
-                    );
-                  })}
-                  </select>
+                  <Select
+                    data-addr='doitacid'
+                    placeholder="Chon nha cung cap..."
+                    clearable= {true}
+                    searchable={true}
+                     onChange={::this.changeSelect}
+                    value={gdItem.doitacid}
+                    options={listNCC} />
                 </div>
                 <div className='form-group' key="tinhtrangdonhang">
                   {renderLabel(metaGD.tinhtrangdonhang)}

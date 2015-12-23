@@ -1,11 +1,13 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {initObject, ATO, OTA, preprocess, datetime, changeDTI, renderLabel, setValue, checkRequire, preprocessPost, numeral} from '../../../meta';
+import {initObject, ATO, OTA, preprocess, datetime, changeDTI, renderLabel, setValue, checkRequire, preprocessPost, numeral, parseOptSelect} from '../../../meta';
 import {THead, TBody} from '../../table/rowForPMH';
 import * as pmhActions from '../../../actions/khachhang/pmhActions';
 import * as giaodichActions from '../../../actions/giaodichActions';
 import {markdown} from 'markdown';
 import {NotePMH} from '../../markdownNote';
+import Select from 'react-select';
+
 
 @connect(state =>({
   gdItem: state.phieumuahang.editItem,
@@ -99,6 +101,7 @@ export default class EditPMH extends Component {
     let obj = this.state.gdItem;
     let addr = event.target.dataset.addr;
     let value = event.target.value;
+    console.log(obj, addr, value);
     this.setState({
       edited: true,
       gdItem: setValue(obj, addr, value)
@@ -190,11 +193,19 @@ export default class EditPMH extends Component {
       this.setState({ctdh: ctdh, editedDH: true});
     }
   }
+  changeSelect(val) {
+    let gdItem = this.state.gdItem;
+    if(val && val !== gdItem.doitacid){
+      gdItem.doitacid = val;
+      this.setState({gdItem:gdItem});
+    }
+  }
   render() {
-    const {meta, error, message, listKH, listLV} = this.props;
+    const {meta, error, message, listLV} = this.props;
     const {gdItem, edited, submited, showFullField, giaodichid, ctdh, editedDH} = this.state;
     const metaGD = meta && preprocess(meta.giaodich) || {};
     const metaCTDH = meta && preprocess(meta.ctdh) || {};
+    const listKH = parseOptSelect(this.props.listKH||[]);
     return (
       <div>
         <div className="row">
@@ -212,18 +223,14 @@ export default class EditPMH extends Component {
                 <div className='form-group' key="khachhang">
                   {renderLabel(metaGD.doitacid)}
                   &nbsp;
-                  <select className='form-control' data-addr='doitacid'
-                  onChange={::this.handleChange}
-                  value={gdItem.doitacid || ''}>
-                  <option key='doitacid'>-- Khách Hàng --</option>
-                  {listKH && listKH.map(b => {
-                    return (
-                      <option key={b.id} value={b.id}>
-                        {b.ten}
-                      </option>
-                    );
-                  })}
-                  </select>
+                  <Select
+                    data-addr='doitacid'
+                    placeholder="Chon khach hang..."
+                    clearable= {true}
+                    searchable={true}
+                     onChange={::this.changeSelect}
+                    value={gdItem.doitacid}
+                    options={listKH} />
                 </div>
                 <div className='form-group' key="tinhtrangdonhang">
                   {renderLabel(metaGD.tinhtrangdonhang)}
