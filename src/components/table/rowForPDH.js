@@ -15,7 +15,7 @@ export class THead extends Component {
         continue;
       }
       thList.push(
-        <th className={classField} key={field.name} tabIndex="0" aria-controls="example" rowSpan="1" colSpan="1">{field.label}</th>
+        <th className={classField} key={field.name} tabIndex="0" aria-controls="example" rowSpan="1" colSpan="1">{field.label+(field.unitTable? field.unitTable : '')}</th>
       );
     }
     return (

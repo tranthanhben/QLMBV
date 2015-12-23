@@ -101,7 +101,6 @@ export default class EditPMH extends Component {
     let obj = this.state.gdItem;
     let addr = event.target.dataset.addr;
     let value = event.target.value;
-    console.log(obj, addr, value);
     this.setState({
       edited: true,
       gdItem: setValue(obj, addr, value)
@@ -197,7 +196,10 @@ export default class EditPMH extends Component {
     let gdItem = this.state.gdItem;
     if(val && val !== gdItem.doitacid){
       gdItem.doitacid = val;
-      this.setState({gdItem:gdItem});
+      this.setState({
+        edited: true,
+        gdItem:gdItem
+      });
     }
   }
   render() {

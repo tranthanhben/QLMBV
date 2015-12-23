@@ -469,9 +469,9 @@ const initialState = {
         field: false,
         view: true
       },
-      "nhanvienid": {
-        name: "nhanvienid",
-        label: "Nhân Viên",
+      "nvdh": {
+        name: "nhdh",
+        label: "NV DH",
         sort: true,
         up: true,
         type: "single",
@@ -512,6 +512,7 @@ const initialState = {
         name: "tinhtrangdonhang",
         label: "Tình Trạng Đặt",
         sort: false,
+        required: true,
         up: false,
         type: "select",
         options: [{
@@ -573,6 +574,15 @@ const initialState = {
         }],
         field: false,
         view: false
+      },
+      "ngaydat": {
+        name: "ngaydat",
+        label: "Ngày Đặt",
+        sort: true,
+        type: "date",
+        required: true,
+        field: true,
+        view: false
       }
     },
     ctdh: {
@@ -610,7 +620,9 @@ const initialState = {
         up: false,
         type: "number",
         field: true,
-        view: true
+        view: true,
+        unitTable: "(met)",
+        unit: "met"
       },
       gia: {
         name: "gia",
@@ -619,7 +631,9 @@ const initialState = {
         up: false,
         type: "number",
         field: true,
-        view: true
+        view: true,
+        unitTable: "(vnd)",
+        unit: " VND"
       },
       thanhtien: {
         name: "thanhtien",
@@ -628,7 +642,9 @@ const initialState = {
         up: false,
         type: "number",
         field: false,
-        view: true
+        view: true,
+        unitTable: "(vnd)",
+        unit: " VND"
       }
     }
   },

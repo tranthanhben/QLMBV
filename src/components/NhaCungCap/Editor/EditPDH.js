@@ -29,9 +29,11 @@ export default class EditPDH extends Component {
   }
   state = {
     gdItem: {
-      nhanvienid: this.props.user.nhanvienid || 'admin',
+      nvdh: this.props.user.nhanvienid || 'admin',
       tinhtrangdonhang: 'chuaxuly',
-      doitacid: ''
+      doitacid: '',
+      soluong: 1,
+      ngaydat: changeDTI(datetime(new Date()))
     },
     giaodichid: this.props.giaodichid,
     ctdh:this.props.gdItem && this.props.gdItem.chitietdonhang || [],
@@ -109,7 +111,10 @@ export default class EditPDH extends Component {
     let gdItem = this.state.gdItem;
     if(val && val !== gdItem.doitacid){
       gdItem.doitacid = val;
-      this.setState({gdItem:gdItem});
+      this.setState({
+        edited: true,
+        gdItem:gdItem
+      });
     }
   }
   onSubmit(){
@@ -212,7 +217,7 @@ export default class EditPDH extends Component {
                   <Select
                     data-addr='doitacid'
                     placeholder="Chon nha cung cap..."
-                    clearable= {true}
+                    clearable= {false}
                     searchable={true}
                      onChange={::this.changeSelect}
                     value={gdItem.doitacid}
@@ -221,6 +226,10 @@ export default class EditPDH extends Component {
                 <div className='form-group' key="tinhtrangdonhang">
                   {renderLabel(metaGD.tinhtrangdonhang)}
                   {metaGD && metaGD["tinhtrangdonhang"].$input(gdItem,this)}
+                </div>
+                <div className='form-group' key="ngaydat">
+                  {renderLabel(metaGD.ngaydat)}
+                  {metaGD && metaGD["ngaydat"].$input(gdItem,this)}
                 </div>
               </div>
               <div className="col-md-4">
