@@ -656,6 +656,7 @@ const initialState = {
         sort: true,
         up: true,
         type: "single",
+        required: true,
         field: false,
         view: true
       },
@@ -697,6 +698,35 @@ const initialState = {
         field: true,
         view: true,
         unit: ' VND'
+      },
+      "kho": {
+        name: "kho",
+        label: "Tong so met nhap",
+        sort: false,
+        up: false,
+        type: "number",
+        field: true,
+        view: true,
+        unit: ' met'
+      },
+      "donhang": {
+        name: "donhang",
+        label: "Tong so cay nhap",
+        sort: false,
+        up: false,
+        type: "number",
+        field: true,
+        view: true,
+        unit: ' Cay'
+      },
+      "ngayhoanthanh": {
+        name: "ngayhoanthanh",
+        label: "Ngày Hoan Thanh",
+        sort: true,
+        type: "date",
+        disabled: true,
+        field: false,
+        view: false
       },
       "tinhtrangdonhang": {
         name: "tinhtrangdonhang",

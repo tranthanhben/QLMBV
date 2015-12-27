@@ -4,7 +4,8 @@ import {formatDate, numeral, ATOLV} from '../../meta';
 export class THead extends Component {
   static propTypes = {
     meta: PropTypes.object,
-    add: PropTypes.func.isRequired
+    add: PropTypes.func.isRequired,
+    addRow: PropTypes.func.isRequired,
   }
   render(){
     let thList = [];
@@ -24,6 +25,9 @@ export class THead extends Component {
         {thList}
         <th key="control" className="group-edit">
           <button className="btn btn-success btn-table btn-in-th btn-in-add" title="Add" onClick={this.props.add}>
+            <i className="fa fa-plus"/>
+          </button>
+          <button className="btn btn-default btn-table btn-in-th btn-in-add" title="Add" onClick={this.props.addRow}>
             <i className="fa fa-plus"/>
           </button>
         </th>
@@ -74,7 +78,7 @@ export class TBody extends Component {
   componentWillMount(){
     this.state.objectLV = ATOLV(this.props.listLV || []);
     this.state.loaivai = this.state.objectLV[this.props.item.loaivaiid]|| {};
-    this.state.objectK = ATOLV(this.props.listLV || []);
+    this.state.objectK = ATOLV(this.props.listK || []);
     this.state.kho = this.state.objectK[this.props.item.khoid]|| {};
   }
   componentWillReceiveProps(nextProps) {

@@ -14,4 +14,4 @@ export {default as checkRequire} from './checkRequire';
 export {default as makeQuery} from './makeQuery';
 export let defaultimg = '../images/defautl.jpg';
 export {default as numeral} from './numeral';
-export {default as parseOptSelect} from './parseOptSelect';
+export {parseOptTen, parseOptId} from './parseOptSelect';

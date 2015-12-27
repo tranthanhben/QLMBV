@@ -1,4 +1,4 @@
-export default function parseOptSelect(array=[]){
+export function parseOptTen(array=[]){
   if(!array instanceof Array){
     return [];
   }
@@ -10,5 +10,20 @@ export default function parseOptSelect(array=[]){
     }
     arr.push(obj);
   });
+  return arr;
+}
+export function parseOptId(array=[]){
+  if(!array instanceof Array){
+    return [];
+  }
+  let  arr = [];
+  array.map(a =>{
+    let obj ={
+      label: a.id || '',
+      value: a.id || ''
+    }
+    arr.push(obj);
+  });
+  console.log("array", array);
   return arr;
 }

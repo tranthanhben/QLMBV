@@ -98,6 +98,20 @@ export const Style = {
     borderRadius: '4px',
     outline: 'none',
     padding: '10px 20px'
+  },
+  content_add: {
+    position: 'absolute',
+    width: '90%',
+    height: '300px',
+    top: '40%',
+    left: '5%',
+    border: '1px solid #ccc',
+    background: '#fff',
+    overflow: 'auto',
+    WebkitOverflowScrolling: 'touch',
+    borderRadius: '4px',
+    outline: 'none',
+    padding: '10px 20px'
   }
 }
 export const DataBar = {

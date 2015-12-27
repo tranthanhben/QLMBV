@@ -1,11 +1,22 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {initObject, ATO, OTA, preprocess, datetime, changeDTI, renderLabel, setValue, checkRequire, preprocessPost} from '../../../meta';
+import {initObject, ATOLV, OTA, preprocess, datetime, changeDTI, renderLabel, setValue, checkRequire, preprocessPost, parseOptTen, parseOptId} from '../../../meta';
 import {THead, TBody} from '../../table/rowForPNH';
 import {THeadCTDH, TBodyCTDH} from '../../table/rowForPDH';
 import * as pnhActions from '../../../actions/nhacungcap/pnhActions';
 import * as giaodichActions from '../../../actions/giaodichActions';
+import Modal from '../../layout/Modal';
+import {Style} from '../../Style';
+import Select from 'react-select';
 
+function filterLV(ctdh, list){
+  let listLV =[];
+  let obj = ATOLV(list);
+  ctdh.map(dh =>{
+    listLV.push(obj[dh.loaivaiid]);
+  });
+  return [...listLV];
+}
 @connect(state =>({
   gdItem: state.phieunhaphang.editItem,
   meta: state.meta.phieunhaphang,
@@ -36,32 +47,28 @@ export default class EditPNH extends Component {
     loadK: PropTypes.func.isRequired
   }
   state = {
-    gdItem: {
-      nhanvienid: this.props.user.nhanvienid || 'admin',
-      tinhtrangkho: 'chuaxuly',
-      doitacid: '',
-      ngayhoanthanh: changeDTI(datetime(new Date()))
-    },
+    gdItem: {},
     giaodichid: this.props.giaodichid,
-    ctk:this.props.gdItem && this.props.gdItem.chitietkho || [],
+    ctk: [],
     edited: false,
     editedCTK: false,
     submiting: false,
     ctk_init: {
       giaodichid: this.props.giaodichid || '',
       loaivaiid:'',
-      soluong:'',
+      soluong: 1 , // so luong cay vai
       gia:'',
       khoid:'',
       ngaytao: new Date(changeDTI(datetime(new Date()))),
+      ngaynhap: changeDTI(datetime(new Date())),
       loaigiaodich:"pdh"
     },
-    newGD: true
+    newGD: true,
+    openAdd: false
   }
   componentWillMount(){
     if(this.props.giaodichid){
       this.props.getItem(this.props.giaodichid);
-      this.state.newGD = false;
     }
     this.props.loadNCC();
     this.props.loadLV();
@@ -76,26 +83,36 @@ export default class EditPNH extends Component {
       this.setState({
         giaodichid: nextProps.gdItem.id,
         gdItem: nextProps.gdItem,
-        newGD: false,
         submiting: false,
         edited: false
       });
     }else if(nextProps.gdItem){
       this.setState({
-        giaodichid: nextProps.gdItem.id,
         ctk: nextProps.gdItem.chitietkho ||[],
         gdItem: nextProps.gdItem,
-        newGD: false,
         edited: false,
         editedCTK: false,
-        submiting: false,
+        submiting: false
+      });
+    }
+    if(nextProps.gdItem && this.state.newGD){
+      let gdItem = nextProps.gdItem;
+      gdItem.nvnh = this.props.user.nhanvienid || 'admin';
+      gdItem.tinhtrangkho = 'chuaxuly';
+      gdItem.ngayhoanthanh = changeDTI(datetime(new Date()));
+      this.setState({
+        giaodichid: nextProps.gdItem.id,
+        ctk: nextProps.gdItem.chitietkho ||[],
+        gdItem: gdItem,
+        newGD: false,
         ctk_init: {
           giaodichid: nextProps.gdItem.id || '',
           loaivaiid:'',
-          soluong:'',
+          soluong: 1,
+          chieudai:'',
           gia:'',
-          khoid:'',
           ngaytao: new Date(changeDTI(datetime(new Date()))),
+          ngaynhap: changeDTI(datetime(new Date())),
           loaigiaodich:"pdh"
         }
       });
@@ -117,13 +134,12 @@ export default class EditPNH extends Component {
       gdItem: setValue(obj, addr, value)
     })
   }
-  changeGDID(){
-    let value = event.target.value;
+  changeGDID(val){
     this.setState({
       edited: false,
-      giaodichid: value
+      giaodichid: val
     });
-    this.props.getItem(value);
+    this.props.getItem(val);
   }
   checkRq(){
     let mes = '';
@@ -134,6 +150,16 @@ export default class EditPNH extends Component {
       return 'Vui lòng thêm chi tiết kho';
     }
     return '';
+  }
+  changeSelect(val) {
+    let gdItem = this.state.gdItem;
+    if(val && val !== gdItem.doitacid){
+      gdItem.doitacid = val;
+      this.setState({
+        edited: true,
+        gdItem:gdItem
+      });
+    }
   }
   onSubmit(){
     if(this.checkRq()){
@@ -179,12 +205,30 @@ export default class EditPNH extends Component {
       this.props.close();
     }
   }
+  renderCTK(options={}){
+    return ()=>{
+      let ctk = this.state.ctk ||[];
+      let soluong = options.soluong || 0;
+      let ctk_init = this.state.ctk_init || {};
+      // if(soluong<= ctk.length){
+      //   this.setState({ctk: ctk, openAdd: false});
+      // }else{
+        for (let i = 0; i < soluong; i++) {
+          let ctk_new = {...ctk_init};
+          ctk_new.loaivaiid = options.loaivaiid;
+          ctk_new.khoid = options.khoid;
+          ctk_new.cayvaiid = 'cv_' + this.state.giaodichid + '_' + i;
+          ctk.push(ctk_new);
+        };
+        this.setState({ctk: ctk, openAdd: false});
+      // }
+    }
+  }
   addCTK(index) {
     return () =>{
       let ctk = this.state.ctk || [];
       const init = this.state.ctk_init || [];
       let befor_ctk = ctk.splice(0, index + 1);
-      console.log(befor_ctk, ctk);
       befor_ctk= [...befor_ctk, {...init}];
       ctk = [...befor_ctk,...ctk];
       this.setState({ctk : ctk});
@@ -210,12 +254,22 @@ export default class EditPNH extends Component {
       this.setState({ctk: ctk, editedCTK: true});
     }
   }
+  openAdd() {
+    if(this.state.giaodichid){
+      this.setState({openAdd: !this.state.openAdd});
+    }else{
+      alert("Vui long chon id phieu dat hang");
+    }
+  }
   render() {
-    const {meta, error, message, listNCC, listLV, listK, listPDH} = this.props;
-    const {gdItem, edited, submited, showFullField, giaodichid, ctk, editedCTK} = this.state;
+    const {meta, error, message, listK} = this.props;
+    const {gdItem, edited, submited, showFullField, giaodichid, ctk, editedCTK, openAdd} = this.state;
     const metaGD = meta && preprocess(meta.giaodich) || {};
     const metaCTK = meta && preprocess(meta.ctk) || {};
     const metaCTDH = meta && preprocess(meta.ctdh) || {};
+    const listLV = filterLV(gdItem.chitietdonhang || [], this.props.listLV||[]);
+    const listNCC = parseOptTen(this.props.listNCC || []);
+    const listPDH = parseOptId(this.props.listPDH ||[]);
     return (
       <div>
         <div className="row">
@@ -227,52 +281,68 @@ export default class EditPNH extends Component {
         </div>
         <hr/>
         <div className="row">
-          { giaodichid? [<div className="col-md-12" key="gdfield">
+          {openAdd? <Add close={::this.openAdd} listLV={listLV} listK={listK} meta={metaCTK} add={::this.renderCTK}></Add>
+             : null}
+          <div className="col-md-12" key="gdfield">
             <div className="row">
               <div className="col-md-8 boder-right">
                 <div className='form-group' key="giaodichid">
                   {renderLabel(metaGD.id)}
                   &nbsp;
-                  <select className='form-control   uppercase' data-addr='id'
-                  onChange={::this.changeGDID}
-                  value={giaodichid || ''}>
-                  <option key='id'>-- Giao Dich ID --</option>
-                  {listPDH && listPDH.map(b => {
-                    return (
-                      <option key={b.id} value={b.id}>
-                        {b.id}
-                      </option>
-                    );
-                  })}
-                  </select>
+                  <Select
+                    data-addr='giaodichid'
+                    className= "uppercase"
+                    placeholder="Chon phieu dat hang..."
+                    clearable= {false}
+                    searchable={true}
+                    onChange={::this.changeGDID}
+                    value={giaodichid || ''}
+                    options={listPDH} />
                 </div>
-                <div className='form-group' key="khachhang">
-                  {renderLabel(metaGD.doitacid)}
-                  &nbsp;
-                  <select className='form-control' data-addr='doitacid'
-                  readOnly
-                  value={gdItem.doitacid || ''}>
-                  <option key='doitacid'>-- Nha Cung Cap --</option>
-                  {listNCC && listNCC.map(b => {
-                    return (
-                      <option key={b.id} value={b.id}>
-                        {b.ten}
-                      </option>
-                    );
-                  })}
-                  </select>
-                </div>
-                <div className='form-group' key="tinhtrangkho">
-                  {renderLabel(metaGD.tinhtrangkho)}
-                  {metaGD && metaGD["tinhtrangkho"].$input(gdItem,this)}
+                <div className="row">
+                  <div className="col-md-6">
+                    <div className='form-group' key="khachhang">
+                      {renderLabel(metaGD.doitacid)}
+                      &nbsp;
+                      <Select
+                        data-addr='doitacid'
+                        placeholder="Chon nha cung cap..."
+                        clearable= {false}
+                        searchable={true}
+                         onChange={::this.changeSelect}
+                        value={gdItem.doitacid}
+                        options={listNCC} />
+                    </div>
+                    <div className='form-group' key="tinhtrangkho">
+                      {renderLabel(metaGD.tinhtrangkho)}
+                      {metaGD && metaGD["tinhtrangkho"].$input(gdItem,this)}
+                    </div>
+                    <div className='form-group' key="tongtien">
+                      {renderLabel(metaGD.tongtien)}
+                      {metaGD && metaGD["tongtien"].$input(gdItem,this)}
+                    </div>
+                  </div>
+                  <div className="col-md-6">
+                    <div className='form-group' key="donhang">
+                      {renderLabel(metaGD.donhang)}
+                      {metaGD && metaGD["donhang"].$input(gdItem,this)}
+                    </div>
+                    <div className='form-group' key="kho">
+                      {renderLabel(metaGD.kho)}
+                      {metaGD && metaGD["kho"].$input(gdItem,this)}
+                    </div>
+                    <div className='form-group' key="ngayhoanthanh">
+                      {renderLabel(metaGD.ngayhoanthanh)}
+                      {metaGD && metaGD["ngayhoanthanh"].$input(gdItem,this)}
+                    </div>
+                  </div>
                 </div>
               </div>
               <div className="col-md-4">
               </div>
             </div>
-          </div>,
+          </div>
           <div className="col-md-12" key="view ctdh">
-            <br/>
             <strong>Chi tiết đơn hàng:</strong>
             <table id="example" className="table display preline dataTable" cellSpacing="0" width="100%" role="grid" aria-describedby="example_info" style={{"width": "100%"}}>
               <thead>
@@ -284,13 +354,12 @@ export default class EditPNH extends Component {
                 })}
               </tbody>
             </table>
-          </div>,
+          </div>
           <div className="col-md-12" key="ctk">
-            <br/>
             <strong>Chi tiết nhập hàng:</strong>
             <table id="example" className="table display nowrap dataTable" role="grid" aria-describedby="example_info" >
               <thead>
-                <THead meta={metaCTK} add={::this.addCTK(0)}></THead>
+                <THead meta={metaCTK} add={::this.addCTK(0)} addRow={::this.openAdd}></THead>
               </thead>
               <tbody>
                 {ctk && ctk.map((dh, index)=>{
@@ -308,29 +377,6 @@ export default class EditPNH extends Component {
               </tbody>
             </table>
           </div>
-          ]: <div className="col-md-12">
-            <div className="row">
-              <div className="col-md-8 boder-right">
-                <div className='form-group' key="giaodichid">
-                  {renderLabel(metaGD.id)}
-                  &nbsp;
-                  <select className='form-control  uppercase' data-addr='id'
-                  onChange={::this.changeGDID}
-                  value={giaodichid || ''}>
-                  <option key='id'>-- Giao Dich ID --</option>
-                  {listPDH && listPDH.map(b => {
-                    return (
-                      <option key={b.id} value={b.id}>
-                        {b.id}
-                      </option>
-                    );
-                  })}
-                  </select>
-                </div>
-              </div>
-            </div>
-          </div>}
-
         </div>
         <br/>
         <hr/>
@@ -347,6 +393,178 @@ export default class EditPNH extends Component {
           </div>
         </div>
       </div>
+    );
+  }
+}
+class Add extends Component{
+  static propTypes = {
+    listLV: PropTypes.array,
+    listK: PropTypes.array,
+    meta: PropTypes.object,
+    close: PropTypes.func.isRequired,
+    add: PropTypes.func.isRequired
+  }
+  state = {
+    options:{
+      loaivaiid: '',
+      khoid: '',
+      sodong: 0
+    },
+    kho: {},
+    objectK: ATOLV(this.props.listK || [])||{},
+    height: 0
+  }
+  componentWillMount(){
+    this.state.objectK = ATOLV(this.props.listK || []);
+    this.state.kho = this.state.objectK[this.state.options.khoid]|| {};
+  }
+  componentWillUnmount(){
+    this.setState({
+      options:{
+      loaivaiid: '',
+      khoid: '',
+      sodong: 0
+    },
+    kho: {},
+    objectK: {},
+    height: 0
+    })
+  }
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.listK){
+      let obj = ATOLV(nextProps.listK || [])|| {};
+      let kho = obj[this.state.options.khoid] || {};
+      this.setState({objectK: obj, kho: kho});
+    }
+  }
+  handleChange(){
+    let obj = this.state.options;
+    let addr = event.target.dataset.addr;
+    let value = event.target.value;
+    this.setState({
+      options: setValue(obj, addr, value)
+    })
+  }
+  selectLV(val){
+    let obj = this.state.options;
+    obj.loaivaiid = val;
+    this.setState({options: obj});
+  }
+  selectK(val){
+    let obj = this.state.options;
+    obj.khoid = val;
+    this.setState({options: obj, kho: this.state.objectK[val]});
+  }
+  changeHeight(filter){
+    return ()=>{
+      let height = 0;
+      if(filter === "kho"){
+        height = this.props.listK.length;
+      }else{
+        height = this.props.listLV.length;
+      }
+      if(height> 6 ){
+        height = 6;
+      }
+      this.setState({height: height});
+    }
+  }
+  onBlur(){
+    this.setState({height: 0});
+  }
+  render(){
+    const {close, close, add, meta} = this.props;
+    const {options, kho} = this.state;
+    const listLV = parseOptTen(this.props.listLV || []);
+    const listK = parseOptTen(this.props.listK || []);
+    const height = this.state.height * 34 + 150;
+    let content_add = Style.content_add;
+    content_add.height = height + "px";
+    return(
+        <Modal  modalStyle={Style.content_add}
+          overlayStyle= {Style.overlay}
+          close={close}
+          overlayClassName='modaldumb modalOverlay modalOverlay--after-open '
+          modalClassName='dumb modalContent modalContent--after-open '
+          >
+          <div className="col-md-12" key="view ctdh">
+            <br/>
+            <h4 className="underline">Chi tiết thêm:</h4>
+            <div className="row">
+              <div className="col-md-3">
+                {renderLabel(meta.loaivaiid)}
+              </div>
+              <div className="col-md-3">
+                {renderLabel(meta.khoid)}
+              </div>
+              <div className="col-md-2">
+                {renderLabel({
+                    label: "Con trong",
+                    name: "controng"
+                  })}
+              </div>
+              <div className="col-md-2">
+                {renderLabel({
+                    label: "So cay vai",
+                    name: "socayvai"
+                  })}
+              </div>
+              <div className="col-md-2"></div>
+            </div>
+            <div className="row">
+              <div className="col-md-3">
+                <Select
+                  data-addr='loaivaiid'
+                  placeholder="Chon loai vai..."
+                  clearable= {false}
+                  searchable={true}
+                  onChange={::this.selectLV}
+                  onFocus={::this.changeHeight("loaivai")}
+                  onBlur={::this.onBlur}
+                  value={options.loaivaiid}
+                  options={listLV} />
+              </div>
+              <div className="col-md-3">
+                <Select
+                  data-addr='khoid'
+                  placeholder="Chon kho"
+                  clearable= {false}
+                  searchable={true}
+                  onChange={::this.selectK}
+                  onFocus={::this.changeHeight("kho")}
+                  onBlur={::this.onBlur}
+                  value={options.khoid}
+                  options={listK} />
+                </div>
+                <div className="col-md-2">
+                  <input type="number" data-addr='trong' className="form-control" readOnly  value={kho.trong || ''} />
+                </div>
+              <div className="col-md-2">
+                <input type="number" step='10' min='0' data-addr='soluong'className="form-control dt-body-right" value={options.soluong || ''} onChange={::this.handleChange} />
+              </div>
+              < div className = "col-md-2 pull-right" >
+              <div className="row">
+                <div className="col-md-6">
+                  < button className = "btn btn-success btn-table btn-in-th btn-in-add"
+                    title = "Add"
+                    onClick = {add(options)}
+                    key = "add" >
+                  < i className = 'fa fa-plus' / > Add
+                  < /button>
+                </div>
+                <div className="col-md-6">
+                  < button className = "btn btn-default btn-table btn-in-th"
+                    title = "close"
+                    onClick = {close}
+                    key = "close" >
+                  < i className = "fa fa-close" / > Close
+                  < /button>
+                </div>
+              </div>
+              < /div>
+            </div>
+          </div>
+        </Modal>
     );
   }
 }

@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {initObject, ATO, OTA, preprocess, datetime, changeDTI, renderLabel, setValue, checkRequire, preprocessPost, parseOptSelect} from '../../../meta';
+import {initObject, ATO, OTA, preprocess, datetime, changeDTI, renderLabel, setValue, checkRequire, preprocessPost, parseOptTen} from '../../../meta';
 import {THead, TBody} from '../../table/rowForPDH';
 import * as pdhActions from '../../../actions/nhacungcap/pdhActions';
 import * as giaodichActions from '../../../actions/giaodichActions';
@@ -32,7 +32,6 @@ export default class EditPDH extends Component {
       nvdh: this.props.user.nhanvienid || 'admin',
       tinhtrangdonhang: 'chuaxuly',
       doitacid: '',
-      soluong: 1,
       ngaydat: changeDTI(datetime(new Date()))
     },
     giaodichid: this.props.giaodichid,
@@ -196,7 +195,7 @@ export default class EditPDH extends Component {
     const {gdItem, edited, submited, showFullField, giaodichid, ctdh, editedDH} = this.state;
     const metaGD = meta && preprocess(meta.giaodich) || {};
     const metaCTDH = meta && preprocess(meta.ctdh) || {};
-    const listNCC = parseOptSelect(this.props.listNCC||[]);
+    const listNCC = parseOptTen(this.props.listNCC||[]);
     return (
       <div>
         <div className="row">
