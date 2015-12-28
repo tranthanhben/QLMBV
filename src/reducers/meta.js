@@ -678,7 +678,7 @@ const initialState = {
         up: true,
         type: "single",
         field: false,
-        view: true
+        view: false
       },
       "doitacid": {
         name: "doitacid",
@@ -723,7 +723,7 @@ const initialState = {
       },
       "kho": {
         name: "kho",
-        label: "Tong so met nhap",
+        label: "So met nhap",
         sort: false,
         up: false,
         type: "number",
@@ -734,7 +734,7 @@ const initialState = {
       },
       "donhang": {
         name: "donhang",
-        label: "Tong so cay nhap",
+        label: "So cay nhap",
         sort: false,
         up: false,
         type: "number",
