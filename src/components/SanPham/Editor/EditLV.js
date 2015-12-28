@@ -90,15 +90,14 @@ export default class EditLV extends Component {
           {submited ? <p className='help-block required'>
               {checkRequire(metaPP, item)}&nbsp;&nbsp;
             </p>:null}
-
-            {(message && !edited)? (message === true?
-                <p className='help-block success'>
-                <span className="fa fa-check"></span>{' Cập nhật thành công!!'}
-                </p>:
-                <p className='help-block required'>
-                <span className="fa fa-close"></span>{" Cập nhật thất bại!"}
-                </p>
-                ):null}
+          {(message && !edited)? (message === true?
+              <p className='help-block success'>
+              <span className="fa fa-check"></span>{' Cập nhật thành công!!'}
+              </p>:
+              <p className='help-block required'>
+              <span className="fa fa-close"></span>{" Cập nhật thất bại!"}
+              </p>
+              ):null}
           </div>
         </div>
         <hr/>

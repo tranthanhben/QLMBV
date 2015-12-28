@@ -98,41 +98,27 @@ export default class EditNCC extends Component {
           {submited ? <p className='help-block required'>
               {checkRequire(metaPP, item)}&nbsp;&nbsp;
             </p>:null}
-          {id? <button className='btn btn-warning' onClick={::this.onSubmit} disabled={(edited? '':'disabled')}>
-          {"Cập Nhật"}
-          </button>: <button className='btn btn-success' onClick={::this.onSubmit} disabled={(edited? '':'disabled')}>
-          {"Tạo mới"}</button>}
+          {(message && !edited)? (message === true?
+            <p className='help-block success'>
+            <span className="fa fa-check"></span>{' Cập nhật thành công!!'}
+            </p>:
+            <p className='help-block required'>
+            <span className="fa fa-close"></span>{" Cập nhật thất bại!"}
+            </p>
+            ):null}
           </div>
         </div>
         <hr/>
         <div className="row">
-          <div className="col-md-12">
-            <div className="row">
-              <div className="col-md-6 boder-right">
-                {fieldRender}
-              </div>
-              <div className="col-md-6">
-              <div className="row">
-                {id? <div className="col-md-12" style={{"lineHeight":"30px"}}>
-                    Hiển thị đầy đủ các thuộc tính
-                    <div className="switch">
-                      <input type="checkbox" id="showfullfield" name="showfullfield" className="control" checked={showFullField === true ? 'checked' : ''} onChange={::this.showFull}/>
-                      <label htmlFor="showfullfield" className="checkboxs"></label>
-                    </div>
-                  </div>: null}
-                  <div className="col-md-12">
-                    {(message && !edited)? (message === true?
-                      <p className='help-block success'>
-                      <span className="fa fa-check"></span>{' Cập nhật thành công!!'}
-                      </p>:
-                      <p className='help-block required'>
-                      <span className="fa fa-close"></span>{" Cập nhật thất bại!"}
-                      </p>
-                      ):null}
-                  </div>
-                </div>
-              </div>
+          {id? <div className="col-md-12" style={{"lineHeight":"30px"}}>
+            Hiển thị đầy đủ
+            <div className="switch">
+              <input type="checkbox" id="showfullfield" name="showfullfield" className="control" checked={showFullField === true ? 'checked' : ''} onChange={::this.showFull}/>
+              <label htmlFor="showfullfield" className="checkboxs"></label>
             </div>
+          </div>: null}
+          <div className="col-md-12">
+            {fieldRender}
           </div>
         </div>
         <br/>
@@ -146,6 +132,14 @@ export default class EditNCC extends Component {
                       </button>):null}
           </div>
           <div className="col-md-10 flex-right">
+          {(message && !edited)? (message === true?
+            <p className='help-block success'>
+            <span className="fa fa-check"></span>{' Cập nhật thành công!!'}
+            </p>:
+            <p className='help-block required'>
+            <span className="fa fa-close"></span>{" Cập nhật thất bại!"}
+            </p>
+            ):null}&nbsp;&nbsp;
           {submited ? <p className='help-block required'>
               {checkRequire(metaPP, item)}
             </p>:null}&nbsp;&nbsp;

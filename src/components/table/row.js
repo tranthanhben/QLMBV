@@ -38,7 +38,7 @@ export class THead extends Component {
 
     }
     return (
-      <tr role="row">
+      <tr role="row" >
         <th key="stt" tabIndex="0" aria-controls="example" >#</th>
         {thList}
         <th key="control"></th>
@@ -101,7 +101,7 @@ export class TBody extends Component {
 
     }
     return (
-      <tr role="row" className={index%2===1 ? "even":"odd"}>
+      <tr role="row" className={index%2===1 ? "even":"odd" + (item.lock? " disabled" : "")}>
         <td>{paging.page*paging.page_size+1+index}</td>
         {trList}
         <td key='control' className="group-edit">

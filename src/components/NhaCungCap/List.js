@@ -164,7 +164,7 @@ class List extends Component{
                     <ViewNCC meta={meta} item={itemView} close={::this.viewModal} edit={::this.editItem}></ViewNCC>
                   </Modal> : null}
                   {openEdit?
-                  <Modal  modalStyle={Style.content_60}
+                  <Modal  modalStyle={Style.content_40}
                   overlayStyle= {Style.overlay}
                   close={::this.editModal}
                   overlayClassName='modaldumb modalOverlay modalOverlay--after-open '
