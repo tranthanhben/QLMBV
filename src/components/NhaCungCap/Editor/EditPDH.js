@@ -1,9 +1,11 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {initObject, ATO, OTA, preprocess, datetime, changeDTI, renderLabel, setValue, checkRequire, preprocessPost, parseOptTen} from '../../../meta';
+import {initObject, ATO, OTA, preprocess, datetime, changeDTI, renderLabel, setValue, checkRequire, preprocessPost, numeral, parseOptTen} from '../../../meta';
 import {THead, TBody} from '../../table/rowForPDH';
 import * as pdhActions from '../../../actions/nhacungcap/pdhActions';
 import * as giaodichActions from '../../../actions/giaodichActions';
+import {markdown} from 'markdown';
+import {NotePDH} from '../../markdownNote';
 import Select from 'react-select';
 
 @connect(state =>({
@@ -216,7 +218,7 @@ export default class EditPDH extends Component {
         <div className="row">
           <div className="col-md-12" key="gdfield">
             <div className="row">
-              <div className="col-md-8 boder-right">
+              <div className="col-md-7 boder-right">
                 <div className='form-group' key="khachhang">
                   {renderLabel(metaGD.doitacid)}
                   &nbsp;
@@ -237,8 +239,13 @@ export default class EditPDH extends Component {
                   {renderLabel(metaGD.ngaydat)}
                   {metaGD && metaGD["ngaydat"].$input(gdItem,this)}
                 </div>
+                <div className='form-group' key="tongtiendutinh">
+                  {renderLabel(metaGD.tongtiendutinh)}
+                  <input type="text" data-addr='tongtiendutinh'className="form-control" readOnly value={numeral(gdItem["tongtiendutinh"]).format('(0,0.00)')} />
+                </div>
               </div>
-              <div className="col-md-4">
+              <div className="col-md-5">
+                <p dangerouslySetInnerHTML={{ __html: markdown.toHTML(NotePDH || '') }}></p>
               </div>
             </div>
           </div>

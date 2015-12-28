@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import * as pdhActions from '../../actions/nhacungcap/pdhActions';
-import {THead, TBody, TFoot} from '../table/row';
+import {THeadView, TBodyView, TFootView} from '../table/rowForPDH';
 import {Pagination, PageShow} from '../table/pagination';
 import {isLoaded, loadList as loadPDH} from '../../actions/nhacungcap/pdhActions';
 import * as layoutActions from '../../actions/layoutActions';
@@ -19,7 +19,8 @@ import {ViewPDH} from './Editor/ViewFull';
     loading: state.phieudathang.loading,
     reload: state.phieudathang.reloadList,
     meta: state.meta.phieudathang,
-    listLV: state.giaodich.listLV
+    listLV: state.giaodich.listLV,
+    listNCC: state.giaodich.listNCC,
   }),
   {...pdhActions,...layoutActions,...giaodichActions})
 
@@ -28,6 +29,7 @@ class PDH extends Component{
   static propTypes = {
     listPDH: PropTypes.array,
     listLV: PropTypes.array,
+    listNCC: PropTypes.array,
     error: PropTypes.object,
     paging: PropTypes.object,
     meta: PropTypes.object,
@@ -43,16 +45,17 @@ class PDH extends Component{
   }
   componentWillMount(){
     this.props.loadLV();
+    this.props.loadNCC();
   }
   componentWillReceiveProps(nextProps) {
-    if(nextProps.reload === true && !this.state.openView && !this.state.openEdit){
+    if(nextProps.reload === true){
       this.props.loadList(this.state.options);
     }
   }
   state = {
     options :{
       page_size: 10,
-      name: '',
+      id: '',
       sort: ''
     },
     openView: false,
@@ -87,8 +90,8 @@ class PDH extends Component{
   searchField(){
     let value = event.target.value;
     let opt = this.state.options;
-    if(value !== opt.name){
-      opt.name = value;
+    if(value !== opt.id){
+      opt.id = value;
       opt.page = 0;
       this.props.loadList(opt);
       this.setState({options: opt});
@@ -123,7 +126,7 @@ class PDH extends Component{
     this.setState({openEdit: !this.state.openEdit, openView: false})
   }
   render(){
-    const {listPDH, paging, meta, listLV} = this.props;
+    const {listPDH, paging, meta, listLV, listNCC} = this.props;
     const {options, itemView, openView, openEdit, idEdit} = this.state;
     let metagd = meta && meta.giaodich || {};
 
@@ -143,20 +146,20 @@ class PDH extends Component{
                 </div>
                 <div id="example_filter" className="dataTables_filter" style={{"display": "inline-flex", "float":"right"}}>
                   <label className="line-height" style={{"display": "flex"}}>Search:
-                    <input type="search" className="form-control " placeholder="Search Name" onChange={::this.searchField} aria-controls="example" />
+                    <input type="search" className="form-control " placeholder="Search GDID" onChange={::this.searchField} aria-controls="example" />
                   </label>
                 </div>
                 <table id="example" className="table display preline dataTable" cellSpacing="0" width="100%" role="grid" aria-describedby="example_info" style={{"width": "100%"}}>
                   <thead>
-                    <THead meta={metagd} sort={options.sort} sortFunc={::this.sortField} ></THead>
+                    <THeadView meta={metagd} sort={options.sort} sortFunc={::this.sortField} />
                   </thead>
                   <tfoot>
-                    <TFoot meta={metagd} ></TFoot>
+                    <TFootView meta={metagd} />
                   </tfoot>
                   <tbody>
                     {listPDH && listPDH.map((item, index) =>{
                       return(
-                        <TBody item={item} index={index} sort={options.sort} meta={metagd} paging={paging} key={index} view={::this.viewItemFull} edit={::this.editItem} />
+                        <TBodyView item={item} index={index} sort={options.sort} meta={metagd} paging={paging} key={index} view={::this.viewItemFull} edit={::this.editItem} listNCC={listNCC}/>
                       );
                     })}
                   </tbody>

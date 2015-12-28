@@ -1,6 +1,6 @@
 export default function parseTinhTrang(tinhtrang){
   switch (tinhtrang){
-    case "chuaxualy":
+    case "chuaxuly":
       return "Chưa Xử Lý";
     case "dangxuly":
       return "Đang xử lý";
@@ -11,5 +11,4 @@ export default function parseTinhTrang(tinhtrang){
     default:
       return "Chưa Cập Nhật";
   }
-  return "Chưa Cập Nhật";
 }

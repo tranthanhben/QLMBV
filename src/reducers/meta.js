@@ -476,15 +476,24 @@ const initialState = {
         up: true,
         type: "single",
         field: false,
-        view: true
+        view: false
       },
       "doitacid": {
         name: "doitacid",
-        label: "Nhà Cung Cấp",
+        label: "NCCID",
         sort: true,
         up: true,
         type: "single",
         required: true,
+        field: false,
+        view: true
+      },
+      "ncc": {
+        name: "ncc",
+        label: "Nhà Cung Cấp",
+        sort: false,
+        up: false,
+        type: "single",
         field: false,
         view: true
       },
@@ -496,6 +505,7 @@ const initialState = {
         type: "number",
         field: true,
         unit: ' VND',
+        unitTable: '(vnd)',
         view: true
       },
       "tongtien": {
@@ -506,6 +516,7 @@ const initialState = {
         type: "number",
         field: false,
         unit: ' VND',
+        unitTable: '(vnd)',
         view: false
       },
       "tinhtrangdonhang": {
@@ -582,7 +593,7 @@ const initialState = {
         type: "date",
         required: true,
         field: true,
-        view: false
+        view: true
       }
     },
     ctdh: {
@@ -671,11 +682,20 @@ const initialState = {
       },
       "doitacid": {
         name: "doitacid",
-        label: "Nhà Cung Cấp",
+        label: "NCCID",
         sort: true,
         up: true,
         type: "single",
         required: true,
+        field: false,
+        view: true
+      },
+      "ncc": {
+        name: "ncc",
+        label: "Nhà Cung Cấp",
+        sort: false,
+        up: false,
+        type: "single",
         field: false,
         view: true
       },
@@ -687,6 +707,7 @@ const initialState = {
         type: "number",
         field: false,
         view: false,
+        unitTable: "(vnd)",
         unit: ' VND'
       },
       "tongtien": {
@@ -697,6 +718,7 @@ const initialState = {
         type: "number",
         field: true,
         view: true,
+        unitTable: "(vnd)",
         unit: ' VND'
       },
       "kho": {
@@ -707,7 +729,8 @@ const initialState = {
         type: "number",
         field: true,
         view: true,
-        unit: ' met'
+        unitTable: '(met)',
+        unit: ' met',
       },
       "donhang": {
         name: "donhang",
@@ -717,7 +740,8 @@ const initialState = {
         type: "number",
         field: true,
         view: true,
-        unit: ' Cay'
+        unit: ' Cay',
+        unitTable: '(cay)'
       },
       "ngayhoanthanh": {
         name: "ngayhoanthanh",
@@ -725,6 +749,15 @@ const initialState = {
         sort: true,
         type: "date",
         field: true,
+        view: false
+      },
+      "ngaydat": {
+        name: "ngaydat",
+        label: "Ngày Đặt",
+        sort: true,
+        type: "date",
+        required: true,
+        field: false,
         view: false
       },
       "tinhtrangdonhang": {
@@ -837,6 +870,8 @@ const initialState = {
         sort: false,
         up: false,
         type: "number",
+        unit: ' met',
+        unitTable: '(met)',
         field: true,
         view: true
       },
@@ -847,7 +882,9 @@ const initialState = {
         up: false,
         type: "number",
         field: true,
-        view: true
+        view: true,
+        unit: ' VND',
+        unitTable: '(vnd)'
       },
       thanhtien: {
         name: "thanhtien",
@@ -856,7 +893,9 @@ const initialState = {
         up: false,
         type: "number",
         field: false,
-        view:true
+        view:true,
+        unit: ' VND',
+        unitTable: '(vnd)'
       },
       ngaynhap: {
         name: "ngaynhap",
@@ -902,7 +941,9 @@ const initialState = {
         up: false,
         type: "number",
         field: true,
-        view: true
+        view: true,
+        unit: ' met',
+        unitTable: '(met)'
       },
       gia: {
         name: "gia",
@@ -911,7 +952,9 @@ const initialState = {
         up: false,
         type: "number",
         field: true,
-        view: true
+        view: true,
+        unit: ' VND/met',
+        unitTable: '(vnd/met)'
       },
       thanhtien: {
         name: "thanhtien",
@@ -920,7 +963,9 @@ const initialState = {
         up: false,
         type: "number",
         field: false,
-        view: true
+        view: true,
+        unit: ' VND',
+        unitTable: '(vnd)'
       }
     }
   },
@@ -961,8 +1006,9 @@ const initialState = {
         up: false,
         type: "number",
         field: true,
+        view: true,
         unit: ' VND',
-        view: true
+        unitTable: '(vnd)'
       },
       "tongtien": {
         name: "tongtien",
@@ -971,8 +1017,9 @@ const initialState = {
         up: false,
         type: "number",
         field: false,
+        view: false,
         unit: ' VND',
-        view: false
+        unitTable: '(vnd)'
       },
       "tinhtrangdonhang": {
         name: "tinhtrangdonhang",
@@ -1085,7 +1132,9 @@ const initialState = {
         up: false,
         type: "number",
         field: true,
-        view: true
+        view: true,
+        unit: ' cay',
+        unitTable: '(cay)'
       },
       gia: {
         name: "gia",
@@ -1094,7 +1143,9 @@ const initialState = {
         up: false,
         type: "number",
         field: true,
-        view: true
+        view: true,
+        unit: ' VND/met',
+        unitTable: '(vnd/met)'
       },
       thanhtien: {
         name: "thanhtien",
@@ -1103,7 +1154,9 @@ const initialState = {
         up: false,
         type: "number",
         field: false,
-        view: true
+        view: true,
+        unit: ' VND',
+        unitTable: '(vnd)'
       }
     }
   },
@@ -1145,7 +1198,8 @@ const initialState = {
         type: "number",
         field: false,
         view: false,
-        unit: ' VND'
+        unit: ' VND',
+        unitTable: '(vnd)'
       },
       "tongtien": {
         name: "tongtien",
@@ -1155,7 +1209,8 @@ const initialState = {
         type: "number",
         field: true,
         view: true,
-        unit: ' VND'
+        unit: ' VND',
+        unitTable: '(vnd)'
       },
       "tinhtrangdonhang": {
         name: "tinhtrangdonhang",
@@ -1241,7 +1296,9 @@ const initialState = {
         up: false,
         type: "number",
         field: false,
-        view: true
+        view: true,
+        unit: ' met',
+        unitTable: '(met)'
       },
       khoid: {
         name: "khoid",
@@ -1269,7 +1326,9 @@ const initialState = {
         up: false,
         type: "number",
         field: true,
-        view:true
+        view:true,
+        unit: ' cay',
+        unitTable: '(cay)'
       },
       gia: {
         name: "gia",
@@ -1278,7 +1337,9 @@ const initialState = {
         up: false,
         type: "number",
         field: true,
-        view: true
+        view: true,
+        unit: ' VND',
+        unitTable: '(vnd)'
       },
       thanhtien: {
         name: "thanhtien",
@@ -1287,7 +1348,9 @@ const initialState = {
         up: false,
         type: "number",
         field: false,
-        view:true
+        view:true,
+        unit: ' VND',
+        unitTable: '(vnd)'
       }
     },
     ctdh: {
@@ -1334,7 +1397,9 @@ const initialState = {
         up: false,
         type: "number",
         field: true,
-        view: true
+        view: true,
+        unit: ' cay',
+        unitTable: '(cay)'
       },
       gia: {
         name: "gia",
@@ -1343,7 +1408,9 @@ const initialState = {
         up: false,
         type: "number",
         field: true,
-        view: true
+        view: true,
+        unit: ' VND/met',
+        unitTable: '(vnd/met)'
       },
       thanhtien: {
         name: "thanhtien",
@@ -1352,7 +1419,9 @@ const initialState = {
         up: false,
         type: "number",
         field: false,
-        view: true
+        view: true,
+        unit: ' VND',
+        unitTable: '(vnd)'
       }
     }
   },
@@ -1439,7 +1508,8 @@ const initialState = {
         disabled: true,
         field: false,
         view: true,
-        unit: ' VND'
+        unit: ' VND',
+        unitTable: '(vnd)'
       },
       "thanhtoan": {
         name: "thanhtoan",
@@ -1450,7 +1520,8 @@ const initialState = {
         disabled: true,
         field: false,
         view: true,
-        unit: ' VND'
+        unit: ' VND',
+        unitTable: '(vnd)'
       },
       "congno": {
         name: "congno",
@@ -1461,7 +1532,8 @@ const initialState = {
         disabled: true,
         field: false,
         view: true,
-        unit: ' VND'
+        unit: ' VND',
+        unitTable: '(vnd)'
       }
     },
     nhacungcap: {
@@ -1534,7 +1606,8 @@ const initialState = {
         disabled: true,
         field: false,
         view: true,
-        unit: ' VND'
+        unit: ' VND',
+        unitTable: '(vnd)'
       },
       "thanhtoan": {
         name: "thanhtoan",
@@ -1545,7 +1618,8 @@ const initialState = {
         disabled: true,
         field: false,
         view: true,
-        unit: ' VND'
+        unit: ' VND',
+        unitTable: '(vnd)'
       },
       "congno": {
         name: "congno",
@@ -1556,7 +1630,8 @@ const initialState = {
         disabled: true,
         field: false,
         view: true,
-        unit: ' VND'
+        unit: ' VND',
+        unitTable: '(vnd)'
       }
     }
   },
@@ -1597,8 +1672,9 @@ const initialState = {
         up: false,
         type: "number",
         field: true,
+        view: false,
         unit: ' VND',
-        view: false
+        unitTable: '(vnd)'
       },
       "tongtien": {
         name: "tongtien",
@@ -1607,8 +1683,9 @@ const initialState = {
         up: false,
         type: "number",
         field: false,
+        view: true,
         unit: ' VND',
-        view: true
+        unitTable: '(vnd)'
       },
       "thanhtoan": {
         name: "thanhtoan",
@@ -1617,8 +1694,9 @@ const initialState = {
         up: false,
         type: "number",
         field: false,
+        view: true,
         unit: ' VND',
-        view: true
+        unitTable: '(vnd)'
       },
       "tinhtrangdonhang": {
         name: "tinhtrangdonhang",
@@ -1696,7 +1774,9 @@ const initialState = {
         up: false,
         type: "number",
         field: true,
-        view: true
+        view: true,
+        unit: ' VND',
+        unitTable: '(vnd)'
       },
       phuongthuc: {
         name: "phuongthuc",
@@ -1760,8 +1840,9 @@ const initialState = {
         up: false,
         type: "number",
         field: true,
+        view: false,
         unit: ' VND',
-        view: false
+        unitTable: '(vnd)'
       },
       "tongtien": {
         name: "tongtien",
@@ -1770,8 +1851,9 @@ const initialState = {
         up: false,
         type: "number",
         field: false,
+        view: true,
         unit: ' VND',
-        view: true
+        unitTable: '(vnd)'
       },
       "thanhtoan": {
         name: "thanhtoan",
@@ -1780,8 +1862,9 @@ const initialState = {
         up: false,
         type: "number",
         field: false,
+        view: true,
         unit: ' VND',
-        view: true
+        unitTable: '(vnd)'
       },
       "tinhtrangdonhang": {
         name: "tinhtrangdonhang",
@@ -1859,7 +1942,9 @@ const initialState = {
         up: false,
         type: "number",
         field: true,
-        view: true
+        view: true,
+        unit: ' VND',
+        unitTable: '(vnd)'
       },
       phuongthuc: {
         name: "phuongthuc",
