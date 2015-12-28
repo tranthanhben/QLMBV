@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import {formatDate, numeral, ATOLV} from '../../meta';
+import {formatDate, numeral, ATOLV, changeDTI, datetime} from '../../meta';
 
 export class THead extends Component {
   static propTypes = {
@@ -27,8 +27,8 @@ export class THead extends Component {
           <button className="btn btn-success btn-table btn-in-th btn-in-add" title="Add" onClick={this.props.add}>
             <i className="fa fa-plus"/>
           </button>
-          <button className="btn btn-default btn-table btn-in-th btn-in-add" title="Add" onClick={this.props.addRow}>
-            <i className="fa fa-plus"/>
+          <button className="btn btn-default btn-table btn-in-th btn-in-add" title="Add many" onClick={this.props.addRow}>
+            <i className="fa fa-list-ol"/>
           </button>
         </th>
       </tr>
@@ -127,12 +127,6 @@ export class TBody extends Component {
             })}
           </select>
         </td>
-        <td key='mausac' >
-          <input type="text" data-addr='mausac'className="form-control" readOnly value={loaivai.mausac || ''} />
-        </td>
-        <td key='chatlieu' >
-          <input type="text" data-addr='chatlieu'className="form-control" readOnly  value={loaivai.chatlieu || ''} />
-        </td>
         <td key={'kho'+ index}>
           <select className='form-control' data-addr='khoid'
             onChange={::this.selectKho}
@@ -151,14 +145,17 @@ export class TBody extends Component {
           <input type="number" data-addr='trong' className="form-control" readOnly  value={kho.trong || ''} />
         </td>
 
-        <td key='soluong' className=' dt-body-right' >
-          <input type="number" step='10' min='0' data-addr='soluong'className="form-control dt-body-right" value={item.soluong || ''} onChange={edit} />
+        <td key='chieudai' className=' dt-body-right' >
+          <input type="number" step='10' min='0' data-addr='chieudai'className="form-control dt-body-right" value={item.chieudai || ''} onChange={edit} />
         </td>
         <td key='gia' className=' dt-body-right' >
           <input type="number" step='10' min='0' data-addr='gia'className="form-control dt-body-right" value={item.gia || ''} onChange={edit}/>
         </td>
         <td key='thanhtien' className=' dt-body-right' >
-          <input type="number" step='10' min='0' data-addr='thanhtien' readOnly className="form-control dt-body-right" value={item.gia*item.soluong} />
+          <input type="number" step='10' min='0' data-addr='thanhtien' readOnly className="form-control dt-body-right" value={item.gia*item.chieudai} />
+        </td>
+        <td key='ngaynhap' className=' dt-body-right' >
+          <input type="date" step='10' min='0' data-addr='ngaynhap' className="form-control dt-body-right" value={changeDTI(datetime(new Date(item.ngaynhap || '')))} onChange={edit}/>
         </td>
 
         <td key='control' className="group-edit">
@@ -226,13 +223,13 @@ export class TBodyCTK extends Component {
           {kho.trong}
         </td>
         <td key='soluong' >
-          {numeral(item.soluong).format('0,0') + ' Cây'}
+          {numeral(item.soluong).format('(0,0.00)') + ' Cây'}
         </td>
         <td key='gia' >
-          {numeral(item.gia).format('0,0') + ' VND'}
+          {numeral(item.gia).format('(0,0.00)') + ' VND'}
         </td>
         <td key='thanhtien' >
-          {numeral(item.gia*item.soluong).format('0,0') + ' VND'}
+          {numeral(item.gia*item.soluong).format('(0,0.00)') + ' VND'}
         </td>
       </tr>
     )

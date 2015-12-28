@@ -57,6 +57,7 @@ export default class EditPNH extends Component {
       giaodichid: this.props.giaodichid || '',
       loaivaiid:'',
       soluong: 1 , // so luong cay vai
+      chieudai: 0,
       gia:'',
       khoid:'',
       ngaytao: new Date(changeDTI(datetime(new Date()))),
@@ -88,7 +89,7 @@ export default class EditPNH extends Component {
       });
     }else if(nextProps.gdItem){
       this.setState({
-        ctk: nextProps.gdItem.chitietkho ||[],
+        ctk: nextProps.gdItem.chitietcayvai ||[],
         gdItem: nextProps.gdItem,
         edited: false,
         editedCTK: false,
@@ -102,14 +103,15 @@ export default class EditPNH extends Component {
       gdItem.ngayhoanthanh = changeDTI(datetime(new Date()));
       this.setState({
         giaodichid: nextProps.gdItem.id,
-        ctk: nextProps.gdItem.chitietkho ||[],
+        ctk: nextProps.gdItem.chitietcayvai ||[],
         gdItem: gdItem,
         newGD: false,
+        edited: true,
         ctk_init: {
           giaodichid: nextProps.gdItem.id || '',
           loaivaiid:'',
           soluong: 1,
-          chieudai:'',
+          chieudai: 0,
           gia:'',
           ngaytao: new Date(changeDTI(datetime(new Date()))),
           ngaynhap: changeDTI(datetime(new Date())),
@@ -213,14 +215,15 @@ export default class EditPNH extends Component {
       // if(soluong<= ctk.length){
       //   this.setState({ctk: ctk, openAdd: false});
       // }else{
-        for (let i = 0; i < soluong; i++) {
-          let ctk_new = {...ctk_init};
-          ctk_new.loaivaiid = options.loaivaiid;
-          ctk_new.khoid = options.khoid;
-          ctk_new.cayvaiid = 'cv_' + this.state.giaodichid + '_' + i;
-          ctk.push(ctk_new);
-        };
-        this.setState({ctk: ctk, openAdd: false});
+      for (let i = 0; i < soluong; i++) {
+        let ctk_new = {...ctk_init};
+        ctk_new.loaivaiid = options.loaivaiid;
+        ctk_new.khoid = options.khoid;
+        ctk_new.gia = options.gia;
+        ctk_new.cayvaiid = 'cv' + this.state.giaodichid + new Date().getDate()*(i+1);
+        ctk.push(ctk_new);
+      };
+      this.setState({ctk: ctk, openAdd: false, editedCTK: true});
       // }
     }
   }
@@ -408,7 +411,8 @@ class Add extends Component{
     options:{
       loaivaiid: '',
       khoid: '',
-      sodong: 0
+      sodong: 0,
+      gia: 0
     },
     kho: {},
     objectK: ATOLV(this.props.listK || [])||{},
@@ -423,7 +427,8 @@ class Add extends Component{
       options:{
       loaivaiid: '',
       khoid: '',
-      sodong: 0
+      sodong: 0,
+      gia: 0
     },
     kho: {},
     objectK: {},
@@ -473,11 +478,11 @@ class Add extends Component{
     this.setState({height: 0});
   }
   render(){
-    const {close, close, add, meta} = this.props;
+    const {close, close, add} = this.props;
     const {options, kho} = this.state;
     const listLV = parseOptTen(this.props.listLV || []);
     const listK = parseOptTen(this.props.listK || []);
-    const height = this.state.height * 34 + 150;
+    const height = this.state.height * 34 + 185;
     let content_add = Style.content_add;
     content_add.height = height + "px";
     return(
@@ -490,29 +495,31 @@ class Add extends Component{
           <div className="col-md-12" key="view ctdh">
             <br/>
             <h4 className="underline">Chi tiết thêm:</h4>
-            <div className="row">
-              <div className="col-md-3">
-                {renderLabel(meta.loaivaiid)}
-              </div>
-              <div className="col-md-3">
-                {renderLabel(meta.khoid)}
-              </div>
-              <div className="col-md-2">
-                {renderLabel({
-                    label: "Con trong",
-                    name: "controng"
-                  })}
-              </div>
-              <div className="col-md-2">
-                {renderLabel({
-                    label: "So cay vai",
-                    name: "socayvai"
-                  })}
-              </div>
-              <div className="col-md-2"></div>
-            </div>
-            <div className="row">
-              <div className="col-md-3">
+          <table id="example" className="table display nowrap dataTable" role="grid" aria-describedby="example_info" >
+          <thead>
+            <tr role="row">
+              <th key="loaivaiid" tabIndex="0" aria-controls="example" rowSpan="1" colSpan="1">
+                {"Loại vải"}
+              </th>
+              <th key="khoid" tabIndex="0" aria-controls="example" rowSpan="1" colSpan="1">
+                {"Kho"}
+              </th>
+              <th key="controng" tabIndex="0" aria-controls="example" rowSpan="1" colSpan="1">
+                {"Còn trống"}
+              </th>
+              <th key="soluong" tabIndex="0" aria-controls="example" rowSpan="1" colSpan="1">
+                {"Số cây"}
+              </th>
+              <th key="gia" tabIndex="0" aria-controls="example" rowSpan="1" colSpan="1">
+                {"Giá"}
+              </th>
+              <th key="control" tabIndex="0" aria-controls="example" rowSpan="1" colSpan="1">
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr role="row">
+              <td key="loaivaiid" className=" td-content">
                 <Select
                   data-addr='loaivaiid'
                   placeholder="Chon loai vai..."
@@ -523,8 +530,8 @@ class Add extends Component{
                   onBlur={::this.onBlur}
                   value={options.loaivaiid}
                   options={listLV} />
-              </div>
-              <div className="col-md-3">
+              </td>
+              <td key="khoid" className=" td-content">
                 <Select
                   data-addr='khoid'
                   placeholder="Chon kho"
@@ -535,35 +542,34 @@ class Add extends Component{
                   onBlur={::this.onBlur}
                   value={options.khoid}
                   options={listK} />
-                </div>
-                <div className="col-md-2">
-                  <input type="number" data-addr='trong' className="form-control" readOnly  value={kho.trong || ''} />
-                </div>
-              <div className="col-md-2">
+              </td>
+              <td key="controng">
+                <input type="number" data-addr='trong' className="form-control" readOnly  value={kho.trong || ''} />
+              </td>
+              <td key="soluong">
                 <input type="number" step='10' min='0' data-addr='soluong'className="form-control dt-body-right" value={options.soluong || ''} onChange={::this.handleChange} />
-              </div>
-              < div className = "col-md-2 pull-right" >
-              <div className="row">
-                <div className="col-md-6">
-                  < button className = "btn btn-success btn-table btn-in-th btn-in-add"
+              </td>
+              <td key="gia">
+                <input type="number" step='10' min='0' data-addr='gia'className="form-control dt-body-right" value={options.gia || ''} onChange={::this.handleChange} />
+              </td>
+              <td key="control" className="group-edit">
+                < button className = "btn btn-success btn-table btn-in-th btn-in-add"
                     title = "Add"
                     onClick = {add(options)}
                     key = "add" >
                   < i className = 'fa fa-plus' / > Add
                   < /button>
-                </div>
-                <div className="col-md-6">
                   < button className = "btn btn-default btn-table btn-in-th"
                     title = "close"
                     onClick = {close}
                     key = "close" >
                   < i className = "fa fa-close" / > Close
                   < /button>
-                </div>
-              </div>
-              < /div>
-            </div>
-          </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        </div>
         </Modal>
     );
   }

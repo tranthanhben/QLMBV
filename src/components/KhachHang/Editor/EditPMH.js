@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {initObject, ATO, OTA, preprocess, datetime, changeDTI, renderLabel, setValue, checkRequire, preprocessPost, numeral, parseOptSelect} from '../../../meta';
+import {initObject, ATO, OTA, preprocess, datetime, changeDTI, renderLabel, setValue, checkRequire, preprocessPost, numeral, parseOptTen} from '../../../meta';
 import {THead, TBody} from '../../table/rowForPMH';
 import * as pmhActions from '../../../actions/khachhang/pmhActions';
 import * as giaodichActions from '../../../actions/giaodichActions';
@@ -32,9 +32,10 @@ export default class EditPMH extends Component {
   }
   state = {
     gdItem: {
-      nhanvienid: this.props.user.nhanvienid || 'admin',
+      nvdh: this.props.user.nhanvienid || 'admin',
       tinhtrangdonhang: 'dangxuly',
-      doitacid: ''
+      doitacid: '',
+      ngaydat: changeDTI(datetime(new Date()))
     },
     giaodichid: this.props.giaodichid,
     ctdh:this.props.gdItem && this.props.gdItem.chitietdonhang || [],
@@ -116,6 +117,16 @@ export default class EditPMH extends Component {
     }
     return '';
   }
+  changeSelect(val) {
+    let gdItem = this.state.gdItem;
+    if(val && val !== gdItem.doitacid){
+      gdItem.doitacid = val;
+      this.setState({
+        edited: true,
+        gdItem:gdItem
+      });
+    }
+  }
   onSubmit(){
     if(this.checkRq()){
       this.setState({
@@ -141,7 +152,6 @@ export default class EditPMH extends Component {
         ctdhPP.push(dh);
       }
     };
-    console.log("sausuly", ctdhPP);
     return ctdhPP;
   }
   setgiaodichid(ctdh, giaodichid){
@@ -192,22 +202,13 @@ export default class EditPMH extends Component {
       this.setState({ctdh: ctdh, editedDH: true});
     }
   }
-  changeSelect(val) {
-    let gdItem = this.state.gdItem;
-    if(val && val !== gdItem.doitacid){
-      gdItem.doitacid = val;
-      this.setState({
-        edited: true,
-        gdItem:gdItem
-      });
-    }
-  }
+
   render() {
     const {meta, error, message, listLV} = this.props;
     const {gdItem, edited, submited, showFullField, giaodichid, ctdh, editedDH} = this.state;
     const metaGD = meta && preprocess(meta.giaodich) || {};
     const metaCTDH = meta && preprocess(meta.ctdh) || {};
-    const listKH = parseOptSelect(this.props.listKH||[]);
+    const listKH = parseOptTen(this.props.listKH||[]);
     return (
       <div>
         <div className="row">
@@ -240,7 +241,7 @@ export default class EditPMH extends Component {
                 </div>
                 <div className='form-group' key="tongtiendutinh">
                   {renderLabel(metaGD.tongtiendutinh)}
-                  <input type="text" data-addr='mausac'className="form-control" readOnly value={numeral(gdItem.tongtiendutinh).format('0,0') || '0'} />
+                  <input type="text" data-addr='mausac'className="form-control" readOnly value={numeral(gdItem.tongtiendutinh).format('(0,0.00)') || '0'} />
                 </div>
               </div>
               <div className="col-md-5">

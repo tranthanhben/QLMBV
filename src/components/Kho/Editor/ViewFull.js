@@ -19,7 +19,7 @@ export class ViewK extends Component {
         value =formatDate(item[key]);
       }
       if(field.type === "number"){
-        value = numeral(item[key]).format('0,0')+(field.unit|| '');
+        value = numeral(item[key]).format('(0,0.00)')+(field.unit|| '');
       }
       info.push(
         <div className="info-group" key={key}>

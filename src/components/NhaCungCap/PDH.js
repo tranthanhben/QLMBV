@@ -45,7 +45,7 @@ class PDH extends Component{
     this.props.loadLV();
   }
   componentWillReceiveProps(nextProps) {
-    if(nextProps.reload === true){
+    if(nextProps.reload === true && !this.state.openView && !this.state.openEdit){
       this.props.loadList(this.state.options);
     }
   }

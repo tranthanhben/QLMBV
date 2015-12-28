@@ -117,7 +117,7 @@ export class TBodyCTTT extends Component {
       <tr role="row" className={index%2===1 ? "even":"odd"} key={index}>
         <td>{index+1}</td>
         <td key='thanhtoan'>
-          {numeral(item.thanhtoan).format('0,0')+ ' VND'}
+          {numeral(item.thanhtoan).format('(0,0.00)')+ ' VND'}
         </td>
         <td key='phuongthuc'>
           {item.phuongthuc}

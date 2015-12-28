@@ -216,13 +216,13 @@ export class TBodyCTK extends Component {
           {objectK[item.khoid]}
         </td>
         <td key='soluong'  >
-          {numeral(item.soluong*-1).format('0,0') + ' Cây'}
+          {numeral(item.soluong*-1).format('(0,0.00)') + ' Cây'}
         </td>
         <td key='gia' >
-          {numeral(item.gia).format('0,0') + ' VND'}
+          {numeral(item.gia).format('(0,0.00)') + ' VND'}
         </td>
         <td key='thanhtien' >
-          {numeral(item.gia*item.soluong*-1).format('0,0') + ' VND'}
+          {numeral(item.gia*item.soluong*-1).format('(0,0.00)') + ' VND'}
         </td>
       </tr>
     )

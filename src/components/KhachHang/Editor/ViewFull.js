@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {renderInfo, formatDate, numeral} from '../../../meta';
+import {renderInfo, formatDate, numeral, parseTinhtrang} from '../../../meta';
 import {THeadCTDH, TBodyCTDH} from '../../table/rowForPMH';
 import {THeadCTK, TBodyCTK} from '../../table/rowForPXH';
 import {THeadCTTT, TBodyCTTT} from '../../table/rowForTTKH';
@@ -22,7 +22,7 @@ export class ViewKH extends Component {
         value =formatDate(item[key]);
       }
       if(field.type === "number"){
-        value = numeral(item[key]).format('0,0')+(field.unit|| '');
+        value = numeral(item[key]).format('(0,0.00)')+(field.unit|| '');
       }
       info.push(
         <div className="info-group" key={key}>
@@ -97,13 +97,13 @@ export class ViewPMH extends Component {
                 </div>
               </div>
             </div>
-            <div className="info-group" key='nhanvienid'>
+            <div className="info-group" key='nvdh'>
               <div className="row">
                 <div className="col-md-6 align-right">
-                  <span>{metaGD["nhanvienid"].label + ": "}</span>
+                  <span>{metaGD["nvdh"].label + ": "}</span>
                 </div>
                 <div className="col-md-6">
-                  <p className={metaGD["nhanvienid"].up? 'uppercase':''}>{item["nhanvienid"]}</p>
+                  <p className={metaGD["nvdh"].up? 'uppercase':''}>{item["nvdh"]}</p>
                 </div>
               </div>
             </div>
@@ -115,7 +115,7 @@ export class ViewPMH extends Component {
                   <span>{metaGD["tongtiendutinh"].label + ": "}</span>
                 </div>
                 <div className="col-md-6">
-                  <p className={metaGD["tongtiendutinh"].up? 'uppercase':''}>{numeral(item["tongtiendutinh"]).format('0,0')+' VND'}</p>
+                  <p className={metaGD["tongtiendutinh"].up? 'uppercase':''}>{numeral(item["tongtiendutinh"]).format('(0,0.00)')+' VND'}</p>
                 </div>
               </div>
             </div>
@@ -125,7 +125,7 @@ export class ViewPMH extends Component {
                   <span>{metaGD["tinhtrangdonhang"].label + ": "}</span>
                 </div>
                 <div className="col-md-6">
-                  <p className={metaGD["tinhtrangdonhang"].up? 'uppercase':''}>{item["tinhtrangdonhang"]}</p>
+                  <p className={metaGD["tinhtrangdonhang"].up? 'uppercase':''}>{parseTinhtrang(item["tinhtrangdonhang"])}</p>
                 </div>
               </div>
             </div>
@@ -199,13 +199,13 @@ export class ViewPXH extends Component {
                 </div>
               </div>
             </div>
-            <div className="info-group" key='nhanvienid'>
+            <div className="info-group" key='nvnh'>
               <div className="row">
                 <div className="col-md-6 align-right">
-                  <span>{metaGD["nhanvienid"].label + ": "}</span>
+                  <span>{metaGD["nvnh"].label + ": "}</span>
                 </div>
                 <div className="col-md-6">
-                  <p className={metaGD["nhanvienid"].up? 'uppercase':''}>{item["nhanvienid"]}</p>
+                  <p className={metaGD["nvnh"].up? 'uppercase':''}>{item["nvnh"]}</p>
                 </div>
               </div>
             </div>
@@ -217,7 +217,7 @@ export class ViewPXH extends Component {
                   <span>{metaGD["tongtien"].label + ": "}</span>
                 </div>
                 <div className="col-md-6">
-                  <p className={metaGD["tongtien"].up? 'uppercase':''}>{numeral(item["tongtien"]*-1).format('0,0')+' VND'}</p>
+                  <p className={metaGD["tongtien"].up? 'uppercase':''}>{numeral(item["tongtien"]*-1).format('(0,0.00)')+' VND'}</p>
                 </div>
               </div>
             </div>
@@ -227,7 +227,7 @@ export class ViewPXH extends Component {
                   <span>{metaGD["tinhtrangkho"].label + ": "}</span>
                 </div>
                 <div className="col-md-6">
-                  <p className={metaGD["tinhtrangkho"].up? 'uppercase':''}>{item["tinhtrangkho"]}</p>
+                  <p className={metaGD["tinhtrangkho"].up? 'uppercase':''}>{parseTinhtrang(item["tinhtrangkho"])}</p>
                 </div>
               </div>
             </div>
@@ -318,13 +318,13 @@ export class ViewTTKH extends Component {
                 </div>
               </div>
             </div>
-            <div className="info-group" key='nhanvienid'>
+            <div className="info-group" key='nvtt'>
               <div className="row">
                 <div className="col-md-6 align-right">
-                  <span>{metaGD["nhanvienid"].label + ": "}</span>
+                  <span>{metaGD["nvtt"].label + ": "}</span>
                 </div>
                 <div className="col-md-6">
-                  <p className={metaGD["nhanvienid"].up? 'uppercase':''}>{item["nhanvienid"]}</p>
+                  <p className={metaGD["nvtt"].up? 'uppercase':''}>{item["nvtt"]}</p>
                 </div>
               </div>
             </div>
@@ -336,7 +336,7 @@ export class ViewTTKH extends Component {
                   <span>{metaGD["thanhtoan"].label + ": "}</span>
                 </div>
                 <div className="col-md-6">
-                  <p className={metaGD["thanhtoan"].up? 'uppercase':''}>{numeral(item["thanhtoan"]).format('0,0')+' VND'}</p>
+                  <p className={metaGD["thanhtoan"].up? 'uppercase':''}>{numeral(item["thanhtoan"]).format('(0,0.00)')+' VND'}</p>
                 </div>
               </div>
             </div>
@@ -346,7 +346,7 @@ export class ViewTTKH extends Component {
                   <span>{metaGD["tinhtrangthanhtoan"].label + ": "}</span>
                 </div>
                 <div className="col-md-6">
-                  <p className={metaGD["tinhtrangthanhtoan"].up? 'uppercase':''}>{item["tinhtrangthanhtoan"]}</p>
+                  <p className={metaGD["tinhtrangthanhtoan"].up? 'uppercase':''}>{parseTinhtrang(item["tinhtrangthanhtoan"])}</p>
                 </div>
               </div>
             </div>

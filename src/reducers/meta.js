@@ -660,8 +660,8 @@ const initialState = {
         field: false,
         view: true
       },
-      "nhanvienid": {
-        name: "nhanvienid",
+      "nvnh": {
+        name: "nvnh",
         label: "Nhân Viên",
         sort: true,
         up: true,
@@ -724,8 +724,7 @@ const initialState = {
         label: "Ngày Hoan Thanh",
         sort: true,
         type: "date",
-        disabled: true,
-        field: false,
+        field: true,
         view: false
       },
       "tinhtrangdonhang": {
@@ -805,24 +804,6 @@ const initialState = {
         field: false,
         view:true
       },
-      mausac: {
-        name: "mausac",
-        label: "Màu Sắc",
-        sort: false,
-        up: false,
-        type: "special",
-        field: false,
-        view:true
-      },
-      chatlieu: {
-        name: "chatlieu",
-        label: "Chất Liệu",
-        sort: false,
-        up: false,
-        type: "special",
-        field: false,
-        view:true
-      },
       khoid: {
         name: "khoid",
         label: "Kho Còn Trống",
@@ -848,7 +829,16 @@ const initialState = {
         up: false,
         type: "number",
         field: true,
-        view:true
+        view:false
+      },
+      chieudai: {
+        name: "chieudai",
+        label: "Chieu dai",
+        sort: false,
+        up: false,
+        type: "number",
+        field: true,
+        view: true
       },
       gia: {
         name: "gia",
@@ -867,6 +857,14 @@ const initialState = {
         type: "number",
         field: false,
         view:true
+      },
+      ngaynhap: {
+        name: "ngaynhap",
+        label: "Ngày Nhap",
+        sort: true,
+        type: "date",
+        field: true,
+        view: true
       }
     },
     ctdh: {
@@ -937,8 +935,8 @@ const initialState = {
         field: false,
         view: true
       },
-      "nhanvienid": {
-        name: "nhanvienid",
+      "nvdh": {
+        name: "nvdh",
         label: "Nhân Viên",
         sort: true,
         up: true,
@@ -1120,8 +1118,8 @@ const initialState = {
         field: false,
         view: true
       },
-      "nhanvienid": {
-        name: "nhanvienid",
+      "nvnh": {
+        name: "nvnh",
         label: "Nhân Viên",
         sort: true,
         up: true,
@@ -1573,8 +1571,8 @@ const initialState = {
         field: false,
         view: true
       },
-      "nhanvienid": {
-        name: "nhanvienid",
+      "nvtt": {
+        name: "nvtt",
         label: "Nhân Viên",
         sort: true,
         up: true,
@@ -1685,6 +1683,7 @@ const initialState = {
           value: "huy",
           label: "Hủy"
         }],
+        required: true,
         field: true,
         view: true
       }
@@ -1735,8 +1734,8 @@ const initialState = {
         field: false,
         view: true
       },
-      "nhanvienid": {
-        name: "nhanvienid",
+      "nvtt": {
+        name: "nvtt",
         label: "Nhân Viên",
         sort: true,
         up: true,
@@ -1847,6 +1846,7 @@ const initialState = {
           value: "huy",
           label: "Hủy"
         }],
+        required: true,
         field: true,
         view: true
       }

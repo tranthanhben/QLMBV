@@ -269,7 +269,7 @@ export default class EditPXH extends Component {
                 </div>
                 <div className='form-group' key="tongtien">
                   {renderLabel(metaGD.tongtien)}
-                  <input type="text" data-addr='tongtien'className="form-control" readOnly value={numeral(gdItem.tongtien).format('0,0') || '0'} />
+                  <input type="text" data-addr='tongtien'className="form-control" readOnly value={numeral(gdItem.tongtien).format('(0,0.00)') || '0'} />
                 </div>
               </div>
               <div className="col-md-5">

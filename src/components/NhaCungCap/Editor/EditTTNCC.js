@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {initObject, ATO, OTA, preprocess, datetime, changeDTI, renderLabel, setValue, checkRequire, preprocessPost} from '../../../meta';
+import {initObject, ATO, OTA, preprocess, datetime, changeDTI, renderLabel, setValue, checkRequire, numeral, preprocessPost} from '../../../meta';
 import {THead, TBody} from '../../table/rowForTTNCC';
 import * as ttnccActions from '../../../actions/nhacungcap/ttnccActions';
 import * as giaodichActions from '../../../actions/giaodichActions';
@@ -37,7 +37,7 @@ export default class EditPNH extends Component {
   state = {
     gdItem: {
       nhanvienid: this.props.user.nhanvienid || 'admin',
-      tinhtrangkho: 'chuaxuly',
+      tinhtrangthanhtoan: 'chuaxuly',
       doitacid: '',
       ngayhoanthanh: changeDTI(datetime(new Date()))
     },
@@ -128,7 +128,7 @@ export default class EditPNH extends Component {
       return checkRequire(this.props.meta.giaodich, this.state.gdItem);
     }
     if(this.state.cttt.length === 0){
-      return 'Vui lòng thêm chi tiết kho';
+      return 'Vui lòng thêm chi tiết thanh toan';
     }
     return '';
   }
@@ -264,7 +264,7 @@ export default class EditPNH extends Component {
                 </div>
                 <div className='form-group' key="tong">
                   {renderLabel(metaGD.tongtien)}
-                  <input className='form-control' type="text" readOnly value={gdItem.tongtien||0}/>
+                  <input className='form-control' type="text" readOnly value={numeral(gdItem.tongtien).format('(0,0.00)')}/>
                 </div>
               </div>
               <div className="col-md-4">

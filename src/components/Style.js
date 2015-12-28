@@ -101,10 +101,10 @@ export const Style = {
   },
   content_add: {
     position: 'absolute',
-    width: '90%',
+    width: '98%',
     height: '300px',
-    top: '40%',
-    left: '5%',
+    top: '25%',
+    left: '1%',
     border: '1px solid #ccc',
     background: '#fff',
     overflow: 'auto',

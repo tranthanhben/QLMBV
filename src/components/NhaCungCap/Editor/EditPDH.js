@@ -76,7 +76,14 @@ export default class EditPDH extends Component {
         newGD: false,
         edited: false,
         editedDH: false,
-        submiting: false
+        submiting: false,
+        ctdh_init: {
+          giaodichid: nextProps.gdItem.id || '',
+          loaivaiid:'',
+          soluong:'',
+          gia:'',
+          loaigiaodich:"pmh"
+        }
       });
     }
     if(nextProps.ctdh){
