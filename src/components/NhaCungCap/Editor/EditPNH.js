@@ -25,7 +25,8 @@ function filterLV(ctdh, list){
   listK: state.giaodich.listK,
   listPDH: state.giaodich.listPDH,
   user: state.user.user,
-  ctk: state.phieunhaphang.ctk
+  ctk: state.phieunhaphang.ctk,
+  msgPCTK: state.phieunhaphang.msgPCTK
 }),{...pnhActions, ...giaodichActions})
 export default class EditPNH extends Component {
   static propTypes = {
@@ -120,11 +121,15 @@ export default class EditPNH extends Component {
       });
     }
     if(nextProps.ctk){
+      this.props.getItem(this.props.giaodichid);
       this.setState({
         ctk: nextProps.ctk || [],
         editedCTK: false,
         edited: false
       });
+    }
+    if(nextProps.msgPCTK){
+      this.props.getItem(this.props.giaodichid);
     }
   }
   handleChange(){

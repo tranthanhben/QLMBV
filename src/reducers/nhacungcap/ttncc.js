@@ -89,8 +89,8 @@ export default function thanhtoanNCC(state = initialState, action = {}){
       return {
         ...state,
         getding: false,
-        editItem: action.result,
-        cttt: action.result.chitietthanhtoan
+        msgPCTTT: false,
+        editItem: action.result
       };
     case TTNCC_GET_FAIL:
       return {
@@ -177,6 +177,7 @@ export default function thanhtoanNCC(state = initialState, action = {}){
         postingCTTT: false,
         reloadList: true,
         cttt: action.result,
+        msgPCTTT: true
       };
     case TTNCC_CTTT_FAIL:
       return {
@@ -198,6 +199,7 @@ export default function thanhtoanNCC(state = initialState, action = {}){
     case GD_DEL_CTTT_SUCCESS:
       return {
         ...state,
+        msgPCTTT: true,
         reloadList: true
       };
     default:

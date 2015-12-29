@@ -331,6 +331,16 @@ export class ViewTTNCC extends Component {
             </div>
           </div>
           <div className="col-md-6">
+            <div className="info-group" key='tongtien'>
+              <div className="row">
+                <div className="col-md-6 align-right">
+                  <span>{metaGD["tongtien"].label + ": "}</span>
+                </div>
+                <div className="col-md-6">
+                  <p className={metaGD["tongtien"].up? 'uppercase':''}>{numeral(item["tongtien"]).format('(0,0.00)')+' VND'}</p>
+                </div>
+              </div>
+            </div>
             <div className="info-group" key='thanhtoan'>
               <div className="row">
                 <div className="col-md-6 align-right">

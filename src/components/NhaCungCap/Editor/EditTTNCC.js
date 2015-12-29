@@ -13,7 +13,8 @@ import * as giaodichActions from '../../../actions/giaodichActions';
   listK: state.giaodich.listK,
   listPNH: state.giaodich.listPNH,
   user: state.user.user,
-  cttt: state.thanhtoanNCC.cttt
+  cttt: state.thanhtoanNCC.cttt,
+  msgPCTTT: state.thanhtoanNCC.msgPCTTT
 }),{...ttnccActions, ...giaodichActions})
 export default class EditPNH extends Component {
   static propTypes = {
@@ -36,7 +37,7 @@ export default class EditPNH extends Component {
   }
   state = {
     gdItem: {
-      nhanvienid: this.props.user.nhanvienid || 'admin',
+      nvtt: this.props.user.nvtt || 'admin',
       tinhtrangthanhtoan: 'chuaxuly',
       doitacid: '',
       ngayhoanthanh: changeDTI(datetime(new Date()))
@@ -74,7 +75,6 @@ export default class EditPNH extends Component {
       this.setState({
         giaodichid: nextProps.gdItem.id,
         gdItem: nextProps.gdItem,
-        newGD: false,
         submiting: false,
         edited: false
       });
@@ -83,7 +83,6 @@ export default class EditPNH extends Component {
         giaodichid: nextProps.gdItem.id,
         cttt: nextProps.gdItem.chitietthanhtoan ||[],
         gdItem: nextProps.gdItem,
-        newGD: false,
         edited: false,
         editedCTTT: false,
         submiting: false,
@@ -97,12 +96,36 @@ export default class EditPNH extends Component {
         }
       });
     }
+    if(nextProps.gdItem && this.state.newGD){
+      let gdItem = nextProps.gdItem;
+      gdItem.nvtt = this.props.user.nhanvienid || 'admin';
+      gdItem.tinhtrangthanhtoan = 'chuaxuly';
+      this.setState({
+        giaodichid: nextProps.gdItem.id,
+        cttt: nextProps.gdItem.chitietthanhtoan ||[],
+        gdItem: gdItem,
+        newGD: false,
+        edited: true,
+        cttt_init: {
+          giaodichid: nextProps.gdItem.id || '',
+          thanhtoan: 0,
+          phuongthuc: 'tienmat',
+          ngaythanhtoan: changeDTI(datetime(new Date())),
+          ngaytao: new Date(changeDTI(datetime(new Date()))),
+          loaigiaodich:"pdh"
+        }
+      });
+    }
     if(nextProps.cttt){
+      console.log("next", nextProps.msgPCTTT);
       this.setState({
         cttt: nextProps.cttt || [],
         editedCTTT: false,
         edited: false
       });
+    }
+    if(nextProps.msgPCTTT){
+      this.props.getItem(this.props.giaodichid);
     }
   }
   handleChange(){
@@ -225,7 +248,7 @@ export default class EditPNH extends Component {
         <div className="row">
           { giaodichid? [<div className="col-md-12" key="gdfield">
             <div className="row">
-              <div className="col-md-8 boder-right">
+              <div className="col-md-7 boder-right">
                 <div className='form-group' key="giaodichid">
                   {renderLabel(metaGD.id)}
                   &nbsp;
@@ -266,8 +289,12 @@ export default class EditPNH extends Component {
                   {renderLabel(metaGD.tongtien)}
                   <input className='form-control' type="text" readOnly value={numeral(gdItem.tongtien).format('(0,0.00)')}/>
                 </div>
+                <div className='form-group' key="thanhtoan">
+                  {renderLabel(metaGD.thanhtoan)}
+                  <input className='form-control' type="text" readOnly value={numeral(gdItem.thanhtoan).format('(0,0.00)')}/>
+                </div>
               </div>
-              <div className="col-md-4">
+              <div className="col-md-5">
               </div>
             </div>
           </div>,

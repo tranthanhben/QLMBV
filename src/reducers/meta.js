@@ -987,15 +987,24 @@ const initialState = {
         up: true,
         type: "single",
         field: false,
-        view: true
+        view: false
       },
       "doitacid": {
         name: "doitacid",
-        label: "Khách Hàng",
+        label: "KHID",
         sort: true,
         up: true,
         type: "single",
         required: true,
+        field: false,
+        view: true
+      },
+      "kh": {
+        name: "kh",
+        label: "Khách Hàng",
+        sort: false,
+        up: false,
+        type: "single",
         field: false,
         view: true
       },
@@ -1178,15 +1187,24 @@ const initialState = {
         up: true,
         type: "single",
         field: false,
-        view: true
+        view: false
       },
       "doitacid": {
         name: "doitacid",
-        label: "Khách Hàng",
+        label: "KHID",
         sort: true,
         up: true,
         type: "single",
         required: true,
+        field: false,
+        view: true
+      },
+      "kh": {
+        name: "kh",
+        label: "Khách Hàng",
+        sort: false,
+        up: false,
+        type: "single",
         field: false,
         view: true
       },
@@ -1653,15 +1671,24 @@ const initialState = {
         up: true,
         type: "single",
         field: false,
-        view: true
+        view: false
       },
       "doitacid": {
         name: "doitacid",
-        label: "Nhà Cung Cấp",
+        label: "NCCID",
         sort: true,
         up: true,
         type: "single",
         required: true,
+        field: false,
+        view: true
+      },
+      "ncc": {
+        name: "ncc",
+        label: "Nhà Cung Cấp",
+        sort: false,
+        up: false,
+        type: "single",
         field: false,
         view: true
       },
@@ -1821,15 +1848,24 @@ const initialState = {
         up: true,
         type: "single",
         field: false,
-        view: true
+        view: false
       },
       "doitacid": {
         name: "doitacid",
-        label: "Khách Hàng",
+        label: "KHID",
         sort: true,
         up: true,
         type: "single",
         required: true,
+        field: false,
+        view: true
+      },
+      "kh": {
+        name: "kh",
+        label: "Khách Hàng",
+        sort: false,
+        up: false,
+        type: "single",
         field: false,
         view: true
       },

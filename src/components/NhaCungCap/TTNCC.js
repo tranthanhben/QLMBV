@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import * as ttnccActions from '../../actions/nhacungcap/ttnccActions';
-import {THead, TBody, TFoot} from '../table/row';
+import {THeadView, TBodyView, TFootView} from '../table/rowForTTNCC';
 import {Pagination, PageShow} from '../table/pagination';
 import {isLoaded, loadList as loadTTNCC} from '../../actions/nhacungcap/ttnccActions';
 import * as layoutActions from '../../actions/layoutActions';
@@ -21,6 +21,7 @@ import {ViewTTNCC} from './Editor/ViewFull';
     meta: state.meta.thanhtoanNCC,
     listLV: state.giaodich.listLV,
     listK: state.giaodich.listK,
+    listNCC: state.giaodich.listNCC
   }),
   {...ttnccActions,...layoutActions, ...giaodichActions})
 
@@ -44,6 +45,7 @@ class TTNCC extends Component{
   componentWillMount(){
     this.props.loadLV();
     this.props.loadK();
+    this.props.loadNCC();
   }
   componentWillReceiveProps(nextProps) {
     if(nextProps.reload === true){
@@ -124,7 +126,7 @@ class TTNCC extends Component{
     this.setState({openEdit: !this.state.openEdit, openView: false})
   }
   render(){
-    const {listTTNCC, paging, meta, listLV, listK} = this.props;
+    const {listTTNCC, paging, meta, listLV, listK, listNCC} = this.props;
     const {options, itemView, openView, openEdit, idEdit} = this.state;
     let metagd = meta && meta.giaodich || {};
 
@@ -149,15 +151,15 @@ class TTNCC extends Component{
                 </div>
                 <table id="example" className="table display preline dataTable" cellSpacing="0" width="100%" role="grid" aria-describedby="example_info" style={{"width": "100%"}}>
                   <thead>
-                    <THead meta={metagd} sort={options.sort} sortFunc={::this.sortField} ></THead>
+                    <THeadView meta={metagd} sort={options.sort} sortFunc={::this.sortField} />
                   </thead>
                   <tfoot>
-                    <TFoot meta={metagd} ></TFoot>
+                    <TFootView meta={metagd} />
                   </tfoot>
                   <tbody>
                     {listTTNCC && listTTNCC.map((item, index) =>{
                       return(
-                        <TBody item={item} index={index} sort={options.sort} meta={metagd} paging={paging} key={index} view={::this.viewItemFull} edit={::this.editItem} />
+                        <TBodyView item={item} index={index} sort={options.sort} meta={metagd} paging={paging} key={index} view={::this.viewItemFull} listNCC={listNCC} edit={::this.editItem} />
                       );
                     })}
                   </tbody>
