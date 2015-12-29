@@ -68,7 +68,7 @@ const initialState = {
       required: false,
       disabled: true,
       field: false,
-      view: true
+      view: false
     },
     "tongtien": {
       name: "tongtien",
@@ -1050,6 +1050,7 @@ const initialState = {
           label: "Hủy"
         }],
         field: true,
+        required: true,
         view: true
       },
       "tinhtrangkho": {
@@ -1095,6 +1096,15 @@ const initialState = {
         }],
         field: false,
         view: false
+      },
+      "ngaydat": {
+        name: "ngaydat",
+        label: "Ngày Đặt",
+        sort: true,
+        type: "date",
+        required: true,
+        field: true,
+        view: true
       }
     },
     ctdh: {
@@ -1132,18 +1142,20 @@ const initialState = {
         up: false,
         type: "number",
         field: false,
-        view: true
+        view: true,
+        unit: ' met',
+        unitTable: '(met)'
       },
       soluong: {
         name: "soluong",
-        label: "Số lượng mua",
+        label: "SL mua",
         sort: false,
         up: false,
         type: "number",
         field: true,
         view: true,
-        unit: ' cay',
-        unitTable: '(cay)'
+        unit: ' met',
+        unitTable: '(met)'
       },
       gia: {
         name: "gia",
@@ -1272,6 +1284,7 @@ const initialState = {
           label: "Hủy"
         }],
         field: true,
+        required: true,
         view: true
       },
       "tinhtrangthanhtoan": {

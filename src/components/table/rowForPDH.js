@@ -88,7 +88,6 @@ export class TBody extends Component {
       }
     };
     this.props.edit(event);
-
     this.setState({loaivai: this.state.object[val]});
   }
   render(){

@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import {formatDate, numeral, ATOLV} from '../../meta';
+import {formatDate, numeral, ATOLV, parseTinhtrang} from '../../meta';
 
 export class THead extends Component {
   static propTypes = {

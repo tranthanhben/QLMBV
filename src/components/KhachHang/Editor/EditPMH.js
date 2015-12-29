@@ -15,7 +15,8 @@ import Select from 'react-select';
   listKH: state.giaodich.listKH,
   listLV: state.giaodich.listLV,
   user: state.user.user,
-  ctdh: state.phieumuahang.ctdh
+  ctdh: state.phieumuahang.ctdh,
+  msgPCTDH: state.phieumuahang.msgPCTDH,
 }),{...pmhActions, ...giaodichActions})
 export default class EditPMH extends Component {
   static propTypes = {
@@ -54,21 +55,18 @@ export default class EditPMH extends Component {
   componentWillMount(){
     if(this.props.giaodichid){
       this.props.getItem(this.props.giaodichid);
-      this.state.newGD = false;
     }
     this.props.loadKH();
     this.props.loadLV();
   }
   componentWillReceiveProps(nextProps) {
     if(nextProps.gdItem && this.state.submiting){
-      console.log("tiep");
       let ctdh = this.state.ctdh;
       ctdh = this.setgiaodichid(ctdh,nextProps.gdItem.id);
       this.props.postCTDH(this.xulytruoc(ctdh));
       this.setState({
         giaodichid: nextProps.gdItem.id,
         gdItem: nextProps.gdItem,
-        newGD: false,
         submiting: false,
         edited: false
       });
@@ -77,10 +75,28 @@ export default class EditPMH extends Component {
         giaodichid: nextProps.gdItem.id,
         ctdh: nextProps.gdItem.chitietdonhang ||[],
         gdItem: nextProps.gdItem,
-        newGD: false,
         edited: false,
         editedDH: false,
         submiting: false,
+        ctdh_init: {
+          giaodichid: nextProps.gdItem.id || '',
+          loaivaiid:'',
+          soluong:'',
+          gia:'',
+          loaigiaodich:"pmh"
+        }
+      });
+    }
+    if(nextProps.gdItem && this.state.newGD){
+      let gdItem = nextProps.gdItem;
+      gdItem.nvdh = this.props.user.nhanvienid || 'admin';
+      gdItem.tinhtrangdathang = 'chuaxuly';
+      this.setState({
+        giaodichid: nextProps.gdItem.id,
+        ctdh: nextProps.gdItem.chitietkho ||[],
+        gdItem: gdItem,
+        newGD: false,
+        edited: true,
         ctdh_init: {
           giaodichid: nextProps.gdItem.id || '',
           loaivaiid:'',
@@ -96,6 +112,9 @@ export default class EditPMH extends Component {
         editedDH: false,
         edited: false
       });
+    }
+    if(nextProps.msgPCTDH){
+      this.props.getItem(this.state.giaodichid);
     }
   }
   handleChange(){
@@ -194,7 +213,7 @@ export default class EditPMH extends Component {
     }
   }
   handleChangeCTDH(index){
-    return ()=>{
+    return (event)=>{
       let ctdh = this.state.ctdh;
       let addr = event.target.dataset.addr;
       let value = event.target.value;
@@ -238,6 +257,10 @@ export default class EditPMH extends Component {
                 <div className='form-group' key="tinhtrangdonhang">
                   {renderLabel(metaGD.tinhtrangdonhang)}
                   {metaGD && metaGD["tinhtrangdonhang"].$input(gdItem,this)}
+                </div>
+                <div className='form-group' key="ngaydat">
+                  {renderLabel(metaGD.ngaydat)}
+                  {metaGD && metaGD["ngaydat"].$input(gdItem,this)}
                 </div>
                 <div className='form-group' key="tongtiendutinh">
                   {renderLabel(metaGD.tongtiendutinh)}

@@ -89,8 +89,8 @@ export default function phieuxuathang(state = initialState, action = {}){
       return {
         ...state,
         getding: false,
-        editItem: action.result,
-        ctk: action.result.chitietkho
+        msgPCTK: false,
+        editItem: action.result
       };
     case PXH_GET_FAIL:
       return {
@@ -176,6 +176,7 @@ export default function phieuxuathang(state = initialState, action = {}){
         ...state,
         postingCTK: false,
         reloadList: true,
+        msgPCTK: true,
         ctk: action.result,
       };
     case PXH_CTK_FAIL:
@@ -198,6 +199,7 @@ export default function phieuxuathang(state = initialState, action = {}){
     case GD_DEL_CTK_SUCCESS:
       return {
         ...state,
+        msgPCTK: true,
         reloadList: true
       };
     default:

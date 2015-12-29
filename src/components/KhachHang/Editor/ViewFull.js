@@ -137,11 +137,11 @@ export class ViewPMH extends Component {
             <strong>Chi tiết đơn hàng:</strong>
             <table id="example" className="table display preline dataTable" cellSpacing="0" width="100%" role="grid" aria-describedby="example_info" style={{"width": "100%"}}>
               <thead>
-                <THeadCTDH meta={metaCTDH} ></THeadCTDH>
+                <THeadCTDH meta={metaCTDH} />
               </thead>
               <tbody>
                 {item.chitietdonhang && item.chitietdonhang.map((item, index)=>{
-                  return <TBodyCTDH meta={metaCTDH} listLV={listLV} index={index} item={item}></TBodyCTDH>;
+                  return <TBodyCTDH meta={metaCTDH} listLV={listLV} index={index} key={index} item={item} />;
                 })}
               </tbody>
             </table>

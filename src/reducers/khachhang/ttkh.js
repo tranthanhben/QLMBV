@@ -89,8 +89,8 @@ export default function thanhtoanKH(state = initialState, action = {}){
       return {
         ...state,
         getding: false,
-        editItem: action.result,
-        cttt: action.result.chitietthanhtoan
+        msgPCTTT: false,
+        editItem: action.result
       };
     case TTKH_GET_FAIL:
       return {
@@ -176,6 +176,7 @@ export default function thanhtoanKH(state = initialState, action = {}){
         ...state,
         postingCTTT: false,
         reloadList: true,
+        msgPCTTT: true,
         cttt: action.result,
       };
     case TTKH_CTTT_FAIL:
@@ -198,6 +199,7 @@ export default function thanhtoanKH(state = initialState, action = {}){
     case GD_DEL_CTTT_SUCCESS:
       return {
         ...state,
+        msgPCTTT: true,
         reloadList: true
       };
     default:

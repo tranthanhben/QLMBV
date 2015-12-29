@@ -82,7 +82,7 @@ export default class EditPDH extends Component {
           loaivaiid:'',
           soluong:'',
           gia:'',
-          loaigiaodich:"pmh"
+          loaigiaodich:"pdh"
         }
       });
     }
@@ -101,7 +101,7 @@ export default class EditPDH extends Component {
           loaivaiid:'',
           soluong:'',
           gia:'',
-          loaigiaodich:"pmh"
+          loaigiaodich:"pdh"
         }
       });
     }
@@ -113,7 +113,7 @@ export default class EditPDH extends Component {
       });
     }
     if(nextProps.msgPCTDH){
-      this.props.getItem(this.props.giaodichid);
+      this.props.getItem(this.state.giaodichid);
     }
   }
   handleChange(){
@@ -211,7 +211,7 @@ export default class EditPDH extends Component {
     }
   }
   handleChangeCTDH(index){
-    return ()=>{
+    return (event)=>{
       let ctdh = this.state.ctdh;
       let addr = event.target.dataset.addr;
       let value = event.target.value;

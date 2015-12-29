@@ -123,7 +123,7 @@ export default class EditPNH extends Component {
       });
     }
     if(nextProps.msgPCTTT){
-      this.props.getItem(this.props.giaodichid);
+      this.props.getItem(this.state.giaodichid);
     }
   }
   handleChange(){

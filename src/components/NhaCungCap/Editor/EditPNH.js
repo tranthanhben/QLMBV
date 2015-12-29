@@ -121,7 +121,6 @@ export default class EditPNH extends Component {
       });
     }
     if(nextProps.ctk){
-      this.props.getItem(this.props.giaodichid);
       this.setState({
         ctk: nextProps.ctk || [],
         editedCTK: false,
@@ -129,7 +128,7 @@ export default class EditPNH extends Component {
       });
     }
     if(nextProps.msgPCTK){
-      this.props.getItem(this.props.giaodichid);
+      this.props.getItem(this.state.giaodichid);
     }
   }
   handleChange(){
@@ -225,7 +224,7 @@ export default class EditPNH extends Component {
         ctk_new.loaivaiid = options.loaivaiid;
         ctk_new.khoid = options.khoid;
         ctk_new.gia = options.gia;
-        ctk_new.cayvaiid = 'cv' + this.state.giaodichid + new Date().getDate()*(i+1);
+        ctk_new.cayvaiid = 'cv' + this.state.giaodichid + new Date().getSeconds().toString()+ new Date().getMinutes().toString();
         ctk.push(ctk_new);
       };
       this.setState({ctk: ctk, openAdd: false, editedCTK: true});
