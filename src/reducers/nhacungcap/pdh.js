@@ -89,6 +89,7 @@ export default function phieudathang(state = initialState, action = {}){
       return {
         ...state,
         getding: false,
+        msgPCTDH: false,
         editItem: action.result
       };
     case PDH_GET_FAIL:
@@ -173,6 +174,7 @@ export default function phieudathang(state = initialState, action = {}){
         ...state,
         postingCTDH: false,
         reloadList: true,
+        msgPCTDH: true,
         ctdh: action.result,
       };
     case PDH_CTDH_FAIL:
@@ -195,6 +197,7 @@ export default function phieudathang(state = initialState, action = {}){
     case GD_DEL_CTDH_SUCCESS:
       return {
         ...state,
+        msgPCTDH: true,
         reloadList: true
       };
     default:

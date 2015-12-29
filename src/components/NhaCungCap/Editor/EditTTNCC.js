@@ -60,7 +60,6 @@ export default class EditPNH extends Component {
   componentWillMount(){
     if(this.props.giaodichid){
       this.props.getItem(this.props.giaodichid);
-      this.state.newGD = false;
     }
     this.props.loadNCC();
     this.props.loadLV();
@@ -117,7 +116,6 @@ export default class EditPNH extends Component {
       });
     }
     if(nextProps.cttt){
-      console.log("next", nextProps.msgPCTTT);
       this.setState({
         cttt: nextProps.cttt || [],
         editedCTTT: false,

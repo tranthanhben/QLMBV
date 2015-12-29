@@ -14,7 +14,8 @@ import Select from 'react-select';
   listNCC: state.giaodich.listNCC,
   listLV: state.giaodich.listLV,
   user: state.user.user,
-  ctdh: state.phieudathang.ctdh
+  ctdh: state.phieudathang.ctdh,
+  msgPCTDH: state.phieudathang.msgPCTDH
 }),{...pdhActions, ...giaodichActions})
 export default class EditPDH extends Component {
   static propTypes = {
@@ -53,7 +54,6 @@ export default class EditPDH extends Component {
   componentWillMount(){
     if(this.props.giaodichid){
       this.props.getItem(this.props.giaodichid);
-      this.state.newGD = false;
     }
     this.props.loadNCC();
     this.props.loadLV();
@@ -66,7 +66,6 @@ export default class EditPDH extends Component {
       this.setState({
         giaodichid: nextProps.gdItem.id,
         gdItem: nextProps.gdItem,
-        newGD: false,
         submiting: false,
         edited: false
       });
@@ -75,10 +74,28 @@ export default class EditPDH extends Component {
         giaodichid: nextProps.gdItem.id,
         ctdh: nextProps.gdItem.chitietdonhang ||[],
         gdItem: nextProps.gdItem,
-        newGD: false,
         edited: false,
         editedDH: false,
         submiting: false,
+        ctdh_init: {
+          giaodichid: nextProps.gdItem.id || '',
+          loaivaiid:'',
+          soluong:'',
+          gia:'',
+          loaigiaodich:"pmh"
+        }
+      });
+    }
+    if(nextProps.gdItem && this.state.newGD){
+      let gdItem = nextProps.gdItem;
+      gdItem.nvdh = this.props.user.nhanvienid || 'admin';
+      gdItem.tinhtrangdathang = 'chuaxuly';
+      this.setState({
+        giaodichid: nextProps.gdItem.id,
+        ctdh: nextProps.gdItem.chitietkho ||[],
+        gdItem: gdItem,
+        newGD: false,
+        edited: true,
         ctdh_init: {
           giaodichid: nextProps.gdItem.id || '',
           loaivaiid:'',
@@ -94,6 +111,9 @@ export default class EditPDH extends Component {
         editedDH: false,
         edited: false
       });
+    }
+    if(nextProps.msgPCTDH){
+      this.props.getItem(this.props.giaodichid);
     }
   }
   handleChange(){
