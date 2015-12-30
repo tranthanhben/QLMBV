@@ -62,6 +62,7 @@ export default class EditPXH extends Component {
       gia:'',
       khoid:'',
       ngaytao: new Date(changeDTI(datetime(new Date()))),
+      ngaynhap: changeDTI(datetime(new Date())),
       loaigiaodich:"pmh"
     },
     newGD: true
@@ -103,18 +104,20 @@ export default class EditPXH extends Component {
           gia:'',
           khoid:'',
           ngaytao: new Date(changeDTI(datetime(new Date()))),
+          ngaynhap: changeDTI(datetime(new Date())),
           loaigiaodich:"pmh"
         }
       });
     }
     if(nextProps.gdItem && this.state.newGD){
       let gdItem = nextProps.gdItem;
-      gdItem.nvnh = this.props.user.nhanvienid || 'admin';
-      gdItem.tinhtrangkho = 'chuaxuly';
-      gdItem.ngayhoanthanh = changeDTI(datetime(new Date()));
+      gdItem.nvnh = gdItem.nvnh? gdItem.nvnh :( this.props.user.nhanvienid || 'admin');
+      gdItem.newpnh = gdItem.newpnh ? gdItem.newpnh: true;
+      gdItem.tinhtrangkho = gdItem.tinhtrangkho? gdItem.tinhtrangkho: 'chuaxuly';
+      gdItem.ngayhoanthanh =gdItem.ngayhoanthanh? gdItem.ngayhoanthanh:changeDTI(datetime(new Date()));
       this.setState({
         giaodichid: nextProps.gdItem.id,
-        ctk: nextProps.gdItem.chitietcayvai ||[],
+        ctk: nextProps.gdItem.chitietkho ||[],
         gdItem: gdItem,
         newGD: false,
         edited: true,
@@ -233,11 +236,11 @@ export default class EditPXH extends Component {
     }
   }
   handleChangeCTK(index){
-    return ()=>{
+    return (event)=>{
       let ctk = this.state.ctk;
       let addr = event.target.dataset.addr;
       let value = event.target.value;
-      if(addr === 'soluong'){
+      if(addr === 'chieudai'){
         value = parseFloat(value)*-1 || 0;
       }
       ctk[index][addr] = value;
@@ -291,9 +294,8 @@ export default class EditPXH extends Component {
                         clearable= {false}
                         searchable={true}
                         disabled={true}
-                        onChange={::this.changeSelect}
                         value={gdItem.doitacid}
-                        options={listNCC} />
+                        options={listKH} />
                     </div>
                     <div className='form-group' key="tinhtrangkho">
                       {renderLabel(metaGD.tinhtrangkho)}
@@ -307,15 +309,11 @@ export default class EditPXH extends Component {
                   <div className="col-md-6">
                     <div className='form-group' key="donhang">
                       {renderLabel(metaGD.donhang)}
-                      {metaGD && metaGD["donhang"].$input(gdItem,this)}
+                      <input type="text" data-addr='donhang'className="form-control" readOnly value={numeral(gdItem.donhang).format('(0,0.00)') || '0'} />
                     </div>
                     <div className='form-group' key="kho">
                       {renderLabel(metaGD.kho)}
-                      {metaGD && metaGD["kho"].$input(gdItem,this)}
-                    </div>
-                    <div className='form-group' key="ngayhoanthanh">
-                      {renderLabel(metaGD.ngayhoanthanh)}
-                      {metaGD && metaGD["ngayhoanthanh"].$input(gdItem,this)}
+                      <input type="text" data-addr='kho'className="form-control" readOnly value={numeral(gdItem.kho).format('(0,0.00)') || '0'} />
                     </div>
                   </div>
                 </div>
@@ -327,7 +325,7 @@ export default class EditPXH extends Component {
           <div className="col-md-12" key="view ctdh">
             <br/>
             <strong>Chi tiết đơn hàng:</strong>
-            <table id="example" className="table display preline dataTable" cellSpacing="0" width="100%" role="grid" aria-describedby="example_info" style={{"width": "100%"}}>
+            <table id="example" className="table display preline dataTable" cellSpacing="0" width="100%" role="grid" aria-describedby="example_info" style={{"maxWidth": "100%"}}>
               <thead>
                 <THeadCTDH meta={metaCTDH} ></THeadCTDH>
               </thead>
@@ -341,7 +339,7 @@ export default class EditPXH extends Component {
           <div className="col-md-12" key="ctk">
             <br/>
             <strong>Chi tiết nhập hàng:</strong>
-            <table id="example" className="table display nowrap dataTable" role="grid" aria-describedby="example_info" >
+            <table id="example" className="table display nowrap dataTable" role="grid" aria-describedby="example_info" style={{"maxWidth": "100%"}}>
               <thead>
                 <THead meta={metaCTK} add={::this.addCTK(0)}></THead>
               </thead>

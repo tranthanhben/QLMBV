@@ -98,8 +98,9 @@ export default class EditPXH extends Component {
     }
     if(nextProps.gdItem && this.state.newGD){
       let gdItem = nextProps.gdItem;
-      gdItem.nvtt = this.props.user.nhanvienid || 'admin';
-      gdItem.tinhtrangthanhtoan = 'chuaxuly';
+      gdItem.nvtt = gdItem.nvtt? gdItem.nvtt :(this.props.user.nhanvienid || 'admin');
+      gdItem.newtt = gdItem.newtt ? gdItem.newtt: true;
+      gdItem.tinhtrangthanhtoan =gdItem.tinhtrangthanhtoan? gdItem.tinhtrangthanhtoan:'chuaxuly';
       this.setState({
         giaodichid: nextProps.gdItem.id,
         cttt: nextProps.gdItem.chitietthanhtoan ||[],
@@ -244,7 +245,7 @@ export default class EditPXH extends Component {
         </div>
         <hr/>
         <div className="row">
-          { giaodichid? [<div className="col-md-12" key="gdfield">
+          <div className="col-md-12" key="gdfield">
             <div className="row">
               <div className="col-md-7 boder-right">
                 <div className='form-group' key="giaodichid">
@@ -288,7 +289,7 @@ export default class EditPXH extends Component {
               <div className="col-md-5">
               </div>
             </div>
-          </div>,
+          </div>
           <div className="col-md-12" key="cttt">
             <br/>
             <strong>Chi tiết thanh toán:</strong>
@@ -310,29 +311,6 @@ export default class EditPXH extends Component {
               </tbody>
             </table>
           </div>
-          ]: <div className="col-md-12">
-            <div className="row">
-              <div className="col-md-8 boder-right">
-                <div className='form-group' key="giaodichid">
-                  {renderLabel(metaGD.id)}
-                  &nbsp;
-                  <select className='form-control  uppercase' data-addr='id'
-                  onChange={::this.changeGDID}
-                  value={giaodichid || ''}>
-                  <option key='id'>-- Giao Dich ID --</option>
-                  {listPXH && listPXH.map(b => {
-                    return (
-                      <option key={b.id} value={b.id}>
-                        {b.id}
-                      </option>
-                    );
-                  })}
-                  </select>
-                </div>
-              </div>
-            </div>
-          </div>}
-
         </div>
         <br/>
         <hr/>

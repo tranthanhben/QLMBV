@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {initObject, ATOLV, OTA, preprocess, datetime, changeDTI, renderLabel, setValue, checkRequire, preprocessPost, parseOptTen, parseOptId} from '../../../meta';
+import {initObject, ATOLV, OTA, preprocess, datetime, changeDTI, renderLabel, setValue, checkRequire, preprocessPost, parseOptTen, parseOptId, numeral} from '../../../meta';
 import {THead, TBody} from '../../table/rowForPNH';
 import {THeadCTDH, TBodyCTDH} from '../../table/rowForPDH';
 import * as pnhActions from '../../../actions/nhacungcap/pnhActions';
@@ -90,7 +90,7 @@ export default class EditPNH extends Component {
       });
     }else if(nextProps.gdItem){
       this.setState({
-        ctk: nextProps.gdItem.chitietcayvai ||[],
+        ctk: nextProps.gdItem.chitietkho ||[],
         gdItem: nextProps.gdItem,
         edited: false,
         editedCTK: false,
@@ -99,12 +99,13 @@ export default class EditPNH extends Component {
     }
     if(nextProps.gdItem && this.state.newGD){
       let gdItem = nextProps.gdItem;
-      gdItem.nvnh = this.props.user.nhanvienid || 'admin';
-      gdItem.tinhtrangkho = 'chuaxuly';
-      gdItem.ngayhoanthanh = changeDTI(datetime(new Date()));
+      gdItem.nvnh = gdItem.nvnh? gdItem.nvnh:( this.props.user.nhanvienid || 'admin');
+      gdItem.newpnh = gdItem.newpnh ? gdItem.newpnh: true;
+      gdItem.tinhtrangkho = gdItem.tinhtrangkho ? gdItem.tinhtrangkho:'chuaxuly';
+      gdItem.ngayhoanthanh = gdItem.ngayhoanthanh? gdItem.ngayhoanthanh:changeDTI(datetime(new Date()));
       this.setState({
         giaodichid: nextProps.gdItem.id,
-        ctk: nextProps.gdItem.chitietcayvai ||[],
+        ctk: nextProps.gdItem.chitietkho ||[],
         gdItem: gdItem,
         newGD: false,
         edited: true,
@@ -234,7 +235,8 @@ export default class EditPNH extends Component {
   addCTK(index) {
     return () =>{
       let ctk = this.state.ctk || [];
-      const init = this.state.ctk_init || [];
+      let init = {...this.state.ctk_init};
+      init.cayvaiid = 'cv' + this.state.giaodichid + new Date().getSeconds().toString()+ new Date().getMinutes().toString();
       let befor_ctk = ctk.splice(0, index + 1);
       befor_ctk= [...befor_ctk, {...init}];
       ctk = [...befor_ctk,...ctk];
@@ -327,21 +329,17 @@ export default class EditPNH extends Component {
                     </div>
                     <div className='form-group' key="tongtien">
                       {renderLabel(metaGD.tongtien)}
-                      {metaGD && metaGD["tongtien"].$input(gdItem,this)}
+                      <input className='form-control' type="text" readOnly value={numeral(gdItem.tongtien).format('(0,0.00)')}/>
                     </div>
                   </div>
                   <div className="col-md-6">
                     <div className='form-group' key="donhang">
                       {renderLabel(metaGD.donhang)}
-                      {metaGD && metaGD["donhang"].$input(gdItem,this)}
+                      <input className='form-control' type="text" readOnly value={numeral(gdItem.donhang).format('(0,0.00)')}/>
                     </div>
                     <div className='form-group' key="kho">
                       {renderLabel(metaGD.kho)}
-                      {metaGD && metaGD["kho"].$input(gdItem,this)}
-                    </div>
-                    <div className='form-group' key="ngayhoanthanh">
-                      {renderLabel(metaGD.ngayhoanthanh)}
-                      {metaGD && metaGD["ngayhoanthanh"].$input(gdItem,this)}
+                      <input className='form-control' type="text" readOnly value={numeral(gdItem.kho).format('(0,0.00)')}/>
                     </div>
                   </div>
                 </div>
@@ -352,7 +350,7 @@ export default class EditPNH extends Component {
           </div>
           <div className="col-md-12" key="view ctdh">
             <strong>Chi tiết đơn hàng:</strong>
-            <table id="example" className="table display preline dataTable" cellSpacing="0" width="100%" role="grid" aria-describedby="example_info" style={{"width": "100%"}}>
+            <table id="example" className="table display preline dataTable" cellSpacing="0" width="100%" role="grid" aria-describedby="example_info" style={{"maxWidth": "100%"}}>
               <thead>
                 <THeadCTDH meta={metaCTDH} ></THeadCTDH>
               </thead>
@@ -365,7 +363,7 @@ export default class EditPNH extends Component {
           </div>
           <div className="col-md-12" key="ctk">
             <strong>Chi tiết nhập hàng:</strong>
-            <table id="example" className="table display nowrap dataTable" role="grid" aria-describedby="example_info" >
+            <table id="example" className="table display nowrap dataTable" role="grid" aria-describedby="example_info" style={{"maxWidth": "100%"}} >
               <thead>
                 <THead meta={metaCTK} add={::this.addCTK(0)} addRow={::this.openAdd}></THead>
               </thead>

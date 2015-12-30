@@ -4,6 +4,7 @@ import{initObject, renderField, preprocess, setValue, checkRequire, preprocessPo
 import * as khoActions from '../../../actions/khoActions';
 
 @connect(state =>({
+  user: state.user.user,
   error: state.kho.postError,
   message: state.kho.message,
   item: state.kho.editItem,
@@ -75,8 +76,13 @@ export default class EditK extends Component {
       this.props.close();
     }
   }
+  lock(){
+    let item = this.state.item;
+    item.lock = !item.lock;
+    this.props.postItem(preprocessPost(item, this.props.meta));
+  }
   render() {
-    const {meta, error, message} = this.props;
+    const {meta, error, message, user} = this.props;
     const {item, edited, submited, showFullField, id} = this.state;
     const metaPP = preprocess(meta);
     const fieldRender = showFullField && id? renderField(item, metaPP, this, true):renderField(item, metaPP, this);
@@ -90,50 +96,43 @@ export default class EditK extends Component {
           {submited ? <p className='help-block required'>
               {checkRequire(metaPP, item)}&nbsp;&nbsp;
             </p>:null}
-          {id? <button className='btn btn-warning' onClick={::this.onSubmit} disabled={(edited? '':'disabled')}>
-          {"Cập Nhật"}
-          </button>: <button className='btn btn-success' onClick={::this.onSubmit} disabled={(edited? '':'disabled')}>
-          {"Tạo mới"}</button>}
           </div>
         </div>
         <hr/>
         <div className="row">
-          <div className="col-md-12">
-            <div className="row">
-              <div className="col-md-6 boder-right">
-                {fieldRender}
-              </div>
-              <div className="col-md-6">
-              <div className="row">
-                {id? <div className="col-md-12" style={{"lineHeight":"30px"}}>
-                    Hiển thị đầy đủ các thuộc tính
-                    <div className="switch">
-                      <input type="checkbox" id="showfullfield" name="showfullfield" className="control" checked={showFullField === true ? 'checked' : ''} onChange={::this.showFull}/>
-                      <label htmlFor="showfullfield" className="checkboxs"></label>
-                    </div>
-                  </div>: null}
-                  <div className="col-md-12">
-                    {(message && !edited)? (message === true?
-                      <p className='help-block success'>
-                      <span className="fa fa-check"></span>{' Cập nhật thành công!!'}
-                      </p>:
-                      <p className='help-block required'>
-                      <span className="fa fa-close"></span>{" Cập nhật thất bại!"}
-                      </p>
-                      ):null}
-                  </div>
-                </div>
-              </div>
+          {id? <div className="col-md-12" style={{"lineHeight":"30px"}}>
+            Hiển thị đầy đủ các thuộc tính
+            <div className="switch">
+              <input type="checkbox" id="showfullfield" name="showfullfield" className="control" checked={showFullField === true ? 'checked' : ''} onChange={::this.showFull}/>
+              <label htmlFor="showfullfield" className="checkboxs"></label>
             </div>
+          </div>: null}
+          <div className="col-md-12">
+            {fieldRender}
           </div>
         </div>
         <br/>
         <hr/>
         <div className="row">
-          <div className="col-md-12 flex-right">
+          <div className="col-md-2">
+            {user && user.role === 'admin'? (item.lock === false ? <button className='btn btn-danger' onClick={::this.lock} >
+              {"Lock"}
+              </button>:<button className='btn btn-danger' onClick={::this.lock} >
+              {"Unlock"}
+              </button>):null}
+          </div>
+          <div className="col-md-10 flex-right">
           {submited ? <p className='help-block required'>
               {checkRequire(metaPP, item)}
-            </p>:null}&nbsp;&nbsp;
+            </p>:null}
+          {(message && !edited)? (message === true?
+            <p className='help-block success'>
+            <span className="fa fa-check"></span>{' Cập nhật thành công!!'}
+            </p>:
+            <p className='help-block required'>
+            <span className="fa fa-close"></span>{" Cập nhật thất bại!"}
+            </p>
+            ):null}&nbsp;&nbsp;
           {id? <button className='btn btn-warning' onClick={::this.onSubmit} disabled={(edited? '':'disabled')}>
           {"Cập Nhật"}
           </button>: <button className='btn btn-success' onClick={::this.onSubmit} disabled={(edited? '':'disabled')}>

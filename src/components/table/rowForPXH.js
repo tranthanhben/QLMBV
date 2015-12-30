@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import {formatDate, numeral, ATOLV, parseTinhtrang} from '../../meta';
+import {formatDate, numeral, ATOLV, parseTinhtrang, changeDTI, datetime} from '../../meta';
 
 export class THead extends Component {
   static propTypes = {
@@ -30,6 +30,17 @@ export class THead extends Component {
       </tr>
     )
   }
+}
+function getCayVai(ctcv, loaivaiid){
+  let obj = {};
+  if(ctcv){
+    ctcv.map(cv =>{
+      if(cv.loaivaiid === loaivaiid && cv.con >= 0){
+        obj[cv.cayvaiid]= cv;
+      }
+    })
+  }
+  return obj;
 }
 export class THeadCTK extends Component {
   static propTypes = {
@@ -67,18 +78,22 @@ export class TBody extends Component {
   state = {
     objectLV: {},
     loaivai: {},
-    objectK: {},
-    kho: ''
+    cayvaiObj: {},
+    cayvai:{}
   }
   componentWillMount(){
     this.state.objectLV = ATOLV(this.props.listLV || []);
     this.state.loaivai = this.state.objectLV[this.props.item.loaivaiid]|| {};
-    this.state.objectK = this.state.loaivai && this.state.loaivai["chitietkho"] || {};
-    this.state.kho = this.state.objectK[this.props.item.khoid]|| '';
+    this.state.cayvaiObj = this.state.loaivai && getCayVai(this.state.loaivai["chitietcayvai"],this.state.loaivai["id"]);
+    this.state.cayvai = this.state.cayvaiObj[this.props.item.cayvaiid] || {};
   }
   componentWillReceiveProps(nextProps) {
     if(nextProps.listLV){
-      this.setState({objectLV: ATOLV(nextProps.listLV || [])});
+      let objLV = ATOLV(nextProps.listLV || []);
+      let loaivai = objLV[this.props.item.loaivaiid];
+      let objCV = getCayVai(loaivai["chitietcayvai"], loaivai.id)
+      let cayvai = objCV[nextProps.item.cayvaiid]||{};
+      this.setState({objectLV: objLV, loaivai:loaivai, cayvaiObj: objCV, cayvai: cayvai});
     }
   }
   selectLoaivai(){
@@ -87,30 +102,38 @@ export class TBody extends Component {
     if(value){
       this.setState({
         loaivai: this.state.objectLV[value],
-        objectK: this.state.objectLV[value].chitietkho,
-        kho: this.state.objectLV[value].chitietkho[this.props.item.khoid]
+        cayvaiObj: getCayVai(this.state.objectLV[value]["chitietcayvai"],this.state.objectLV[value]["id"])
       });
     }
   }
-  selectKho(){
+  selectCV(){
     this.props.edit(event);
     let value = event.target.value;
+    let evt = {
+      target:{
+        dataset:{
+          addr: "khoid"
+        },
+        value: this.state.cayvaiObj[value].khoid
+      }
+    }
+    this.props.edit(evt);
     if(value){
-      this.setState({kho: this.state.objectK[value]});
+      this.setState({cayvai: this.state.cayvaiObj[value]});
     }
   }
   render(){
     const {meta, item, add, del, edit, index, listLV, listK} = this.props;
-    const {loaivai, objectLV, kho, objectK} = this.state;
-    const optionK = [];
-    for(let key in objectK){
-      optionK.push(
+    const {loaivai, objectLV, cayvai, cayvaiObj} = this.state;
+    const optionCV = [];
+    for(let key in cayvaiObj){
+      optionCV.push(
         <option key={key} value={key}>
           {key}
         </option>
         );
     }
-    let soluong = item.soluong * -1;
+    let chieudai = item.chieudai * -1;
     return (
       <tr role="row" className={index%2===1 ? "even":"odd"} key={index}>
         <td>{index+1}</td>
@@ -131,28 +154,33 @@ export class TBody extends Component {
         <td key='conlai' >
           <input type="text" data-addr='conlai' className="form-control" readOnly  value={loaivai.conlai || '0'} />
         </td>
-        <td key={'kho'+ index}>
-          <select className='form-control' data-addr='khoid'
-            onChange={::this.selectKho}
-            value={item.khoid || ''}>
-            <option key={index + 'default'}>-- Kho --</option>
-            {optionK}
+        <td key={'cayvaiid'+ index}>
+          <select className='form-control' data-addr='cayvaiid'
+            onChange={::this.selectCV}
+            value={item.cayvaiid || ''}>
+            <option key={index + 'default'}>-- Cay vai --</option>
+            {optionCV}
           </select>
         </td>
+        <td key='khoid' className=' dt-body-right' >
+          <input type="text" data-addr='khoid' className="form-control" readOnly  value={item.khoid || ''} />
+        </td>
         <td key='trong' className=' dt-body-right' >
-          <input type="number" data-addr='trong' className="form-control" readOnly  value={kho || '0'} />
+          <input type="number" data-addr='trong' className="form-control" readOnly  value={cayvai.con || '0'} />
         </td>
 
-        <td key='soluong' className=' dt-body-right' >
-          <input type="number" step='10' min='0' data-addr='soluong'className="form-control dt-body-right" value={soluong || ''} onChange={edit} />
+        <td key='chieudai' className=' dt-body-right' >
+          <input type="number" step='10' min='0' data-addr='chieudai'className="form-control dt-body-right" value={chieudai || ''} onChange={edit} />
         </td>
         <td key='gia' className=' dt-body-right' >
           <input type="number" step='10' min='0' data-addr='gia'className="form-control dt-body-right" value={item.gia || ''} onChange={edit}/>
         </td>
         <td key='thanhtien' className=' dt-body-right' >
-          <input type="number" step='10' min='0' data-addr='thanhtien' readOnly className="form-control dt-body-right" value={item.gia*soluong || '0'} />
+          <input type="number" step='10' min='0' data-addr='thanhtien' readOnly className="form-control dt-body-right" value={item.gia*chieudai || '0'} />
         </td>
-
+        <td key='ngaynhap' className=' dt-body-right' >
+          <input type="date" step='10' min='0' data-addr='ngaynhap' className="form-control dt-body-right" value={changeDTI(datetime(new Date(item.ngaynhap || '')))} onChange={edit}/>
+        </td>
         <td key='control' className="group-edit">
           <button className="btn btn-danger btn-table btn-in-th btn-in-del" title="Del" onClick={del} key="del">
             <i className='fa fa-close'/>
@@ -207,22 +235,28 @@ export class TBodyCTK extends Component {
           {loaivai.ten}
         </td>
         <td key='conlai' >
-          {loaivai.conlai}
+
+        </td>
+        <td key='cayvaiid' >
+          {item.cayvaiid}
         </td>
         <td key={'kho'+ index}>
           {item.khoid}
         </td>
         <td key='trong'  >
-          {objectK[item.khoid]}
+
         </td>
-        <td key='soluong'  >
-          {numeral(item.soluong*-1).format('(0,0.00)') + ' Cây'}
+        <td key='chieudai'  >
+          {numeral(item.chieudai*-1).format('(0,0.00)') + ' Cây'}
         </td>
         <td key='gia' >
           {numeral(item.gia).format('(0,0.00)') + ' VND'}
         </td>
         <td key='thanhtien' >
-          {numeral(item.gia*item.soluong*-1).format('(0,0.00)') + ' VND'}
+          {numeral(item.gia*item.chieudai*-1).format('(0,0.00)') + ' VND'}
+        </td>
+        <td key='ngaynhap' >
+          {datetime(new Date(item.ngaynhap))}
         </td>
       </tr>
     )

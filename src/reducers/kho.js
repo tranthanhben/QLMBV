@@ -126,6 +126,7 @@ export default function kho(state = initialState, action = {}){
         ...state,
         reset: true,
         editItem: action.result,
+        reloadList: true,
         message: true,
         posting: false,
       };

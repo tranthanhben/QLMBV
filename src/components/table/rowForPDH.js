@@ -113,14 +113,14 @@ export class TBody extends Component {
         <td key='chatlieu' >
           <input type="text" data-addr='chatlieu'className="form-control" readOnly  value={loaivai.chatlieu || ''} />
         </td>
-        <td key='soluong' className=' dt-body-right' >
-          <input type="number" step='10' min='0' data-addr='soluong'className="form-control" value={item.soluong || ''} onChange={edit} />
+        <td key='chieudai' className=' dt-body-right' >
+          <input type="number" step='10' min='0' data-addr='chieudai' className="form-control" value={item.chieudai || ''} onChange={edit} />
         </td>
         <td key='gia' className=' dt-body-right'>
           <input type="number" step='10' min='0' data-addr='gia'className="form-control" value={item.gia || ''} onChange={edit}/>
         </td>
         <td key='thanhtien' className=' dt-body-right'>
-          <input type="number" step='10' min='0' data-addr='thanhtien' readOnly className="form-control" value={item.gia*item.soluong} />
+          <input type="number" step='10' min='0' data-addr='thanhtien' readOnly className="form-control" value={item.gia*item.chieudai} />
         </td>
 
         <td key='control' className="group-edit">

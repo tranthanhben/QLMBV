@@ -39,7 +39,12 @@ class PNH extends Component{
 
   static fetchData(store){
     if(!isLoaded(store.getState)){
-      return store.dispatch(loadPNH());
+      return store.dispatch(loadPNH({
+      page_size: 10,
+      id: '',
+      sort: '',
+      newpnh: 't'
+    }));
     }
   }
   componentWillMount(){
@@ -55,8 +60,9 @@ class PNH extends Component{
   state = {
     options :{
       page_size: 10,
-      name: '',
-      sort: ''
+      id: '',
+      sort: '',
+      newpnh: 't'
     },
     openView: false,
     openEdit: false,
@@ -90,8 +96,8 @@ class PNH extends Component{
   searchField(){
     let value = event.target.value;
     let opt = this.state.options;
-    if(value !== opt.name){
-      opt.name = value;
+    if(value !== opt.id){
+      opt.id = value;
       opt.page = 0;
       this.props.loadList(opt);
       this.setState({options: opt});
@@ -146,7 +152,7 @@ class PNH extends Component{
                 </div>
                 <div id="example_filter" className="dataTables_filter" style={{"display": "inline-flex", "float":"right"}}>
                   <label className="line-height" style={{"display": "flex"}}>Search:
-                    <input type="search" className="form-control " placeholder="Search Name" onChange={::this.searchField} aria-controls="example" />
+                    <input type="search" className="form-control " placeholder="Search GDID" onChange={::this.searchField} aria-controls="example" />
                   </label>
                 </div>
                 <table id="example" className="table display preline dataTable" cellSpacing="0" width="100%" role="grid" aria-describedby="example_info" style={{"width": "100%"}}>
@@ -174,7 +180,7 @@ class PNH extends Component{
                     <ViewPNH meta={meta} item={itemView} listLV={listLV} listK={listK} close={::this.viewModal} edit={::this.editItem}></ViewPNH>
                   </Modal> : null}
                   {openEdit?
-                  <Modal  modalStyle={Style.content_80}
+                  <Modal  modalStyle={Style.content_90}
                   overlayStyle= {Style.overlay}
                   close={::this.editModal}
                   overlayClassName='modaldumb modalOverlay modalOverlay--after-open '

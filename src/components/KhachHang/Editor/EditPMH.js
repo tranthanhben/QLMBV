@@ -46,7 +46,8 @@ export default class EditPMH extends Component {
     ctdh_init: {
       giaodichid: this.props.giaodichid || '',
       loaivaiid:'',
-      soluong:'',
+      soluong: 1,
+      chieudai: 0,
       gia:'',
       loaigiaodich:"pmh"
     },
@@ -81,7 +82,8 @@ export default class EditPMH extends Component {
         ctdh_init: {
           giaodichid: nextProps.gdItem.id || '',
           loaivaiid:'',
-          soluong:'',
+          soluong: 1,
+          chieudai: 0,
           gia:'',
           loaigiaodich:"pmh"
         }
@@ -89,8 +91,8 @@ export default class EditPMH extends Component {
     }
     if(nextProps.gdItem && this.state.newGD){
       let gdItem = nextProps.gdItem;
-      gdItem.nvdh = this.props.user.nhanvienid || 'admin';
-      gdItem.tinhtrangdathang = 'chuaxuly';
+      gdItem.nvdh = gdItem.nvdh? gdItem.nvdh :(this.props.user.nhanvienid || 'admin');
+      gdItem.tinhtrangdathang =gdItem.tinhtrangdathang? gdItem.tinhtrangdathang: 'chuaxuly';
       this.setState({
         giaodichid: nextProps.gdItem.id,
         ctdh: nextProps.gdItem.chitietkho ||[],
@@ -100,7 +102,8 @@ export default class EditPMH extends Component {
         ctdh_init: {
           giaodichid: nextProps.gdItem.id || '',
           loaivaiid:'',
-          soluong:'',
+          soluong: 1,
+          chieudai: 0,
           gia:'',
           loaigiaodich:"pmh"
         }

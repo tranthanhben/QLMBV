@@ -98,8 +98,9 @@ export default class EditPNH extends Component {
     }
     if(nextProps.gdItem && this.state.newGD){
       let gdItem = nextProps.gdItem;
-      gdItem.nvtt = this.props.user.nhanvienid || 'admin';
-      gdItem.tinhtrangthanhtoan = 'chuaxuly';
+      gdItem.nvtt = gdItem.nvtt? gdItem.nvtt :(this.props.user.nhanvienid || 'admin');
+      gdItem.tinhtrangthanhtoan = gdItem.tinhtrangthanhtoan? gdItem.tinhtrangthanhtoan : 'chuaxuly';
+      gdItem.newtt = gdItem.newtt? gdItem.newtt :true;
       this.setState({
         giaodichid: nextProps.gdItem.id,
         cttt: nextProps.gdItem.chitietthanhtoan ||[],

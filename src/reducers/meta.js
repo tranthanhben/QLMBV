@@ -632,6 +632,17 @@ const initialState = {
         up: false,
         type: "number",
         field: true,
+        view: false,
+        unitTable: "(cay)",
+        unit: "cay"
+      },
+      chieudai: {
+        name: "chieudai",
+        label: "Chieu Dai",
+        sort: false,
+        up: false,
+        type: "number",
+        field: true,
         view: true,
         unitTable: "(met)",
         unit: "met"
@@ -735,14 +746,14 @@ const initialState = {
       },
       "donhang": {
         name: "donhang",
-        label: "So cay nhap",
+        label: "So met dat",
         sort: false,
         up: false,
         type: "number",
         field: true,
         view: true,
-        unit: ' Cay',
-        unitTable: '(cay)'
+        unit: ' met',
+        unitTable: '(met)'
       },
       "ngayhoanthanh": {
         name: "ngayhoanthanh",
@@ -829,6 +840,15 @@ const initialState = {
       }
     },
     ctk: {
+      cayvaiid: {
+        name: "cayvaiid",
+        label: "CAYVAIID",
+        sort: false,
+        up: false,
+        type: "special",
+        field: false,
+        view:true
+      },
       loaivaiid: {
         name: "loaivaiid",
         label: "Loại Vải",
@@ -938,6 +958,17 @@ const initialState = {
       soluong: {
         name: "soluong",
         label: "Số lượng",
+        sort: false,
+        up: false,
+        type: "number",
+        field: true,
+        view: false,
+        unit: ' cay',
+        unitTable: '(cay)'
+      },
+      chieudai: {
+        name: "chieudai",
+        label: "Chieu Dai",
         sort: false,
         up: false,
         type: "number",
@@ -1149,6 +1180,17 @@ const initialState = {
       },
       soluong: {
         name: "soluong",
+        label: "SL",
+        sort: false,
+        up: false,
+        type: "number",
+        field: true,
+        view: false,
+        unit: ' met',
+        unitTable: '(met)'
+      },
+      chieudai: {
+        name: "chieudai",
         label: "SL mua",
         sort: false,
         up: false,
@@ -1256,14 +1298,14 @@ const initialState = {
       },
       "donhang": {
         name: "donhang",
-        label: "So cay xuat",
+        label: "So met dat",
         sort: false,
         up: false,
         type: "number",
         field: true,
         view: true,
-        unit: ' Cay',
-        unitTable: '(cay)'
+        unit: ' met',
+        unitTable: '(met)'
       },
       "ngayhoanthanh": {
         name: "ngayhoanthanh",
@@ -1362,9 +1404,18 @@ const initialState = {
         unit: ' met',
         unitTable: '(met)'
       },
+      cayvaiid: {
+        name: "cayvaiid",
+        label: "CAYVAIID",
+        sort: false,
+        up: false,
+        type: "special",
+        field: false,
+        view:true
+      },
       khoid: {
         name: "khoid",
-        label: "Kho Còn Hàng",
+        label: "Kho",
         sort: false,
         up: false,
         type: "special",
@@ -1379,7 +1430,8 @@ const initialState = {
         type: "special",
         field: false,
         view:true,
-        unit: " Cây"
+        unit: ' met',
+        unitTable: '(met)'
       },
       soluong: {
         name: "soluong",

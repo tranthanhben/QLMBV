@@ -54,7 +54,7 @@ class PMH extends Component{
   state = {
     options :{
       page_size: 10,
-      name: '',
+      id: '',
       sort: ''
     },
     openView: false,
@@ -89,8 +89,8 @@ class PMH extends Component{
   searchField(){
     let value = event.target.value;
     let opt = this.state.options;
-    if(value !== opt.name){
-      opt.name = value;
+    if(value !== opt.id){
+      opt.id = value;
       opt.page = 0;
       this.props.loadList(opt);
       this.setState({options: opt});
@@ -149,7 +149,7 @@ class PMH extends Component{
                 </div>
                 <div id="example_filter" className="dataTables_filter" style={{"display": "inline-flex", "float":"right"}}>
                   <label className="line-height" style={{"display": "flex"}}>Search:
-                    <input type="search" className="form-control " placeholder="Search Name" onChange={::this.searchField} aria-controls="example" />
+                    <input type="search" className="form-control " placeholder="Search GDID" onChange={::this.searchField} aria-controls="example" />
                   </label>
                 </div>
                 <table id="example" className="table display preline dataTable" cellSpacing="0" width="100%" role="grid" aria-describedby="example_info" style={{"width": "100%"}}>

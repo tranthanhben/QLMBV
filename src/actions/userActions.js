@@ -95,7 +95,7 @@ export function getAccount(id){
   types: [GET_ACCOUNT, GET_ACCOUNT_SUCCESS, GET_ACCOUNT_FAIL],
     promise: (client) => client.get('/account',{
       params: makeQuery({
-        nhanvienid: id || ''
+        nhanvien: id || ''
       })
     })
   };

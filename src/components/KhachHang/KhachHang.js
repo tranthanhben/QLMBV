@@ -98,7 +98,7 @@ export default class KhachHang extends Component{
                 }
                 {
                   this.state.isEditPXH?
-                  <Modal  modalStyle={Style.content_80}
+                  <Modal  modalStyle={Style.content_90}
                   overlayStyle= {Style.overlay}
                   close = {::this.openPXH}
                   overlayClassName='modaldumb modalOverlay modalOverlay--after-open '

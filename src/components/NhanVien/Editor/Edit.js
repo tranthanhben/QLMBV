@@ -56,7 +56,7 @@ export default class EditNV extends Component {
         id: nextProps.item.id,
         edited: false,
         account_init:{
-          nhanvienid: nextProps.item.id,
+          nhanvien: nextProps.item.id,
           username: '',
           password: '123456'
         }

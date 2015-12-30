@@ -48,7 +48,7 @@ export class THeadCTK extends Component {
         continue;
       }
       thList.push(
-        <th className={classField} key={field.name} tabIndex="0" aria-controls="example" rowSpan="1" colSpan="1">{field.label}</th>
+        <th className={classField} key={field.name} tabIndex="0" aria-controls="example" rowSpan="1" colSpan="1">{field.label+(field.unitTable? field.unitTable : '')}</th>
       );
     }
     return (
@@ -113,6 +113,9 @@ export class TBody extends Component {
     return (
       <tr role="row" className={index%2===1 ? "even":"odd"} key={index}>
         <td>{index+1}</td>
+        <td key='cayvaiid' className=' dt-body-right' >
+          <input type="text" data-addr='cayvaiid'className="form-control dt-body-right" value={item.cayvaiid || ''} readOnly />
+        </td>
         <td key={'loaivai'+ index}>
           <select className='form-control' data-addr='loaivaiid'
             onChange={::this.selectLoaivai}
@@ -207,14 +210,11 @@ export class TBodyCTK extends Component {
     return (
       <tr role="row" className={index%2===1 ? "even":"odd"} key={index}>
         <td>{index+1}</td>
+        <td key='cayvaiid' >
+          {item.cayvaiid}
+        </td>
         <td key={'loaivai'+ index}>
           {loaivai.ten}
-        </td>
-        <td key='mausac' >
-          {loaivai.mausac}
-        </td>
-        <td key='chatlieu' >
-          {loaivai.chatlieu}
         </td>
         <td key={'kho'+ index}>
           {kho.ten}
@@ -222,15 +222,19 @@ export class TBodyCTK extends Component {
         <td key='trong' >
           {kho.trong}
         </td>
-        <td key='soluong' >
-          {numeral(item.soluong).format('(0,0.00)') + ' Cây'}
+        <td key='chieudai' >
+          {numeral(item.chieudai).format('(0,0.00)')}
         </td>
         <td key='gia' >
-          {numeral(item.gia).format('(0,0.00)') + ' VND'}
+          {numeral(item.gia).format('(0,0.00)')}
         </td>
         <td key='thanhtien' >
-          {numeral(item.gia*item.soluong).format('(0,0.00)') + ' VND'}
+          {numeral(item.gia*item.chieudai).format('(0,0.00)')}
         </td>
+        <td key='ngaynhap' >
+          {datetime(new Date(item.ngaynhap))}
+        </td>
+
       </tr>
     )
   }

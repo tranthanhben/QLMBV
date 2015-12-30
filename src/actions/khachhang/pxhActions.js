@@ -60,7 +60,8 @@ export function loadList(options = {}){
         page: options.page || 0,
         page_size : options.page_size || 10,
         sort: options.sort || '',
-        tinhtrangdonhang: 'hoanthanh'
+        id: options.id || '',
+        newpnh: options.newpnh || ''
       })
     })
   };

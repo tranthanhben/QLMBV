@@ -45,7 +45,8 @@ export default class EditPDH extends Component {
     ctdh_init: {
       giaodichid: this.props.giaodichid || '',
       loaivaiid:'',
-      soluong:'',
+      soluong:1,
+      chieudai: 0,
       gia:'',
       loaigiaodich:"pdh"
     },
@@ -80,7 +81,8 @@ export default class EditPDH extends Component {
         ctdh_init: {
           giaodichid: nextProps.gdItem.id || '',
           loaivaiid:'',
-          soluong:'',
+          soluong: 1,
+          chieudai: 0,
           gia:'',
           loaigiaodich:"pdh"
         }
@@ -88,8 +90,8 @@ export default class EditPDH extends Component {
     }
     if(nextProps.gdItem && this.state.newGD){
       let gdItem = nextProps.gdItem;
-      gdItem.nvdh = this.props.user.nhanvienid || 'admin';
-      gdItem.tinhtrangdathang = 'chuaxuly';
+      gdItem.nvdh = gdItem.nvdh? gdItem.nvdh:( this.props.user.nhanvienid || 'admin');
+      gdItem.tinhtrangdathang = gdItem.tinhtrangdathang? gdItem.tinhtrangdathang:'chuaxuly';
       this.setState({
         giaodichid: nextProps.gdItem.id,
         ctdh: nextProps.gdItem.chitietkho ||[],
@@ -99,7 +101,8 @@ export default class EditPDH extends Component {
         ctdh_init: {
           giaodichid: nextProps.gdItem.id || '',
           loaivaiid:'',
-          soluong:'',
+          soluong: 1,
+          chieudai: 0,
           gia:'',
           loaigiaodich:"pdh"
         }
@@ -272,7 +275,7 @@ export default class EditPDH extends Component {
           <div className="col-md-12" key="ctdh">
             <br/>
             <strong>Chi tiết đơn hàng:</strong>
-            <table id="example" className="table display nowrap dataTable" role="grid" aria-describedby="example_info" >
+            <table id="example" className="table display nowrap dataTable" role="grid" aria-describedby="example_info" style={{"maxWidth": "100%"}}>
               <thead>
                 <THead meta={metaCTDH} add={::this.addCTDH(-1)}></THead>
               </thead>

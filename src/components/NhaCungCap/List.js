@@ -46,8 +46,9 @@ class List extends Component{
   state = {
     options :{
       page_size: 10,
-      name: '',
-      sort: 'id'
+      id: '',
+      sort: 'id',
+      newpdh: true
     },
     openView: false,
     openEdit: false,
