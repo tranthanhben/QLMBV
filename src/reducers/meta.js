@@ -239,8 +239,8 @@ const initialState = {
       field: true,
       view: false
     },
-    "phongbanif": {
-      name: "phongbanif",
+    "phongbanid": {
+      name: "phongbanid",
       label: "Phòng Ban",
       sort: false,
       type: "special",
@@ -466,6 +466,7 @@ const initialState = {
         sort: true,
         up: true,
         type: "single",
+        required: true,
         field: false,
         view: true
       },
@@ -1242,6 +1243,36 @@ const initialState = {
         unit: ' VND',
         unitTable: '(vnd)'
       },
+      "kho": {
+        name: "kho",
+        label: "So met xuat",
+        sort: false,
+        up: false,
+        type: "number",
+        field: true,
+        view: true,
+        unitTable: '(met)',
+        unit: ' met',
+      },
+      "donhang": {
+        name: "donhang",
+        label: "So cay xuat",
+        sort: false,
+        up: false,
+        type: "number",
+        field: true,
+        view: true,
+        unit: ' Cay',
+        unitTable: '(cay)'
+      },
+      "ngayhoanthanh": {
+        name: "ngayhoanthanh",
+        label: "Ngày Hoan Thanh",
+        sort: true,
+        type: "date",
+        field: true,
+        view: false
+      },
       "tinhtrangdonhang": {
         name: "tinhtrangdonhang",
         label: "Tình Trạng Mua",
@@ -1357,9 +1388,18 @@ const initialState = {
         up: false,
         type: "number",
         field: true,
-        view:true,
-        unit: ' cay',
-        unitTable: '(cay)'
+        view: false
+      },
+      chieudai: {
+        name: "chieudai",
+        label: "Chieu dai",
+        sort: false,
+        up: false,
+        type: "number",
+        unit: ' met',
+        unitTable: '(met)',
+        field: true,
+        view: true
       },
       gia: {
         name: "gia",
@@ -1382,6 +1422,14 @@ const initialState = {
         view:true,
         unit: ' VND',
         unitTable: '(vnd)'
+      },
+      ngaynhap: {
+        name: "ngaynhap",
+        label: "Ngày Xuat",
+        sort: true,
+        type: "date",
+        field: true,
+        view: true
       }
     },
     ctdh: {
@@ -1429,8 +1477,8 @@ const initialState = {
         type: "number",
         field: true,
         view: true,
-        unit: ' cay',
-        unitTable: '(cay)'
+        unit: ' met',
+        unitTable: '(met)'
       },
       gia: {
         name: "gia",

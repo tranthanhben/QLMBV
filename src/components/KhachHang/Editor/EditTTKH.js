@@ -1,9 +1,10 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {initObject, ATO, OTA, preprocess, datetime, changeDTI, renderLabel, setValue, checkRequire, preprocessPost} from '../../../meta';
+import {initObject, ATO, OTA, preprocess, datetime, changeDTI, renderLabel, setValue, checkRequire, preprocessPost, numeral, parseOptId, parseOptTen} from '../../../meta';
 import {THead, TBody} from '../../table/rowForTTKH';
 import * as ttkhActions from '../../../actions/khachhang/ttkhActions';
 import * as giaodichActions from '../../../actions/giaodichActions';
+import Select from 'react-select';
 
 @connect(state =>({
   gdItem: state.thanhtoanKH.editItem,
@@ -13,7 +14,8 @@ import * as giaodichActions from '../../../actions/giaodichActions';
   listK: state.giaodich.listK,
   listPXH: state.giaodich.listPXH,
   user: state.user.user,
-  cttt: state.thanhtoanKH.cttt
+  cttt: state.thanhtoanKH.cttt,
+  msgPCTTT: state.thanhtoanKH.msgPCTTT
 }),{...ttkhActions, ...giaodichActions})
 export default class EditPXH extends Component {
   static propTypes = {
@@ -52,14 +54,13 @@ export default class EditPXH extends Component {
       phuongthuc: 'tienmat',
       ngaytao: new Date(changeDTI(datetime(new Date()))),
       ngaythanhtoan: changeDTI(datetime(new Date())),
-      loaigiaodich:"pdh"
+      loaigiaodich:"pmh"
     },
     newGD: true
   }
   componentWillMount(){
     if(this.props.giaodichid){
       this.props.getItem(this.props.giaodichid);
-      this.state.newGD = false;
     }
     this.props.loadKH();
     this.props.loadLV();
@@ -74,20 +75,14 @@ export default class EditPXH extends Component {
       this.setState({
         giaodichid: nextProps.gdItem.id,
         gdItem: nextProps.gdItem,
-        newGD: false,
         submiting: false,
         edited: false
       });
     }else if(nextProps.gdItem){
-      let items = nextProps.gdItem.chitietthanhtoan;
-      items.map(item =>{
-        item.ngaythanhtoan = changeDTI(datetime(new Date(item.ngaythanhtoan)))
-      });
       this.setState({
         giaodichid: nextProps.gdItem.id,
         cttt: nextProps.gdItem.chitietthanhtoan ||[],
         gdItem: nextProps.gdItem,
-        newGD: false,
         edited: false,
         editedCTTT: false,
         submiting: false,
@@ -97,20 +92,40 @@ export default class EditPXH extends Component {
           phuongthuc: 'tienmat',
           ngaytao: new Date(changeDTI(datetime(new Date()))),
           ngaythanhtoan: changeDTI(datetime(new Date())),
-          loaigiaodich:"pdh"
+          loaigiaodich:"pmh"
+        }
+      });
+    }
+    if(nextProps.gdItem && this.state.newGD){
+      let gdItem = nextProps.gdItem;
+      gdItem.nvtt = this.props.user.nhanvienid || 'admin';
+      gdItem.tinhtrangthanhtoan = 'chuaxuly';
+      this.setState({
+        giaodichid: nextProps.gdItem.id,
+        cttt: nextProps.gdItem.chitietthanhtoan ||[],
+        gdItem: gdItem,
+        newGD: false,
+        edited: true,
+        cttt_init: {
+          giaodichid: nextProps.gdItem.id || '',
+          thanhtoan: 0,
+          phuongthuc: 'tienmat',
+          ngaythanhtoan: changeDTI(datetime(new Date())),
+          ngaytao: new Date(changeDTI(datetime(new Date()))),
+          loaigiaodich:"pmh"
         }
       });
     }
     if(nextProps.cttt){
       let items = nextProps.cttt;
-      items.map(item =>{
-        item.ngaythanhtoan = changeDTI(datetime(new Date(item.ngaythanhtoan)))
-      });
       this.setState({
         cttt: nextProps.cttt || [],
         editedCTTT: false,
         edited: false
       });
+    }
+    if(nextProps.msgPCTTT){
+      this.props.getItem(this.state.giaodichid);
     }
   }
   handleChange(){
@@ -122,13 +137,12 @@ export default class EditPXH extends Component {
       gdItem: setValue(obj, addr, value)
     })
   }
-  changeGDID(){
-    let value = event.target.value;
+  changeGDID(val){
     this.setState({
       edited: false,
-      giaodichid: value
+      giaodichid: val
     });
-    this.props.getItem(value);
+    this.props.getItem(val);
   }
   checkRq(){
     let mes = '';
@@ -187,7 +201,6 @@ export default class EditPXH extends Component {
       let cttt = this.state.cttt || [];
       const init = this.state.cttt_init || [];
       let befor_cttt = cttt.splice(0, index + 1);
-      console.log(befor_cttt, cttt);
       befor_cttt= [...befor_cttt, {...init}];
       cttt = [...befor_cttt,...cttt];
       this.setState({cttt : cttt});
@@ -214,10 +227,12 @@ export default class EditPXH extends Component {
     }
   }
   render() {
-    const {meta, error, message, listKH, listLV, listK, listPXH} = this.props;
+    const {meta, error, message, listLV, listK} = this.props;
     const {gdItem, edited, submited, showFullField, giaodichid, cttt, editedCTTT} = this.state;
     const metaGD = meta && preprocess(meta.giaodich) || {};
     const metaCTTT = meta && preprocess(meta.cttt) || {};
+    const listPXH = parseOptId(this.props.listPXH ||[]);
+    const listKH = parseOptTen(this.props.listKH || []);
     return (
       <div>
         <div className="row">
@@ -231,38 +246,31 @@ export default class EditPXH extends Component {
         <div className="row">
           { giaodichid? [<div className="col-md-12" key="gdfield">
             <div className="row">
-              <div className="col-md-8 boder-right">
+              <div className="col-md-7 boder-right">
                 <div className='form-group' key="giaodichid">
                   {renderLabel(metaGD.id)}
                   &nbsp;
-                  <select className='form-control   uppercase' data-addr='id'
-                  readOnly
-                  value={giaodichid || ''}>
-                  <option key='id'>-- Giao Dich ID --</option>
-                  {listPXH && listPXH.map(b => {
-                    return (
-                      <option key={b.id} value={b.id}>
-                        {b.id}
-                      </option>
-                    );
-                  })}
-                  </select>
+                  <Select
+                    data-addr='giaodichid'
+                    className= "uppercase"
+                    placeholder="Chon phieu xuat hang..."
+                    clearable= {false}
+                    searchable={true}
+                    onChange={::this.changeGDID}
+                    value={giaodichid || ''}
+                    options={listPXH} />
                 </div>
                 <div className='form-group' key="khachhang">
                   {renderLabel(metaGD.doitacid)}
                   &nbsp;
-                  <select className='form-control' data-addr='doitacid'
-                  readOnly
-                  value={gdItem.doitacid || ''}>
-                  <option key='doitacid'>-- Khach Hang --</option>
-                  {listKH && listKH.map(b => {
-                    return (
-                      <option key={b.id} value={b.id}>
-                        {b.ten}
-                      </option>
-                    );
-                  })}
-                  </select>
+                  <Select
+                    data-addr='doitacid'
+                    placeholder="Chon khach hang..."
+                    clearable= {false}
+                    searchable={true}
+                    disabled={true}
+                    value={gdItem.doitacid}
+                    options={listKH} />
                 </div>
                 <div className='form-group' key="tinhtrangthanhtoan">
                   {renderLabel(metaGD.tinhtrangthanhtoan)}
@@ -270,10 +278,14 @@ export default class EditPXH extends Component {
                 </div>
                 <div className='form-group' key="tong">
                   {renderLabel(metaGD.tongtien)}
-                  <input className='form-control' type="text" readOnly value={gdItem.tongtien||0}/>
+                  <input className='form-control' type="text" readOnly value={numeral(gdItem.tongtien).format('(0,0.00)')}/>
+                </div>
+                <div className='form-group' key="thanhtoan">
+                  {renderLabel(metaGD.thanhtoan)}
+                  <input className='form-control' type="text" readOnly value={numeral(gdItem.thanhtoan).format('(0,0.00)')}/>
                 </div>
               </div>
-              <div className="col-md-4">
+              <div className="col-md-5">
               </div>
             </div>
           </div>,

@@ -24,6 +24,5 @@ export function parseOptId(array=[]){
     }
     arr.push(obj);
   });
-  console.log("array", array);
   return arr;
 }

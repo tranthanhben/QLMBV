@@ -47,6 +47,7 @@ export default function nhanvien(state = initialState, action = {}){
         loading: false,
         loaded: true,
         list: action.result.items,
+        reloadList: false,
         paging: action.result.paging
       };
     case NV_LIST_LOAD_FAIL:
@@ -148,6 +149,7 @@ export default function nhanvien(state = initialState, action = {}){
         ...state,
         reset: true,
         editItem: action.result,
+        reloadList: true,
         message: true,
         posting: false,
       };
@@ -169,6 +171,7 @@ export default function nhanvien(state = initialState, action = {}){
       return {
         ...state,
         reset: true,
+        reloadList: true,
         deleting: false,
         item: null
       };
@@ -185,6 +188,7 @@ export default function nhanvien(state = initialState, action = {}){
         ...state,
         loaded: false,
         editItem: null,
+        reloadList: true,
         message: false,
         errorPost:null
       };

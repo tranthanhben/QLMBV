@@ -311,12 +311,13 @@ export default class EditPNH extends Component {
                     <div className='form-group' key="khachhang">
                       {renderLabel(metaGD.doitacid)}
                       &nbsp;
-                      <Select
+                     <Select
                         data-addr='doitacid'
                         placeholder="Chon nha cung cap..."
                         clearable= {false}
                         searchable={true}
-                         onChange={::this.changeSelect}
+                        disabled={true}
+                        onChange={::this.changeSelect}
                         value={gdItem.doitacid}
                         options={listNCC} />
                     </div>

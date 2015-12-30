@@ -62,12 +62,12 @@ export default class EditNV extends Component {
         }
       });
     }
-    if(nextProps.account && this.props.item && this.props.item.haveaccount===false){
-      let item = this.props.item;
+    if(nextProps.account && this.props.item && this.props.item.haveaccount===false && this.state.createAcc === true){
+      let item = {...this.props.item};
       item.haveaccount = true;
       this.props.postItem(item);
     }
-    if(nextProps.account && this.props.item && this.props.item.haveaccount===true){
+    if(nextProps.account && this.props.item && this.props.item.haveaccount === true){
       this.setState({createAcc: false})
     }
 
@@ -145,6 +145,7 @@ export default class EditNV extends Component {
     const {item, edited, submited, showFullField, id, createAcc, messNewacc, account_init} = this.state;
     const metaPP = preprocess(meta);
     const fieldRender = showFullField && id? renderField(item, metaPP, this, true):renderField(item, metaPP, this);
+    console.log("have account", this.props.item && this.props.item.haveaccount, item.haveaccount);
     return (
       <div>
         <div className="row">
@@ -186,7 +187,7 @@ export default class EditNV extends Component {
                   })}
                   </select>
                 </div>
-                {item && item.haveaccount && account? <div className='form-group' key='username'>
+                {item && item.haveaccount && account ? <div className='form-group' key='username'>
                   <label>
                     <span>
                       {"Tên đăng nhập"}

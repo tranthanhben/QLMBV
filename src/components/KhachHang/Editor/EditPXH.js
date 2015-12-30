@@ -1,11 +1,19 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {initObject, ATO, OTA, preprocess, datetime, changeDTI, renderLabel, setValue, checkRequire, preprocessPost, numeral} from '../../../meta';
+import {initObject, ATO, OTA,ATOLV,  preprocess, datetime, changeDTI, renderLabel, setValue, checkRequire, preprocessPost, numeral, parseOptTen, parseOptId} from '../../../meta';
 import {THead, TBody} from '../../table/rowForPXH';
 import {THeadCTDH, TBodyCTDH} from '../../table/rowForPMH';
 import * as pxhActions from '../../../actions/khachhang/pxhActions';
 import * as giaodichActions from '../../../actions/giaodichActions';
-
+import Select from 'react-select';
+function filterLV(ctdh, list){
+  let listLV =[];
+  let obj = ATOLV(list);
+  ctdh.map(dh =>{
+    listLV.push(obj[dh.loaivaiid]);
+  });
+  return [...listLV];
+}
 @connect(state =>({
   gdItem: state.phieuxuathang.editItem,
   meta: state.meta.phieuxuathang,
@@ -49,7 +57,8 @@ export default class EditPXH extends Component {
     ctk_init: {
       giaodichid: this.props.giaodichid || '',
       loaivaiid:'',
-      soluong:'',
+      soluong: 1,
+      chieudai: 0,
       gia:'',
       khoid:'',
       ngaytao: new Date(changeDTI(datetime(new Date()))),
@@ -75,7 +84,6 @@ export default class EditPXH extends Component {
       this.setState({
         giaodichid: nextProps.gdItem.id,
         gdItem: nextProps.gdItem,
-        newGD: false,
         submiting: false,
         edited: false
       });
@@ -84,17 +92,40 @@ export default class EditPXH extends Component {
         giaodichid: nextProps.gdItem.id,
         ctk: nextProps.gdItem.chitietkho ||[],
         gdItem: nextProps.gdItem,
-        newGD: false,
         edited: false,
         editedCTK: false,
         submiting: false,
         ctk_init: {
           giaodichid: nextProps.gdItem.id || '',
           loaivaiid:'',
-          soluong:'',
+          soluong: 1,
+          chieudai: 0,
           gia:'',
           khoid:'',
           ngaytao: new Date(changeDTI(datetime(new Date()))),
+          loaigiaodich:"pmh"
+        }
+      });
+    }
+    if(nextProps.gdItem && this.state.newGD){
+      let gdItem = nextProps.gdItem;
+      gdItem.nvnh = this.props.user.nhanvienid || 'admin';
+      gdItem.tinhtrangkho = 'chuaxuly';
+      gdItem.ngayhoanthanh = changeDTI(datetime(new Date()));
+      this.setState({
+        giaodichid: nextProps.gdItem.id,
+        ctk: nextProps.gdItem.chitietcayvai ||[],
+        gdItem: gdItem,
+        newGD: false,
+        edited: true,
+        ctk_init: {
+          giaodichid: nextProps.gdItem.id || '',
+          loaivaiid:'',
+          soluong: 1,
+          chieudai: 0,
+          gia:'',
+          ngaytao: new Date(changeDTI(datetime(new Date()))),
+          ngaynhap: changeDTI(datetime(new Date())),
           loaigiaodich:"pmh"
         }
       });
@@ -106,6 +137,9 @@ export default class EditPXH extends Component {
         edited: false
       });
     }
+    if(nextProps.msgPCTK){
+      this.props.getItem(this.state.giaodichid);
+    }
   }
   handleChange(){
     let obj = this.state.gdItem;
@@ -116,13 +150,12 @@ export default class EditPXH extends Component {
       gdItem: setValue(obj, addr, value)
     })
   }
-  changeGDID(){
-    let value = event.target.value;
+  changeGDID(val){
     this.setState({
       edited: false,
-      giaodichid: value
+      giaodichid: val
     });
-    this.props.getItem(value);
+    this.props.getItem(val);
   }
   checkRq(){
     let mes = '';
@@ -212,11 +245,14 @@ export default class EditPXH extends Component {
     }
   }
   render() {
-    const {meta, error, message, listKH, listLV, listK, listPMH} = this.props;
+    const {meta, error, message, listK} = this.props;
     const {gdItem, edited, submited, showFullField, giaodichid, ctk, editedCTK} = this.state;
     const metaGD = meta && preprocess(meta.giaodich) || {};
     const metaCTK = meta && preprocess(meta.ctk) || {};
     const metaCTDH = meta && preprocess(meta.ctdh) || {};
+    const listLV = filterLV(gdItem.chitietdonhang || [], this.props.listLV||[]);
+    const listKH = parseOptTen(this.props.listKH || []);
+    const listPMH = parseOptId(this.props.listPMH ||[]);
     return (
       <div>
         <div className="row">
@@ -228,54 +264,66 @@ export default class EditPXH extends Component {
         </div>
         <hr/>
         <div className="row">
-          { giaodichid? [<div className="col-md-12" key="gdfield">
+          <div className="col-md-12" key="gdfield">
             <div className="row">
               <div className="col-md-7 boder-right">
                 <div className='form-group' key="giaodichid">
                   {renderLabel(metaGD.id)}
                   &nbsp;
-                  <select className='form-control   uppercase' data-addr='id'
-                  onChange={::this.changeGDID}
-                  value={giaodichid || ''}>
-                  <option key='id'>-- Giao Dich ID --</option>
-                  {listPMH && listPMH.map(b => {
-                    return (
-                      <option key={b.id} value={b.id}>
-                        {b.id}
-                      </option>
-                    );
-                  })}
-                  </select>
+                  <Select
+                    data-addr='giaodichid'
+                    className= "uppercase"
+                    placeholder="Chon don dat hang..."
+                    clearable= {false}
+                    searchable={true}
+                    onChange={::this.changeGDID}
+                    value={giaodichid || ''}
+                    options={listPMH} />
                 </div>
-                <div className='form-group' key="khachhang">
-                  {renderLabel(metaGD.doitacid)}
-                  &nbsp;
-                  <select className='form-control' data-addr='doitacid'
-                  readOnly
-                  value={gdItem.doitacid || ''}>
-                  <option key='doitacid'>-- Nha Cung Cap --</option>
-                  {listKH && listKH.map(b => {
-                    return (
-                      <option key={b.id} value={b.id}>
-                        {b.ten}
-                      </option>
-                    );
-                  })}
-                  </select>
-                </div>
-                <div className='form-group' key="tinhtrangkho">
-                  {renderLabel(metaGD.tinhtrangkho)}
-                  {metaGD && metaGD["tinhtrangkho"].$input(gdItem,this)}
-                </div>
-                <div className='form-group' key="tongtien">
-                  {renderLabel(metaGD.tongtien)}
-                  <input type="text" data-addr='tongtien'className="form-control" readOnly value={numeral(gdItem.tongtien).format('(0,0.00)') || '0'} />
+                <div className="row">
+                  <div className="col-md-6">
+                    <div className='form-group' key="khachhang">
+                      {renderLabel(metaGD.doitacid)}
+                      &nbsp;
+                      <Select
+                        data-addr='doitacid'
+                        placeholder="Chon khach hang..."
+                        clearable= {false}
+                        searchable={true}
+                        disabled={true}
+                        onChange={::this.changeSelect}
+                        value={gdItem.doitacid}
+                        options={listNCC} />
+                    </div>
+                    <div className='form-group' key="tinhtrangkho">
+                      {renderLabel(metaGD.tinhtrangkho)}
+                      {metaGD && metaGD["tinhtrangkho"].$input(gdItem,this)}
+                    </div>
+                    <div className='form-group' key="tongtien">
+                      {renderLabel(metaGD.tongtien)}
+                      <input type="text" data-addr='tongtien'className="form-control" readOnly value={numeral(gdItem.tongtien).format('(0,0.00)') || '0'} />
+                    </div>
+                  </div>
+                  <div className="col-md-6">
+                    <div className='form-group' key="donhang">
+                      {renderLabel(metaGD.donhang)}
+                      {metaGD && metaGD["donhang"].$input(gdItem,this)}
+                    </div>
+                    <div className='form-group' key="kho">
+                      {renderLabel(metaGD.kho)}
+                      {metaGD && metaGD["kho"].$input(gdItem,this)}
+                    </div>
+                    <div className='form-group' key="ngayhoanthanh">
+                      {renderLabel(metaGD.ngayhoanthanh)}
+                      {metaGD && metaGD["ngayhoanthanh"].$input(gdItem,this)}
+                    </div>
+                  </div>
                 </div>
               </div>
               <div className="col-md-5">
               </div>
             </div>
-          </div>,
+          </div>
           <div className="col-md-12" key="view ctdh">
             <br/>
             <strong>Chi tiết đơn hàng:</strong>
@@ -289,7 +337,7 @@ export default class EditPXH extends Component {
                 })}
               </tbody>
             </table>
-          </div>,
+          </div>
           <div className="col-md-12" key="ctk">
             <br/>
             <strong>Chi tiết nhập hàng:</strong>
@@ -313,29 +361,6 @@ export default class EditPXH extends Component {
               </tbody>
             </table>
           </div>
-          ]: <div className="col-md-12">
-            <div className="row">
-              <div className="col-md-8 boder-right">
-                <div className='form-group' key="giaodichid">
-                  {renderLabel(metaGD.id)}
-                  &nbsp;
-                  <select className='form-control  uppercase' data-addr='id'
-                  onChange={::this.changeGDID}
-                  value={giaodichid || ''}>
-                  <option key='id'>-- Giao Dich ID --</option>
-                  {listPMH && listPMH.map(b => {
-                    return (
-                      <option key={b.id} value={b.id}>
-                        {b.id}
-                      </option>
-                    );
-                  })}
-                  </select>
-                </div>
-              </div>
-            </div>
-          </div>}
-
         </div>
         <br/>
         <hr/>

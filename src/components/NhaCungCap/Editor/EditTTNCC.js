@@ -1,9 +1,10 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {initObject, ATO, OTA, preprocess, datetime, changeDTI, renderLabel, setValue, checkRequire, numeral, preprocessPost} from '../../../meta';
+import {initObject, ATO, OTA, preprocess, datetime, changeDTI, renderLabel, setValue, checkRequire, numeral, preprocessPost, parseOptId, parseOptTen} from '../../../meta';
 import {THead, TBody} from '../../table/rowForTTNCC';
 import * as ttnccActions from '../../../actions/nhacungcap/ttnccActions';
 import * as giaodichActions from '../../../actions/giaodichActions';
+import Select from 'react-select';
 
 @connect(state =>({
   gdItem: state.thanhtoanNCC.editItem,
@@ -52,7 +53,7 @@ export default class EditPNH extends Component {
       thanhtoan:0,
       phuongthuc: 'tienmat',
       ngaythanhtoan: changeDTI(datetime(new Date())),
-      ngaytao: new Date(),
+      ngaytao: new Date(changeDTI(datetime(new Date()))),
       loaigiaodich:"pdh"
     },
     newGD: true
@@ -135,13 +136,12 @@ export default class EditPNH extends Component {
       gdItem: setValue(obj, addr, value)
     })
   }
-  changeGDID(){
-    let value = event.target.value;
+  changeGDID(val){
     this.setState({
       edited: false,
-      giaodichid: value
+      giaodichid: val
     });
-    this.props.getItem(value);
+    this.props.getItem(val);
   }
   checkRq(){
     let mes = '';
@@ -229,10 +229,12 @@ export default class EditPNH extends Component {
     }
   }
   render() {
-    const {meta, error, message, listNCC, listLV, listK, listPNH} = this.props;
+    const {meta, error, message, listLV, listK} = this.props;
     const {gdItem, edited, submited, showFullField, giaodichid, cttt, editedCTTT} = this.state;
     const metaGD = meta && preprocess(meta.giaodich) || {};
     const metaCTTT = meta && preprocess(meta.cttt) || {};
+    const listPNH = parseOptId(this.props.listPNH ||[]);
+    const listNCC = parseOptTen(this.props.listNCC || []);
     return (
       <div>
         <div className="row">
@@ -244,40 +246,33 @@ export default class EditPNH extends Component {
         </div>
         <hr/>
         <div className="row">
-          { giaodichid? [<div className="col-md-12" key="gdfield">
+          <div className="col-md-12" key="gdfield">
             <div className="row">
               <div className="col-md-7 boder-right">
                 <div className='form-group' key="giaodichid">
                   {renderLabel(metaGD.id)}
                   &nbsp;
-                  <select className='form-control   uppercase' data-addr='id'
-                  onChange={::this.changeGDID}
-                  value={giaodichid || ''}>
-                  <option key='id'>-- Giao Dich ID --</option>
-                  {listPNH && listPNH.map(b => {
-                    return (
-                      <option key={b.id} value={b.id}>
-                        {b.id}
-                      </option>
-                    );
-                  })}
-                  </select>
+                  <Select
+                    data-addr='giaodichid'
+                    className= "uppercase"
+                    placeholder="Chon phieu dat hang..."
+                    clearable= {false}
+                    searchable={true}
+                    onChange={::this.changeGDID}
+                    value={giaodichid || ''}
+                    options={listPNH} />
                 </div>
                 <div className='form-group' key="khachhang">
                   {renderLabel(metaGD.doitacid)}
                   &nbsp;
-                  <select className='form-control' data-addr='doitacid'
-                  readOnly
-                  value={gdItem.doitacid || ''}>
-                  <option key='doitacid'>-- Nha Cung Cap --</option>
-                  {listNCC && listNCC.map(b => {
-                    return (
-                      <option key={b.id} value={b.id}>
-                        {b.ten}
-                      </option>
-                    );
-                  })}
-                  </select>
+                  <Select
+                    data-addr='doitacid'
+                    placeholder="Chon nha cung cap..."
+                    clearable= {false}
+                    searchable={true}
+                    disabled={true}
+                    value={gdItem.doitacid}
+                    options={listNCC} />
                 </div>
                 <div className='form-group' key="tinhtrangthanhtoan">
                   {renderLabel(metaGD.tinhtrangthanhtoan)}
@@ -295,7 +290,7 @@ export default class EditPNH extends Component {
               <div className="col-md-5">
               </div>
             </div>
-          </div>,
+          </div>
           <div className="col-md-12" key="cttt">
             <br/>
             <strong>Chi tiết thanh toán:</strong>
@@ -317,29 +312,6 @@ export default class EditPNH extends Component {
               </tbody>
             </table>
           </div>
-          ]: <div className="col-md-12">
-            <div className="row">
-              <div className="col-md-8 boder-right">
-                <div className='form-group' key="giaodichid">
-                  {renderLabel(metaGD.id)}
-                  &nbsp;
-                  <select className='form-control  uppercase' data-addr='id'
-                  onChange={::this.changeGDID}
-                  value={giaodichid || ''}>
-                  <option key='id'>-- Giao Dich ID --</option>
-                  {listPNH && listPNH.map(b => {
-                    return (
-                      <option key={b.id} value={b.id}>
-                        {b.id}
-                      </option>
-                    );
-                  })}
-                  </select>
-                </div>
-              </div>
-            </div>
-          </div>}
-
         </div>
         <br/>
         <hr/>

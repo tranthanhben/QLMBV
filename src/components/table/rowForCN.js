@@ -28,11 +28,11 @@ export class THead extends Component {
           classField += " sorting";
         }
         thList.push(
-        <th className={classField} onClick={sortFunc(field.name)} key={field.name} tabIndex="0" aria-controls="example" rowSpan="1" colSpan="1" >{field.label}</th>
+        <th className={classField} onClick={sortFunc(field.name)} key={field.name} tabIndex="0" aria-controls="example" rowSpan="1" colSpan="1" >{field.label+(field.unitTable? field.unitTable : '')}</th>
         );
       }else{
         thList.push(
-        <th className={classField} key={field.name} tabIndex="0" aria-controls="example" rowSpan="1" colSpan="1" >{field.label}</th>
+        <th className={classField} key={field.name} tabIndex="0" aria-controls="example" rowSpan="1" colSpan="1" >{field.label+(field.unitTable? field.unitTable : '')}</th>
         );
       }
 
@@ -84,14 +84,14 @@ export class TBody extends Component {
       }else if(field.type ==="number"){
         // classField += " dt-body-right";
         trList.push(
-        <td className={classField} key={field.name} >{numeral(item[key]).format('(0,0.00)')+(field.unit|| '')}</td>
+        <td className={classField} key={field.name} >{numeral(item[key]).format('(0,0.00)')}</td>
         );
       }else if(field.type === "gia"){
         if(item[key]=== -1){
           trList.push(<td className={classField} key={field.name} >Chưa cập nhật</td>);
         }else{
           trList.push(
-          <td className={classField} key={field.name} >{numeral(item[key]).format('(0,0.00)')+(field.unit|| '')}</td>
+          <td className={classField} key={field.name} >{numeral(item[key]).format('(0,0.00)')}</td>
           );
         }
       }else{

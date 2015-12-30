@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import * as ttkhActions from '../../actions/khachhang/ttkhActions';
-import {THead, TBody, TFoot} from '../table/row';
+import {THeadView, TBodyView, TFootView} from '../table/rowForTTKH';
 import {Pagination, PageShow} from '../table/pagination';
 import {isLoaded, loadList as loadTTKH} from '../../actions/khachhang/ttkhActions';
 import * as layoutActions from '../../actions/layoutActions';
@@ -21,6 +21,7 @@ import {ViewTTKH} from './Editor/ViewFull';
     meta: state.meta.thanhtoanKH,
     listLV: state.giaodich.listLV,
     listK: state.giaodich.listK,
+    listKH: state.giaodich.listKH,
   }),
   {...ttkhActions,...layoutActions, ...giaodichActions})
 
@@ -44,6 +45,7 @@ class TTKH extends Component{
   componentWillMount(){
     this.props.loadLV();
     this.props.loadK();
+    this.props.loadKH();
   }
   componentWillReceiveProps(nextProps) {
     if(nextProps.reload === true){
@@ -124,7 +126,7 @@ class TTKH extends Component{
     this.setState({openEdit: !this.state.openEdit, openView: false})
   }
   render(){
-    const {listTTKH, paging, meta, listLV, listK} = this.props;
+    const {listTTKH, paging, meta, listLV, listK, listKH} = this.props;
     const {options, itemView, openView, openEdit, idEdit} = this.state;
     let metagd = meta && meta.giaodich || {};
 
@@ -149,15 +151,15 @@ class TTKH extends Component{
                 </div>
                 <table id="example" className="table display preline dataTable" cellSpacing="0" width="100%" role="grid" aria-describedby="example_info" style={{"width": "100%"}}>
                   <thead>
-                    <THead meta={metagd} sort={options.sort} sortFunc={::this.sortField} ></THead>
+                    <THeadView meta={metagd} sort={options.sort} sortFunc={::this.sortField} />
                   </thead>
                   <tfoot>
-                    <TFoot meta={metagd} ></TFoot>
+                    <TFootView meta={metagd} />
                   </tfoot>
                   <tbody>
                     {listTTKH && listTTKH.map((item, index) =>{
                       return(
-                        <TBody item={item} index={index} sort={options.sort} meta={metagd} paging={paging} key={index} view={::this.viewItemFull} edit={::this.editItem} />
+                        <TBodyView item={item} index={index} sort={options.sort} meta={metagd} paging={paging} key={index} listKH={listKH} view={::this.viewItemFull} edit={::this.editItem} />
                       );
                     })}
                   </tbody>
