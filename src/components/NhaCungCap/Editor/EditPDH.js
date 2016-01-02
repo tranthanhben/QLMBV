@@ -264,7 +264,7 @@ export default class EditPDH extends Component {
                 </div>
                 <div className='form-group' key="tongtiendutinh">
                   {renderLabel(metaGD.tongtiendutinh)}
-                  <input type="text" data-addr='tongtiendutinh'className="form-control" readOnly value={numeral(gdItem["tongtiendutinh"]).format('(0,0.00)')} />
+                  <input type="text" data-addr='tongtiendutinh'className="form-control" readOnly value={numeral(gdItem["tongtiendutinh"]).format('(0,0)')} />
                 </div>
               </div>
               <div className="col-md-5">

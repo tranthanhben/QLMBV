@@ -281,11 +281,11 @@ export default class EditPNH extends Component {
                 </div>
                 <div className='form-group' key="tong">
                   {renderLabel(metaGD.tongtien)}
-                  <input className='form-control' type="text" readOnly value={numeral(gdItem.tongtien).format('(0,0.00)')}/>
+                  <input className='form-control' type="text" readOnly value={numeral(gdItem.tongtien).format('(0,0)')}/>
                 </div>
                 <div className='form-group' key="thanhtoan">
                   {renderLabel(metaGD.thanhtoan)}
-                  <input className='form-control' type="text" readOnly value={numeral(gdItem.thanhtoan).format('(0,0.00)')}/>
+                  <input className='form-control' type="text" readOnly value={numeral(gdItem.thanhtoan).format('(0,0)')}/>
                 </div>
               </div>
               <div className="col-md-5">

@@ -267,7 +267,7 @@ export default class EditPMH extends Component {
                 </div>
                 <div className='form-group' key="tongtiendutinh">
                   {renderLabel(metaGD.tongtiendutinh)}
-                  <input type="text" data-addr='mausac'className="form-control" readOnly value={numeral(gdItem.tongtiendutinh).format('(0,0.00)') || '0'} />
+                  <input type="text" data-addr='mausac'className="form-control" readOnly value={numeral(gdItem.tongtiendutinh).format('(0,0)') || '0'} />
                 </div>
               </div>
               <div className="col-md-5">

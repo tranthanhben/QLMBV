@@ -117,7 +117,7 @@ export class TBodyCTTT extends Component {
       <tr role="row" className={index%2===1 ? "even":"odd"} key={index}>
         <td>{index+1}</td>
         <td key='thanhtoan'>
-          {numeral(item.thanhtoan).format('(0,0.00)')+ ' VND'}
+          {numeral(item.thanhtoan).format('(0,0)')+ ' VND'}
         </td>
         <td key='phuongthuc'>
           {item.phuongthuc}
@@ -221,8 +221,8 @@ export class TBodyView extends Component {
         <td className={" uppercase" + (sort === "id" || sort ==="-id"? " sorting_1":"")}key="giaodichid" >{item["id"]}</td>
         <td className={" uppercase" + (sort === "doitacid" || sort ==="-doitacid"? " sorting_1":"")} key="doitacid" >{item["doitacid"]}</td>
         <td className="" key="nhacungcap" >{objKH[item["doitacid"]]&& objKH[item["doitacid"]].ten || ''}</td>
-        <td className="" key="tongtien" >{numeral(item["tongtien"]).format('(0,0.00)')}</td>
-        <td className="" key="thanhtoan" >{numeral(item["thanhtoan"]).format('(0,0.00)')}</td>
+        <td className="" key="tongtien" >{numeral(item["tongtien"]).format('(0,0)')}</td>
+        <td className="" key="thanhtoan" >{numeral(item["thanhtoan"]).format('(0,0)')}</td>
         <td className="" key="tinhtrangthanhtoan" >{parseTinhtrang(item["tinhtrangthanhtoan"])}</td>
         <td key='control' className="group-edit">
           <button className="btn btn-warning btn-table" title="View full" onClick={view?  view(item): function(){}}>

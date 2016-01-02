@@ -84,14 +84,14 @@ export class TBody extends Component {
       }else if(field.type ==="number"){
         // classField += " dt-body-right";
         trList.push(
-        <td className={classField} key={field.name} >{numeral(item[key]).format('(0,0.00)')+(field.unit|| '')}</td>
+        <td className={classField} key={field.name} >{numeral(item[key]).format('(0,0)')+(field.unit|| '')}</td>
         );
       }else if(field.type === "gia"){
         if(item[key]=== -1){
           trList.push(<td className={classField} key={field.name} >Chưa cập nhật</td>);
         }else{
           trList.push(
-          <td className={classField} key={field.name} >{numeral(item[key]).format('(0,0.00)')+(field.unit|| '')}</td>
+          <td className={classField} key={field.name} >{numeral(item[key]).format('(0,0)')+(field.unit|| '')}</td>
           );
         }
       }else{

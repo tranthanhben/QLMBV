@@ -21,7 +21,7 @@ export class ViewNCC extends Component {
         value =formatDate(item[key]);
       }
       if(field.type === "number"){
-        value = numeral(item[key]).format('(0,0.00)')+(field.unit|| '');
+        value = numeral(item[key]).format('(0,0)')+(field.unit|| '');
       }
       info.push(
         <div className="info-group" key={key}>
@@ -114,7 +114,7 @@ export class ViewPDH extends Component {
                   <span>{metaGD["tongtiendutinh"].label + ": "}</span>
                 </div>
                 <div className="col-md-6">
-                  <p className={metaGD["tongtiendutinh"].up? 'uppercase':''}>{numeral(item["tongtiendutinh"]).format('(0,0.00)')+' VND'}</p>
+                  <p className={metaGD["tongtiendutinh"].up? 'uppercase':''}>{numeral(item["tongtiendutinh"]).format('(0,0)')+' VND'}</p>
                 </div>
               </div>
             </div>
@@ -217,7 +217,7 @@ export class ViewPNH extends Component {
                   <span>{metaGD["tongtien"].label + ": "}</span>
                 </div>
                 <div className="col-md-6">
-                  <p className={metaGD["tongtien"].up? 'uppercase':''}>{numeral(item["tongtien"]).format('(0,0.00)')+' VND'}</p>
+                  <p className={metaGD["tongtien"].up? 'uppercase':''}>{numeral(item["tongtien"]).format('(0,0)')+' VND'}</p>
                 </div>
               </div>
             </div>
@@ -337,7 +337,7 @@ export class ViewTTNCC extends Component {
                   <span>{metaGD["tongtien"].label + ": "}</span>
                 </div>
                 <div className="col-md-6">
-                  <p className={metaGD["tongtien"].up? 'uppercase':''}>{numeral(item["tongtien"]).format('(0,0.00)')+' VND'}</p>
+                  <p className={metaGD["tongtien"].up? 'uppercase':''}>{numeral(item["tongtien"]).format('(0,0)')+' VND'}</p>
                 </div>
               </div>
             </div>
@@ -347,7 +347,7 @@ export class ViewTTNCC extends Component {
                   <span>{metaGD["thanhtoan"].label + ": "}</span>
                 </div>
                 <div className="col-md-6">
-                  <p className={metaGD["thanhtoan"].up? 'uppercase':''}>{numeral(item["thanhtoan"]).format('(0,0.00)')+' VND'}</p>
+                  <p className={metaGD["thanhtoan"].up? 'uppercase':''}>{numeral(item["thanhtoan"]).format('(0,0)')+' VND'}</p>
                 </div>
               </div>
             </div>

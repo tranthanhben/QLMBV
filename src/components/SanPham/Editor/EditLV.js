@@ -4,6 +4,7 @@ import{initObject, renderField, preprocess, setValue, checkRequire, preprocessPo
 import * as loaivaiActions from '../../../actions/loaivaiActions';
 
 @connect(state =>({
+  user: state.user.user,
   error: state.loaivai.postError,
   message: state.loaivai.message,
   item: state.loaivai.editItem,
@@ -75,8 +76,13 @@ export default class EditLV extends Component {
       this.props.close();
     }
   }
+  lock(){
+    let item = this.state.item;
+    item.lock = !item.lock;
+    this.props.postItem(preprocessPost(item, this.props.meta));
+  }
   render() {
-    const {meta, error, message} = this.props;
+    const {meta, error, message, user} = this.props;
     const {item, edited, submited, showFullField, id} = this.state;
     const metaPP = preprocess(meta);
     const fieldRender = showFullField && id? renderField(item, metaPP, this, true):renderField(item, metaPP, this);
@@ -120,7 +126,14 @@ export default class EditLV extends Component {
         <br/>
         <hr/>
         <div className="row">
-          <div className="col-md-12 flex-right">
+          <div className="col-md-2">
+            {user && user.role === 'admin'? (item.lock === false ? <button className='btn btn-danger' onClick={::this.lock} >
+                      {"Lock"}
+                      </button>:<button className='btn btn-danger' onClick={::this.lock} >
+                      {"Unlock"}
+                      </button>):null}&nbsp;&nbsp;&nbsp;&nbsp;
+          </div>
+          <div className="col-md-10 flex-right">
           {submited ? <p className='help-block required'>
               {checkRequire(metaPP, item)}
             </p>:null}

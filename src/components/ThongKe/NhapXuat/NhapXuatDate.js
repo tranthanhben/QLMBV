@@ -10,10 +10,10 @@ function xulydulieudate(datas=[]){
   datas.map(data =>{
     let db = data.reduction || [];
     db.map(d=>{
-      if(d.soluong > 0){
-        nhap += d.soluong;
+      if(d.chieudai > 0){
+        nhap += d.chieudai;
       }else{
-        xuat += d.soluong;
+        xuat += d.chieudai;
       }
     })
   })

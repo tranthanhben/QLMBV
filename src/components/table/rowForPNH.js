@@ -223,13 +223,13 @@ export class TBodyCTK extends Component {
           {kho.trong}
         </td>
         <td key='chieudai' >
-          {numeral(item.chieudai).format('(0,0.00)')}
+          {numeral(item.chieudai).format('(0,0)')}
         </td>
         <td key='gia' >
-          {numeral(item.gia).format('(0,0.00)')}
+          {numeral(item.gia).format('(0,0)')}
         </td>
         <td key='thanhtien' >
-          {numeral(item.gia*item.chieudai).format('(0,0.00)')}
+          {numeral(item.gia*item.chieudai).format('(0,0)')}
         </td>
         <td key='ngaynhap' >
           {datetime(new Date(item.ngaynhap))}
@@ -331,9 +331,9 @@ export class TBodyView extends Component {
         <td className={" uppercase" + (sort === "id" || sort ==="-id"? " sorting_1":"")}key="giaodichid" >{item["id"]}</td>
         <td className={" uppercase" + (sort === "doitacid" || sort ==="-doitacid"? " sorting_1":"")} key="doitacid" >{item["doitacid"]}</td>
         <td className="" key="nhacungcap" >{objNCC[item["doitacid"]]&& objNCC[item["doitacid"]].ten || ''}</td>
-        <td className="" key="tongtien" >{numeral(item["tongtien"]).format('(0,0.00)')}</td>
-        <td className="" key="kho" >{numeral(item["kho"]).format('(0,0.00)')}</td>
-        <td className="" key="donhang" >{numeral(item["donhang"]).format('(0,0.00)')}</td>
+        <td className="" key="tongtien" >{numeral(item["tongtien"]).format('(0,0)')}</td>
+        <td className="" key="kho" >{numeral(item["kho"]).format('(0,0)')}</td>
+        <td className="" key="donhang" >{numeral(item["donhang"]).format('(0,0)')}</td>
         <td className="" key="tinhtrangkho" >{parseTinhtrang(item["tinhtrangkho"])}</td>
         <td key='control' className="group-edit">
           <button className="btn btn-warning btn-table" title="View full" onClick={view?  view(item): function(){}}>

@@ -177,13 +177,13 @@ export class TBodyCTDH extends Component {
           {loaivai.conlai}
         </td>
         <td key='soluong' >
-          {numeral(item.soluong).format('(0,0.00)')}
+          {numeral(item.soluong).format('(0,0)')}
         </td>
         <td key='gia' >
-          {numeral(item.gia).format('(0,0.00)')}
+          {numeral(item.gia).format('(0,0)')}
         </td>
         <td key='thanhtien' >
-          {numeral(item.gia*item.soluong).format('(0,0.00)')}
+          {numeral(item.gia*item.soluong).format('(0,0)')}
         </td>
       </tr>
     )
@@ -282,7 +282,7 @@ export class TBodyView extends Component {
         <td className={" uppercase" + (sort === "id" || sort ==="-id"? " sorting_1":"")}key="giaodichid" >{item["id"]}</td>
         <td className={" uppercase" + (sort === "doitacid" || sort ==="-doitacid"? " sorting_1":"")} key="doitacid" >{item["doitacid"]}</td>
         <td className="" key="nhacungcap" >{objKH[item["doitacid"]]&& objKH[item["doitacid"]].ten || ''}</td>
-        <td className="" key="tongtiendutinh" >{numeral(item["tongtiendutinh"]).format('(0,0.00)')}</td>
+        <td className="" key="tongtiendutinh" >{numeral(item["tongtiendutinh"]).format('(0,0)')}</td>
         <td className="" key="tinhtrangdonhang" >{parseTinhtrang(item["tinhtrangdonhang"])}</td>
         <td className={(sort === "ngaydat" || sort ==="-ngaydat"? " sorting_1":"")} key="ngaydat" >{formatDate(item["ngaydat"])}</td>
         <td key='control' className="group-edit">

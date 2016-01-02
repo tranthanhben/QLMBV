@@ -252,7 +252,7 @@ export default class EditNV extends Component {
           </div>
         </div>
         <div className="row">
-        <div className="col-md-5">
+          <div className="col-md-5">
             {user && user.role === 'admin'? (item.lock === false ? <button className='btn btn-danger' onClick={::this.lock} >
                       {"Lock"}
                       </button>:<button className='btn btn-danger' onClick={::this.lock} >

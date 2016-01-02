@@ -303,17 +303,17 @@ export default class EditPXH extends Component {
                     </div>
                     <div className='form-group' key="tongtien">
                       {renderLabel(metaGD.tongtien)}
-                      <input type="text" data-addr='tongtien'className="form-control" readOnly value={numeral(gdItem.tongtien).format('(0,0.00)') || '0'} />
+                      <input type="text" data-addr='tongtien'className="form-control" readOnly value={numeral(gdItem.tongtien).format('(0,0)') || '0'} />
                     </div>
                   </div>
                   <div className="col-md-6">
                     <div className='form-group' key="donhang">
                       {renderLabel(metaGD.donhang)}
-                      <input type="text" data-addr='donhang'className="form-control" readOnly value={numeral(gdItem.donhang).format('(0,0.00)') || '0'} />
+                      <input type="text" data-addr='donhang'className="form-control" readOnly value={numeral(gdItem.donhang).format('(0,0)') || '0'} />
                     </div>
                     <div className='form-group' key="kho">
                       {renderLabel(metaGD.kho)}
-                      <input type="text" data-addr='kho'className="form-control" readOnly value={numeral(gdItem.kho).format('(0,0.00)') || '0'} />
+                      <input type="text" data-addr='kho'className="form-control" readOnly value={numeral(gdItem.kho).format('(0,0)') || '0'} />
                     </div>
                   </div>
                 </div>

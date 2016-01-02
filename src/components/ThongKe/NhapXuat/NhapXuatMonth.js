@@ -23,10 +23,10 @@ function congtungngay(data=[]){
   let nhap = 0;
   let xuat = 0;
   data.map(db=>{
-    if(db.soluong > 0){
-      nhap += db.soluong;
+    if(db.chieudai > 0){
+      nhap += db.chieudai;
     }else{
-      xuat += db.soluong;
+      xuat += db.chieudai;
     }
   });
   return {nhap, xuat};
