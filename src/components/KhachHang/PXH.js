@@ -155,7 +155,7 @@ class PXH extends Component{
                 </div>
                 <div id="example_filter" className="dataTables_filter" style={{"display": "inline-flex", "float":"right"}}>
                   <label className="line-height" style={{"display": "flex"}}>Search:
-                    <input type="search" className="form-control " placeholder="Search GDID" onChange={::this.searchField} aria-controls="example" />
+                    <input type="search" className="form-control " placeholder="Search GDID" onBlur={::this.searchField} aria-controls="example" />
                   </label>
                 </div>
                 <table id="example" className="table display preline dataTable" cellSpacing="0" width="100%" role="grid" aria-describedby="example_info" style={{"width": "100%"}}>

@@ -16,7 +16,7 @@ export class THead extends Component {
         continue;
       }
       thList.push(
-        <th className={classField} key={field.name} tabIndex="0" aria-controls="example" rowSpan="1" colSpan="1">{field.label}</th>
+        <th className={classField} key={field.name} tabIndex="0" aria-controls="example" rowSpan="1" colSpan="1">{field.label+(field.unitTable? field.unitTable : '')}</th>
       );
     }
     return (
@@ -333,7 +333,7 @@ export class TBodyView extends Component {
         <td className="" key="nhacungcap" >{objNCC[item["doitacid"]]&& objNCC[item["doitacid"]].ten || ''}</td>
         <td className="" key="tongtien" >{numeral(item["tongtien"]).format('(0,0)')}</td>
         <td className="" key="kho" >{numeral(item["kho"]).format('(0,0)')}</td>
-        <td className="" key="donhang" >{numeral(item["donhang"]).format('(0,0)')}</td>
+        <td className="" key="chieudaidonhang" >{numeral(item["chieudaidonhang"]).format('(0,0)')}</td>
         <td className="" key="tinhtrangkho" >{parseTinhtrang(item["tinhtrangkho"])}</td>
         <td key='control' className="group-edit">
           <button className="btn btn-warning btn-table" title="View full" onClick={view?  view(item): function(){}}>

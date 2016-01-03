@@ -333,9 +333,9 @@ export default class EditPNH extends Component {
                     </div>
                   </div>
                   <div className="col-md-6">
-                    <div className='form-group' key="donhang">
-                      {renderLabel(metaGD.donhang)}
-                      <input className='form-control' type="text" readOnly value={numeral(gdItem.donhang).format('(0,0)')}/>
+                    <div className='form-group' key="chieudaidonhang">
+                      {renderLabel(metaGD.chieudaidonhang)}
+                      <input className='form-control' type="text" readOnly value={numeral(gdItem.chieudaidonhang).format('(0,0)')}/>
                     </div>
                     <div className='form-group' key="kho">
                       {renderLabel(metaGD.kho)}
@@ -511,10 +511,10 @@ class Add extends Component{
                 {"Còn trống"}
               </th>
               <th key="soluong" tabIndex="0" aria-controls="example" rowSpan="1" colSpan="1">
-                {"Số cây"}
+                {"Số cây(cay)"}
               </th>
               <th key="gia" tabIndex="0" aria-controls="example" rowSpan="1" colSpan="1">
-                {"Giá"}
+                {"Giá(vnd/met)"}
               </th>
               <th key="control" tabIndex="0" aria-controls="example" rowSpan="1" colSpan="1">
               </th>

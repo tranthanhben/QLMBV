@@ -409,20 +409,22 @@ const initialState = {
       label: "Giá Bán",
       sort: false,
       type: "gia",
-      unit: " VND",
       required: false,
       disabled: true,
-      field: false
+      field: false,
+      unitTable: "(vnd/mét)",
+      unit: " VND/mét"
     },
     "giamua": {
       name: "giamua",
       label: "Giá Mua",
       sort: false,
       type: "gia",
-      unit: " VND",
       disabled: true,
       required: false,
-      field: false
+      field: false,
+      unitTable: "(vnd/mét)",
+      unit: " VND/mét"
     },
     "tongnhap": {
       name: "tongnhap",
@@ -644,8 +646,8 @@ const initialState = {
         type: "number",
         field: true,
         view: true,
-        unitTable: "(met)",
-        unit: "met"
+        unitTable: "(mét)",
+        unit: "mét"
       },
       gia: {
         name: "gia",
@@ -655,8 +657,8 @@ const initialState = {
         type: "number",
         field: true,
         view: true,
-        unitTable: "(vnd)",
-        unit: " VND"
+        unitTable: "(vnd/mét)",
+        unit: " VND/mét"
       },
       thanhtien: {
         name: "thanhtien",
@@ -735,25 +737,25 @@ const initialState = {
       },
       "kho": {
         name: "kho",
-        label: "Số met Nhập",
+        label: "Số mét Nhập",
         sort: false,
         up: false,
         type: "number",
         field: true,
         view: true,
-        unitTable: '(met)',
-        unit: ' met',
+        unitTable: '(mét)',
+        unit: ' mét',
       },
-      "donhang": {
-        name: "donhang",
-        label: "Số met đặt",
+      "chieudaidonhang": {
+        name: "chieudaidonhang",
+        label: "Số mét đặt",
         sort: false,
         up: false,
         type: "number",
         field: true,
         view: true,
-        unit: ' met',
-        unitTable: '(met)'
+        unit: ' mét',
+        unitTable: '(mét)'
       },
       "ngayhoanthanh": {
         name: "ngayhoanthanh",
@@ -891,8 +893,8 @@ const initialState = {
         sort: false,
         up: false,
         type: "number",
-        unit: ' met',
-        unitTable: '(met)',
+        unit: ' mét',
+        unitTable: '(mét)',
         field: true,
         view: true
       },
@@ -904,8 +906,8 @@ const initialState = {
         type: "number",
         field: true,
         view: true,
-        unit: ' VND',
-        unitTable: '(vnd)'
+        unitTable: "(vnd/mét)",
+        unit: " VND/mét"
       },
       thanhtien: {
         name: "thanhtien",
@@ -974,8 +976,8 @@ const initialState = {
         type: "number",
         field: true,
         view: true,
-        unit: ' met',
-        unitTable: '(met)'
+        unit: ' mét',
+        unitTable: '(mét)'
       },
       gia: {
         name: "gia",
@@ -985,8 +987,8 @@ const initialState = {
         type: "number",
         field: true,
         view: true,
-        unit: ' VND/met',
-        unitTable: '(vnd/met)'
+        unit: ' VND/mét',
+        unitTable: '(vnd/mét)'
       },
       thanhtien: {
         name: "thanhtien",
@@ -1175,8 +1177,8 @@ const initialState = {
         type: "number",
         field: false,
         view: true,
-        unit: ' met',
-        unitTable: '(met)'
+        unit: ' mét',
+        unitTable: '(mét)'
       },
       soluong: {
         name: "soluong",
@@ -1186,8 +1188,8 @@ const initialState = {
         type: "number",
         field: true,
         view: false,
-        unit: ' met',
-        unitTable: '(met)'
+        unit: ' mét',
+        unitTable: '(mét)'
       },
       chieudai: {
         name: "chieudai",
@@ -1197,8 +1199,8 @@ const initialState = {
         type: "number",
         field: true,
         view: true,
-        unit: ' met',
-        unitTable: '(met)'
+        unit: ' mét',
+        unitTable: '(mét)'
       },
       gia: {
         name: "gia",
@@ -1208,8 +1210,8 @@ const initialState = {
         type: "number",
         field: true,
         view: true,
-        unit: ' VND/met',
-        unitTable: '(vnd/met)'
+        unit: ' VND/mét',
+        unitTable: '(vnd/mét)'
       },
       thanhtien: {
         name: "thanhtien",
@@ -1287,25 +1289,25 @@ const initialState = {
       },
       "kho": {
         name: "kho",
-        label: "Số met xuất",
+        label: "Số mét xuất",
         sort: false,
         up: false,
         type: "number",
         field: true,
         view: true,
-        unitTable: '(met)',
-        unit: ' met',
+        unitTable: '(mét)',
+        unit: ' mét',
       },
-      "donhang": {
-        name: "donhang",
-        label: "Số met đặt",
+      "chieudaidonhang": {
+        name: "chieudaidonhang",
+        label: "Số mét đặt",
         sort: false,
         up: false,
         type: "number",
         field: true,
         view: true,
-        unit: ' met',
-        unitTable: '(met)'
+        unit: ' mét',
+        unitTable: '(mét)'
       },
       "ngayhoanthanh": {
         name: "ngayhoanthanh",
@@ -1401,8 +1403,8 @@ const initialState = {
         type: "number",
         field: false,
         view: true,
-        unit: ' met',
-        unitTable: '(met)'
+        unit: ' mét',
+        unitTable: '(mét)'
       },
       cayvaiid: {
         name: "cayvaiid",
@@ -1430,8 +1432,8 @@ const initialState = {
         type: "special",
         field: false,
         view:true,
-        unit: ' met',
-        unitTable: '(met)'
+        unit: ' mét',
+        unitTable: '(mét)'
       },
       soluong: {
         name: "soluong",
@@ -1448,8 +1450,8 @@ const initialState = {
         sort: false,
         up: false,
         type: "number",
-        unit: ' met',
-        unitTable: '(met)',
+        unit: ' mét',
+        unitTable: '(mét)',
         field: true,
         view: true
       },
@@ -1461,8 +1463,8 @@ const initialState = {
         type: "number",
         field: true,
         view: true,
-        unit: ' VND',
-        unitTable: '(vnd)'
+        unitTable: "(vnd/mét)",
+        unit: " VND/mét"
       },
       thanhtien: {
         name: "thanhtien",
@@ -1521,16 +1523,16 @@ const initialState = {
         field: false,
         view: true
       },
-      soluong: {
-        name: "soluong",
+      chieudai: {
+        name: "chieudai",
         label: "Số lượng mua",
         sort: false,
         up: false,
         type: "number",
         field: true,
         view: true,
-        unit: ' met',
-        unitTable: '(met)'
+        unit: ' mét',
+        unitTable: '(mét)'
       },
       gia: {
         name: "gia",
@@ -1540,8 +1542,8 @@ const initialState = {
         type: "number",
         field: true,
         view: true,
-        unit: ' VND/met',
-        unitTable: '(vnd/met)'
+        unit: ' VND/mét',
+        unitTable: '(vnd/mét)'
       },
       thanhtien: {
         name: "thanhtien",

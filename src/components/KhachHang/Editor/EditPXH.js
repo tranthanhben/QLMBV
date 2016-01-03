@@ -307,9 +307,9 @@ export default class EditPXH extends Component {
                     </div>
                   </div>
                   <div className="col-md-6">
-                    <div className='form-group' key="donhang">
-                      {renderLabel(metaGD.donhang)}
-                      <input type="text" data-addr='donhang'className="form-control" readOnly value={numeral(gdItem.donhang).format('(0,0)') || '0'} />
+                    <div className='form-group' key="chieudaidonhang">
+                      {renderLabel(metaGD.chieudaidonhang)}
+                      <input type="text" data-addr='chieudaidonhang'className="form-control" readOnly value={numeral(gdItem.chieudaidonhang).format('(0,0)') || '0'} />
                     </div>
                     <div className='form-group' key="kho">
                       {renderLabel(metaGD.kho)}
