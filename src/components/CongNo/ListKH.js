@@ -16,6 +16,7 @@ import {Style} from '../Style';
     error: state.khachhang.error,
     loading: state.khachhang.loading,
     meta: state.meta.congno.khachhang,
+    metaTTKH: state.meta.thanhtoanKH,
     reload: state.khachhang.reloadList
   }),
   {...khachhangActions, ...layoutActions})
@@ -119,7 +120,7 @@ class List extends Component{
     this.setState({openEdit: !this.state.openEdit})
   }
   render(){
-    const {listKH, paging, meta} = this.props;
+    const {listKH, paging, meta, metaTTKH} = this.props;
     const {options, itemView, openView, openEdit, idEdit} = this.state;
     return (
         <div className="mbv-grid container-fluid" style={{"zIndex": "9999983"}}>
@@ -151,19 +152,19 @@ class List extends Component{
                   <tbody>
                     {listKH && listKH.map((item, index) =>{
                       return(
-                        <TBody item={item} index={index} sort={options.sort} meta={meta} paging={paging} key={index} view={::this.viewItemFull} edit={::this.editItem}></TBody>
+                        <TBody item={item} index={index} sort={options.sort} meta={meta}  paging={paging} key={index} view={::this.viewItemFull} edit={::this.editItem}></TBody>
                       )
                     })}
                   </tbody>
                 </table>
                 {openView?
-                  <Modal  modalStyle={Style.content_50}
+                  <Modal  modalStyle={Style.content_80}
                   overlayStyle= {Style.overlay}
                   close={::this.viewModal}
                   overlayClassName='modaldumb modalOverlay modalOverlay--after-open '
                   modalClassName='dumb modalContent modalContent--after-open '
                   >
-                    <ViewKH meta={meta} item={itemView} close={::this.viewModal} edit={::this.editItem}></ViewKH>
+                    <ViewKH meta={meta} metaTTKH={metaTTKH} item={itemView} close={::this.viewModal} ></ViewKH>
                   </Modal> : null}
                 <PageShow paging={paging} length={listKH.length}/>
                 <Pagination load={::this.paginationLoad} paging={paging}></Pagination>

@@ -151,7 +151,7 @@ class List extends Component{
                   </tbody>
                 </table>
                 {openView?
-                  <Modal  modalStyle={Style.content_50}
+                  <Modal  modalStyle={Style.content_80}
                   overlayStyle= {Style.overlay}
                   close={::this.viewModal}
                   overlayClassName='modaldumb modalOverlay modalOverlay--after-open '

@@ -252,7 +252,14 @@ const initialState = {
       name: "chucvu",
       label: "Chức Vụ",
       sort: false,
-      type: "single",
+      type: "select",
+      options: [{
+        value: "nhanvien",
+        label: "Nhân viên"
+      },{
+        value: "quanly",
+        label: "Quản lý"
+      }],
       required: false,
       field: true
     }
@@ -384,7 +391,8 @@ const initialState = {
       sort: false,
       type: "single",
       required: false,
-      field: true
+      field: true,
+      view: false
     },
     "chatlieu": {
       name: "chatlieu",

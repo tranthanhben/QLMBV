@@ -90,7 +90,7 @@ export default class EditLV extends Component {
       <div>
         <div className="row">
           <div className="col-md-4">
-            <h4>Loai Vai</h4>
+            <h4>Loại Vải</h4>
           </div>
           <div className="col-md-8 flex-right">
           {submited ? <p className='help-block required'>
@@ -127,11 +127,11 @@ export default class EditLV extends Component {
         <hr/>
         <div className="row">
           <div className="col-md-2">
-            {user && user.role === 'admin'? (item.lock === false ? <button className='btn btn-danger' onClick={::this.lock} >
-                      {"Lock"}
-                      </button>:<button className='btn btn-danger' onClick={::this.lock} >
-                      {"Unlock"}
-                      </button>):null}&nbsp;&nbsp;&nbsp;&nbsp;
+            {item && item.id && user && user.role === 'admin'? (item.lock === false ? <button className='btn btn-danger' onClick={::this.lock} >
+              {"Lock"}
+              </button>:<button className='btn btn-danger' onClick={::this.lock} >
+              {"Unlock"}
+              </button>):null}&nbsp;&nbsp;&nbsp;&nbsp;
           </div>
           <div className="col-md-10 flex-right">
           {submited ? <p className='help-block required'>

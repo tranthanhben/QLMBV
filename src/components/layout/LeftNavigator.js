@@ -1,7 +1,8 @@
 import React, {Component, PropTypes} from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
-import {logout} from '../../actions/userActions';
+import {logout, getMyAcc} from '../../actions/userActions';
+// import * as userActions from '../../actions/userActions';
 import {bindActionCreators} from 'redux';
 import Modal from './Modal';
 import {Style} from '../Style';
@@ -13,11 +14,15 @@ class LeftNav extends Component {
     menu: PropTypes.array,
     params: PropTypes.object,
     user: PropTypes.object,
+    myaccount: PropTypes.object,
     logout: PropTypes.func.isRequired,
   }
   state = {
     openTabs:{},
     isOpenUser: false
+  }
+  componentWillMount(){
+    this.props.getMyAcc(this.props.user && this.props.user.nhanvienid || '');
   }
   logout(){
     this.props.logout();
@@ -38,7 +43,7 @@ class LeftNav extends Component {
     this.setState({isOpenUser: !this.state.isOpenUser})
   }
   render (){
-    const {menu, params, user, openmodal} = this.props;
+    const {menu, params, user, openmodal, myaccount} = this.props;
     let openTabs = this.state.openTabs;
     return (
       <div className='tabs sidebar-nav-container' style={{"zIndex":(this.state.isOpenUser? '23':'22')}}>
@@ -69,7 +74,10 @@ class LeftNav extends Component {
             index > 0 ? <div className='space'/> : null,
             <ul style={{"marginBottom":"0"}} key={index} className="items sidebar-nav">
                 {items.map((item) => {
-                  if(item.role && user.role !=='admin'){
+                  if(item.role === "admin" && user.role !=='admin'){
+                    return null;
+                  }
+                  if(item.role === "quanly" && user.role !== 'admin' && myaccount && myaccount.chucvu !== 'quanly'){
                     return null;
                   }
                   if(item.sub){
@@ -133,18 +141,20 @@ class LeftNav extends Component {
 
 @connect(state => ({
   menu: state.layout.menu,
-  user: state.user.user
+  user: state.user.user,
+  myaccount: state.user.myaccount
 }))
 
-export default class LeftNavContainer {
+export default class LeftNavContainer{
   static propTypes = {
     menu : PropTypes.array,
     params: PropTypes.object,
     user: PropTypes.object,
+    myaccount: PropTypes.object,
     dispatch: PropTypes.func.isRequired
   }
   render(){
-    const {menu, params, user, dispatch} = this.props;
-    return (<LeftNav menu={menu} user={user} params={params} {...bindActionCreators({logout}, dispatch)}></LeftNav>);
+    const {menu, params, user, dispatch, myaccount} = this.props;
+    return (<LeftNav menu={menu} user={user} myaccount={myaccount} params={params} {...bindActionCreators({logout, getMyAcc}, dispatch)}></LeftNav>);
   }
 }

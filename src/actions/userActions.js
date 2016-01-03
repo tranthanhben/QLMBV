@@ -30,7 +30,11 @@ import {
 
   GET_ACCOUNT,
   GET_ACCOUNT_SUCCESS,
-  GET_ACCOUNT_FAIL
+  GET_ACCOUNT_FAIL,
+
+  GET_MYACC,
+  GET_MYACC_SUCCESS,
+  GET_MYACC_FAIL
 
 } from './actionTypes';
 
@@ -93,6 +97,16 @@ export function updateAccount(data){
 export function getAccount(id){
   return  {
   types: [GET_ACCOUNT, GET_ACCOUNT_SUCCESS, GET_ACCOUNT_FAIL],
+    promise: (client) => client.get('/account',{
+      params: makeQuery({
+        nhanvien: id || ''
+      })
+    })
+  };
+}
+export function getMyAcc(id){
+  return  {
+  types: [GET_MYACC, GET_MYACC_SUCCESS, GET_MYACC_FAIL],
     promise: (client) => client.get('/account',{
       params: makeQuery({
         nhanvien: id || ''

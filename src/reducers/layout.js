@@ -54,25 +54,29 @@ const initialState = {
         label: 'Hóa Đơn',
         href: '/nhacungcap/hdncc',
         icon: 'money'
-      }]
+      }],
+      role: 'quanly'
     },{
       label: 'Công Nợ',
       href: '/congno',
-      icon: 'dollar'
+      icon: 'dollar',
+      role: 'quanly'
     },{
       label: 'Thống Kê',
       href: '/thongke',
-      icon: 'line-chart'
+      icon: 'line-chart',
+      role: 'quanly'
     },{
       label: 'Kho',
       href: '/kho',
-      icon: 'database'
+      icon: 'database',
+      role: 'quanly'
     }],
     [{
       label: 'Nhân Viên',
       href: '/nhanvien',
       icon: 'user',
-      role: true
+      role: 'admin'
     }, {
       label: 'Đăng xuất',
       href: '/logout',

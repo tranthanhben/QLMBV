@@ -7,6 +7,10 @@ import {
   GET_ACCOUNT_SUCCESS,
   GET_ACCOUNT_FAIL,
 
+  GET_MYACC,
+  GET_MYACC_SUCCESS,
+  GET_MYACC_FAIL,
+
   LOGIN_LOAD,
   LOGIN_LOAD_SUCCESS,
   LOGIN_LOAD_FAIL,
@@ -74,6 +78,24 @@ export default function user(state = initialState, action = {}) {
           ...state,
           getingAccount: false,
           account: null,
+          errorGetAccount: action.error
+        }
+      case GET_MYACC:
+        return {
+          ...state,
+          getingAccount: true
+        };
+      case GET_MYACC_SUCCESS:
+        return {
+          ...state,
+          getingAccount: false,
+          myaccount: action.result.items[0] || null
+        };
+      case GET_MYACC_FAIL:
+        return {
+          ...state,
+          getingAccount: false,
+          myaccount: null,
           errorGetAccount: action.error
         }
       case REGISTER_LOAD:

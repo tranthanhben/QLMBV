@@ -61,8 +61,8 @@ export function loadKH(){
       params: makeQuery({
         page: 0,
         page_size : 100,
-        name: '',
-        sort:'ten'
+        sort:'ten',
+        lock: 't'
       })
     })
   };
@@ -74,8 +74,8 @@ export function loadNCC(){
       params: makeQuery({
         page: 0,
         page_size : 100,
-        name: '',
-        sort:'ten'
+        sort:'ten',
+        lock: 't'
       })
     })
   };
@@ -87,8 +87,8 @@ export function loadLV(){
       params: makeQuery({
         page: 0,
         page_size : 100,
-        name: '',
-        sort:'ten'
+        sort:'ten',
+        lock: 't'
       })
     })
   };
@@ -100,8 +100,8 @@ export function loadK(){
       params: makeQuery({
         page: 0,
         page_size : 100,
-        name: '',
-        sort:'ten'
+        sort:'ten',
+        lock: 't'
       })
     })
   };

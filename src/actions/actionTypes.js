@@ -6,6 +6,10 @@ export const GET_ACCOUNT = "GET_ACCOUNT";
 export const GET_ACCOUNT_SUCCESS = "GET_ACCOUNT_SUCCESS";
 export const GET_ACCOUNT_FAIL = "GET_ACCOUNT_FAIL";
 
+export const GET_MYACC = "GET_MYACC";
+export const GET_MYACC_SUCCESS = "GET_MYACC_SUCCESS";
+export const GET_MYACC_FAIL = "GET_MYACC_FAIL";
+
 export const LOGIN_LOAD = "LOGIN_LOAD";
 export const LOGIN_LOAD_SUCCESS = "LOGIN_LOAD_SUCCESS";
 export const LOGIN_LOAD_FAIL = "LOGIN_LOAD_FAIL";

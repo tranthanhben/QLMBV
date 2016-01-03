@@ -16,6 +16,7 @@ import {Style} from '../Style';
     error: state.nhacungcap.error,
     meta: state.meta.congno.nhacungcap,
     loading: state.nhacungcap.loading,
+    metaTTNCC: state.meta.thanhtoanNCC,
     reload: state.nhacungcap.reloadList
   }),
   {...nhacungcapActions, ...layoutActions})
@@ -115,7 +116,7 @@ class List extends Component{
     this.setState({openEdit: !this.state.openEdit, openView: false})
   }
   render(){
-    const {listNCC, paging, meta} = this.props;
+    const {listNCC, paging, meta, metaTTNCC} = this.props;
     const {options, itemView, openView, openEdit, idEdit} = this.state;
     return (
       <div className="mbv-grid container-fluid" style={{"zIndex": "9999983"}}>
@@ -154,13 +155,13 @@ class List extends Component{
                 </tbody>
               </table>
               {openView?
-                  <Modal  modalStyle={Style.content_50}
+                  <Modal  modalStyle={Style.content_80}
                   overlayStyle= {Style.overlay}
                   close={::this.viewModal}
                   overlayClassName='modaldumb modalOverlay modalOverlay--after-open '
                   modalClassName='dumb modalContent modalContent--after-open '
                   >
-                    <ViewNCC meta={meta} item={itemView} close={::this.viewModal}></ViewNCC>
+                    <ViewNCC meta={meta} item={itemView} metaTTNCC={metaTTNCC} close={::this.viewModal}></ViewNCC>
                   </Modal> : null}
               <PageShow paging={paging} length={listNCC &&listNCC.length} />
               <Pagination load={::this.paginationLoad} paging={paging}></Pagination>
