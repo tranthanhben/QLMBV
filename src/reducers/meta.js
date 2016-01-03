@@ -44,7 +44,7 @@ const initialState = {
     },
     "sotk": {
       name: "sotk",
-      label: "Số TK",
+      label: "Số Tài Khoản",
       sort: false,
       type: "single",
       required: false,
@@ -114,7 +114,7 @@ const initialState = {
     },
     "ten": {
       name: "ten",
-      label: "Tên Nhà Cung Cấp",
+      label: "Nhà Cung Cấp",
       sort: true,
       type: "single",
       required: true,
@@ -147,7 +147,7 @@ const initialState = {
     },
     "sotk": {
       name: "sotk",
-      label: "Số TK",
+      label: "Số Tài Khoản",
       sort: false,
       type: "single",
       required: false,
@@ -345,7 +345,7 @@ const initialState = {
     },
     "trong": {
       name: "trong",
-      label: "Còn Trống",
+      label: "SL Trống",
       sort: true,
       type: "number",
       unit: ' Chỗ',
@@ -638,7 +638,7 @@ const initialState = {
       },
       chieudai: {
         name: "chieudai",
-        label: "Chieu Dai",
+        label: "Chiều Dài",
         sort: false,
         up: false,
         type: "number",
@@ -735,7 +735,7 @@ const initialState = {
       },
       "kho": {
         name: "kho",
-        label: "So met nhap",
+        label: "Số met Nhập",
         sort: false,
         up: false,
         type: "number",
@@ -746,7 +746,7 @@ const initialState = {
       },
       "donhang": {
         name: "donhang",
-        label: "So met dat",
+        label: "Số met đặt",
         sort: false,
         up: false,
         type: "number",
@@ -757,7 +757,7 @@ const initialState = {
       },
       "ngayhoanthanh": {
         name: "ngayhoanthanh",
-        label: "Ngày Hoan Thanh",
+        label: "Ngày Hoàn Thành",
         sort: true,
         type: "date",
         field: true,
@@ -860,7 +860,7 @@ const initialState = {
       },
       khoid: {
         name: "khoid",
-        label: "Kho Còn Trống",
+        label: "Kho Trống",
         sort: false,
         up: false,
         type: "special",
@@ -869,7 +869,7 @@ const initialState = {
       },
       controng: {
         name: "controng",
-        label: "Còn Trống",
+        label: "SL Trống",
         sort: false,
         up: false,
         type: "special",
@@ -887,7 +887,7 @@ const initialState = {
       },
       chieudai: {
         name: "chieudai",
-        label: "Chieu dai",
+        label: "Chiều Dài",
         sort: false,
         up: false,
         type: "number",
@@ -920,7 +920,7 @@ const initialState = {
       },
       ngaynhap: {
         name: "ngaynhap",
-        label: "Ngày Nhap",
+        label: "Ngày Nhập",
         sort: true,
         type: "date",
         field: true,
@@ -968,7 +968,7 @@ const initialState = {
       },
       chieudai: {
         name: "chieudai",
-        label: "Chieu Dai",
+        label: "Chiều Dài",
         sort: false,
         up: false,
         type: "number",
@@ -1287,7 +1287,7 @@ const initialState = {
       },
       "kho": {
         name: "kho",
-        label: "So met xuat",
+        label: "Số met xuất",
         sort: false,
         up: false,
         type: "number",
@@ -1298,7 +1298,7 @@ const initialState = {
       },
       "donhang": {
         name: "donhang",
-        label: "So met dat",
+        label: "Số met đặt",
         sort: false,
         up: false,
         type: "number",
@@ -1309,7 +1309,7 @@ const initialState = {
       },
       "ngayhoanthanh": {
         name: "ngayhoanthanh",
-        label: "Ngày Hoan Thanh",
+        label: "Ngày Hoàn Thành",
         sort: true,
         type: "date",
         field: true,
@@ -1444,7 +1444,7 @@ const initialState = {
       },
       chieudai: {
         name: "chieudai",
-        label: "Chieu dai",
+        label: "Chiều Dài",
         sort: false,
         up: false,
         type: "number",

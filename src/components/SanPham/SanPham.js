@@ -54,7 +54,7 @@ export default class SanPham extends Component{
               <div className="view-tabs col-xs-3 col-sm-8">
                 <ul className="nav-main pull-right">
                   <li onClick={::this.toggleModal}>
-                    <a ><span key="icoen" className={'fa fa-user'}></span>{" Loai Vai Moi"}</a>
+                    <a ><span key="icoen" className={'fa fa-user'}></span>{" Tạo Loại Vải"}</a>
                   </li>
                 </ul>
               </div>
