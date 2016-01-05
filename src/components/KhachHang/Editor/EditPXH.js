@@ -6,6 +6,9 @@ import {THeadCTDH, TBodyCTDH} from '../../table/rowForPMH';
 import * as pxhActions from '../../../actions/khachhang/pxhActions';
 import * as giaodichActions from '../../../actions/giaodichActions';
 import Select from 'react-select';
+import {markdown} from 'markdown';
+import {NotePXH} from '../../markdownNote';
+
 function filterLV(ctdh, list){
   let listLV =[];
   let obj = ATOLV(list);
@@ -319,6 +322,7 @@ export default class EditPXH extends Component {
                 </div>
               </div>
               <div className="col-md-5">
+                <p dangerouslySetInnerHTML={{ __html: markdown.toHTML(NotePXH || '') }}></p>
               </div>
             </div>
           </div>

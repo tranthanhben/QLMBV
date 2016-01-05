@@ -101,7 +101,7 @@ export class TBody extends Component {
 
     }
     return (
-      <tr role="row" className={index%2===1 ? "even":"odd" + (item.lock? " disabled" : "")}>
+      <tr role="row" className={(index%2===1 ? "even":"odd" )+ (item.lock === true? " disabled" : "")}>
         <td>{paging.page*paging.page_size+1+index}</td>
         {trList}
         <td key='control' className="group-edit">

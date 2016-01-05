@@ -20,7 +20,7 @@ const initialState = {
         href: '/khachhang/list',
         icon: 'list'
       },{
-        label: 'Phiếu Mua Hàng',
+        label: 'Đơn đặt hàng',
         href: '/khachhang/pmh',
         icon: 'shopping-cart'
       },{

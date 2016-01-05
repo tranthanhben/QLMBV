@@ -62,7 +62,7 @@ export function loadKH(){
         page: 0,
         page_size : 100,
         sort:'ten',
-        lock: 't'
+        // lock: 'available'
       })
     })
   };
@@ -75,7 +75,7 @@ export function loadNCC(){
         page: 0,
         page_size : 100,
         sort:'ten',
-        lock: 't'
+        // lock: 'available'
       })
     })
   };
@@ -88,7 +88,7 @@ export function loadLV(){
         page: 0,
         page_size : 100,
         sort:'ten',
-        lock: 't'
+        // lock: 'available'
       })
     })
   };
@@ -101,7 +101,7 @@ export function loadK(){
         page: 0,
         page_size : 100,
         sort:'ten',
-        lock: 't'
+        // lock: 'available'
       })
     })
   };

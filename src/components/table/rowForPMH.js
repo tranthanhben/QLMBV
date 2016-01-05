@@ -176,14 +176,14 @@ export class TBodyCTDH extends Component {
         <td key='conlai' >
           {loaivai.conlai}
         </td>
-        <td key='soluong' >
-          {numeral(item.soluong).format('(0,0)')}
+        <td key='chieudai' >
+          {numeral(item.chieudai).format('(0,0)')}
         </td>
         <td key='gia' >
           {numeral(item.gia).format('(0,0)')}
         </td>
         <td key='thanhtien' >
-          {numeral(item.gia*item.soluong).format('(0,0)')}
+          {numeral(item.gia*item.chieudai).format('(0,0)')}
         </td>
       </tr>
     )

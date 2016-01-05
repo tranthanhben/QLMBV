@@ -5,7 +5,8 @@ import {THead, TBody} from '../../table/rowForTTNCC';
 import * as ttnccActions from '../../../actions/nhacungcap/ttnccActions';
 import * as giaodichActions from '../../../actions/giaodichActions';
 import Select from 'react-select';
-
+import {markdown} from 'markdown';
+import {NoteTTNCC} from '../../markdownNote';
 @connect(state =>({
   gdItem: state.thanhtoanNCC.editItem,
   meta: state.meta.thanhtoanNCC,
@@ -249,7 +250,7 @@ export default class EditPNH extends Component {
         <div className="row">
           <div className="col-md-12" key="gdfield">
             <div className="row">
-              <div className="col-md-7 boder-right">
+              <div className="col-md-6 boder-right">
                 <div className='form-group' key="giaodichid">
                   {renderLabel(metaGD.id)}
                   &nbsp;
@@ -288,7 +289,7 @@ export default class EditPNH extends Component {
                   <input className='form-control' type="text" readOnly value={numeral(gdItem.thanhtoan).format('(0,0)')}/>
                 </div>
               </div>
-              <div className="col-md-5">
+              <div className="col-md-6"><p dangerouslySetInnerHTML={{ __html: markdown.toHTML(NoteTTNCC || '') }}></p>
               </div>
             </div>
           </div>

@@ -8,6 +8,8 @@ import * as giaodichActions from '../../../actions/giaodichActions';
 import Modal from '../../layout/Modal';
 import {Style} from '../../Style';
 import Select from 'react-select';
+import {markdown} from 'markdown';
+import {NotePNH} from '../../markdownNote';
 
 function filterLV(ctdh, list){
   let listLV =[];
@@ -294,7 +296,7 @@ export default class EditPNH extends Component {
              : null}
           <div className="col-md-12" key="gdfield">
             <div className="row">
-              <div className="col-md-8 boder-right">
+              <div className="col-md-7 boder-right">
                 <div className='form-group' key="giaodichid">
                   {renderLabel(metaGD.id)}
                   &nbsp;
@@ -344,7 +346,8 @@ export default class EditPNH extends Component {
                   </div>
                 </div>
               </div>
-              <div className="col-md-4">
+              <div className="col-md-5">
+                <p dangerouslySetInnerHTML={{ __html: markdown.toHTML(NotePNH || '') }}></p>
               </div>
             </div>
           </div>
