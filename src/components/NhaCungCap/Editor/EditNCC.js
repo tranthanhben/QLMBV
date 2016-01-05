@@ -125,7 +125,7 @@ export default class EditNCC extends Component {
         <hr/>
         <div className="row">
           <div className="col-md-2">
-            {user && user.role === 'admin'? (item.lock === false ? <button className='btn btn-danger' onClick={::this.lock} >
+            {item && item.id && user && user.role === 'admin'? (item.lock === false ? <button className='btn btn-danger' onClick={::this.lock} >
                       {"Lock"}
                       </button>:<button className='btn btn-danger' onClick={::this.lock} >
                       {"Unlock"}

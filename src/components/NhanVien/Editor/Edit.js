@@ -253,12 +253,12 @@ export default class EditNV extends Component {
         </div>
         <div className="row">
           <div className="col-md-5">
-            {user && user.role === 'admin'? (item.lock === false ? <button className='btn btn-danger' onClick={::this.lock} >
+            {item && item.id && user && user.role === 'admin'? (item.lock === false ? <button className='btn btn-danger' onClick={::this.lock} >
                       {"Lock"}
                       </button>:<button className='btn btn-danger' onClick={::this.lock} >
                       {"Unlock"}
                       </button>):null}&nbsp;&nbsp;&nbsp;&nbsp;
-            {user && user.role === 'admin' && item.haveaccount? (account && account.lock === false ? <button className='btn btn-danger' onClick={::this.lockAcc} >
+            {item && item.id && user && user.role === 'admin' && item.haveaccount? (account && account.lock === false ? <button className='btn btn-danger' onClick={::this.lockAcc} >
                       {"Lock Account"}
                       </button>:<button className='btn btn-danger' onClick={::this.lockAcc} >
                       {"Unlock Account"}
