@@ -227,7 +227,7 @@ export default class EditPNH extends Component {
         ctk_new.loaivaiid = options.loaivaiid;
         ctk_new.khoid = options.khoid;
         ctk_new.gia = options.gia;
-        ctk_new.cayvaiid = 'cv' + this.state.giaodichid + new Date().getSeconds().toString()+ new Date().getMinutes().toString();
+        ctk_new.cayvaiid = 'cv' + new Date().getSeconds().toString()+ new Date().getMinutes().toString()+ ctk.length;
         ctk.push(ctk_new);
       };
       this.setState({ctk: ctk, openAdd: false, editedCTK: true});
@@ -238,7 +238,7 @@ export default class EditPNH extends Component {
     return () =>{
       let ctk = this.state.ctk || [];
       let init = {...this.state.ctk_init};
-      init.cayvaiid = 'cv' + this.state.giaodichid + new Date().getSeconds().toString()+ new Date().getMinutes().toString();
+      init.cayvaiid = 'cv' + new Date().getSeconds().toString()+ new Date().getMinutes().toString()+ index;
       let befor_ctk = ctk.splice(0, index + 1);
       befor_ctk= [...befor_ctk, {...init}];
       ctk = [...befor_ctk,...ctk];
