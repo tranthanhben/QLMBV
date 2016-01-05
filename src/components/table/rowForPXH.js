@@ -55,7 +55,7 @@ export class THeadCTK extends Component {
         continue;
       }
       thList.push(
-        <th className={classField} key={field.name} tabIndex="0" aria-controls="example" rowSpan="1" colSpan="1">{field.label}</th>
+        <th className={classField} key={field.name} tabIndex="0" aria-controls="example" rowSpan="1" colSpan="1">{field.label+(field.unitTable? field.unitTable : '')}</th>
       );
     }
     return (
@@ -247,13 +247,13 @@ export class TBodyCTK extends Component {
 
         </td>
         <td key='chieudai'  >
-          {numeral(item.chieudai*-1).format('(0,0)') + ' Cây'}
+          {numeral(item.chieudai*-1).format('(0,0)')}
         </td>
         <td key='gia' >
-          {numeral(item.gia).format('(0,0)') + ' VND'}
+          {numeral(item.gia).format('(0,0)')}
         </td>
         <td key='thanhtien' >
-          {numeral(item.gia*item.chieudai*-1).format('(0,0)') + ' VND'}
+          {numeral(item.gia*item.chieudai*-1).format('(0,0)')}
         </td>
         <td key='ngaynhap' >
           {datetime(new Date(item.ngaynhap))}

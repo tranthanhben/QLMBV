@@ -106,7 +106,6 @@ class List extends Component{
   }
   editItem(id){
     return ()=>{
-      console.log("id", id);
       this.props.openModal(true);
       this.setState({idEdit: id, openEdit: true});
     }

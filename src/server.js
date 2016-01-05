@@ -33,7 +33,6 @@ app.use('/v1', (req, res) => {
 });
 
 app.use('/v1/upload', (req, res) => {
-  console.log("route");
   httpProxy.createProxyServer({
     target: 'http://localhost:' + config.apiPort + '/v1/upload'
   }).web(req, res);
@@ -53,7 +52,6 @@ app.use((req, res) => {
   universalRouter(location, undefined, store)
     .then(({component, transition, isRedirect}) => {
       try {
-        // console.log("server", transition);
         if (isRedirect) {
           res.redirect(transition.redirectInfo.pathname);
           return;

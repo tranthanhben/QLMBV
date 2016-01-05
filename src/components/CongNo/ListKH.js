@@ -41,7 +41,6 @@ class List extends Component{
   // }
   componentWillReceiveProps(nextProps) {
     if(nextProps.reload === true){
-      console.log("reload");
       this.props.loadList(this.state.options);
     }
   }

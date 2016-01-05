@@ -36,7 +36,6 @@ export default class EditNCC extends Component {
   }
   componentWillReceiveProps(nextProps) {
     if(nextProps.item){
-      console.log("nextprops");
       this.setState({
         item: nextProps.item,
         id: nextProps.item.id,

@@ -25,7 +25,8 @@ function filterLV(ctdh, list){
   listK: state.giaodich.listK,
   listPMH: state.giaodich.listPMH,
   user: state.user.user,
-  ctk: state.phieuxuathang.ctk
+  ctk: state.phieuxuathang.ctk,
+  msgPCTK: state.phieuxuathang.msgPCTK
 }),{...pxhActions, ...giaodichActions})
 export default class EditPXH extends Component {
   static propTypes = {

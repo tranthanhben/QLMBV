@@ -42,7 +42,6 @@ export class ViewNV extends Component {
         </div>
       );
     }
-    console.log("phongban", item);
     return (
       <div className="info">
         <h3 className="info-header">Thông Tin Nhân Viên</h3>

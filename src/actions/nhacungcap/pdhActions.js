@@ -83,7 +83,6 @@ export function postItem(data){
   };
 }
 export function postCTDH(data){
-  console.log("data", data);
   return {
     types: [PDH_CTDH, PDH_CTDH_SUCCESS, PDH_CTDH_FAIL],
     promise: (client) => client.post('/chi_tiet_don_hang', {

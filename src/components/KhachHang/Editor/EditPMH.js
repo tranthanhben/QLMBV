@@ -158,7 +158,6 @@ export default class EditPMH extends Component {
       //kiem tra va parse kieu so va ngya
       if(this.state.edited){
         this.setState({submiting: true});
-        console.log("ctdh truoc khi submit", this.state.ctdh);
         this.props.postItem(preprocessPost(this.state.gdItem, this.props.meta.giaodich));
       }else{
         this.setState({submiting: false});

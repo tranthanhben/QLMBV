@@ -145,7 +145,6 @@ export default class EditNV extends Component {
     const {item, edited, submited, showFullField, id, createAcc, messNewacc, account_init} = this.state;
     const metaPP = preprocess(meta);
     const fieldRender = showFullField && id? renderField(item, metaPP, this, true):renderField(item, metaPP, this);
-    console.log("have account", this.props.item && this.props.item.haveaccount, item.haveaccount);
     return (
       <div>
         <div className="row">

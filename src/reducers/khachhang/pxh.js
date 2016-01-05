@@ -176,8 +176,8 @@ export default function phieuxuathang(state = initialState, action = {}){
         ...state,
         postingCTK: false,
         reloadList: true,
-        msgPCTK: true,
         ctk: action.result,
+        msgPCTK: true,
       };
     case PXH_CTK_FAIL:
       return {

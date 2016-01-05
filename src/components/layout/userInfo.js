@@ -154,7 +154,6 @@ export default class InfoUser extends Component {
     input.onchange = function () {
       let file = input.files[0];
       if(/png|jpeg/.test(file.type)){
-        console.log("postFile");
         input.postFile(file);
       }else if(!(/png|jpg/.test(file.type))){
         alert("Định dạng file không đúng?")
