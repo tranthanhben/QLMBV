@@ -163,6 +163,16 @@ const initialState = {
       field: true,
       view: false
     },
+    "ngaytao": {
+      name: "ngaytao",
+      label: "Ngày Tạo",
+      sort: true,
+      type: "date",
+      required: false,
+      disabled: true,
+      field: false,
+      view: false
+    },
     "tongtien": {
       name: "tongtien",
       label: "Tổng Giao Dịch",
@@ -1736,6 +1746,16 @@ const initialState = {
         type: "single",
         required: false,
         field: true,
+        view: false
+      },
+      "ngaytao": {
+        name: "ngaytao",
+        label: "Ngày Tạo",
+        sort: true,
+        type: "date",
+        required: false,
+        disabled: true,
+        field: false,
         view: false
       },
       "tongtien": {

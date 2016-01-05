@@ -8,8 +8,7 @@ export class ViewK extends Component {
   static propTypes = {
     meta: PropTypes.object,
     item: PropTypes.object,
-    close: PropTypes.func.isRequired,
-    edit: PropTypes.func.isRequired
+    close: PropTypes.func.isRequired
   }
   render(){
     const {meta, item, close} = this.props;
@@ -61,8 +60,7 @@ export class ViewKH extends Component {
   static propTypes = {
     meta: PropTypes.object,
     item: PropTypes.object,
-    close: PropTypes.func.isRequired,
-    edit: PropTypes.func.isRequired
+    close: PropTypes.func.isRequired
   }
   render(){
     const {meta,metaTTKH, item, close} = this.props;
@@ -380,7 +378,7 @@ export class ViewNCC extends Component {
               </table>
             </div>
           </div>
-        </div>>
+        </div>
             <hr/>
         <div className="row">
           <div className="col-md-6">
