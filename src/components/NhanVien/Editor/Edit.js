@@ -48,7 +48,8 @@ export default class EditNV extends Component {
   }
   componentWillReceiveProps(nextProps) {
     if(nextProps.item){
-      if(nextProps.item && nextProps.item.haveaccount && !this.props.account){
+      console.log(this.props.account,   !this.props.account);
+      if(nextProps.item && nextProps.item.haveaccount && (!this.props.account || this.props.account.nhanvienid !== nextProps.item.id)){
         this.props.getAccount(nextProps.item.id);
       }
       this.setState({
@@ -56,7 +57,7 @@ export default class EditNV extends Component {
         id: nextProps.item.id,
         edited: false,
         account_init:{
-          nhanvien: nextProps.item.id,
+          nhanvienid: nextProps.item.id,
           username: '',
           password: '123456'
         }
