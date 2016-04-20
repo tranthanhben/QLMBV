@@ -1,4 +1,4 @@
-# Adjobs Client (Frontend UI)
+# QLMBV Client (Frontend UI)
 
 ## Installation
 
